@@ -1,0 +1,41 @@
+{
+	"name": "readme-utils",
+	"version": "1.0.0",
+	"description": "Utilities for batch updating your README files",
+	"homepage": "https://github.com/bevry/readme-utils",
+	"keywords": [
+		"readme", "batch", "tools", "package.json"
+	],
+	"author": "Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
+	"maintainers": [
+		"Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
+	],
+	"contributors": [
+		"Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"	],
+	"bugs": {
+		"url": "https://github.com/bevry/readme-utils/issues"
+	},
+	"repository" : {
+		"type": "git",
+		"url": "https://github.com/bevry/readme-utils.git"
+	},
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "https://github.com/bevry/readme-utils/blob/master/LICENSE.md"
+		}
+	],
+	"engines" : {
+		"node": ">=0.4"
+	},
+	"dependencies": {
+		"extendr": "~2.0.1"
+	},
+	"devDependencies": {
+		"coffee-script": "~1.6.2"
+	},
+	"main": "./out/readme-utils.js",
+	"scripts": {
+		"test": "node ./out/readme-utils-test.js"
+	}
+}
