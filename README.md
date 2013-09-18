@@ -112,7 +112,9 @@ Here is the spec for the `projectz.cson` file:
 
 
 ## Contributing
-This project is under heavy development and is not yet ready. We could certaintly do with your help though!
+This project is under heavy development and is not ready yet.
+
+We could certaintly do with your help though! Participate via:
 
 - IRC: `#bevry` on freenode
 - GitHub pull requests, issues and discussions welcome!
