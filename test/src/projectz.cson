@@ -1,0 +1,36 @@
+{
+	package:
+		name: "projectz"
+		version: "0.0.1"
+		license: "MIT"
+		description: "Stop wasting time syncing and updating your project's README and Package Files!"
+		homepage: "https://github.com/bevry/projectz"
+		keywords: "project, readme, package.json, jquery.json, component.json, bower.json"
+		author: "Bevry Pty Ltd <us@bevry.me> (http://bevry.me)"
+		maintainers: [
+			"Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
+		]
+		bugs:
+			url: "https://github.com/bevry/projectz/issues"
+		repository:
+			type: "git"
+			url: "https://github.com/bevry/projectz.git"
+		engines:
+			node: ">0.4"
+		dependencies:
+			extendr: "~2.1.0"
+		devDependencies:
+			"coffee-script": "~1.6.2"
+		main: "./out/projectz.js"
+		scripts:
+			test: "node ./out/projectz-test.js"
+
+	component:
+		dependencies:
+			"bevry/extendr": "master"
+
+	readme:
+		badges:
+			flattr: '344188/balupton-on-Flattr'
+			paypal: 'QB8GQPZAH84N6'
+}
