@@ -28,6 +28,7 @@ Projectz auto-generates the following parts of the following files:
 	- Contributing
 	- Backers
 	- License
+- `CONTRIBUTING.md`
 - `LICENSE.md`
 - `BACKERS.md`
 	- Maintainers
