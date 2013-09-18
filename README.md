@@ -6,21 +6,36 @@
 [![Flattr donate button](https://raw.github.com/balupton/flattr-buttons/master/badge-89x18.gif)](http://flattr.com/thing/344188/balupton-on-Flattr "Donate monthly to this project using Flattr")
 [![PayPayl donate button](https://www.paypalobjects.com/en_AU/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6 "Donate once-off to this project using Paypal")
 
-Projectz auto-generates the following parts of the following files based on determined values from your repository information:
+Projectz auto-generates the following parts of the following files:
 
 - `package.json`
-	- `contributors`
-- `jquery.json`
-- `bower.json`
 - `component.json`
+- `bower.json`
+- `jquery.json`
 - `README.md`
 	- Badges
+		- Travis CI
+		- NPM Version
+		- Gittip
+		- Flattr
+		- Paypal
+	- Install
+		- Node / Browserify
+		- Ender
+		- Component
+		- Bower
 	- History
 	- Contributing
 	- Backers
 	- License
-- `BACKERS.md`
 - `LICENSE.md`
+- `BACKERS.md`
+	- Maintainers
+	- Contributors
+	- Sponsors
+	- Participants
+
+Values are determined from your `project.json` file and your github repository.
 
 
 ## History
