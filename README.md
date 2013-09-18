@@ -47,18 +47,22 @@ Here is the spec for the `projectz.cson` file:
 {
 	# Over-rides for the `package.json` file
 	# Set to `false` to avoid touching
+	# https://npmjs.org/doc/json.html
 	package: {}
 
 	# Over-rides for the `bower.json` file
 	# Set to `false` to avoid touching
+	# http://bower.io/#defining-a-package
 	bower: {}
 
 	# Over-rides for the `component.json` file
 	# Set to `false` to avoid touching
+	# https://github.com/component/component/wiki/Spec
 	component: {}
 
 	# Over-rides for the `jquery.json` file
 	# Set to `false` to avoid touching
+	# http://plugins.jquery.com/docs/package-manifest/
 	jquery: {}
 	
 	# Customisations for the `README.md` file
@@ -99,6 +103,8 @@ Here is the spec for the `projectz.cson` file:
 	contributing: true
 }
 ```
+
+[Here is an example `projectz.cson` file.](https://github.com/bevry/projectz/blob/master/test/src/projectz.cson)
 
 
 ## History
