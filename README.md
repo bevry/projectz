@@ -9,21 +9,21 @@
 Projectz auto-generates the following parts of the following files:
 
 - `package.json`
-- `component.json`
 - `bower.json`
+- `component.json`
 - `jquery.json`
 - `README.md`
 	- Badges
 		- Travis CI
-		- NPM Version
+		- Package Version
 		- Gittip
 		- Flattr
 		- Paypal
 	- Install
 		- Node / Browserify
 		- Ender
-		- Component
 		- Bower
+		- Component
 	- History
 	- Contributing
 	- Backers
@@ -36,7 +36,57 @@ Projectz auto-generates the following parts of the following files:
 	- Sponsors
 	- Participants
 
-Values are determined from your `project.json` file and your github repository.
+Values are determined from your `package.json` file and your github repository.
+
+
+## `package.json` spec
+The spec is the same as [npm `package.json` spec](https://npmjs.org/doc/json.html) with the following additions:
+
+``` coffee
+{
+	# Badges to add to the readme header
+	badges:
+		# Travis CI Badge
+		# determined from package.json repository
+		travis: true
+		
+		# Version Badge by Fury.io
+		# determined from package.json name
+		fury: true
+		
+		# Gittip Donate
+		# determined from package.json repository username
+		gittip: true
+
+		# Flattr Donate
+		# not determined
+		flattr: false
+		
+		# Paypal Donate
+		# not determined
+		paypal: false
+	
+	# Bower
+	# determined from package.json values
+	# can also be an object to over-ride determined values
+	bower: true
+
+	# Component
+	# determined from package.json values
+	# can also be an object to over-ride determined values
+	
+	# Whether or not we should keep these files updated
+	projectzFiles:
+		readme: true
+		license: true
+		backers: true
+		contributing: true
+		package: true
+		bower: true
+		component: true
+		jquery: true
+}
+```
 
 
 ## History
