@@ -36,55 +36,67 @@ Projectz auto-generates the following parts of the following files:
 	- Sponsors
 	- Participants
 
-Values are determined from your `package.json` file and your github repository.
+Values are determined from your `projectz.cson` file and your github repository.
 
 
-## `package.json` spec
-The spec is the same as [npm `package.json` spec](https://npmjs.org/doc/json.html) with the following additions:
+## Spec
+
+Here is the spec for the `projectz.cson` file:
 
 ``` coffee
 {
-	# Badges to add to the readme header
-	badges:
-		# Travis CI Badge
-		# determined from package.json repository
-		travis: true
-		
-		# Version Badge by Fury.io
-		# determined from package.json name
-		fury: true
-		
-		# Gittip Donate
-		# determined from package.json repository username
-		gittip: true
+	# Over-rides for the `package.json` file
+	# Set to `false` to avoid touching
+	package: {}
 
-		# Flattr Donate
-		# not determined
-		flattr: false
-		
-		# Paypal Donate
-		# not determined
-		paypal: false
-	
-	# Bower
-	# determined from package.json values
-	# can also be an object to over-ride determined values
-	bower: true
+	# Over-rides for the `bower.json` file
+	# Set to `false` to avoid touching
+	bower: {}
 
-	# Component
-	# determined from package.json values
-	# can also be an object to over-ride determined values
+	# Over-rides for the `component.json` file
+	# Set to `false` to avoid touching
+	component: {}
+
+	# Over-rides for the `jquery.json` file
+	# Set to `false` to avoid touching
+	jquery: {}
 	
-	# Whether or not we should keep these files updated
-	projectzFiles:
-		readme: true
-		license: true
-		backers: true
-		contributing: true
-		package: true
-		bower: true
-		component: true
-		jquery: true
+	# Customisations for the `README.md` file
+	# Set to `false` to avoid touching
+	readme:
+		# Badges to add to the readme header
+		badges:
+			# Travis CI Badge
+			# determined from repository
+			travis: true
+			
+			# Version Badge by Fury.io
+			# determined from name
+			fury: true
+			
+			# Gittip Donate
+			# determined from repository username
+			gittip: true
+
+			# Flattr Donate
+			# not determined
+			flattr: false
+			
+			# Paypal Donate
+			# not determined
+			paypal: false
+	
+	# Whether or not we should write to the `LICENSE.md` file
+	# Set to `false` to avoid touching
+	license: true
+
+	# Whether or not we should write to the `BACKERS.md` file
+	# Set to `false` to avoid touching
+	backers: true
+
+	# Whether or not we should write to the `CONTRIBUTING.md` file
+	# Set to `false` to avoid touching
+	contributing: true
 }
 ```
 
@@ -94,7 +106,15 @@ The spec is the same as [npm `package.json` spec](https://npmjs.org/doc/json.htm
 
 
 ## Contributing
-[You can discover the contributing instructions inside the `Contributing.md` file](https://github.com/bevry/projectz/blob/master/Contributing.md#files)
+This project is under heavy development and is not yet ready. We could certaintly do with your help though!
+
+- IRC: `#bevry` on freenode
+- GitHub pull requests, issues and discussions welcome!
+
+Todo:
+
+- Rewrite the little that has been done already in noflo
+- Finish adding the rest
 
 
 ## License

@@ -1,37 +1,43 @@
 {
-	"name": "projectz",
-	"version": "0.0.1",
-	"description": "Stop wasting time syncing and updating your project's README and Package Files!",
-	"homepage": "https://github.com/bevry/projectz",
-	"keywords": [
-		"project", "readme", "package.json", "jquery.json", "component.json", "bower.json"
-	],
-	"author": "Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
-	"maintainers": [
-		"Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
-	],
-	"contributors": [
-		"Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
-	],
-	"bugs": {
-		"url": "https://github.com/bevry/projectz/issues"
-	},
-	"repository" : {
-		"type": "git",
-		"url": "https://github.com/bevry/projectz.git"
-	},
-	"license": "MIT",
-	"engines" : {
-		"node": ">=0.4"
-	},
-	"dependencies": {
-		"extendr": "~2.1.0"
-	},
-	"devDependencies": {
-		"coffee-script": "~1.6.2"
-	},
-	"main": "./out/projectz.js",
-	"scripts": {
-		"test": "node ./out/projectz-test.js"
-	}
+  "name": "projectz",
+  "version": "0.0.1",
+  "description": "Stop wasting time syncing and updating your project's README and Package Files!",
+  "homepage": "https://github.com/bevry/projectz",
+  "keywords": [
+    "project",
+    "readme",
+    "package.json",
+    "jquery.json",
+    "component.json",
+    "bower.json"
+  ],
+  "author": "Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
+  "maintainers": [
+    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
+  ],
+  "contributors": [
+    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
+  ],
+  "bugs": {
+    "url": "https://github.com/bevry/projectz/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bevry/projectz.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=0.4"
+  },
+  "dependencies": {
+    "extendr": "~2.1.0",
+    "cson": "~1.4.4"
+  },
+  "devDependencies": {
+    "coffee-script": "~1.6.2"
+  },
+  "main": "./out/projectz.js",
+  "scripts": {
+    "test": "node ./out/projectz-test.js"
+  }
 }
