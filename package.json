@@ -31,7 +31,10 @@
   },
   "dependencies": {
     "extendr": "~2.1.0",
-    "cson": "~1.4.4"
+    "cson": "~1.4.4",
+    "taskgroup": "~3.2.3",
+    "getcontributors": "~1.1.1",
+    "eachr": "~2.0.2"
   },
   "devDependencies": {
     "coffee-script": "~1.6.2"

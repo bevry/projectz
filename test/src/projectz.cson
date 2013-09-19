@@ -26,6 +26,7 @@
 			test: "node ./out/projectz-test.js"
 
 	component:
+		repo: "bevry/projectz"
 		dependencies:
 			"bevry/extendr": "master"
 
