@@ -14,4 +14,4 @@ history =
 			"""
 
 # Export
-module.exports = contributing
+module.exports = history

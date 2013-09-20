@@ -1,5 +1,9 @@
 # Import
+fsUtil = require('fs')
+pathUtil = require('path')
 CSON = require('cson')
+{TaskGroup} = require('taskgroup')
+eachr = require('eachr')
 extendr = require('extendr')
 backers = require('./backers')
 badges = require('./badges')
@@ -14,6 +18,7 @@ main =
 	pathsForPackages: null
 	pathsForReadmes: null
 	dataForPackages: null
+	dataForPackagesNormalized: null
 	dataForReadmes: null
 	contributors: []
 
@@ -36,14 +41,56 @@ main =
 			backers:       pathUtil.join(cwd, 'BACKERS.md')
 			license:       pathUtil.join(cwd, 'LICENSE.md')
 
+		@dataForPackages = {}
+		@dataForPackagesNormalized = {}
+		@dataForReadmes = {}
+
 		# Load
 		tasks = new TaskGroup().once('complete', next)
 
-		tasks.addTask (complete) ->
+		tasks.addTask (complete) =>
 			@loadAndApplyPaths(complete)
 
-		tasks.addTask (complete) ->
+		tasks.addTask =>
+			@dataForPackages.merged = extendr.extend({}, @dataForPackages.component, @dataForPackages.bower, @dataForPackages.package, @dataForPackages.generic)
+			console.log 'data', @dataForPackages
+			@dataForPackagesNormalized.merged = extendr.extend({}, @dataForPackages.merged)
+
+			@dataForPackagesNormalized.merged.repo ?= (@dataForPackagesNormalized.merged.repository?.url or @dataForPackagesNormalized.merged.homepage or '').replace(/^.+?github.com\//, '').replace(/(\.git|\/)+$/, '') or null
+			if @dataForPackagesNormalized.merged.repo
+				@dataForPackagesNormalized.merged.repository ?= {
+					type: 'git'
+					url: "https://github.com/#{@dataForPackagesNormalized.merged.repo}.git"
+				}
+				@dataForPackagesNormalized.merged.bugs ?= {
+					url: "https://github.com/#{@dataForPackagesNormalized.merged.repo}/issues"
+				}
+
+			if typeof @dataForPackagesNormalized.merged.keywords is 'string'
+				@dataForPackagesNormalized.merged.keywords = @dataForPackagesNormalized.merged.keywords.split(/[, ]+/)
+
+		tasks.addTask (complete) =>
 			@loadAndApplyContributors(complete)
+
+		tasks.addTask =>
+			@dataForPackagesNormalized.package = extendr.extend({
+				name:                   @dataForPackagesNormalized.name
+				version:                @dataForPackagesNormalized.version
+				license:                @dataForPackagesNormalized.license
+				description:            @dataForPackagesNormalized.description
+				keywords:               @dataForPackagesNormalized.keywords
+				author:                 @dataForPackagesNormalized.author
+				maintainers:            @dataForPackagesNormalized.maintainers
+				contributors:           @contributors.map (contributor) -> contributor.text
+				bugs:                   @dataForPackagesNormalized.bugs
+				engines:                @dataForPackagesNormalized.engines
+				dependencies:           @dataForPackagesNormalized.dependencies
+				devDependencies:        @dataForPackagesNormalized.devDependencies
+				peerDependencies:       @dataForPackagesNormalized.peerDependencies
+				main:                   @dataForPackagesNormalized.main
+			}, @dataForPackages.package)
+
+			console.log @dataForPackagesNormalized
 
 		tasks.run()
 
@@ -56,12 +103,12 @@ main =
 		return @
 
 	# Log
-	log: (args...) ->
+	log: (args...) =>
 		# Create
 		unless @logger?
 			# Import
 			level  = if '-d' in process.argv.indexOf('-d') then 7 else 6
-			@logger = new (require('./').Logger)({level:level})
+			@logger = new (require('caterpillar').Logger)({level:level})
 			filter = new (require('caterpillar-filter').Filter)()
 			human  = new (require('caterpillar-human').Human)()
 
@@ -77,16 +124,11 @@ main =
 	# Load Contributors
 	# next(err)
 	loadAndApplyContributors: (next) ->
-		getContributors = require('getcontributors')
-		getContributors(
-			repo: @dataForPackages.normalized.repo
-			log: @log
-			next: (err,contributors) =>
-				return next(err)  if err
-				@contributors = contributors
-				return next()
-		)
-
+		fetchContributors = require('getcontributors').create(log:@log)
+		fetchContributors.fetchContributorsFromRepos @dataForPackagesNormalized.merged.repo, (err) ->
+			return next(err)  if err
+			@contributors = fetchContributors.getContributors()
+			return next()
 		@
 
 	# Load Paths
@@ -98,7 +140,6 @@ main =
 			@loadPackages @pathsForPackages, (err,dataForPackages) =>
 				return complete(err) if err
 				@dataForPackages = dataForPackages
-				dataForPackages.merged = extendr({}, dataForPackages.component, dataForPackages.bower, dataForPackages.package, dataForPackages.projectz)
 				return complete()
 
 		tasks.addTask (complete) =>
@@ -123,9 +164,10 @@ main =
 		eachr pathsForPackages, (value,key) ->
 			tasks.addTask (complete) ->
 				fsUtil.exists value, (exists) ->
+					return complete()  if exists is false
 					CSON.parseFile value, (err,data) ->
 						return complete(err)  if err
-						dataForPackages[value] = data
+						dataForPackages[key] = data
 						return complete()
 
 		tasks.run()
@@ -135,6 +177,8 @@ main =
 	# Load Readmes
 	# next(err, dataForReadmes)
 	loadReadmes: (pathsForReadmes, next) ->
+		dataForReadmes = {}
+
 		tasks = new TaskGroup().setConfig(concurrency:0).once 'complete', (err) ->
 			return next(err)  if err
 			return next(null, dataForReadmes)
@@ -142,9 +186,10 @@ main =
 		eachr pathsForReadmes, (value,key) ->
 			tasks.addTask (complete) ->
 				fsUtil.exists value, (exists) ->
+					return complete()  if exists is false
 					fsUtil.readFile value, (err,data) ->
 						return complete(err)  if err
-						dataForReadmes[value] = data.toString()
+						dataForReadmes[key] = data.toString()
 						return complete()
 
 		tasks.run()
@@ -172,4 +217,4 @@ main =
 extendr.extend({}, backers, badges, contributing, history, licenses, utils, main)
 
 # Export
-modules.exports = main
+module.exports = main

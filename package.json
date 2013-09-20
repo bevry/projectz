@@ -33,8 +33,11 @@
     "extendr": "~2.1.0",
     "cson": "~1.4.4",
     "taskgroup": "~3.2.3",
-    "getcontributors": "~1.1.1",
-    "eachr": "~2.0.2"
+    "getcontributors": "~1.2.0",
+    "eachr": "~2.0.2",
+    "caterpillar": "~2.0.4",
+    "caterpillar-filter": "~2.0.1",
+    "caterpillar-human": "~2.1.0"
   },
   "devDependencies": {
     "coffee-script": "~1.6.2"

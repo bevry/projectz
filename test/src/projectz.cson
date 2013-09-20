@@ -1,6 +1,7 @@
 {
-	package:
+	generic:
 		name: "projectz"
+		repo: "bevry/projectz"
 		version: "0.0.1"
 		license: "MIT"
 		description: "Stop wasting time syncing and updating your project's README and Package Files!"
@@ -10,11 +11,6 @@
 		maintainers: [
 			"Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
 		]
-		bugs:
-			url: "https://github.com/bevry/projectz/issues"
-		repository:
-			type: "git"
-			url: "https://github.com/bevry/projectz.git"
 		engines:
 			node: ">0.4"
 		dependencies:
@@ -22,11 +18,12 @@
 		devDependencies:
 			"coffee-script": "~1.6.2"
 		main: "./out/projectz.js"
+
+	package:
 		scripts:
 			test: "node ./out/projectz-test.js"
 
 	component:
-		repo: "bevry/projectz"
 		dependencies:
 			"bevry/extendr": "master"
 

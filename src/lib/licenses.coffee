@@ -1,7 +1,7 @@
 # Define
 licenses =
 	# Get Authors
-	getAuthors: (opts-{}) ->
+	getAuthors: (opts={}) ->
 		# Check
 		return ''  if !opts.authors
 
@@ -107,4 +107,4 @@ licenses =
 		return result
 
 # Export
-modules.exports = licenses
+module.exports = licenses
