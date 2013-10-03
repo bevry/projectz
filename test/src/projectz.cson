@@ -1,4 +1,7 @@
 {
+	# =================================
+	# Packages
+
 	generic:
 		name: "projectz"
 		repo: "bevry/projectz"
@@ -27,6 +30,18 @@
 		dependencies:
 			"bevry/extendr": "master"
 
+	bower: true
+
+	jquery: true
+
+
+	# =================================
+	# READMEs
+
+	history: true
+	contributing: true
+	backers: true
+	license: true
 	readme:
 		badges:
 			travis: true
@@ -40,6 +55,10 @@
 			'BADGES'
 			'DESCRIPTION'
 			"""
+			## Usage
+
+			### Files
+
 			Projectz auto-generates the following parts of the following files:
 
 			- `package.json`
@@ -73,7 +92,7 @@
 			Values are determined from your `projectz.cson` file and your github repository.
 
 
-			## Spec
+			### Spec
 
 			Here is the spec for the `projectz.cson` file:
 
@@ -139,6 +158,13 @@
 			```
 
 			[Here is an example `projectz.cson` file.](https://github.com/bevry/projectz/blob/master/test/src/projectz.cson)
+
+			### Commands
+
+			- `projectz compile` - compile your files once
+			- `projectz watch` - compile your files on every change
+			- `projectz init` - walks you through the setup of your new project
+
 			"""
 			'INSTALL'
 			'HISTORY'
