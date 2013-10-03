@@ -85,8 +85,6 @@ main =
 				bugs:                   @dataForPackagesNormalized.bugs
 				engines:                @dataForPackagesNormalized.engines
 				dependencies:           @dataForPackagesNormalized.dependencies
-				devDependencies:        @dataForPackagesNormalized.devDependencies
-				peerDependencies:       @dataForPackagesNormalized.peerDependencies
 				main:                   @dataForPackagesNormalized.main
 			}, @dataForPackages.package)
 
