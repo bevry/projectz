@@ -31,6 +31,12 @@
 			preinstall: "node ./cyclic.js"
 			test: "node ./out/text/everything-test.js"
 		main: "./out/.js"
+		badges:
+			travis: true
+			fury: true
+			gittip: 'bevry'
+			flattr: '344188/balupton-on-Flattr'
+			paypal: 'QB8GQPZAH84N6'
 
 		# auto detected and enhanced
 		# - homepage
@@ -54,13 +60,6 @@
 
 	# =================================
 	# README FILES
-
-	badges:
-		travis: true
-		fury: true
-		gittip: 'bevry'
-		flattr: '344188/balupton-on-Flattr'
-		paypal: 'QB8GQPZAH84N6'
 
 	history: true
 	contributing: true
