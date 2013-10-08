@@ -1,51 +1,48 @@
 {
 	# =================================
-	# PACKAGE FILES
+	# META
 
-	meta:
-		name: "ambi"
-		repo: "bevry/ambi"
-		version: "2.1.4"
-		license: "MIT"
-		description: "Execute a function ambidextrously (normalizes the differences between synchronous and asynchronous functions). Useful for treating synchronous functions as asynchronous functions (like supporting both synchronous and asynchronous event definitions automatically)."
-		keywords: "keywords, for, ambi"
-		authors: """
-			2013+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)
-			2011-2012 Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)
-			"""
-		maintainers: """
-			Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)
-			"""
-		dependencies:
-			"typechecker": "~2.0.6"
-		devDependencies:
-			"coffee-script": "~1.6.2"
-			"joe": "~1.3.0"
-			"joe-reporter-console": "~1.2.0"
-			"chai": "~1.7.2"
-		engines:
-			node: ">0.4"
-		directories:
-			lib: './out/lib'
-		scripts:
-			preinstall: "node ./cyclic.js"
-			test: "node ./out/text/everything-test.js"
-		main: "./out/.js"
-		badges:
-			travis: true
-			fury: true
-			gittip: 'bevry'
-			flattr: '344188/balupton-on-Flattr'
-			paypal: 'QB8GQPZAH84N6'
+	name: "ambi"
+	repo: "bevry/ambi"
+	version: "2.1.4"
+	license: "MIT"
+	description: "Execute a function ambidextrously (normalizes the differences between synchronous and asynchronous functions). Useful for treating synchronous functions as asynchronous functions (like supporting both synchronous and asynchronous event definitions automatically)."
+	keywords: "keywords, for, ambi"
+	authors: """
+		2013+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)
+		2011-2012 Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)
+		"""
+	maintainers: """
+		Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)
+		"""
+	dependencies:
+		"typechecker": "~2.0.6"
+	devDependencies:
+		"coffee-script": "~1.6.2"
+		"joe": "~1.3.0"
+		"joe-reporter-console": "~1.2.0"
+		"chai": "~1.7.2"
+	engines:
+		node: ">0.4"
+	directories:
+		lib: './out/lib'
+	scripts:
+		preinstall: "node ./cyclic.js"
+		test: "node ./out/text/everything-test.js"
+	main: "./out/.js"
 
-		# auto detected and enhanced
-		# - homepage
-		# - authors
-		# - maintainers
-		# - keywords
-		# - license
-		# - repository
-		# - bugs
+	# auto detected and enhanced
+	# - homepage
+	# - authors
+	# - maintainers
+	# - keywords
+	# - license
+	# - repository
+	# - bugs
+
+
+	# =================================
+	# PACKAGE MANAGERS
 
 	package: true
 
@@ -59,7 +56,17 @@
 
 
 	# =================================
-	# README FILES
+	# BADGES
+
+	travis: true
+	fury: true
+	gittip: 'bevry'
+	flattr: '344188/balupton-on-Flattr'
+	paypal: 'QB8GQPZAH84N6'
+
+
+	# =================================
+	# READMES
 
 	history: true
 	contributing: true

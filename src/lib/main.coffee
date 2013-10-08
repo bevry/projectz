@@ -18,7 +18,7 @@ main =
 	pathsForPackages: null
 	pathsForReadmes: null
 	dataForPackages: null
-	dataForPackagesNormalized: null
+	dataForPackagesEnhanced: null
 	dataForReadmes: null
 	contributors: []
 
@@ -42,7 +42,7 @@ main =
 			license:       pathUtil.join(cwd, 'LICENSE.md')
 
 		@dataForPackages = {}
-		@dataForPackagesNormalized = {}
+		@dataForPackagesEnhanced = {}
 		@dataForReadmes = {}
 
 		# Load
@@ -54,41 +54,41 @@ main =
 		tasks.addTask =>
 			@dataForPackages.merged = extendr.extend({}, @dataForPackages.component, @dataForPackages.bower, @dataForPackages.package, @dataForPackages.generic)
 			console.log 'data', @dataForPackages
-			@dataForPackagesNormalized.merged = extendr.extend({}, @dataForPackages.merged)
+			@dataForPackagesEnhanced.merged = extendr.extend({}, @dataForPackages.merged)
 
-			@dataForPackagesNormalized.merged.repo ?= (@dataForPackagesNormalized.merged.repository?.url or @dataForPackagesNormalized.merged.homepage or '').replace(/^.+?github.com\//, '').replace(/(\.git|\/)+$/, '') or null
-			if @dataForPackagesNormalized.merged.repo
-				@dataForPackagesNormalized.merged.repository ?= {
+			@dataForPackagesEnhanced.merged.repo ?= (@dataForPackagesEnhanced.merged.repository?.url or @dataForPackagesEnhanced.merged.homepage or '').replace(/^.+?github.com\//, '').replace(/(\.git|\/)+$/, '') or null
+			if @dataForPackagesEnhanced.merged.repo
+				@dataForPackagesEnhanced.merged.repository ?= {
 					type: 'git'
-					url: "https://github.com/#{@dataForPackagesNormalized.merged.repo}.git"
+					url: "https://github.com/#{@dataForPackagesEnhanced.merged.repo}.git"
 				}
-				@dataForPackagesNormalized.merged.bugs ?= {
-					url: "https://github.com/#{@dataForPackagesNormalized.merged.repo}/issues"
+				@dataForPackagesEnhanced.merged.bugs ?= {
+					url: "https://github.com/#{@dataForPackagesEnhanced.merged.repo}/issues"
 				}
 
-			if typeof @dataForPackagesNormalized.merged.keywords is 'string'
-				@dataForPackagesNormalized.merged.keywords = @dataForPackagesNormalized.merged.keywords.split(/[, ]+/)
+			if typeof @dataForPackagesEnhanced.merged.keywords is 'string'
+				@dataForPackagesEnhanced.merged.keywords = @dataForPackagesEnhanced.merged.keywords.split(/[, ]+/)
 
 		tasks.addTask (complete) =>
 			@loadAndApplyContributors(complete)
 
 		tasks.addTask =>
-			@dataForPackagesNormalized.package = extendr.extend({
-				name:                   @dataForPackagesNormalized.name
-				version:                @dataForPackagesNormalized.version
-				license:                @dataForPackagesNormalized.license
-				description:            @dataForPackagesNormalized.description
-				keywords:               @dataForPackagesNormalized.keywords
-				author:                 @dataForPackagesNormalized.author
-				maintainers:            @dataForPackagesNormalized.maintainers
+			@dataForPackagesEnhanced.package = extendr.extend({
+				name:                   @dataForPackagesEnhanced.name
+				version:                @dataForPackagesEnhanced.version
+				license:                @dataForPackagesEnhanced.license
+				description:            @dataForPackagesEnhanced.description
+				keywords:               @dataForPackagesEnhanced.keywords
+				author:                 @dataForPackagesEnhanced.author
+				maintainers:            @dataForPackagesEnhanced.maintainers
 				contributors:           @contributors.map (contributor) -> contributor.text
-				bugs:                   @dataForPackagesNormalized.bugs
-				engines:                @dataForPackagesNormalized.engines
-				dependencies:           @dataForPackagesNormalized.dependencies
-				main:                   @dataForPackagesNormalized.main
+				bugs:                   @dataForPackagesEnhanced.bugs
+				engines:                @dataForPackagesEnhanced.engines
+				dependencies:           @dataForPackagesEnhanced.dependencies
+				main:                   @dataForPackagesEnhanced.main
 			}, @dataForPackages.package)
 
-			console.log @dataForPackagesNormalized
+			console.log @dataForPackagesEnhanced
 
 		tasks.run()
 
@@ -123,7 +123,7 @@ main =
 	# next(err)
 	loadAndApplyContributors: (next) ->
 		fetchContributors = require('getcontributors').create(log:@log)
-		fetchContributors.fetchContributorsFromRepos @dataForPackagesNormalized.merged.repo, (err) ->
+		fetchContributors.fetchContributorsFromRepos @dataForPackagesEnhanced.merged.repo, (err) ->
 			return next(err)  if err
 			@contributors = fetchContributors.getContributors()
 			return next()
