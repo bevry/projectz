@@ -28,6 +28,10 @@ Extract out version out of our package and apply it to commander
 		require('../../package.json').version
 	)
 
+Add our cwd customisation
+
+	cli.option('-p, --path [value]', "Path to the project that you wish to work with, defaults to the current working directory")
+
 Add the compile command that will create a new projectz instance and compile the project
 
 	cli.command('compile')
@@ -39,6 +43,7 @@ Create our new project and use our caterpillar logger instance for the logging
 			logger.log('info', 'Initialising project')
 			project = require('../../').create(
 				log: logger.log.bind(logger)
+				cwd: cli.path or null
 			)
 			logger.log('info', 'Initialised project')
 

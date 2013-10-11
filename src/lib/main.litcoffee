@@ -43,16 +43,6 @@ Projects is defined as a class to ensure we can run multiple instances of it
 
 	class Projectz
 
-It accepts the following configuration:
-
-- `cwd` the directory that we wish to do our work on, defaults to `process.cwd()`
-- `log` the log function to use, first argument being the log level
-
-And can be instantiated by either:
-
-- `project = require('projectz').create(opts)`
-- `project = new (require('projectz').Projectz)(opts)`
-
 
 ### Internal Properties
 
@@ -82,7 +72,7 @@ The data that for each of our readme files
 
 The data for the projects contributors
 
-		contributors: []
+		contributors: null
 
 Our log function to use
 
@@ -91,45 +81,54 @@ Our log function to use
 
 ### Constructor
 
+Options:
+
+- `cwd` the directory that we wish to do our work on, defaults to `process.cwd()`
+- `log` the log function to use, first argument being the log level
+
+Usage:
+
+- `project = require('projectz').create(opts)`
+- `project = new (require('projectz').Projectz)(opts)`
+
 		constructor: (opts={}) ->
 
 Apply our current working directory
 
-			@cwd = cwd = opts.cwd = process.cwd()
+			@cwd = pathUtil.resolve(opts.cwd)  if opts.cwd
+			@cwd ?= process.cwd()
 
 Apply our logging function
 
 			@log = opts.log or null
 
+Apply our contributors
+
+			@contributors = []
+
 Apply our determined paths for packages
 
 			@pathsForPackages =
-				projectz:      pathUtil.join(cwd, 'projectz.cson')
-				package:       pathUtil.join(cwd, 'package.json')
-				bower:         pathUtil.join(cwd, 'bower.json')
-				component:     pathUtil.join(cwd, 'component.json')
-				jquery:        pathUtil.join(cwd, 'jquery.json')
+				projectz:      pathUtil.join(@cwd, 'projectz.cson')
+				package:       pathUtil.join(@cwd, 'package.json')
+				bower:         pathUtil.join(@cwd, 'bower.json')
+				component:     pathUtil.join(@cwd, 'component.json')
+				jquery:        pathUtil.join(@cwd, 'jquery.json')
 
 Apply our determined paths for readmes
 
 			@pathsForReadmes =
-				readme:        pathUtil.join(cwd, 'README.md')
-				history:       pathUtil.join(cwd, 'HISTORY.md')
-				contributing:  pathUtil.join(cwd, 'CONTRIBUTING.md')
-				backers:       pathUtil.join(cwd, 'BACKERS.md')
-				license:       pathUtil.join(cwd, 'LICENSE.md')
-
-Reset/apply our data for the different properties
-
-			@dataForPackages = {}
-			@dataForPackagesEnhanced = {}
-			@dataForReadmes = {}
+				readme:        pathUtil.join(@cwd, 'README.md')
+				history:       pathUtil.join(@cwd, 'HISTORY.md')
+				contributing:  pathUtil.join(@cwd, 'CONTRIBUTING.md')
+				backers:       pathUtil.join(@cwd, 'BACKERS.md')
+				license:       pathUtil.join(@cwd, 'LICENSE.md')
 
 ### Log
 
 You can pass over your own logging function if you'd like.
 
-The first argument it receives will be the log type/level.
+Usage: `log (logLevel, args...) ->`
 
 		log: (args...) =>
 			@config.log?(args...)
@@ -138,78 +137,187 @@ The first argument it receives will be the log type/level.
 
 ### Load
 
+Load in the files we will be working with
+
+Usage: `load (err) ->`
 
 		load: (next) ->
 
-			# Load
+Reset/apply our data for the different properties
+
+			@dataForPackages = {merged: {}}
+			@dataForPackagesEnhanced = {merged: {}}
+			@dataForReadmes = {}
+			merged = @dataForPackages.merged
+			mergedAndEnhanced = @dataForPackagesEnhanced.merged
+
+Create our serial task group to allot our tasks into and once it completes continue to the next handler
+
 			tasks = new TaskGroup().once('complete', next)
 
-			tasks.addTask (complete) =>
-				@loadAndApplyPaths(complete)
+
+First load in the paths we've defined
+
+			tasks.addTask @loadPaths.bind(@)
+
+
+Then enhance our data
 
 			tasks.addTask =>
-				@dataForPackages.merged = extendr.extend({}, @dataForPackages.component, @dataForPackages.bower, @dataForPackages.package, @dataForPackages.generic)
-				console.log 'data', @dataForPackages
-				@dataForPackagesEnhanced.merged = extendr.extend({}, @dataForPackages.merged)
 
-				@dataForPackagesEnhanced.merged.repo ?= (@dataForPackagesEnhanced.merged.repository?.url or @dataForPackagesEnhanced.merged.homepage or '').replace(/^.+?github.com\//, '').replace(/(\.git|\/)+$/, '') or null
-				if @dataForPackagesEnhanced.merged.repo
-					@dataForPackagesEnhanced.merged.repository ?= {
+By first merging in all the package data together
+
+				console.log @dataForPackages
+
+				extendr.deepExtend(
+					merged
+					@dataForPackages.component
+					@dataForPackages.bower
+					@dataForPackages.jquery
+					@dataForPackages.package
+					@dataForPackages.projectz
+				)
+				delete merged.component
+				delete merged.bower
+				delete merged.jquery
+				delete merged.package
+
+Then cloning it into our enhanced merged data
+
+				extendr.deepExtend(mergedAndEnhanced, merged)
+
+Fallback repo, by scanning repository and homepage
+
+				unless mergedAndEnhanced.repo
+					if mergedAndEnhanced.repository?.url
+						mergedAndEnhanced.repo = mergedAndEnhanced.repository?.url
+					else if (mergedAndEnhanced.homepage or '').indexOf('github.com') isnt -1
+						mergedAndEnhanced.repo = mergedAndEnhanced.homepage.replace(/^.+?github.com\//, '').replace(/(\.git|\/)+$/, '') or null
+
+Fallback repository field, by scanning repo
+
+				if mergedAndEnhanced.repo
+					mergedAndEnhanced.repository ?= {
 						type: 'git'
-						url: "https://github.com/#{@dataForPackagesEnhanced.merged.repo}.git"
+						url: "https://github.com/#{mergedAndEnhanced.repo}.git"
 					}
-					@dataForPackagesEnhanced.merged.bugs ?= {
-						url: "https://github.com/#{@dataForPackagesEnhanced.merged.repo}/issues"
+					mergedAndEnhanced.bugs ?= {
+						url: "https://github.com/#{mergedAndEnhanced.repo}/issues"
 					}
 
-				if typeof @dataForPackagesEnhanced.merged.keywords is 'string'
-					@dataForPackagesEnhanced.merged.keywords = @dataForPackagesEnhanced.merged.keywords.split(/[, ]+/)
+Fallback demo field, by scanning homepage
 
-			tasks.addTask (complete) =>
-				@loadAndApplyContributors(complete)
+				if mergedAndEnhanced.homepage
+					mergedAndEnhanced.demo ?= mergedAndEnhanced.homepage
+
+Fallback license name, by scanning license
+
+				if typeof mergedAndEnhanced.license is 'string'
+					mergedAndEnhanced.licenseName = mergedAndEnhanced.license
+				else if typeof mergedAndEnhanced.license is 'object'
+					mergedAndEnhanced.licenseName = mergedAndEnhanced.license.name
+
+Enhance keywords, with CSV format
+
+				if typeof mergedAndEnhanced.keywords is 'string'
+					mergedAndEnhanced.keywords = mergedAndEnhanced.keywords.split(/[,\n]+/)
+
+
+Next up is applying our contributors. This is after the merging as we access merged properties to be able to do this.
+
+			tasks.addTask @loadContributors.bind(@)
+
+
+Finally output our merged data into the individual packages for saving
 
 			tasks.addTask =>
+
+Create the data for the `package.json` format
+
 				@dataForPackagesEnhanced.package = extendr.extend({
-					name:                   @dataForPackagesEnhanced.name
-					version:                @dataForPackagesEnhanced.version
-					license:                @dataForPackagesEnhanced.license
-					description:            @dataForPackagesEnhanced.description
-					keywords:               @dataForPackagesEnhanced.keywords
-					author:                 @dataForPackagesEnhanced.author
-					maintainers:            @dataForPackagesEnhanced.maintainers
+					name:                   mergedAndEnhanced.name
+					version:                mergedAndEnhanced.version
+					license:                mergedAndEnhanced.license
+					description:            mergedAndEnhanced.description
+					keywords:               mergedAndEnhanced.keywords
+					author:                 mergedAndEnhanced.author
+					maintainers:            mergedAndEnhanced.maintainers
 					contributors:           @contributors.map (contributor) -> contributor.text
-					bugs:                   @dataForPackagesEnhanced.bugs
-					engines:                @dataForPackagesEnhanced.engines
-					dependencies:           @dataForPackagesEnhanced.dependencies
-					main:                   @dataForPackagesEnhanced.main
+					bugs:                   mergedAndEnhanced.bugs
+					engines:                mergedAndEnhanced.engines
+					dependencies:           mergedAndEnhanced.dependencies
+					main:                   mergedAndEnhanced.main
 				}, @dataForPackages.package)
 
-				console.log @dataForPackagesEnhanced
+Create the data for the `jquery.json` format, which is essentially exactly the same as the `package.json` format so just extend that
+
+				@dataForPackagesEnhanced.jquery = extendr.extend({},
+					@dataForPackagesEnhanced.package
+					@dataForPackages.jquery
+				)
+
+Create the data for the `component.json` format
+
+				@dataForPackagesEnhanced.component = extendr.extend({
+					name:                   mergedAndEnhanced.name
+					version:                mergedAndEnhanced.version
+					license:                mergedAndEnhanced.licenseName
+					description:            mergedAndEnhanced.description
+					keywords:               mergedAndEnhanced.keywords
+					demo:                   mergedAndEnhanced.demo
+					main:                   mergedAndEnhanced.main
+					scripts:                [mergedAndEnhanced.main]
+				}, @dataForPackages.component)
+
+
+Now that all our tasks are added, start executing them
 
 			tasks.run()
 
-			# Fetch the latest contributors
-			# Fetch the latest backers
-			# Read the package.json file
-			# Normalize the package.json values
+And finish with a chain
 
-			# Return
 			return @
 
-		# Load Contributors
-		# next(err)
-		loadAndApplyContributors: (next) ->
-			fetchContributors = require('getcontributors').create(log:@log)
-			fetchContributors.fetchContributorsFromRepos [@dataForPackagesEnhanced.merged.repo], (err) ->
+
+### Load Contributors
+
+Fetch the contributors for the repo if we have it
+
+Usage: `loadContributors (err) ->`
+
+		loadContributors: (next) ->
+
+Check if we have the repo data, if we don't then we should exit and chain right away
+
+			repo = @dataForPackagesEnhanced.merged.repo
+			return next(); @  unless repo
+
+If we do have a repo, then fetch the contributor data for it
+
+			fetchContributors = require('getcontributors').create(log: @log)
+			fetchContributors.fetchContributorsFromRepos [repo], (err) ->
 				return next(err)  if err
 				@contributors = fetchContributors.getContributors()
 				return next()
-			@
 
-		# Load Paths
-		# next(err)
-		loadAndApplyPaths: (next) ->
+Finish with a chain
+
+			return @
+
+
+### Load Paths
+
+Load in the paths we have specified
+
+Usage: `loadPaths (err) ->`
+
+		loadPaths: (next) ->
+
+Create the parallel task group and once they've all completed fire our completion callback
+
 			tasks = new TaskGroup().setConfig(concurrency:0).once('complete', next)
+
+First load in the packages
 
 			tasks.addTask (complete) =>
 				@loadPackages @pathsForPackages, (err,dataForPackages) =>
@@ -217,18 +325,29 @@ The first argument it receives will be the log type/level.
 					@dataForPackages = dataForPackages
 					return complete()
 
+Then load in our readmes
+
 			tasks.addTask (complete) =>
 				@loadReadmes @pathsForReadmes, (err,dataForReadmes) =>
 					return complete(err)  if err
 					@dataForReadmes = dataForReadmes
 					return complete()
 
+Fire the tasks
+
 			tasks.run()
+
+Finish with a chain
 
 			@
 
-		# Load Packages
-		# next(err, dataForPackages)
+
+### Load Packages
+
+Load in the packages we have specified
+
+Usage: `loadPackages paths, (err, dataForPackages) ->`
+
 		loadPackages: (pathsForPackages, next) ->
 			dataForPackages = {}
 
@@ -249,8 +368,12 @@ The first argument it receives will be the log type/level.
 
 			@
 
-		# Load Readmes
-		# next(err, dataForReadmes)
+### Load Readmes
+
+Load in the readmes we have specified
+
+Usage: `loadPackages paths, (err, dataForReadmes) ->`
+
 		loadReadmes: (pathsForReadmes, next) ->
 			dataForReadmes = {}
 
@@ -288,7 +411,12 @@ The first argument it receives will be the log type/level.
 			# Update the license file
 			# Update the readme file
 
-		# Save
+### Save
+
+Save the data we've loaded into the files
+
+Usage: `save (err) ->`
+
 		save: (next) ->
 			console.log JSON.stringify(@dataForPackagesEnhanced, null, '\t')
 			return next()

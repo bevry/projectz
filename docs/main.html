@@ -180,19 +180,10 @@ utils = require(<span class="string">'./utils'</span>)</pre></div></div>
         <li id="section-8">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h3">
                 <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
-              <p>It accepts the following configuration:</p>
-<ul>
-<li><code>cwd</code> the directory that we wish to do our work on, defaults to <code>process.cwd()</code></li>
-</ul>
-<p>And can be instantiated by either:</p>
-<ul>
-<li><code>project = require(&#39;projectz&#39;).create(opts)</code></li>
-<li><code>project = new (require(&#39;projectz&#39;).Projectz)(opts)</code></li>
-</ul>
-<h3>Internal Properties</h3>
+              <h3>Internal Properties</h3>
 <p>The current working directory (the path) that projectz is working on</p>
 
             </div>
@@ -287,7 +278,7 @@ utils = require(<span class="string">'./utils'</span>)</pre></div></div>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	contributors: []</pre></div></div>
+            <div class="content"><div class='highlight'><pre>	contributors: <span class="literal">null</span></pre></div></div>
             
         </li>
         
@@ -298,11 +289,11 @@ utils = require(<span class="string">'./utils'</span>)</pre></div></div>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
-              <p>The logger for our project</p>
+              <p>Our log function to use</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	logger: <span class="literal">null</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>	log: <span class="literal">null</span></pre></div></div>
             
         </li>
         
@@ -313,7 +304,17 @@ utils = require(<span class="string">'./utils'</span>)</pre></div></div>
               <div class="pilwrap for-h3">
                 <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
-              <h3>Constructor &amp; Configuration</h3>
+              <h3>Constructor</h3>
+<p>Options:</p>
+<ul>
+<li><code>cwd</code> the directory that we wish to do our work on, defaults to <code>process.cwd()</code></li>
+<li><code>log</code> the log function to use, first argument being the log level</li>
+</ul>
+<p>Usage:</p>
+<ul>
+<li><code>project = require(&#39;projectz&#39;).create(opts)</code></li>
+<li><code>project = new (require(&#39;projectz&#39;).Projectz)(opts)</code></li>
+</ul>
 
             </div>
             
@@ -328,7 +329,7 @@ utils = require(<span class="string">'./utils'</span>)</pre></div></div>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
-              <p>Apply our <code>cwd</code> property with the appropriate default</p>
+              <p>Apply our current working directory</p>
 
             </div>
             
@@ -342,6 +343,36 @@ utils = require(<span class="string">'./utils'</span>)</pre></div></div>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>Apply our logging function</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		<span class="property">@log</span> = opts.log <span class="keyword">or</span> <span class="literal">null</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>Apply our contributors</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		<span class="property">@contributors</span> = []</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
               <p>Apply our determined paths for packages</p>
 
@@ -357,11 +388,11 @@ utils = require(<span class="string">'./utils'</span>)</pre></div></div>
         </li>
         
         
-        <li id="section-19">
+        <li id="section-21">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-19">&#182;</a>
+                <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
               <p>Apply our determined paths for readmes</p>
 
@@ -377,11 +408,11 @@ utils = require(<span class="string">'./utils'</span>)</pre></div></div>
         </li>
         
         
-        <li id="section-20">
+        <li id="section-22">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-20">&#182;</a>
+                <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
               <p>Reset/apply our data for the different properties</p>
 
@@ -394,47 +425,21 @@ utils = require(<span class="string">'./utils'</span>)</pre></div></div>
         </li>
         
         
-        <li id="section-21">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-21">&#182;</a>
-              </div>
-              <p>Chain</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>		@</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-22">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-22">&#182;</a>
-              </div>
-              <p>Log</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>	log: (args...) =&gt;</pre></div></div>
-            
-        </li>
-        
-        
         <li id="section-23">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h3">
                 <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
-              <p>Create</p>
+              <h3>Log</h3>
+<p>You can pass over your own logging function if you&#39;d like.</p>
+<p>Usage: <code>log (logLevel, args...) -&gt;</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>		<span class="keyword">unless</span> <span class="property">@logger</span>?</pre></div></div>
+            <div class="content"><div class='highlight'><pre>	log: (args...) =&gt;
+		<span class="property">@config</span>.log?(args...)
+		@</pre></div></div>
             
         </li>
         
@@ -442,17 +447,16 @@ utils = require(<span class="string">'./utils'</span>)</pre></div></div>
         <li id="section-24">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h3">
                 <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
-              <p>Import</p>
+              <h3>Load</h3>
+<p>Load in the files we will be working with</p>
+<p>Usage: <code>load (err) -&gt;</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>			level  = <span class="keyword">if</span> <span class="string">'-d'</span> <span class="keyword">in</span> process.argv.indexOf(<span class="string">'-d'</span>) <span class="keyword">then</span> <span class="number">7</span> <span class="keyword">else</span> <span class="number">6</span>
-			<span class="property">@logger</span> = <span class="keyword">new</span> (require(<span class="string">'caterpillar'</span>).Logger)({level:level})
-			filter  = <span class="keyword">new</span> (require(<span class="string">'caterpillar-filter'</span>).Filter)()
-			human   = <span class="keyword">new</span> (require(<span class="string">'caterpillar-human'</span>).Human)()</pre></div></div>
+            <div class="content"><div class='highlight'><pre>	load: (next) -&gt;</pre></div></div>
             
         </li>
         
@@ -463,11 +467,11 @@ utils = require(<span class="string">'./utils'</span>)</pre></div></div>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
-              <p>Pipe logger output to filter, then filter output to stdout</p>
+              <p>Create our serial task group to allot our tasks into and once it completes continue to the next handler</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>			<span class="property">@logger</span>.pipe(filter).pipe(human).pipe(process.stdout)</pre></div></div>
+            <div class="content"><div class='highlight'><pre>		tasks = <span class="keyword">new</span> TaskGroup().once(<span class="string">'complete'</span>, next)</pre></div></div>
             
         </li>
         
@@ -478,11 +482,11 @@ utils = require(<span class="string">'./utils'</span>)</pre></div></div>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
-              <p>Log</p>
+              <p>First load in the paths we&#39;ve defined</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>		<span class="property">@logger</span>.log(args...)</pre></div></div>
+            <div class="content"><div class='highlight'><pre>		tasks.addTask <span class="property">@loadPaths</span>.bind(@)</pre></div></div>
             
         </li>
         
@@ -493,46 +497,11 @@ utils = require(<span class="string">'./utils'</span>)</pre></div></div>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-27">&#182;</a>
               </div>
-              <p>Chain</p>
+              <p>Then merge the configuration together</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>		@</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-28">
-            <div class="annotation">
-              
-              <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-28">&#182;</a>
-              </div>
-              <h3>Load</h3>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>	load: (next) -&gt;</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-29">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-29">&#182;</a>
-              </div>
-              <p>Load</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>		tasks = <span class="keyword">new</span> TaskGroup().once(<span class="string">'complete'</span>, next)
-
-		tasks.addTask (complete) =&gt;
-			<span class="property">@loadAndApplyPaths</span>(complete)
-
-		tasks.addTask =&gt;
+            <div class="content"><div class='highlight'><pre>		tasks.addTask =&gt;
 			<span class="property">@dataForPackages</span>.merged = extendr.extend({}, <span class="property">@dataForPackages</span>.component, <span class="property">@dataForPackages</span>.bower, <span class="property">@dataForPackages</span>.package, <span class="property">@dataForPackages</span>.generic)
 			console.log <span class="string">'data'</span>, <span class="property">@dataForPackages</span>
 			<span class="property">@dataForPackagesEnhanced</span>.merged = extendr.extend({}, <span class="property">@dataForPackages</span>.merged)
@@ -548,12 +517,37 @@ utils = require(<span class="string">'./utils'</span>)</pre></div></div>
 				}
 
 			<span class="keyword">if</span> <span class="keyword">typeof</span> <span class="property">@dataForPackagesEnhanced</span>.merged.keywords <span class="keyword">is</span> <span class="string">'string'</span>
-				<span class="property">@dataForPackagesEnhanced</span>.merged.keywords = <span class="property">@dataForPackagesEnhanced</span>.merged.keywords.split(<span class="regexp">/[, ]+/</span>)
+				<span class="property">@dataForPackagesEnhanced</span>.merged.keywords = <span class="property">@dataForPackagesEnhanced</span>.merged.keywords.split(<span class="regexp">/[, ]+/</span>)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-28">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-28">&#182;</a>
+              </div>
+              <p>Apply our contributors. This is after the merging as we access merged properties to be able to do this.</p>
 
-		tasks.addTask (complete) =&gt;
-			<span class="property">@loadAndApplyContributors</span>(complete)
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		tasks.addTask <span class="property">@loadContributors</span>.bind(@)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-29">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-29">&#182;</a>
+              </div>
+              <p>Finally output our merged data into the individual packages for saving</p>
 
-		tasks.addTask =&gt;
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		tasks.addTask =&gt;
 			<span class="property">@dataForPackagesEnhanced</span>.package = extendr.extend({
 				name:                   <span class="property">@dataForPackagesEnhanced</span>.name
 				version:                <span class="property">@dataForPackagesEnhanced</span>.version
@@ -569,9 +563,7 @@ utils = require(<span class="string">'./utils'</span>)</pre></div></div>
 				main:                   <span class="property">@dataForPackagesEnhanced</span>.main
 			}, <span class="property">@dataForPackages</span>.package)
 
-			console.log <span class="property">@dataForPackagesEnhanced</span>
-
-		tasks.run()</pre></div></div>
+			console.log <span class="property">@dataForPackagesEnhanced</span></pre></div></div>
             
         </li>
         
@@ -582,15 +574,11 @@ utils = require(<span class="string">'./utils'</span>)</pre></div></div>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-30">&#182;</a>
               </div>
-              <p>Fetch the latest contributors
-Fetch the latest backers
-Read the package.json file
-Normalize the package.json values</p>
-<p>Return</p>
+              <p>Now that all our tasks are added, start executing them</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>		<span class="keyword">return</span> @</pre></div></div>
+            <div class="content"><div class='highlight'><pre>		tasks.run()</pre></div></div>
             
         </li>
         
@@ -601,18 +589,11 @@ Normalize the package.json values</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-31">&#182;</a>
               </div>
-              <p>Load Contributors
-next(err)</p>
+              <p>And finish with a chain</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	loadAndApplyContributors: (next) -&gt;
-		fetchContributors = require(<span class="string">'getcontributors'</span>).create(log:<span class="property">@log</span>)
-		fetchContributors.fetchContributorsFromRepos <span class="property">@dataForPackagesEnhanced</span>.merged.repo, (err) -&gt;
-			<span class="keyword">return</span> next(err)  <span class="keyword">if</span> err
-			<span class="property">@contributors</span> = fetchContributors.getContributors()
-			<span class="keyword">return</span> next()
-		@</pre></div></div>
+            <div class="content"><div class='highlight'><pre>		<span class="keyword">return</span> @</pre></div></div>
             
         </li>
         
@@ -620,32 +601,16 @@ next(err)</p>
         <li id="section-32">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h3">
                 <a class="pilcrow" href="#section-32">&#182;</a>
               </div>
-              <p>Load Paths
-next(err)</p>
+              <h3>Load Contributors</h3>
+<p>Fetch the contributors for the repo if we have it</p>
+<p>Usage: <code>loadContributors (err) -&gt;</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	loadAndApplyPaths: (next) -&gt;
-		tasks = <span class="keyword">new</span> TaskGroup().setConfig(concurrency:<span class="number">0</span>).once(<span class="string">'complete'</span>, next)
-
-		tasks.addTask (complete) =&gt;
-			<span class="property">@loadPackages</span> <span class="property">@pathsForPackages</span>, (err,dataForPackages) =&gt;
-				<span class="keyword">return</span> complete(err) <span class="keyword">if</span> err
-				<span class="property">@dataForPackages</span> = dataForPackages
-				<span class="keyword">return</span> complete()
-
-		tasks.addTask (complete) =&gt;
-			<span class="property">@loadReadmes</span> <span class="property">@pathsForReadmes</span>, (err,dataForReadmes) =&gt;
-				<span class="keyword">return</span> complete(err)  <span class="keyword">if</span> err
-				<span class="property">@dataForReadmes</span> = dataForReadmes
-				<span class="keyword">return</span> complete()
-
-		tasks.run()
-
-		@</pre></div></div>
+            <div class="content"><div class='highlight'><pre>	loadContributors: (next) -&gt;</pre></div></div>
             
         </li>
         
@@ -656,8 +621,159 @@ next(err)</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-33">&#182;</a>
               </div>
-              <p>Load Packages
-next(err, dataForPackages)</p>
+              <p>Check if we have the repo data, if we don&#39;t then we should exit and chain right away</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		repo = <span class="property">@dataForPackagesEnhanced</span>.merged.repo
+		<span class="keyword">return</span> next(); @  <span class="keyword">unless</span> repo</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-34">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-34">&#182;</a>
+              </div>
+              <p>If we do have a repo, then fetch the contributor data for it</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		fetchContributors = require(<span class="string">'getcontributors'</span>).create(log: <span class="property">@log</span>)
+		fetchContributors.fetchContributorsFromRepos [repo], (err) -&gt;
+			<span class="keyword">return</span> next(err)  <span class="keyword">if</span> err
+			<span class="property">@contributors</span> = fetchContributors.getContributors()
+			<span class="keyword">return</span> next()</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-35">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-35">&#182;</a>
+              </div>
+              <p>Finish with a chain</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		<span class="keyword">return</span> @</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-36">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-36">&#182;</a>
+              </div>
+              <h3>Load Paths</h3>
+<p>Load in the paths we have specified</p>
+<p>Usage: <code>loadPaths (err) -&gt;</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	loadPaths: (next) -&gt;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-37">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-37">&#182;</a>
+              </div>
+              <p>Create the parallel task group and once they&#39;ve all completed fire our completion callback</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		tasks = <span class="keyword">new</span> TaskGroup().setConfig(concurrency:<span class="number">0</span>).once(<span class="string">'complete'</span>, next)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-38">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-38">&#182;</a>
+              </div>
+              <p>First load in the packages</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		tasks.addTask (complete) =&gt;
+			<span class="property">@loadPackages</span> <span class="property">@pathsForPackages</span>, (err,dataForPackages) =&gt;
+				<span class="keyword">return</span> complete(err) <span class="keyword">if</span> err
+				<span class="property">@dataForPackages</span> = dataForPackages
+				<span class="keyword">return</span> complete()</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-39">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-39">&#182;</a>
+              </div>
+              <p>Then load in our readmes</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		tasks.addTask (complete) =&gt;
+			<span class="property">@loadReadmes</span> <span class="property">@pathsForReadmes</span>, (err,dataForReadmes) =&gt;
+				<span class="keyword">return</span> complete(err)  <span class="keyword">if</span> err
+				<span class="property">@dataForReadmes</span> = dataForReadmes
+				<span class="keyword">return</span> complete()</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-40">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-40">&#182;</a>
+              </div>
+              <p>Fire the tasks</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		tasks.run()</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-41">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-41">&#182;</a>
+              </div>
+              <p>Finish with a chain</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		@</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-42">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-42">&#182;</a>
+              </div>
+              <h3>Load Packages</h3>
+<p>Load in the packages we have specified</p>
+<p>Usage: <code>loadPackages paths, (err, dataForReadmes) -&gt;</code></p>
 
             </div>
             
@@ -684,14 +800,14 @@ next(err, dataForPackages)</p>
         </li>
         
         
-        <li id="section-34">
+        <li id="section-43">
             <div class="annotation">
               
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-34">&#182;</a>
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-43">&#182;</a>
               </div>
-              <p>Load Readmes
-next(err, dataForReadmes)</p>
+              <h3>Load Readmes</h3>
+<p>Load in the</p>
 
             </div>
             
@@ -718,11 +834,11 @@ next(err, dataForReadmes)</p>
         </li>
         
         
-        <li id="section-35">
+        <li id="section-44">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-35">&#182;</a>
+                <a class="pilcrow" href="#section-44">&#182;</a>
               </div>
               <p>Apply Section</p>
 
@@ -733,11 +849,11 @@ next(err, dataForReadmes)</p>
         </li>
         
         
-        <li id="section-36">
+        <li id="section-45">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-36">&#182;</a>
+                <a class="pilcrow" href="#section-45">&#182;</a>
               </div>
               <p>Find the badges section and replace
 Find the history section and replace
@@ -753,11 +869,11 @@ Find the license section and replace</p>
         </li>
         
         
-        <li id="section-37">
+        <li id="section-46">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-37">&#182;</a>
+                <a class="pilcrow" href="#section-46">&#182;</a>
               </div>
               <p>Apply Files</p>
 
@@ -768,21 +884,40 @@ Find the license section and replace</p>
         </li>
         
         
-        <li id="section-38">
+        <li id="section-47">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-38">&#182;</a>
+                <a class="pilcrow" href="#section-47">&#182;</a>
               </div>
               <p>Update the backers file
 Update the license file
 Update the readme file</p>
-<h2>Export</h2>
+<p>Save</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	save: (next) -&gt;
+		console.log JSON.stringify(<span class="property">@dataForPackagesEnhanced</span>, <span class="literal">null</span>, <span class="string">'\t'</span>)
+		<span class="keyword">return</span> next()</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-48">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-48">&#182;</a>
+              </div>
+              <h2>Export</h2>
 <p>Merge the other parts of our program together and export it</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>module.exports = extendr.extend({}, backers, badges, contributing, history, licenses, utils, main)</pre></div></div>
+            <div class="content"><div class='highlight'><pre>module.exports =
+	Projectz: Projectz
+	create: (opts) -&gt; <span class="keyword">new</span> Projectz(opts)</pre></div></div>
             
         </li>
         
