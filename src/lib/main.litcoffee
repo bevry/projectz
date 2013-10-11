@@ -62,7 +62,11 @@ The data for each of our packages
 
 		dataForPackages: null
 
-The enhanced (normalised) data for each of our packages
+The merged data for each of our packages
+
+		dataForPackagesMerged: null
+
+The enhanced data for each of our packages
 
 		dataForPackagesEnhanced: null
 
@@ -145,11 +149,10 @@ Usage: `load (err) ->`
 
 Reset/apply our data for the different properties
 
-			@dataForPackages = {merged: {}}
-			@dataForPackagesEnhanced = {merged: {}}
+			@dataForPackages = {}
+			@dataForPackagesMerged = {}
+			@dataForPackagesEnhanced = {}
 			@dataForReadmes = {}
-			merged = @dataForPackages.merged
-			mergedAndEnhanced = @dataForPackagesEnhanced.merged
 
 Create our serial task group to allot our tasks into and once it completes continue to the next handler
 
@@ -165,62 +168,63 @@ Then enhance our data
 
 			tasks.addTask =>
 
-By first merging in all the package data together
-
-				console.log @dataForPackages
+By first merging in all the package data together into the enhanced data
 
 				extendr.deepExtend(
-					merged
+					@dataForPackagesMerged
 					@dataForPackages.component
+					@dataForPackages.projectz.component
 					@dataForPackages.bower
+					@dataForPackages.projectz.bower
 					@dataForPackages.jquery
+					@dataForPackages.projectz.jquery
 					@dataForPackages.package
+					@dataForPackages.projectz.package
 					@dataForPackages.projectz
 				)
-				delete merged.component
-				delete merged.bower
-				delete merged.jquery
-				delete merged.package
 
-Then cloning it into our enhanced merged data
+				@dataForPackagesMerged.component = @dataForPackages.projectz.component
+				@dataForPackagesMerged.bower = @dataForPackages.projectz.bower
+				@dataForPackagesMerged.jquery = @dataForPackages.projectz.jquery
+				@dataForPackagesMerged.package = @dataForPackages.projectz.package
 
-				extendr.deepExtend(mergedAndEnhanced, merged)
+				console.log @dataForPackagesMerged
 
 Fallback repo, by scanning repository and homepage
 
-				unless mergedAndEnhanced.repo
-					if mergedAndEnhanced.repository?.url
-						mergedAndEnhanced.repo = mergedAndEnhanced.repository?.url
-					else if (mergedAndEnhanced.homepage or '').indexOf('github.com') isnt -1
-						mergedAndEnhanced.repo = mergedAndEnhanced.homepage.replace(/^.+?github.com\//, '').replace(/(\.git|\/)+$/, '') or null
+				unless @dataForPackagesMerged.repo
+					if @dataForPackagesMerged.repository?.url
+						@dataForPackagesMerged.repo = @dataForPackagesMerged.repository?.url
+					else if (@dataForPackagesMerged.homepage or '').indexOf('github.com') isnt -1
+						@dataForPackagesMerged.repo = @dataForPackagesMerged.homepage.replace(/^.+?github.com\//, '').replace(/(\.git|\/)+$/, '') or null
 
 Fallback repository field, by scanning repo
 
-				if mergedAndEnhanced.repo
-					mergedAndEnhanced.repository ?= {
+				if @dataForPackagesMerged.repo
+					@dataForPackagesMerged.repository ?= {
 						type: 'git'
-						url: "https://github.com/#{mergedAndEnhanced.repo}.git"
+						url: "https://github.com/#{@dataForPackagesMerged.repo}.git"
 					}
-					mergedAndEnhanced.bugs ?= {
-						url: "https://github.com/#{mergedAndEnhanced.repo}/issues"
+					@dataForPackagesMerged.bugs ?= {
+						url: "https://github.com/#{@dataForPackagesMerged.repo}/issues"
 					}
 
 Fallback demo field, by scanning homepage
 
-				if mergedAndEnhanced.homepage
-					mergedAndEnhanced.demo ?= mergedAndEnhanced.homepage
+				if @dataForPackagesMerged.homepage
+					@dataForPackagesMerged.demo ?= @dataForPackagesMerged.homepage
 
 Fallback license name, by scanning license
 
-				if typeof mergedAndEnhanced.license is 'string'
-					mergedAndEnhanced.licenseName = mergedAndEnhanced.license
-				else if typeof mergedAndEnhanced.license is 'object'
-					mergedAndEnhanced.licenseName = mergedAndEnhanced.license.name
+				if typeof @dataForPackagesMerged.license is 'string'
+					@dataForPackagesMerged.licenseName = @dataForPackagesMerged.license
+				else if typeof @dataForPackagesMerged.license is 'object'
+					@dataForPackagesMerged.licenseName = @dataForPackagesMerged.license.name
 
 Enhance keywords, with CSV format
 
-				if typeof mergedAndEnhanced.keywords is 'string'
-					mergedAndEnhanced.keywords = mergedAndEnhanced.keywords.split(/[,\n]+/)
+				if typeof @dataForPackagesMerged.keywords is 'string'
+					@dataForPackagesMerged.keywords = @dataForPackagesMerged.keywords.split(/[,\n]+/)
 
 
 Next up is applying our contributors. This is after the merging as we access merged properties to be able to do this.
@@ -235,39 +239,40 @@ Finally output our merged data into the individual packages for saving
 Create the data for the `package.json` format
 
 				@dataForPackagesEnhanced.package = extendr.extend({
-					name:                   mergedAndEnhanced.name
-					version:                mergedAndEnhanced.version
-					license:                mergedAndEnhanced.license
-					description:            mergedAndEnhanced.description
-					keywords:               mergedAndEnhanced.keywords
-					author:                 mergedAndEnhanced.author
-					maintainers:            mergedAndEnhanced.maintainers
+					name:                   @dataForPackagesMerged.name
+					version:                @dataForPackagesMerged.version
+					license:                @dataForPackagesMerged.license
+					description:            @dataForPackagesMerged.description
+					keywords:               @dataForPackagesMerged.keywords
+					author:                 @dataForPackagesMerged.author
+					maintainers:            @dataForPackagesMerged.maintainers
 					contributors:           @contributors.map (contributor) -> contributor.text
-					bugs:                   mergedAndEnhanced.bugs
-					engines:                mergedAndEnhanced.engines
-					dependencies:           mergedAndEnhanced.dependencies
-					main:                   mergedAndEnhanced.main
-				}, @dataForPackages.package)
+					bugs:                   @dataForPackagesMerged.bugs
+					engines:                @dataForPackagesMerged.engines
+					dependencies:           @dataForPackagesMerged.dependencies
+					main:                   @dataForPackagesMerged.main
+				}, @dataForPackagesMerged.package)
 
 Create the data for the `jquery.json` format, which is essentially exactly the same as the `package.json` format so just extend that
 
-				@dataForPackagesEnhanced.jquery = extendr.extend({},
+				@dataForPackagesEnhanced.jquery = extendr.extend(
+					{}
 					@dataForPackagesEnhanced.package
-					@dataForPackages.jquery
+					@dataForPackagesMerged.jquery
 				)
 
 Create the data for the `component.json` format
 
 				@dataForPackagesEnhanced.component = extendr.extend({
-					name:                   mergedAndEnhanced.name
-					version:                mergedAndEnhanced.version
-					license:                mergedAndEnhanced.licenseName
-					description:            mergedAndEnhanced.description
-					keywords:               mergedAndEnhanced.keywords
-					demo:                   mergedAndEnhanced.demo
-					main:                   mergedAndEnhanced.main
-					scripts:                [mergedAndEnhanced.main]
-				}, @dataForPackages.component)
+					name:                   @dataForPackagesMerged.name
+					version:                @dataForPackagesMerged.version
+					license:                @dataForPackagesMerged.licenseName
+					description:            @dataForPackagesMerged.description
+					keywords:               @dataForPackagesMerged.keywords
+					demo:                   @dataForPackagesMerged.demo
+					main:                   @dataForPackagesMerged.main
+					scripts:                [@dataForPackagesMerged.main]
+				}, @dataForPackagesMerged.component)
 
 
 Now that all our tasks are added, start executing them
@@ -289,7 +294,7 @@ Usage: `loadContributors (err) ->`
 
 Check if we have the repo data, if we don't then we should exit and chain right away
 
-			repo = @dataForPackagesEnhanced.merged.repo
+			repo = @dataForPackagesMerged.repo
 			return next(); @  unless repo
 
 If we do have a repo, then fetch the contributor data for it
@@ -357,6 +362,7 @@ Usage: `loadPackages paths, (err, dataForPackages) ->`
 
 			eachr pathsForPackages, (value,key) ->
 				tasks.addTask (complete) ->
+					dataForPackages[key] = {}
 					fsUtil.exists value, (exists) ->
 						return complete()  if exists is false
 						CSON.parseFile value, (err,data) ->
@@ -383,6 +389,7 @@ Usage: `loadPackages paths, (err, dataForReadmes) ->`
 
 			eachr pathsForReadmes, (value,key) ->
 				tasks.addTask (complete) ->
+					dataForReadmes[key] = ''
 					fsUtil.exists value, (exists) ->
 						return complete()  if exists is false
 						fsUtil.readFile value, (err,data) ->

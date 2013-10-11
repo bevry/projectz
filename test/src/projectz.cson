@@ -29,7 +29,7 @@
 	scripts:
 		preinstall: "node ./cyclic.js"
 		test: "node ./out/text/everything-test.js"
-	main: "./out/.js"
+	main: "./out/ambi.js"
 
 	# auto detected and enhanced
 	# - homepage
