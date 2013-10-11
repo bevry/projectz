@@ -250,6 +250,7 @@ Create the data for the `package.json` format
 					bugs:                   @dataForPackagesMerged.bugs
 					engines:                @dataForPackagesMerged.engines
 					dependencies:           @dataForPackagesMerged.dependencies
+					devDependencies:        @dataForPackagesMerged.devDependencies
 					main:                   @dataForPackagesMerged.main
 				}, @dataForPackagesMerged.package)
 
@@ -273,6 +274,16 @@ Create the data for the `component.json` format
 					main:                   @dataForPackagesMerged.main
 					scripts:                [@dataForPackagesMerged.main]
 				}, @dataForPackagesMerged.component)
+
+Create the data for the `bower.json` format
+
+				@dataForPackagesEnhanced.bower = extendr.extend({
+					name:                   @dataForPackagesMerged.name
+					version:                @dataForPackagesMerged.version
+					dependencies:           @dataForPackagesMerged.dependencies
+					devDependencies:        @dataForPackagesMerged.devDependencies
+					main:                   @dataForPackagesMerged.main
+				}, @dataForPackagesMerged.bower)
 
 
 Now that all our tasks are added, start executing them
