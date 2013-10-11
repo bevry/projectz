@@ -1,4 +1,4 @@
-# Bevry's Core Cakefile - v1.1.2 September 25, 2013
+# Bevry's Core Cakefile - v1.1.3 October 2, 2013
 # https://gist.github.com/balupton/6409278
 # This file was originally created by Benjamin Lupton <b@lupton.cc> (http://balupton.com)
 # and is currently licensed under the Creative Commons Zero (http://creativecommons.org/publicdomain/zero/1.0/)
@@ -67,11 +67,11 @@ clean = (opts,next) ->
 
 compile = (opts,next) ->
 	(next = opts; opts = {})  unless next?
-	spawn(COFFEE, ['-bco', OUT, SRC], {stdio:'inherit',cwd:APP}).on('close', safe next)
+	spawn(COFFEE, ['-co', OUT, SRC], {stdio:'inherit',cwd:APP}).on('close', safe next)
 
 watch = (opts,next) ->
 	(next = opts; opts = {})  unless next?
-	spawn(COFFEE, ['-bwco', OUT, SRC], {stdio:'inherit',cwd:APP}).on('close', safe next)
+	spawn(COFFEE, ['-wco', OUT, SRC], {stdio:'inherit',cwd:APP}).on('close', safe next)
 
 install = (opts,next) ->
 	(next = opts; opts = {})  unless next?

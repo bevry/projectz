@@ -37,13 +37,16 @@
     "eachr": "~2.0.2",
     "caterpillar": "~2.0.4",
     "caterpillar-filter": "~2.0.1",
-    "caterpillar-human": "~2.1.0"
+    "caterpillar-human": "~2.1.0",
+    "safefs": "~3.0.3",
+    "promptly": "~0.2.0",
+    "commander": "~2.0.0"
   },
   "devDependencies": {
     "coffee-script": "~1.6.2"
   },
-  "main": "./out/projectz.js",
+  "main": "./out/lib/main.js",
   "scripts": {
-    "test": "node ./out/projectz-test.js"
+    "test": "node ./out/test/everything-test.js"
   }
 }

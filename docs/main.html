@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Projectz</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              
+              <a class="source" href="backers.html">
+                backers.coffee
+              </a>
+            
+              
+              <a class="source" href="badges.html">
+                badges.coffee
+              </a>
+            
+              
+              <a class="source" href="contributing.html">
+                contributing.coffee
+              </a>
+            
+              
+              <a class="source" href="history.html">
+                history.coffee
+              </a>
+            
+              
+              <a class="source" href="licenses.html">
+                licenses.coffee
+              </a>
+            
+              
+              <a class="source" href="main.html">
+                main.litcoffee
+              </a>
+            
+              
+              <a class="source" href="utils.html">
+                utils.coffee
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h1">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <h1>Projectz</h1>
+<h2>Imports</h2>
+<p>First we need to import the libraries we require.</p>
+<p>Load in the file system libraries.</p>
+<p><a href="https://github.com/bevry/safefs">SafeFS</a> is aliased to <code>fsUtil</code> as it provides protection against a lot of the common gotchas</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>fsUtil = require(<span class="string">'safefs'</span>)
+pathUtil = require(<span class="string">'path'</span>)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p><a href="https://github.com/bevry/cson">CSON</a> is used for loading in our configuration files</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>CSON = require(<span class="string">'cson'</span>)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p><a href="https://github.com/bevry/taskgroup">TaskGroup</a> is used for bundling tasks together and waiting for their completion</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>{TaskGroup} = require(<span class="string">'taskgroup'</span>)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p><a href="https://github.com/bevry/eachr">Eachr</a> lets us cycle arrays and objects easily</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>eachr = require(<span class="string">'eachr'</span>)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p><a href="https://github.com/bevry/extendr">Extendr</a> gives us safe, deep, and shallow extending abilities</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>extendr = require(<span class="string">'extendr'</span>)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Load in our other project files</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>backers = require(<span class="string">'./backers'</span>)
+badges = require(<span class="string">'./badges'</span>)
+contributing = require(<span class="string">'./contributing'</span>)
+history = require(<span class="string">'./history'</span>)
+licenses = require(<span class="string">'./licenses'</span>)
+utils = require(<span class="string">'./utils'</span>)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <h2>Definition</h2>
+<p>Projects is defined as a class to ensure we can run multiple instances of it</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="class"><span class="keyword">class</span> <span class="title">Projectz</span></span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>It accepts the following configuration:</p>
+<ul>
+<li><code>cwd</code> the directory that we wish to do our work on, defaults to <code>process.cwd()</code></li>
+</ul>
+<p>And can be instantiated by either:</p>
+<ul>
+<li><code>project = require(&#39;projectz&#39;).create(opts)</code></li>
+<li><code>project = new (require(&#39;projectz&#39;).Projectz)(opts)</code></li>
+</ul>
+<h3>Internal Properties</h3>
+<p>The current working directory (the path) that projectz is working on</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	cwd: <span class="literal">null</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>The absolute paths for all the package files</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	pathsForPackages: <span class="literal">null</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>The absolute paths for all the readme files</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	pathsForReadmes: <span class="literal">null</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>The data for each of our packages</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	dataForPackages: <span class="literal">null</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>The enhanced (normalised) data for each of our packages</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	dataForPackagesEnhanced: <span class="literal">null</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>The data that for each of our readme files</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	dataForReadmes: <span class="literal">null</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>The data for the projects contributors</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	contributors: []</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>The logger for our project</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	logger: <span class="literal">null</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <h3>Constructor &amp; Configuration</h3>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	constructor: (opts={}) -&gt;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>Apply our <code>cwd</code> property with the appropriate default</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		<span class="property">@cwd</span> = cwd = opts.cwd = process.cwd()</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>Apply our determined paths for packages</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		<span class="property">@pathsForPackages</span> =
+			projectz:      pathUtil.join(cwd, <span class="string">'projectz.cson'</span>)
+			package:       pathUtil.join(cwd, <span class="string">'package.json'</span>)
+			bower:         pathUtil.join(cwd, <span class="string">'bower.json'</span>)
+			component:     pathUtil.join(cwd, <span class="string">'component.json'</span>)
+			jquery:        pathUtil.join(cwd, <span class="string">'jquery.json'</span>)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>Apply our determined paths for readmes</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		<span class="property">@pathsForReadmes</span> =
+			readme:        pathUtil.join(cwd, <span class="string">'README.md'</span>)
+			history:       pathUtil.join(cwd, <span class="string">'HISTORY.md'</span>)
+			contributing:  pathUtil.join(cwd, <span class="string">'CONTRIBUTING.md'</span>)
+			backers:       pathUtil.join(cwd, <span class="string">'BACKERS.md'</span>)
+			license:       pathUtil.join(cwd, <span class="string">'LICENSE.md'</span>)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>Reset/apply our data for the different properties</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		<span class="property">@dataForPackages</span> = {}
+		<span class="property">@dataForPackagesEnhanced</span> = {}
+		<span class="property">@dataForReadmes</span> = {}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <p>Chain</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		@</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-22">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-22">&#182;</a>
+              </div>
+              <p>Log</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	log: (args...) =&gt;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <p>Create</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		<span class="keyword">unless</span> <span class="property">@logger</span>?</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
+              </div>
+              <p>Import</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>			level  = <span class="keyword">if</span> <span class="string">'-d'</span> <span class="keyword">in</span> process.argv.indexOf(<span class="string">'-d'</span>) <span class="keyword">then</span> <span class="number">7</span> <span class="keyword">else</span> <span class="number">6</span>
+			<span class="property">@logger</span> = <span class="keyword">new</span> (require(<span class="string">'caterpillar'</span>).Logger)({level:level})
+			filter  = <span class="keyword">new</span> (require(<span class="string">'caterpillar-filter'</span>).Filter)()
+			human   = <span class="keyword">new</span> (require(<span class="string">'caterpillar-human'</span>).Human)()</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-25">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-25">&#182;</a>
+              </div>
+              <p>Pipe logger output to filter, then filter output to stdout</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>			<span class="property">@logger</span>.pipe(filter).pipe(human).pipe(process.stdout)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-26">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-26">&#182;</a>
+              </div>
+              <p>Log</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		<span class="property">@logger</span>.log(args...)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-27">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-27">&#182;</a>
+              </div>
+              <p>Chain</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		@</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-28">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-28">&#182;</a>
+              </div>
+              <h3>Load</h3>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	load: (next) -&gt;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-29">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-29">&#182;</a>
+              </div>
+              <p>Load</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		tasks = <span class="keyword">new</span> TaskGroup().once(<span class="string">'complete'</span>, next)
+
+		tasks.addTask (complete) =&gt;
+			<span class="property">@loadAndApplyPaths</span>(complete)
+
+		tasks.addTask =&gt;
+			<span class="property">@dataForPackages</span>.merged = extendr.extend({}, <span class="property">@dataForPackages</span>.component, <span class="property">@dataForPackages</span>.bower, <span class="property">@dataForPackages</span>.package, <span class="property">@dataForPackages</span>.generic)
+			console.log <span class="string">'data'</span>, <span class="property">@dataForPackages</span>
+			<span class="property">@dataForPackagesEnhanced</span>.merged = extendr.extend({}, <span class="property">@dataForPackages</span>.merged)
+
+			<span class="property">@dataForPackagesEnhanced</span>.merged.repo ?= (<span class="property">@dataForPackagesEnhanced</span>.merged.repository?.url <span class="keyword">or</span> <span class="property">@dataForPackagesEnhanced</span>.merged.homepage <span class="keyword">or</span> <span class="string">''</span>).replace(<span class="regexp">/^.+?github.com\//, '').replace(/(\.git|\/)+$/</span>, <span class="string">''</span>) <span class="keyword">or</span> <span class="literal">null</span>
+			<span class="keyword">if</span> <span class="property">@dataForPackagesEnhanced</span>.merged.repo
+				<span class="property">@dataForPackagesEnhanced</span>.merged.repository ?= {
+					type: <span class="string">'git'</span>
+					url: <span class="string">"https://github.com/<span class="subst">#{@dataForPackagesEnhanced.merged.repo}</span>.git"</span>
+				}
+				<span class="property">@dataForPackagesEnhanced</span>.merged.bugs ?= {
+					url: <span class="string">"https://github.com/<span class="subst">#{@dataForPackagesEnhanced.merged.repo}</span>/issues"</span>
+				}
+
+			<span class="keyword">if</span> <span class="keyword">typeof</span> <span class="property">@dataForPackagesEnhanced</span>.merged.keywords <span class="keyword">is</span> <span class="string">'string'</span>
+				<span class="property">@dataForPackagesEnhanced</span>.merged.keywords = <span class="property">@dataForPackagesEnhanced</span>.merged.keywords.split(<span class="regexp">/[, ]+/</span>)
+
+		tasks.addTask (complete) =&gt;
+			<span class="property">@loadAndApplyContributors</span>(complete)
+
+		tasks.addTask =&gt;
+			<span class="property">@dataForPackagesEnhanced</span>.package = extendr.extend({
+				name:                   <span class="property">@dataForPackagesEnhanced</span>.name
+				version:                <span class="property">@dataForPackagesEnhanced</span>.version
+				license:                <span class="property">@dataForPackagesEnhanced</span>.license
+				description:            <span class="property">@dataForPackagesEnhanced</span>.description
+				keywords:               <span class="property">@dataForPackagesEnhanced</span>.keywords
+				author:                 <span class="property">@dataForPackagesEnhanced</span>.author
+				maintainers:            <span class="property">@dataForPackagesEnhanced</span>.maintainers
+				contributors:           <span class="property">@contributors</span>.map (contributor) -&gt; contributor.text
+				bugs:                   <span class="property">@dataForPackagesEnhanced</span>.bugs
+				engines:                <span class="property">@dataForPackagesEnhanced</span>.engines
+				dependencies:           <span class="property">@dataForPackagesEnhanced</span>.dependencies
+				main:                   <span class="property">@dataForPackagesEnhanced</span>.main
+			}, <span class="property">@dataForPackages</span>.package)
+
+			console.log <span class="property">@dataForPackagesEnhanced</span>
+
+		tasks.run()</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-30">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-30">&#182;</a>
+              </div>
+              <p>Fetch the latest contributors
+Fetch the latest backers
+Read the package.json file
+Normalize the package.json values</p>
+<p>Return</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		<span class="keyword">return</span> @</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-31">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-31">&#182;</a>
+              </div>
+              <p>Load Contributors
+next(err)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	loadAndApplyContributors: (next) -&gt;
+		fetchContributors = require(<span class="string">'getcontributors'</span>).create(log:<span class="property">@log</span>)
+		fetchContributors.fetchContributorsFromRepos <span class="property">@dataForPackagesEnhanced</span>.merged.repo, (err) -&gt;
+			<span class="keyword">return</span> next(err)  <span class="keyword">if</span> err
+			<span class="property">@contributors</span> = fetchContributors.getContributors()
+			<span class="keyword">return</span> next()
+		@</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-32">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-32">&#182;</a>
+              </div>
+              <p>Load Paths
+next(err)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	loadAndApplyPaths: (next) -&gt;
+		tasks = <span class="keyword">new</span> TaskGroup().setConfig(concurrency:<span class="number">0</span>).once(<span class="string">'complete'</span>, next)
+
+		tasks.addTask (complete) =&gt;
+			<span class="property">@loadPackages</span> <span class="property">@pathsForPackages</span>, (err,dataForPackages) =&gt;
+				<span class="keyword">return</span> complete(err) <span class="keyword">if</span> err
+				<span class="property">@dataForPackages</span> = dataForPackages
+				<span class="keyword">return</span> complete()
+
+		tasks.addTask (complete) =&gt;
+			<span class="property">@loadReadmes</span> <span class="property">@pathsForReadmes</span>, (err,dataForReadmes) =&gt;
+				<span class="keyword">return</span> complete(err)  <span class="keyword">if</span> err
+				<span class="property">@dataForReadmes</span> = dataForReadmes
+				<span class="keyword">return</span> complete()
+
+		tasks.run()
+
+		@</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-33">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-33">&#182;</a>
+              </div>
+              <p>Load Packages
+next(err, dataForPackages)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	loadPackages: (pathsForPackages, next) -&gt;
+		dataForPackages = {}
+
+		tasks = <span class="keyword">new</span> TaskGroup().setConfig(concurrency:<span class="number">0</span>).once <span class="string">'complete'</span>, (err) -&gt;
+			<span class="keyword">return</span> next(err)  <span class="keyword">if</span> err
+			<span class="keyword">return</span> next(<span class="literal">null</span>, dataForPackages)
+
+		eachr pathsForPackages, (value,key) -&gt;
+			tasks.addTask (complete) -&gt;
+				fsUtil.exists value, (exists) -&gt;
+					<span class="keyword">return</span> complete()  <span class="keyword">if</span> exists <span class="keyword">is</span> <span class="literal">false</span>
+					CSON.parseFile value, (err,data) -&gt;
+						<span class="keyword">return</span> complete(err)  <span class="keyword">if</span> err
+						dataForPackages[key] = data
+						<span class="keyword">return</span> complete()
+
+		tasks.run()
+
+		@</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-34">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-34">&#182;</a>
+              </div>
+              <p>Load Readmes
+next(err, dataForReadmes)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	loadReadmes: (pathsForReadmes, next) -&gt;
+		dataForReadmes = {}
+
+		tasks = <span class="keyword">new</span> TaskGroup().setConfig(concurrency:<span class="number">0</span>).once <span class="string">'complete'</span>, (err) -&gt;
+			<span class="keyword">return</span> next(err)  <span class="keyword">if</span> err
+			<span class="keyword">return</span> next(<span class="literal">null</span>, dataForReadmes)
+
+		eachr pathsForReadmes, (value,key) -&gt;
+			tasks.addTask (complete) -&gt;
+				fsUtil.exists value, (exists) -&gt;
+					<span class="keyword">return</span> complete()  <span class="keyword">if</span> exists <span class="keyword">is</span> <span class="literal">false</span>
+					fsUtil.readFile value, (err,data) -&gt;
+						<span class="keyword">return</span> complete(err)  <span class="keyword">if</span> err
+						dataForReadmes[key] = data.toString()
+						<span class="keyword">return</span> complete()
+
+		tasks.run()
+
+		@</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-35">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-35">&#182;</a>
+              </div>
+              <p>Apply Section</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	applySections: -&gt;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-36">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-36">&#182;</a>
+              </div>
+              <p>Find the badges section and replace
+Find the history section and replace
+Find the contributing section and replace
+Find the backers section and replace
+Find the license section and replace</p>
+<p>Return</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		<span class="keyword">return</span> <span class="string">''</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-37">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-37">&#182;</a>
+              </div>
+              <p>Apply Files</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	applyFiles: -&gt;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-38">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-38">&#182;</a>
+              </div>
+              <p>Update the backers file
+Update the license file
+Update the readme file</p>
+<h2>Export</h2>
+<p>Merge the other parts of our program together and export it</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>module.exports = extendr.extend({}, backers, badges, contributing, history, licenses, utils, main)</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
