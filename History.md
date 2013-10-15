@@ -1,5 +1,8 @@
 # History
 
+- v0.1.0 October 15, 2013
+	- Mostly working except for BACKER tags
+
 - v0.0.2 September 19, 2013
 	- Renamed from `readme-utils` to `projectz`
 
