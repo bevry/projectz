@@ -29,9 +29,9 @@ licenses =
 			# ignore
 		else if opts.authors.length is 1
 			author = opts.authors[0]
-			result += '\n'+licenses.getAuthorText(author)
+			result += licenses.getAuthorText(author)
 		else
-			result += '\n'+(licenses.getLicenseText(license)  for license in opts.licenses).join('\n- ')
+			result += (licenses.getLicenseText(license)  for license in opts.licenses).join('\n- ')
 
 		return result
 
@@ -42,12 +42,15 @@ licenses =
 			# ignore
 		else if opts.licenses.length is 1
 			license = opts.licenses[0]
-			result += "\n\nLicensed under #{licenses.getLicenseText(license)}"
+			result += "Licensed under #{licenses.getLicenseText(license)}"
 		else
-			result += "\n\nLicensed under:\n\n"
+			result += "Licensed under:\n\n"
 			result += '- '+(licenses.getLicenseText(license)  for license in opts.licenses).join('\n- ')
 
 		return result
+
+	getLicensesFiles: (opts) ->
+		return (licenses.getLicenseFileText(license)  for license in opts.licenses).join('\n\n')
 
 	files:
 		mit: (opts={}) ->
@@ -85,9 +88,13 @@ licenses =
 		return '' if !opts.licenses
 
 		# Prepare
-		result = "## License"
-		result += licenses.getLicenses(opts)
-		result += licenses.getAuthors(opts)
+		result = """
+			## License
+
+			#{licenses.getLicenses(opts)}
+
+			#{licenses.getAuthors(opts)}
+			"""
 
 		# Return
 		return result
@@ -98,17 +105,13 @@ licenses =
 		return '' if !opts.licenses
 
 		# Prepare
-		result = ''
-		result += """
-			# License#{if opts.licenses.length is 1 then '' else 's'}
+		result = """
+			# License
 
-			"""  if opts.header isnt false
+			#{licenses.getAuthors(opts)}
 
-		# Authors
-		result += licenses.getAuthors(opts)
-
-		# Handle
-		result += '\n\n'+(licenses.getLicenseFileText(license)  for license in opts.licenses).join('\n\n')
+			#{licenses.getLicensesFiles(opts)}
+			"""
 
 		# Return
 		return result
