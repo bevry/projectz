@@ -45,7 +45,7 @@
   "devDependencies": {
     "coffee-script": "~1.6.2"
   },
-  "main": "./out/lib/main.js",
+  "main": "./out/lib/projectz.js",
   "scripts": {
     "test": "node ./out/test/everything-test.js"
   }
