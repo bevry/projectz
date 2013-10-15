@@ -124,6 +124,8 @@ The following comment tags are supported:
 - `<!-- CONTRIBUTE -->`
 - `<!-- BACKERS -->`
 - `<!-- LICENSE -->`
+- `<!-- LICENSEFILE -->`
+- `<!-- BACKERSFILE -->`
 
 You can inject your content between the tags just as you would expect, making a `README.md` file for a new project look like:
 
@@ -154,7 +156,6 @@ You can inject your content between the tags just as you would expect, making a 
 ## License
 
 Licensed under the incredibly [permissive](http://en.wikipedia.org/wiki/Permissive_free_software_licence) [MIT license](http://creativecommons.org/licenses/MIT/)
-
 Copyright &copy; 2013+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)
 <!-- /LICENSE -->
 

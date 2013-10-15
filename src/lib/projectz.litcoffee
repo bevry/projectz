@@ -277,6 +277,7 @@ Usage: `loadPackages paths, (err, dataForPackages) ->`
 							return complete(err)  if err
 							dataForPackages[key] = data
 							return complete()
+				return true
 
 Finish up
 
@@ -331,13 +332,12 @@ By first merging in all the package data together into the enhanced data
 			@dataForPackagesMerged.packages ?= {}
 
 			eachr @dataForReadmes, (value, name) =>
-				@dataForPackagesMerged.readmes[name] =  @dataForPackages.readmes?[name] ? value?
+				@dataForPackagesMerged.readmes[name] = @dataForPackages.readmes?[name] ? value?
+				return true
 
 			eachr @dataForPackages, (value, name) =>
-				@dataForPackagesMerged.packages[name] =  @dataForPackages.packages?[name] ? value?
-
-			#console.log @dataForPackages
-			#console.log @dataForPackagesMerged
+				@dataForPackagesMerged.packages[name] = @dataForPackages.packages?[name] ? value?
+				return true
 
 Fallback demo field, by scanning homepage
 
@@ -518,7 +518,9 @@ Finish up
 				data = utils.replaceSection(['CONTRIBUTE', 'CONTRIBUTING'], data, contributing.getContributingSection(opts))
 				data = utils.replaceSection(['HISTORY', 'CHANGES', 'CHANGELOG'], data, history.getHistorySection(opts))
 				data = utils.replaceSection(['LICENSE', 'LICENSES'], data, licenses.getLicenseSection(opts))
+				data = utils.replaceSection(['LICENSEFILE'], data, licenses.getLicenseFile(opts))
 				@dataForReadmesEnhanced[name] = data
+				return true
 
 Finish up
 
@@ -534,8 +536,6 @@ Usage: `save (err) ->`
 			log = @log
 
 			log('info', "Writing changes...")
-			#console.log JSON.stringify(@dataForPackagesEnhanced, null, '\t')
-			#console.log JSON.stringify(@dataForReadmes, null, '\t')
 
 			tasks = new TaskGroup().setConfig(concurrency:0).once 'complete', (err) ->
 				return next(err)  if err
@@ -556,6 +556,8 @@ Save package files
 					data = JSON.stringify(@dataForPackagesEnhanced[name], null, '  ')
 					fsUtil.writeFile(path, data, complete)
 
+				return true
+
 Safe readme files
 
 			eachr @dataForPackagesMerged.readmes, (enabled, name) =>
@@ -569,6 +571,8 @@ Safe readme files
 				tasks.addTask (complete) =>
 					data = @dataForReadmesEnhanced[name]
 					fsUtil.writeFile(path, data, complete)
+
+				return true
 
 Finish up
 

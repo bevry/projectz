@@ -67,6 +67,7 @@ badges =
 		eachr badges.sections, (fn, name) ->
 			result = fn.call(@, opts)
 			results.push(result)  if result
+			return true
 
 		# Return
 		return results.join('\n')
