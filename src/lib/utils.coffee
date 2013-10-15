@@ -46,14 +46,14 @@ utils =
 		sectionName = sectionName.toUpperCase()
 
 		regex = ///
-			\s*(
+			\n(
 				<!--\s*#{regexName}\s*-->
 				|
 				<!--\s*#{regexName}/\s*-->
 				[\s\S]*?
 				<!--\s*/#{regexName}\s*-->
 			)\s*
-			///gi
+			///gim
 
 		replace = """
 			\n<!-- #{sectionName}/ -->

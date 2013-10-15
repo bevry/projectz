@@ -15,10 +15,10 @@ badges =
 				[![Build Status](https://secure.travis-ci.org/#{opts.username}/#{opts.name}.png?branch=master)](http://travis-ci.org/#{opts.username}/#{opts.name} "Check this project's build status on TravisCI")
 				"""
 
-		# Get Fury Badge
-		fury: (opts={}) ->
+		# Get NPM Badge
+		npm: (opts={}) ->
 			# Check
-			return ''  if !opts.badges.fury or !opts.name
+			return ''  if !opts.badges.npm or !opts.name
 
 			# Return
 			return """

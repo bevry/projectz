@@ -339,6 +339,11 @@ By first merging in all the package data together into the enhanced data
 			#console.log @dataForPackages
 			#console.log @dataForPackagesMerged
 
+Fallback demo field, by scanning homepage
+
+			@dataForPackagesMerged.homepage ?= @dataForPackagesMerged.homepage
+			@dataForPackagesMerged.demo ?= @dataForPackagesMerged.homepage
+
 Fallback repo, by scanning repository and homepage
 
 			unless @dataForPackagesMerged.repo
@@ -372,11 +377,6 @@ Fallback repository field, by scanning repo
 				@dataForPackagesMerged.bugs ?= {
 					url: "https://github.com/#{@dataForPackagesMerged.repo}/issues"
 				}
-
-Fallback demo field, by scanning homepage
-
-			if @dataForPackagesMerged.homepage
-				@dataForPackagesMerged.demo ?= @dataForPackagesMerged.homepage
 
 Enhance keywords, with CSV format
 

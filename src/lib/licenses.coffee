@@ -31,7 +31,7 @@ licenses =
 		mit: (license) ->
 			url = license.url or 'http://creativecommons.org/licenses/MIT/'
 			return """
-				the incredibly [permissive](http://en.wikipedia.org/wiki/Permissive_free_software_licence) [MIT License](#{url})
+				the incredibly [permissive](http://en.wikipedia.org/wiki/Permissive_free_software_licence) [MIT license](#{url})
 				"""
 
 		unknown: (license) ->
@@ -48,15 +48,6 @@ licenses =
 		# Prepare
 		result = "## License"
 
-		# Authors
-		if opts.authors.length is 0
-			# ignore
-		else if opts.authors.length is 1
-			author = opts.authors[0]
-			result += '\n\n'+licenses.getAuthorText(author)
-		else
-			result += (licenses.getLicenseText(license)  for license in opts.licenses).join('- ')
-
 		# Concatenate badges
 		if opts.licenses.length is 0
 			# ignore
@@ -66,6 +57,15 @@ licenses =
 		else
 			result += "\n\nLicensed under:\n\n"
 			result += '- '+(licenses.getLicenseText(license)  for license in opts.licenses).join('- ')
+
+		# Authors
+		if opts.authors.length is 0
+			# ignore
+		else if opts.authors.length is 1
+			author = opts.authors[0]
+			result += '\n\n'+licenses.getAuthorText(author)
+		else
+			result += '\n\n'+(licenses.getLicenseText(license)  for license in opts.licenses).join('- ')
 
 		# Return
 		return result

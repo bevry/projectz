@@ -2,6 +2,7 @@
 <!-- TITLE/ -->
 # Projectz
 <!-- /TITLE -->
+
 <!-- BADGES/ -->
 [![Build Status](https://secure.travis-ci.org/bevry/projectz.png?branch=master)](http://travis-ci.org/bevry/projectz "Check this project's build status on TravisCI")
 [![NPM version](https://badge.fury.io/js/projectz.png)](https://npmjs.org/package/projectz "View this project on NPM")
@@ -9,6 +10,7 @@
 [![Flattr donate button](https://raw.github.com/balupton/flattr-buttons/master/badge-89x18.gif)](http://flattr.com/thing/344188/balupton-on-Flattr "Donate monthly to this project using Flattr")
 [![PayPayl donate button](https://www.paypalobjects.com/en_AU/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6 "Donate once-off to this project using Paypal")
 <!-- /BADGES -->
+
 <!-- DESCRIPTION/ -->
 Stop wasting time syncing and updating your project's README and Package Files!
 <!-- /DESCRIPTION -->
@@ -17,105 +19,123 @@ Stop wasting time syncing and updating your project's README and Package Files!
 
 ## Usage
 
-Projectz auto-generates the following parts of the following files:
+### Data Files
+Projectz helps you maintain the following data files:
 
 - `package.json`
 - `bower.json`
 - `component.json`
 - `jquery.json`
+
+It does this by reading them, combining their data in memory, and then outputting the appropriate fields and over-rides for each file.
+
+Each file can serve as the master meta data file, however you can also define a `projectz.cson` [CSON](https://github.com/bevry/cson) file that you can use if you'd like to have the benefit of comments, optional commas, multiline strings, etc for your primary meta data file.
+
+The supported fields are as so:
+
+``` coffee
+{	
+	# Project's human readable name
+	title: "Projectz" 
+
+	# Project slug name
+	name: "projectz"
+
+	# Project GitHub repository full name
+	# If `repository` is set, or if `homepage` is a GitHub URL, we set this automatically
+	repo: "bevry/projectz"
+
+	# Project's homepage URL
+	# If `repo`, `repository`, or `demo` is set, we set this automatically
+	homepage: "https://github.com/bevry/projectz"
+	
+	# Project's demo URL
+	# If `homepage` or  is set, we set this automatically
+	demo: "https://github.com/bevry/projectz"
+	
+	# Project description
+	description: "Stop wasting time syncing and updating your project's README and Package Files!"
+	
+	# Project keywords
+	# Can be an array or CSV string
+	keywords: "a, b, c"
+
+	# Project's author details
+	# Can be an array or CSV string
+	author: "2013+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)"
+	authors: null
+
+	# Maintainers
+	# Can be an array or CSV string
+	maintainer: "2013+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)"
+	maintainers: null
+
+	# Contributors
+	# Pulled in automatically from the GitHub Repository API
+	contributor: null
+	contributors: null
+
+	# Project's license details
+	# Can be an array or CSV string
+	license: "MIT"  # {type:"MIT", url:"http://..."}
+	licenses: null
+	
+	# Project's repository details
+	# If `repo` is set, or if `homepage` is a GitHub URL, we set this automatically
+	repository:
+		type: "git"
+		url: "https://github.com/bevry/projectz.git"
+	
+	# Project's repository details
+	# If `repo` is set, or if `homepage` is a GitHub URL, we set this automatically
+	bugs:
+		url: "https://github.com/bevry/projectz/issues"
+	
+	# Project's badges for use in the readme files
+	badges:
+		travis: true
+		npm: true
+		gittip: true
+		flattr: "344188/balupton-on-Flattr"
+		paypal: "QB8GQPZAH84N6"
+
+}
+
+
+### Readme Files
+Projectz helps you maintain the following readme files:
+
 - `README.md`
-	- Badges
-		- Travis CI
-		- Package Version
-		- Gittip
-		- Flattr
-		- Paypal
-	- Install
-		- Node / Browserify
-		- Ender
-		- Bower
-		- Component
-	- History
-	- Contributing
-	- Backers
-	- License
 - `CONTRIBUTING.md`
 - `LICENSE.md`
 - `BACKERS.md`
-	- Maintainers
-	- Contributors
-	- Sponsors
-	- Participants
+- `HISTORY.md`
 
-Values are determined from your `projectz.cson` file and your github repository.
+It does this by reading them, and replacing comment tags with the approriate data.
 
+The following comment tags are supported:
 
-## Spec
+- `<!-- TITLE -->`
+- `<!-- BADGES -->`
+- `<!-- DESCRIPTION -->`
+- `<!-- INSTALL -->`
+- `<!-- HISTORY -->`
+- `<!-- CONTRIBUTE -->`
+- `<!-- BACKERS -->`
+- `<!-- LICENSE -->`
 
-Here is the spec for the `projectz.cson` file:
+You can inject your content between the tags just as you would expect, making a `README.md` file for a new project look like:
 
-``` coffee
-{
-	# Over-rides for the `package.json` file
-	# Set to `false` to avoid touching
-	# https://npmjs.org/doc/json.html
-	package: {}
-
-	# Over-rides for the `bower.json` file
-	# Set to `false` to avoid touching
-	# http://bower.io/#defining-a-package
-	bower: {}
-
-	# Over-rides for the `component.json` file
-	# Set to `false` to avoid touching
-	# https://github.com/component/component/wiki/Spec
-	component: {}
-
-	# Over-rides for the `jquery.json` file
-	# Set to `false` to avoid touching
-	# http://plugins.jquery.com/docs/package-manifest/
-	jquery: {}
-	
-	# Customisations for the `README.md` file
-	# Set to `false` to avoid touching
-	readme:
-		# Badges to add to the readme header
-		badges:
-			# Travis CI Badge
-			# determined from repository
-			travis: true
-			
-			# Version Badge by Fury.io
-			# determined from name
-			fury: true
-			
-			# Gittip Donate
-			# determined from repository username
-			gittip: true
-
-			# Flattr Donate
-			# not determined
-			flattr: false
-			
-			# Paypal Donate
-			# not determined
-			paypal: false
-	
-	# Whether or not we should write to the `LICENSE.md` file
-	# Set to `false` to avoid touching
-	license: true
-
-	# Whether or not we should write to the `BACKERS.md` file
-	# Set to `false` to avoid touching
-	backers: true
-
-	# Whether or not we should write to the `CONTRIBUTING.md` file
-	# Set to `false` to avoid touching
-	contributing: true
-}
-```
-
-[Here is an example `projectz.cson` file.](https://github.com/bevry/projectz/blob/master/test/src/projectz.cson)
+	<!-- TITLE -->
+	<!-- BADGES -->
+	<!-- DESCRIPTION -->
+	<!-- INSTALL -->
+	## Usage
+	Usage instructions go here
+	<!-- HISTORY -->
+	<!-- CONTRIBUTE -->
+	<!-- BACKERS -->
+	<!-- LICENSE -->
 
 
 <!-- HISTORY/ -->
@@ -132,8 +152,8 @@ Here is the spec for the `projectz.cson` file:
 <!-- LICENSE/ -->
 ## License
 
-Copyright &copy; 2013+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)
+Licensed under the incredibly [permissive](http://en.wikipedia.org/wiki/Permissive_free_software_licence) [MIT license](http://creativecommons.org/licenses/MIT/)
 
-Licensed under the incredibly [permissive](http://en.wikipedia.org/wiki/Permissive_free_software_licence) [MIT License](http://creativecommons.org/licenses/MIT/)
+Copyright &copy; 2013+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)
 <!-- /LICENSE -->
 

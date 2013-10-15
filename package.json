@@ -53,7 +53,7 @@
   },
   "badges": {
     "travis": true,
-    "fury": true,
+    "npm": true,
     "gittip": "bevry",
     "flattr": "344188/balupton-on-Flattr",
     "paypal": "QB8GQPZAH84N6"
