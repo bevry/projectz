@@ -17,6 +17,14 @@ Stop wasting time syncing and updating your project's README and Package Files!
 
 <!-- INSTALL -->
 
+## Todo
+
+The following is still left to do before we publish v1.0.0:
+
+- [ ] `<!-- BACKERS -->`
+- [ ] `<!-- BACKERSFILE -->`
+
+
 ## Usage
 
 ### Data Files
@@ -124,10 +132,12 @@ The following comment tags are supported:
 - `<!-- CONTRIBUTE -->`
 - `<!-- BACKERS -->`
 - `<!-- LICENSE -->`
+
+As well as these comment tags for updating entire files:
 - `<!-- LICENSEFILE -->`
 - `<!-- BACKERSFILE -->`
 
-You can inject your content between the tags just as you would expect, making a `README.md` file for a new project look like:
+As an example, here is a a basic `README.md` file:
 
 	<!-- TITLE -->
 	<!-- BADGES -->

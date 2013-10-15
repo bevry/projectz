@@ -12,7 +12,7 @@ backers =
 
 		# Handle
 		for sponsor in opts.sponsors
-			sponsors += "- #{sponsor.markdown}"
+			sponsors += "- #{sponsor.markdown or sponsor.text or sponsor}"
 
 		# Check
 		return result  if !sponsors
@@ -40,7 +40,7 @@ backers =
 
 		# Handle
 		for contributor in opts.contributors
-			contributors += "- #{contributor.markdown}"
+			contributors += "- #{contributor.markdown or contributor.text or contributor}"
 
 		# Check
 		return result  if !contributors
