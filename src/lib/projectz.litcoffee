@@ -170,25 +170,35 @@ Then enhance our data
 
 By first merging in all the package data together into the enhanced data
 
+				@dataForPackages.projectz ?= {}
+				@dataForPackages.projectz.badges ?= {}
+				@dataForPackages.projectz.readmes ?= {}
+				@dataForPackages.projectz.packages ?= {}
+				@dataForPackagesMerged.badges ?= {}
+				@dataForPackagesMerged.readmes ?= {}
+				@dataForPackagesMerged.packages ?= {}
+
 				extendr.deepExtend(
 					@dataForPackagesMerged
 					@dataForPackages.component
-					@dataForPackages.projectz.component
+					@dataForPackages.projectz.packages.component
 					@dataForPackages.bower
-					@dataForPackages.projectz.bower
+					@dataForPackages.projectz.packages.bower
 					@dataForPackages.jquery
-					@dataForPackages.projectz.jquery
+					@dataForPackages.projectz.packages.jquery
 					@dataForPackages.package
-					@dataForPackages.projectz.package
+					@dataForPackages.projectz.packages.package
 					@dataForPackages.projectz
 				)
 
-				@dataForPackagesMerged.component = @dataForPackages.projectz.component
-				@dataForPackagesMerged.bower = @dataForPackages.projectz.bower
-				@dataForPackagesMerged.jquery = @dataForPackages.projectz.jquery
-				@dataForPackagesMerged.package = @dataForPackages.projectz.package
+				eachr @dataForReadmes, (value, name) =>
+					@dataForPackagesMerged.readmes[name] =  @dataForPackages.projectz.readmes[name] ? value?
 
-				console.log @dataForPackagesMerged
+				eachr @dataForPackages, (value, name) =>
+					@dataForPackagesMerged.packages[name] =  @dataForPackages.projectz.packages[name] ? value?
+
+				#console.log @dataForPackages
+				#console.log @dataForPackagesMerged
 
 Fallback repo, by scanning repository and homepage
 
@@ -196,7 +206,12 @@ Fallback repo, by scanning repository and homepage
 					if @dataForPackagesMerged.repository?.url
 						@dataForPackagesMerged.repo = @dataForPackagesMerged.repository?.url
 					else if (@dataForPackagesMerged.homepage or '').indexOf('github.com') isnt -1
-						@dataForPackagesMerged.repo = @dataForPackagesMerged.homepage.replace(/^.+?github.com\//, '').replace(/(\.git|\/)+$/, '') or null
+						@dataForPackagesMerged.repo = @dataForPackagesMerged.homepage
+
+Extract out repo full name from urls
+
+				if @dataForPackagesMerged.repo
+					@dataForPackagesMerged.repo = @dataForPackagesMerged.repo.replace(/^.+?github.com\//, '').replace(/(\.git|\/)+$/, '') or null
 
 Fallback repository field, by scanning repo
 
@@ -238,52 +253,96 @@ Finally output our merged data into the individual packages for saving
 
 Create the data for the `package.json` format
 
-				@dataForPackagesEnhanced.package = extendr.extend({
-					name:                   @dataForPackagesMerged.name
-					version:                @dataForPackagesMerged.version
-					license:                @dataForPackagesMerged.license
-					description:            @dataForPackagesMerged.description
-					keywords:               @dataForPackagesMerged.keywords
-					author:                 @dataForPackagesMerged.author
-					maintainers:            @dataForPackagesMerged.maintainers
-					contributors:           @contributors.map (contributor) -> contributor.text
-					bugs:                   @dataForPackagesMerged.bugs
-					engines:                @dataForPackagesMerged.engines
-					dependencies:           @dataForPackagesMerged.dependencies
-					devDependencies:        @dataForPackagesMerged.devDependencies
-					main:                   @dataForPackagesMerged.main
-				}, @dataForPackagesMerged.package)
+				@dataForPackagesEnhanced.package = extendr.extend(
+					# New Object
+					{}
+
+					# Old Data
+					@dataForPackages.package
+
+					# Enhanced Data
+					{
+						name:                   @dataForPackagesMerged.name
+						version:                @dataForPackagesMerged.version
+						license:                @dataForPackagesMerged.license
+						description:            @dataForPackagesMerged.description
+						keywords:               @dataForPackagesMerged.keywords
+						author:                 @dataForPackagesMerged.author
+						maintainers:            @dataForPackagesMerged.maintainers
+						contributors:           @contributors.map (contributor) -> contributor.text
+						bugs:                   @dataForPackagesMerged.bugs
+						engines:                @dataForPackagesMerged.engines
+						dependencies:           @dataForPackagesMerged.dependencies
+						devDependencies:        @dataForPackagesMerged.devDependencies
+						main:                   @dataForPackagesMerged.main
+					}
+
+					# Explicit Data
+					@dataForPackagesMerged.packages.package
+				)
 
 Create the data for the `jquery.json` format, which is essentially exactly the same as the `package.json` format so just extend that
 
 				@dataForPackagesEnhanced.jquery = extendr.extend(
+					# New Object
 					{}
+
+					# Old Data
+					@dataForPackages.jquery
+
+					# Enhanced Data
 					@dataForPackagesEnhanced.package
+
+					# Explicit Data
 					@dataForPackagesMerged.jquery
 				)
 
 Create the data for the `component.json` format
 
-				@dataForPackagesEnhanced.component = extendr.extend({
-					name:                   @dataForPackagesMerged.name
-					version:                @dataForPackagesMerged.version
-					license:                @dataForPackagesMerged.licenseName
-					description:            @dataForPackagesMerged.description
-					keywords:               @dataForPackagesMerged.keywords
-					demo:                   @dataForPackagesMerged.demo
-					main:                   @dataForPackagesMerged.main
-					scripts:                [@dataForPackagesMerged.main]
-				}, @dataForPackagesMerged.component)
+				@dataForPackagesEnhanced.component = extendr.extend(
+					# New Object
+					{}
+
+					# Old Data
+					@dataForPackages.component
+
+					# Enhanced Data
+					{
+						name:                   @dataForPackagesMerged.name
+						version:                @dataForPackagesMerged.version
+						license:                @dataForPackagesMerged.licenseName
+						description:            @dataForPackagesMerged.description
+						keywords:               @dataForPackagesMerged.keywords
+						demo:                   @dataForPackagesMerged.demo
+						main:                   @dataForPackagesMerged.main
+						scripts:                [@dataForPackagesMerged.main]
+					}
+
+					# Explicit Data
+					@dataForPackagesMerged.packages.component
+				)
 
 Create the data for the `bower.json` format
 
-				@dataForPackagesEnhanced.bower = extendr.extend({
-					name:                   @dataForPackagesMerged.name
-					version:                @dataForPackagesMerged.version
-					dependencies:           @dataForPackagesMerged.dependencies
-					devDependencies:        @dataForPackagesMerged.devDependencies
-					main:                   @dataForPackagesMerged.main
-				}, @dataForPackagesMerged.bower)
+				@dataForPackagesEnhanced.bower = extendr.extend(
+					# New Object
+					{}
+
+					# Old Data
+					@dataForPackages.bower
+
+					# Enhanced Data
+					{
+						name:                   @dataForPackagesMerged.name
+						version:                @dataForPackagesMerged.version
+						dependencies:           @dataForPackagesMerged.dependencies
+						devDependencies:        @dataForPackagesMerged.devDependencies
+						main:                   @dataForPackagesMerged.main
+					}
+
+					# Explicit Data
+					@dataForPackagesMerged.packages.bower
+				)
 
 
 Now that all our tasks are added, start executing them
@@ -302,18 +361,23 @@ Fetch the contributors for the repo if we have it
 Usage: `loadContributors (err) ->`
 
 		loadContributors: (next) ->
+			log = @log
 
 Check if we have the repo data, if we don't then we should exit and chain right away
 
 			repo = @dataForPackagesMerged.repo
-			return next(); @  unless repo
+			unless repo
+				log('info', 'Skipping loading contributors as project repo is not defined')
+				next()
+				return @
 
 If we do have a repo, then fetch the contributor data for it
 
 			fetchContributors = require('getcontributors').create(log: @log)
-			fetchContributors.fetchContributorsFromRepos [repo], (err) ->
+			fetchContributors.fetchContributorsFromRepos [repo], (err,result) =>
 				return next(err)  if err
 				@contributors = fetchContributors.getContributors()
+				log('info', "Loaded #{@contributors.length} contributors from #{repo} repository")
 				return next()
 
 Finish with a chain
@@ -373,7 +437,7 @@ Usage: `loadPackages paths, (err, dataForPackages) ->`
 
 			eachr pathsForPackages, (value,key) ->
 				tasks.addTask (complete) ->
-					dataForPackages[key] = {}
+					dataForPackages[key] = null
 					fsUtil.exists value, (exists) ->
 						return complete()  if exists is false
 						CSON.parseFile value, (err,data) ->
@@ -400,7 +464,7 @@ Usage: `loadPackages paths, (err, dataForReadmes) ->`
 
 			eachr pathsForReadmes, (value,key) ->
 				tasks.addTask (complete) ->
-					dataForReadmes[key] = ''
+					dataForReadmes[key] = null
 					fsUtil.exists value, (exists) ->
 						return complete()  if exists is false
 						fsUtil.readFile value, (err,data) ->
@@ -436,8 +500,31 @@ Save the data we've loaded into the files
 Usage: `save (err) ->`
 
 		save: (next) ->
-			console.log JSON.stringify(@dataForPackagesEnhanced, null, '\t')
-			return next()
+			log = @log
+
+			log('info', "Writing changes...")
+			#console.log JSON.stringify(@dataForPackagesEnhanced, null, '\t')
+			#console.log JSON.stringify(@dataForReadmes, null, '\t')
+
+			tasks = new TaskGroup().setConfig(concurrency:0).once 'complete', (err) ->
+				return next(err)  if err
+				log('info', "Wrote changes")
+				return next()
+
+			eachr @dataForPackagesMerged.packages, (enabled, name) =>
+				return  if name is 'projectz'
+				console.log {name,enabled}
+				unless enabled
+					log('info', "Skipping package file: #{name}")
+					return
+
+				log('info', "Writing package file: #{name}")
+				tasks.addTask (complete) =>
+					data = JSON.stringify(@dataForPackagesEnhanced[name], null, '  ')
+					fsUtil.writeFile(@pathsForPackages[name], data, complete)
+
+			tasks.run()
+			@
 
 
 ## Export

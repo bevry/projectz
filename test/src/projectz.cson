@@ -15,6 +15,12 @@
 	maintainers: """
 		Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)
 		"""
+	badges:
+		travis: true
+		fury: true
+		gittip: 'bevry'
+		flattr: '344188/balupton-on-Flattr'
+		paypal: 'QB8GQPZAH84N6'
 	dependencies:
 		"typechecker": "~2.0.6"
 	devDependencies:
@@ -39,38 +45,26 @@
 	# - license
 	# - repository
 	# - bugs
-
-
-	# =================================
-	# PACKAGE MANAGERS
-
-	package: true
-
-	component:
-		dependencies:
-			"bevry/typechecker": "master"
-
-	bower: true
-
-	jquery: true
-
+	# - badges
 
 	# =================================
-	# BADGES
+	# PACKAGE FILES
 
-	travis: true
-	fury: true
-	gittip: 'bevry'
-	flattr: '344188/balupton-on-Flattr'
-	paypal: 'QB8GQPZAH84N6'
-
+	packages:
+		package: true
+		component:
+			dependencies:
+				"bevry/typechecker": "master"
+		bower: true
+		jquery: true
 
 	# =================================
-	# READMES
+	# README FILES
 
-	history: true
-	contributing: true
-	backers: true
-	license: true
-	readme: true
+	readmes:
+		history: true
+		contributing: true
+		backers: true
+		license: true
+		readme: true
 }
