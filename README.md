@@ -45,7 +45,7 @@ It does this by reading them, combining their data in memory, and then outputtin
 
 Each file can serve as the master meta data file, however you can also define a `projectz.cson` [CSON](https://github.com/bevry/cson) file that you can use if you'd like to have the benefit of comments, optional commas, multiline strings, etc for your primary meta data file.
 
-The supported fields are as so:
+The special fields are as so:
 
 ``` coffee
 {	
