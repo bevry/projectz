@@ -1,61 +1,44 @@
+# Import
+utils = require('./utils')
+
 # Define
 licenses =
-	# Get Authors
-	getAuthors: (opts={}) ->
-		# Check
-		return ''  if !opts.authors
-
-		# Prepare
-		authors = ''
-
-		# Handle
-		for author in opts.authors
-			authors += "- Copyright &copy; #{author.year} #{author.markdown}"
-
-		# Return
-		return authors
-
-
-	# Get MIT License
-	getMitLicense: (opts={}) ->
-		# Return
+	getAuthorText: (author={}) ->
 		return """
-			## The MIT License
-
-			Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-			The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-			THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+			Copyright &copy; #{author.markdown or author.text or author}
 			"""
 
-	# Get MIT Section
-	getMitSection: (opts={}) ->
-		# Return
-		return """
-			Licensed under the incredibly [permissive](http://en.wikipedia.org/wiki/Permissive_free_software_licence) [MIT License](http://creativecommons.org/licenses/MIT/)
-			"""
+	getLicenseText: (license) ->
+		fn = licenses.sections[license.toLowerCase()]
+		if fn
+			return fn.call(@, license)
+		else
+			return licenses.sections.unknown.call(@, license)
 
-	# Get Multi License Section
-	getMultiSection: (opts={}) ->
-		# Check
-		return ''  if !opts.licenses
+	files:
+		mit: (opts={}) ->
+			return """
+				## The MIT License
 
-		# Prepare
-		licenses = []
-		url = @getFileUrl(opts, 'LICENSE.md')
+				Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-		# Handle
-		for license in opts.licenses
-			licenses.push "[#{license.type}](#{license.url})"
+				The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-		# Concatenate
-		licenses = licenses.join(' and ')
+				THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+				"""
 
-		# Return
-		return """
-			Licensed under the #{licenses} licenses, [for more details see the `LICENSE.md` file](#{url})
-			"""
+	sections:
+		mit: (license) ->
+			url = license.url or 'http://creativecommons.org/licenses/MIT/'
+			return """
+				the incredibly [permissive](http://en.wikipedia.org/wiki/Permissive_free_software_licence) [MIT License](#{url})
+				"""
+
+		unknown: (license) ->
+			if license.url
+				"[#{license.type}](#{license.url})"
+			else
+				license.type
 
 	# Get License Section
 	getLicenseSection: (opts={}) ->
@@ -63,27 +46,32 @@ licenses =
 		return '' if !opts.licenses
 
 		# Prepare
-		result = ''
-		result += """
-			## License
-
-			"""  if opts.header isnt false
-
-		# Handle
-		if opts.licenses.length is 1
-			result += @getFunctionNamed.call(licenses, opts.licenes[0].type+'Section')
-		else
-			result += @getFunctionNamed.call(licenses, 'MultiSection')
+		result = "## License"
 
 		# Authors
-		authors = @getAuthors(opts)
-		result += '\n\n'+authors  if authors
+		if opts.authors.length is 0
+			# ignore
+		else if opts.authors.length is 1
+			author = opts.authors[0]
+			result += '\n\n'+licenses.getAuthorText(author)
+		else
+			result += (licenses.getLicenseText(license)  for license in opts.licenses).join('- ')
+
+		# Concatenate badges
+		if opts.licenses.length is 0
+			# ignore
+		else if opts.licenses.length is 1
+			license = opts.licenses[0]
+			result += "\n\nLicensed under #{licenses.getLicenseText(license)}"
+		else
+			result += "\n\nLicensed under:\n\n"
+			result += '- '+(licenses.getLicenseText(license)  for license in opts.licenses).join('- ')
 
 		# Return
 		return result
 
-	# Get Licenses File
-	getLicensesFile: (opts={}) ->
+	# Get License File
+	getLicenseFile: (opts={}) ->
 		# Check
 		return '' if !opts.licenses
 
@@ -100,7 +88,7 @@ licenses =
 
 		# Handle
 		for license in opts.licenses
-			fn = @getFunctionNamed.call(licenses, license.type+'License')
+			fn = utils.getFunctionNamed.call(licenses, license.type+'License')
 			result += '\n\n'+fn.call(@, opts)+'\n'
 
 		# Return

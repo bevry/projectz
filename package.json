@@ -1,4 +1,5 @@
 {
+  "title": "Projectz",
   "name": "projectz",
   "version": "0.0.1",
   "description": "Stop wasting time syncing and updating your project's README and Package Files!",
@@ -40,7 +41,8 @@
     "caterpillar-human": "~2.1.0",
     "safefs": "~3.0.3",
     "promptly": "~0.2.0",
-    "commander": "~2.0.0"
+    "commander": "~2.0.0",
+    "typechecker": "~2.0.6"
   },
   "devDependencies": {
     "coffee-script": "~1.6.2"
@@ -48,5 +50,12 @@
   "main": "./out/lib/projectz.js",
   "scripts": {
     "test": "node ./out/test/everything-test.js"
+  },
+  "badges": {
+    "travis": true,
+    "fury": true,
+    "gittip": "bevry",
+    "flattr": "344188/balupton-on-Flattr",
+    "paypal": "QB8GQPZAH84N6"
   }
 }

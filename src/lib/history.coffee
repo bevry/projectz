@@ -1,16 +1,18 @@
+# Import
+utils = require('./utils')
+
 # Define
 history =
 	# Get History Section
-	getHistorySection: ->
+	getHistorySection: (opts) ->
 		# Prepare
 		file = 'History.md'
-		url = @getFileUrl(file)
+		url = utils.getFileUrl(opts, file)
 
 		# Return
 		return """
 			## History
 			[You can discover the history inside the `#{file}` file](#{url})
-
 			"""
 
 # Export

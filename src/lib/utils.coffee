@@ -1,3 +1,6 @@
+# Import
+typeChecker = require('typechecker')
+
 # Utils
 utils =
 	# Get File URL
@@ -31,6 +34,36 @@ utils =
 
 		# Return
 		return fns
+
+	# Replace Section
+	replaceSection: (names, source, inject) ->
+		if typeChecker.isArray(names)
+			regexName = '('+names.join('|')+')'
+			sectionName = names[0]
+		else
+			regexName = sectionName = names
+
+		sectionName = sectionName.toUpperCase()
+
+		regex = ///
+			\s*(
+				<!--\s*#{regexName}\s*-->
+				|
+				<!--\s*#{regexName}/\s*-->
+				[\s\S]*?
+				<!--\s*/#{regexName}\s*-->
+			)\s*
+			///gi
+
+		replace = """
+			\n<!-- #{sectionName}/ -->
+			#{inject}
+			<!-- /#{sectionName} -->\n\n
+			"""
+
+		result = source.replace(regex, replace)
+
+		return result
 
 # Export
 module.exports = utils
