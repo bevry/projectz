@@ -170,32 +170,24 @@ Then enhance our data
 
 By first merging in all the package data together into the enhanced data
 
-				@dataForPackages.projectz ?= {}
-				@dataForPackages.projectz.badges ?= {}
-				@dataForPackages.projectz.readmes ?= {}
-				@dataForPackages.projectz.packages ?= {}
+				extendr.deepExtend(
+					@dataForPackagesMerged
+					@dataForPackages.component
+					@dataForPackages.bower
+					@dataForPackages.jquery
+					@dataForPackages.package
+					@dataForPackages.projectz
+				)
+
 				@dataForPackagesMerged.badges ?= {}
 				@dataForPackagesMerged.readmes ?= {}
 				@dataForPackagesMerged.packages ?= {}
 
-				extendr.deepExtend(
-					@dataForPackagesMerged
-					@dataForPackages.component
-					@dataForPackages.projectz.packages.component
-					@dataForPackages.bower
-					@dataForPackages.projectz.packages.bower
-					@dataForPackages.jquery
-					@dataForPackages.projectz.packages.jquery
-					@dataForPackages.package
-					@dataForPackages.projectz.packages.package
-					@dataForPackages.projectz
-				)
-
 				eachr @dataForReadmes, (value, name) =>
-					@dataForPackagesMerged.readmes[name] =  @dataForPackages.projectz.readmes[name] ? value?
+					@dataForPackagesMerged.readmes[name] =  @dataForPackages.readmes?[name] ? value?
 
 				eachr @dataForPackages, (value, name) =>
-					@dataForPackagesMerged.packages[name] =  @dataForPackages.projectz.packages[name] ? value?
+					@dataForPackagesMerged.packages[name] =  @dataForPackages.packages?[name] ? value?
 
 				#console.log @dataForPackages
 				#console.log @dataForPackagesMerged
