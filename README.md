@@ -100,6 +100,7 @@ The supported fields are as so:
 		paypal: "QB8GQPZAH84N6"
 
 }
+```
 
 
 ### Readme Files
