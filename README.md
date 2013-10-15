@@ -23,6 +23,8 @@ The following is still left to do before we publish v1.0.0:
 
 - `<!-- BACKERS -->`
 - `<!-- BACKERSFILE -->`
+- Provide documentation for data overrides
+- Provide documentation for readme overrides
 - Tests
 
 
