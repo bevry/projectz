@@ -23,6 +23,8 @@ The following is still left to do before we publish v1.0.0:
 
 - `<!-- BACKERS -->`
 - `<!-- BACKERSFILE -->`
+- Only output `CONTRIBUTE` block if `CONTRIBUTING.md` exists
+- Only output `HISTORY` block if `HISTORY.md` exists
 - Provide documentation for data overrides
 - Provide documentation for readme overrides
 - Tests
