@@ -21,8 +21,9 @@ Stop wasting time syncing and updating your project's README and Package Files!
 
 The following is still left to do before we publish v1.0.0:
 
-- [ ] `<!-- BACKERS -->`
-- [ ] `<!-- BACKERSFILE -->`
+- `<!-- BACKERS -->`
+- `<!-- BACKERSFILE -->`
+- Tests
 
 
 ## Usage
