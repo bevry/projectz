@@ -1,7 +1,7 @@
 {
   "title": "Projectz",
   "name": "projectz",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Stop wasting time syncing and updating your project's README and Package Files!",
   "homepage": "https://github.com/bevry/projectz",
   "keywords": [
@@ -40,7 +40,6 @@
     "caterpillar-filter": "~2.0.1",
     "caterpillar-human": "~2.1.0",
     "safefs": "~3.0.3",
-    "promptly": "~0.2.0",
     "commander": "~2.0.0",
     "typechecker": "~2.0.6"
   },
