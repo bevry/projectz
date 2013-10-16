@@ -181,7 +181,7 @@ As an example, here is a a basic `README.md` file:
 <!-- HISTORY/ -->
 
 ## History
-[Discover the change history by heading on over to the `History.md` file](https://github.com/bevry/projectz/blob/master/History.md#files)
+[Discover the change history by heading on over to the `History.md` file.](https://github.com/bevry/projectz/blob/master/History.md#files)
 
 <!-- /HISTORY -->
 
@@ -190,7 +190,7 @@ As an example, here is a a basic `README.md` file:
 
 ## Contribute
 
-[Discover how you can contribute by heading on over to the `Contributing.md` file](https://github.com/bevry/projectz/blob/master/Contributing.md#files)
+[Discover how you can contribute by heading on over to the `Contributing.md` file.](https://github.com/bevry/projectz/blob/master/Contributing.md#files)
 
 <!-- /CONTRIBUTE -->
 
@@ -219,7 +219,7 @@ These amazing people have contributed code to this project:
 
 - Benjamin Lupton <b@lupton.cc> (https://github.com/balupton) - [view contributions](https://github.com/bevry/projectz/commits?author=balupton)
 
-Become a contributor!<br/>[Discover how you can contribute by heading on over to the `Contributing.md` file](https://github.com/bevry/projectz/blob/master/Contributing.md#files)
+Become a contributor! [Discover how you can contribute by heading on over to the `Contributing.md` file.](https://github.com/bevry/projectz/blob/master/Contributing.md#files)
 
 <!-- /BACKERS -->
 
