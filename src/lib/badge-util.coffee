@@ -1,9 +1,5 @@
-# Import
-utils = require('./utils')
-eachr = require('eachr')
-
 # Define
-badges =
+module.exports = badgeUtil =
 	sections:
 		# Get Travis CI Badge
 		travis: (opts={}) ->
@@ -64,13 +60,9 @@ badges =
 		results = []
 
 		# Concatenate badges
-		eachr badges.sections, (fn, name) ->
+		for own name,fn of badgeUtil.sections
 			result = fn.call(@, opts)
 			results.push(result)  if result
-			return true
 
 		# Return
 		return results.join('\n')
-
-# Export
-module.exports = badges

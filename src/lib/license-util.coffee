@@ -1,26 +1,22 @@
-# Import
-utils = require('./utils')
-
-# Define
-licenses =
+module.exports = licenseUtil =
 	getAuthorText: (author={}) ->
 		return """
 			Copyright &copy; #{author.markdown or author.text or author}
 			"""
 
 	getLicenseText: (license) ->
-		fn = licenses.sections[license.toLowerCase()]
+		fn = licenseUtil.sections[license.toLowerCase()]
 		if fn
 			return fn.call(@, license)
 		else
-			return licenses.sections.unknown.call(@, license)
+			return licenseUtil.sections.unknown.call(@, license)
 
 	getLicenseFileText: (license) ->
-		fn = licenses.files[license.toLowerCase()]
+		fn = licenseUtil.files[license.toLowerCase()]
 		if fn
 			return fn.call(@, license)
 		else
-			return licenses.files.unknown.call(@, license)
+			return licenseUtil.files.unknown.call(@, license)
 
 	getAuthors: (opts) ->
 		result = ''
@@ -29,9 +25,9 @@ licenses =
 			# ignore
 		else if opts.authors.length is 1
 			author = opts.authors[0]
-			result += licenses.getAuthorText(author)
+			result += licenseUtil.getAuthorText(author)
 		else
-			result += (licenses.getLicenseText(license)  for license in opts.licenses).join('\n- ')
+			result += (licenseUtil.getLicenseText(license)  for license in opts.licenses).join('\n- ')
 
 		return result
 
@@ -42,15 +38,15 @@ licenses =
 			# ignore
 		else if opts.licenses.length is 1
 			license = opts.licenses[0]
-			result += "Licensed under #{licenses.getLicenseText(license)}"
+			result += "Licensed under #{licenseUtil.getLicenseText(license)}"
 		else
 			result += "Licensed under:\n\n"
-			result += '- '+(licenses.getLicenseText(license)  for license in opts.licenses).join('\n- ')
+			result += '- '+(licenseUtil.getLicenseText(license)  for license in opts.licenses).join('\n- ')
 
 		return result
 
 	getLicensesFiles: (opts) ->
-		return (licenses.getLicenseFileText(license)  for license in opts.licenses).join('\n\n')
+		return (licenseUtil.getLicenseFileText(license)  for license in opts.licenses).join('\n\n')
 
 	files:
 		mit: (opts={}) ->
@@ -91,9 +87,9 @@ licenses =
 		result = """
 			## License
 
-			#{licenses.getLicenses(opts)}
+			#{licenseUtil.getLicenses(opts)}
 
-			#{licenses.getAuthors(opts)}
+			#{licenseUtil.getAuthors(opts)}
 			"""
 
 		# Return
@@ -108,13 +104,10 @@ licenses =
 		result = """
 			# License
 
-			#{licenses.getAuthors(opts)}
+			#{licenseUtil.getAuthors(opts)}
 
-			#{licenses.getLicensesFiles(opts)}
+			#{licenseUtil.getLicensesFiles(opts)}
 			"""
 
 		# Return
 		return result
-
-# Export
-module.exports = licenses

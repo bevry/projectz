@@ -2,7 +2,8 @@
 typeChecker = require('typechecker')
 
 # Utils
-utils =
+module.exports = projectzUtil =
+
 	# Get File URL
 	getFileUrl: (opts, file) ->
 		return "https://github.com/#{opts.username}/#{opts.name}/blob/master/#{file}#files"
@@ -64,6 +65,3 @@ utils =
 		result = source.replace(regex, replace)
 
 		return result
-
-# Export
-module.exports = utils

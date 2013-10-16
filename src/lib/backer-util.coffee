@@ -1,5 +1,4 @@
-# Define
-backers =
+module.exports = backerUtil =
 
 	# Get Sponsor Backers
 	getSponsorBackers: (opts={}) ->
@@ -89,6 +88,3 @@ backers =
 
 		# Return
 		return ''
-
-# Export
-module.exports = backers

@@ -1,4 +1,4 @@
-module.exports = install =
+module.exports = installUtil =
 
 	getInstallInstructions: (opts) ->
 		result = "# Install"

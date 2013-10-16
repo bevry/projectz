@@ -1,19 +1,16 @@
 # Import
-utils = require('./utils')
+projectzUtil = require('./projectz-util')
 
 # Define
-history =
+module.exports = historyUtil =
 	# Get History Section
 	getHistorySection: (opts) ->
 		# Prepare
 		file = 'History.md'
-		url = utils.getFileUrl(opts, file)
+		url = projectzUtil.getFileUrl(opts, file)
 
 		# Return
 		return """
 			## History
 			[You can discover the history inside the `#{file}` file](#{url})
 			"""
-
-# Export
-module.exports = history
