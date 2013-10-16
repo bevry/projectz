@@ -8,7 +8,7 @@ module.exports = badgeUtil =
 
 			# Return
 			return """
-				[![Build Status](https://secure.travis-ci.org/#{opts.username}/#{opts.name}.png?branch=master)](http://travis-ci.org/#{opts.username}/#{opts.name} "Check this project's build status on TravisCI")
+				[![Build Status](http://img.shields.io/travis-ci/#{opts.username}/#{opts.name}.png?branch=master)](http://travis-ci.org/#{opts.username}/#{opts.name} "Check this project's build status on TravisCI")
 				"""
 
 		# Get NPM Badge
@@ -30,7 +30,7 @@ module.exports = badgeUtil =
 
 			# Return
 			return """
-				[![Gittip donate button](http://badgr.co/gittip/bevry.png)](#{url} "Donate weekly to this project using Gittip")
+				[![Gittip donate button](http://img.shields.io/gittip/#{opts.badges.gittip}.png)](#{url} "Donate weekly to this project using Gittip")
 				"""
 
 		# Get Flattr Badge
@@ -57,7 +57,7 @@ module.exports = badgeUtil =
 
 	# Get Badges Section
 	getBadgesSection: (opts={}) ->
-		return badgeUtil.getTypedBadges('misc', opts)+badgeUtil.getTypedBadges('donation', opts)
+		return badgeUtil.getTypedBadges('misc', opts)+'\n'+badgeUtil.getTypedBadges('donation', opts)
 
 	# Get Donation Badges
 	getTypedBadges: (type, opts={}) ->

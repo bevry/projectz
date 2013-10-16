@@ -9,14 +9,14 @@ module.exports = licenseUtil =
 			"""
 
 	getLicenseText: (license) ->
-		fn = licenseUtil.sections[license.toLowerCase()]
+		fn = licenseUtil.sections[license.type.toLowerCase()]
 		if fn
 			return fn.call(@, license)
 		else
 			return licenseUtil.sections.unknown.call(@, license)
 
 	getLicenseFileText: (license) ->
-		fn = licenseUtil.files[license.toLowerCase()]
+		fn = licenseUtil.files[license.type.toLowerCase()]
 		if fn
 			return fn.call(@, license)
 		else
@@ -31,7 +31,7 @@ module.exports = licenseUtil =
 			author = opts.authors[0]
 			result += licenseUtil.getAuthorText(author)
 		else
-			result += (licenseUtil.getLicenseText(license)  for license in opts.licenses).join('\n- ')
+			result += (licenseUtil.getAuthorText(author)  for author in opts.authors).join('\n<br/>')
 
 		return result
 

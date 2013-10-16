@@ -372,31 +372,33 @@ Fallback repository field, by scanning repo
 
 Enhance keywords, with CSV format
 
-			if typeof @dataForPackagesMerged.keywords is 'string'
-				@dataForPackagesMerged.keywords = @dataForPackagesMerged.keywords.split(/[,\n]+/)
+			@dataForPackagesMerged.keywords = @dataForPackagesMerged.keywords.split(/[,\n]+/)  if typeChecker.isString(@dataForPackagesMerged.keywords)
 
 Fallback sponsors
 
 			@dataForPackagesMerged.sponsors ?= []
-			@dataForPackagesMerged.sponsors = @dataForPackagesMerged.sponsors.split(/[,\n]/).map((i)->i.trim())  unless Array.isArray(@dataForPackagesMerged.sponsors)
+			@dataForPackagesMerged.sponsors = @dataForPackagesMerged.sponsors.split(/[,\n]/).map((i)->i.trim())  if typeChecker.isString(@dataForPackagesMerged.sponsors)
 
 Fallback maintainers
 
 			@dataForPackagesMerged.maintainers ?= @dataForPackagesMerged.maintainer or ''
-			@dataForPackagesMerged.maintainers = @dataForPackagesMerged.maintainers.split(/[,\n]/).map((i)->i.trim())  unless Array.isArray(@dataForPackagesMerged.maintainers)
+			@dataForPackagesMerged.maintainers = @dataForPackagesMerged.maintainers.split(/[,\n]/).map((i)->i.trim())  if typeChecker.isString(@dataForPackagesMerged.maintainers)
+			@dataForPackagesMerged.maintainers = [@dataForPackagesMerged.maintainers]  unless typeChecker.isArray(@dataForPackagesMerged.maintainers)
 			@dataForPackagesMerged.maintainer = @dataForPackagesMerged.maintainers.join(', ')
 
 Fallback authors
 
 			@dataForPackagesMerged.authors ?= @dataForPackagesMerged.author or ''
-			@dataForPackagesMerged.authors = @dataForPackagesMerged.authors.split(/[,\n]/).map((i)->i.trim())  unless Array.isArray(@dataForPackagesMerged.authors)
+			@dataForPackagesMerged.authors = @dataForPackagesMerged.authors.split(/[,\n]/).map((i)->i.trim())  if typeChecker.isString(@dataForPackagesMerged.authors)
+			@dataForPackagesMerged.authors = [@dataForPackagesMerged.authors]  unless typeChecker.isArray(@dataForPackagesMerged.authors)
 			@dataForPackagesMerged.author = @dataForPackagesMerged.authors.join(', ')
 
 Fallback licenses
 
 			@dataForPackagesMerged.licenses ?= @dataForPackagesMerged.license or ''
-			@dataForPackagesMerged.licenses = @dataForPackagesMerged.licenses.split(/[,\n]/).map((i)->i.trim())  unless Array.isArray(@dataForPackagesMerged.licenses)
-			@dataForPackagesMerged.licenses.map (value) =>
+			@dataForPackagesMerged.licenses = @dataForPackagesMerged.licenses.split(/[,\n]/).map((i)->i.trim())  if typeChecker.isString(@dataForPackagesMerged.licenses)
+			@dataForPackagesMerged.licenses = [@dataForPackagesMerged.licenses]  unless typeChecker.isArray(@dataForPackagesMerged.licenses)
+			@dataForPackagesMerged.licenses = @dataForPackagesMerged.licenses.map (value) =>
 				value = {type:value}  if typeChecker.isString(value)
 				return value
 			delete @dataForPackagesMerged.license

@@ -50,6 +50,9 @@
   "scripts": {
     "test": "node ./out/test/everything-test.js"
   },
+  "bin": {
+    "projectz": "./bin/projectz"
+  },
   "badges": {
     "travis": true,
     "npm": true,
@@ -58,6 +61,8 @@
     "paypal": "QB8GQPZAH84N6"
   },
   "licenses": [
-    "MIT"
+    {
+      "type": "MIT"
+    }
   ]
 }
