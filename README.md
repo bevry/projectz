@@ -213,9 +213,7 @@ These amazing people have contributed code to this project:
 
 - Benjamin Lupton <b@lupton.cc> (https://github.com/balupton) - [view contributions](https://github.com/bevry/projectz/commits?author=balupton)
 
-Become a contributor!
-
-[Discover how you can contribute by heading on over to the `Contributing.md` file.](https://github.com/bevry/projectz/blob/master/Contributing.md#files)
+[Become a contributor!](https://github.com/bevry/projectz/blob/master/Contributing.md#files)
 
 ### Maintainers
 

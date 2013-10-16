@@ -40,17 +40,18 @@ module.exports = backerUtil =
 		else
 			result += "These amazing people have contributed code to this project:\n\n"
 			result += '- '+(projectzUtil.getPersonText(contributor)+" - [view contributions](https://github.com/#{opts.repo}/commits?author=#{contributor.username})"  for contributor in opts.contributors).join('\n- ')
-			result += "\n\nBecome a contributor!\n\n#{backerUtil.getContributeText(opts)}"
+			result += "\n\n#{backerUtil.getContributeText(opts, 'Become a contributor!')}"
 
 		return result
 
-	getContributeText: (opts) ->
+	getContributeText: (opts, text) ->
 		# Prepare
 		file = 'Contributing.md'
 		url = projectzUtil.getFileUrl(opts, file)
+		text ?= "Discover how you can contribute by heading on over to the `#{file}` file."
 
 		# Return
-		return "[Discover how you can contribute by heading on over to the `#{file}` file.](#{url})"
+		return "[#{text}](#{url})"
 
 	getBackerSection: (opts={}) ->
 		# Check
