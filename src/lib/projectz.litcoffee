@@ -38,6 +38,7 @@ Load in our other project files
 	contributing = require('./contributing')
 	history = require('./history')
 	licenses = require('./licenses')
+	installUtil = require('./install')
 	utils = require('./utils')
 
 
@@ -515,6 +516,7 @@ Finish up
 				data = utils.replaceSection(['TITLE', 'NAME'], data, "# #{opts.title}")
 				data = utils.replaceSection(['BADGES', 'BADGE'], data, badges.getBadgesSection(opts))
 				data = utils.replaceSection(['DESCRIPTION'], data, "#{opts.description}")
+				data = utils.replaceSection(['INSTALL'], data, installUtil.getInstallInstructions(opts))
 				data = utils.replaceSection(['CONTRIBUTE', 'CONTRIBUTING'], data, contributing.getContributingSection(opts))
 				data = utils.replaceSection(['HISTORY', 'CHANGES', 'CHANGELOG'], data, history.getHistorySection(opts))
 				data = utils.replaceSection(['LICENSE', 'LICENSES'], data, licenses.getLicenseSection(opts))
