@@ -57,9 +57,7 @@ module.exports = projectzUtil =
 			///gim
 
 		replace = """
-			\n<!-- #{sectionName}/ -->
-			#{inject}
-			<!-- /#{sectionName} -->\n\n
+			\n<!-- #{sectionName}/ -->\n\n#{inject}\n\n<!-- /#{sectionName} -->\n\n\n
 			"""
 
 		result = source.replace(regex, replace)

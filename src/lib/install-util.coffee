@@ -1,7 +1,7 @@
 module.exports = installUtil =
 
 	getInstallInstructions: (opts) ->
-		result = "# Install"
+		result = "## Install"
 
 		if opts.packages.package
 			result += """

@@ -1,6 +1,6 @@
 # Define
 module.exports = badgeUtil =
-	sections:
+	miscBadges:
 		# Get Travis CI Badge
 		travis: (opts={}) ->
 			# Check
@@ -21,6 +21,7 @@ module.exports = badgeUtil =
 				[![NPM version](https://badge.fury.io/js/#{opts.name}.png)](https://npmjs.org/package/#{opts.name} "View this project on NPM")
 				"""
 
+	donationBadges:
 		# Get Gittip Badge
 		gittip: (opts={}) ->
 			# Check
@@ -56,11 +57,15 @@ module.exports = badgeUtil =
 
 	# Get Badges Section
 	getBadgesSection: (opts={}) ->
+		return badgeUtil.getTypedBadges('misc', opts)+badgeUtil.getTypedBadges('donation', opts)
+
+	# Get Donation Badges
+	getTypedBadges: (type, opts={}) ->
 		# Prepare
 		results = []
 
 		# Concatenate badges
-		for own name,fn of badgeUtil.sections
+		for own name,fn of badgeUtil[type+'Badges']
 			result = fn.call(@, opts)
 			results.push(result)  if result
 

@@ -1,22 +1,31 @@
 
 <!-- TITLE/ -->
+
 # Projectz
+
 <!-- /TITLE -->
 
+
 <!-- BADGES/ -->
+
 [![Build Status](https://secure.travis-ci.org/bevry/projectz.png?branch=master)](http://travis-ci.org/bevry/projectz "Check this project's build status on TravisCI")
-[![NPM version](https://badge.fury.io/js/projectz.png)](https://npmjs.org/package/projectz "View this project on NPM")
-[![Gittip donate button](http://badgr.co/gittip/bevry.png)](https://www.gittip.com/bevry/ "Donate weekly to this project using Gittip")
+[![NPM version](https://badge.fury.io/js/projectz.png)](https://npmjs.org/package/projectz "View this project on NPM")[![Gittip donate button](http://badgr.co/gittip/bevry.png)](https://www.gittip.com/bevry/ "Donate weekly to this project using Gittip")
 [![Flattr donate button](https://raw.github.com/balupton/flattr-buttons/master/badge-89x18.gif)](http://flattr.com/thing/344188/balupton-on-Flattr "Donate monthly to this project using Flattr")
 [![PayPayl donate button](https://www.paypalobjects.com/en_AU/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6 "Donate once-off to this project using Paypal")
+
 <!-- /BADGES -->
 
+
 <!-- DESCRIPTION/ -->
+
 Stop wasting time syncing and updating your project's README and Package Files!
+
 <!-- /DESCRIPTION -->
 
+
 <!-- INSTALL/ -->
-# Install
+
+## Install
 
 ### [Node](http://nodejs.org/), [Browserify](http://browserify.org/)
 - Use: `require('projectz')`
@@ -25,14 +34,14 @@ Stop wasting time syncing and updating your project's README and Package Files!
 ### [Ender](http://ender.jit.su/)
 - Use: `require('projectz')`
 - Install: `ender add projectz`
+
 <!-- /INSTALL -->
+
 
 ## Todo
 
 The following is still left to do before we publish v1.0.0:
 
-- `<!-- BACKERS -->`
-- `<!-- BACKERSFILE -->`
 - Only output `CONTRIBUTE` block if `CONTRIBUTING.md` exists
 - Only output `HISTORY` block if `HISTORY.md` exists
 - Provide documentation for data overrides
@@ -167,21 +176,50 @@ As an example, here is a a basic `README.md` file:
 
 
 <!-- HISTORY/ -->
+
 ## History
 [You can discover the history inside the `History.md` file](https://github.com/bevry/projectz/blob/master/History.md#files)
+
 <!-- /HISTORY -->
 
+
 <!-- CONTRIBUTE/ -->
+
 ## Contributing
 [You can discover the contributing instructions inside the `Contributing.md` file](https://github.com/bevry/projectz/blob/master/Contributing.md#files)
+
 <!-- /CONTRIBUTE -->
 
-<!-- BACKERS -->
+
+<!-- BACKERS/ -->
+
+## Backers
+
+### Sponsors
+
+No sponsors yet! Will you be the first?
+
+[![Gittip donate button](http://badgr.co/gittip/bevry.png)](https://www.gittip.com/bevry/ "Donate weekly to this project using Gittip")
+[![Flattr donate button](https://raw.github.com/balupton/flattr-buttons/master/badge-89x18.gif)](http://flattr.com/thing/344188/balupton-on-Flattr "Donate monthly to this project using Flattr")
+[![PayPayl donate button](https://www.paypalobjects.com/en_AU/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6 "Donate once-off to this project using Paypal")
+
+### Contributors
+
+Thank you to these amazing people for contributing code to this project:
+
+- Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)
+
+<!-- /BACKERS -->
+
+
 <!-- LICENSE/ -->
+
 ## License
 
 Licensed under the incredibly [permissive](http://en.wikipedia.org/wiki/Permissive_free_software_licence) [MIT license](http://creativecommons.org/licenses/MIT/)
 
 Copyright &copy; 2013+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)
+
 <!-- /LICENSE -->
+
 

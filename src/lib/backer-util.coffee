@@ -1,90 +1,88 @@
+# Import
+projectzUtil = require('./projectz-util')
+badgeUtil = require('./badge-util')
+
+# Define
 module.exports = backerUtil =
 
-	# Get Sponsor Backers
-	getSponsorBackers: (opts={}) ->
-		# Check
-		return '' if !opts.sponsors
+	getBackerText: (backer) ->
+		return backer.markdown or backer.text or backer
 
-		# Prepare
+	getSponsorsText: (opts) ->
 		result = ''
-		sponsors = ''
 
-		# Handle
-		for sponsor in opts.sponsors
-			sponsors += "- #{sponsor.markdown or sponsor.text or sponsor}"
+		if opts.sponsors.length is 0
+			# ignore
+			result += "No sponsors yet! Will you be the first?\n\n"
+			result += badgeUtil.getTypedBadges('donation', opts)
+		else
+			result += "Thank you to these amazing people for contributing finances to this project:\n\n"
+			result += '- '+(backerUtil.getBackerText(sponsor)  for sponsor in opts.sponsors).join('\n- ')
 
-		# Check
-		return result  if !sponsors
-
-		# Concatenate
-		result += """
-			## Sponsors
-
-			Thank you to these amazing people for contributing finances to this project:
-
-			"""  if opts.header isnt false
-		result += sponsors
-
-		# Return
 		return result
 
-	# Get Contributor Backers
-	getContributorBackers: (opts={}) ->
-		# Check
-		return ''  if !opts.contributors
-
-		# Prepare
+	getContributorsText: (opts) ->
 		result = ''
-		contributors = ''
 
-		# Handle
-		for contributor in opts.contributors
-			contributors += "- #{contributor.markdown or contributor.text or contributor}"
+		if opts.contributors.length is 0
+			# ignore
+			result += "No contributors yet! Will you be the first?"
+		else
+			result += "Thank you to these amazing people for contributing code to this project:\n\n"
+			result += '- '+(backerUtil.getBackerText(contributor)  for contributor in opts.contributors).join('\n- ')
 
-		# Check
-		return result  if !contributors
-
-		# Concatenate
-		result += """
-			## Contributors
-
-			Thank you to these amazing people for contributing code to this project:
-
-			"""  if opts.header isnt false
-		result += contributors
-
-		# Return
 		return result
 
-	# Get Backers File
-	getBackersFile: (opts) ->
-		# Prepare
-		parts = []
-
-		# Prepare
-		result = ''
-
-		# Handle
-		for fn in @getFunctionsEndingWith('Backers')
-			parts.push fn.call(@, opts)
-		backers = parts.join('\n\n') or ''
-
+	# Get Backer Section
+	getBackerSection: (opts={}) ->
 		# Check
-		return result  if !backers
+		return '' if !opts.licenses
 
-		# Concatenate
-		result += """
+		# Prepare
+		result = """
 			## Backers
 
-			"""  if opts.header isnt false
-		result += backers
+			### Sponsors
+
+			#{backerUtil.getSponsorsText(opts)}
+
+			### Contributors
+
+			#{backerUtil.getContributorsText(opts)}
+			"""
 
 		# Return
 		return result
 
-	# Get Backers Section
-	getBackersSection: (opts) ->
-		# Only fetch the backers for the current month
+	# Get Backer File
+	getBackerFile: (opts={}) ->
+		# Check
+		return '' if !opts.licenses
+
+		# Prepare
+		result = """
+			# Backers
+
+			## Sponsors
+
+			#{backerUtil.getSponsorsText(opts)}
+
+			## Contributors
+
+			#{backerUtil.getContributorsText(opts)}
+			"""
 
 		# Return
-		return ''
+		return result
+
+	# Get Contributing Section
+	getContributingSection: (opts) ->
+		# Prepare
+		file = 'Contributing.md'
+		url = projectzUtil.getFileUrl(opts, file)
+
+		# Return
+		return """
+			## Contributing
+			[You can discover the contributing instructions inside the `#{file}` file](#{url})
+			"""

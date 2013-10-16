@@ -35,10 +35,9 @@ Load in our other project files
 
 	backerUtil = require('./backer-util')
 	badgeUtil = require('./badge-util')
-	contributeUtil = require('./contribute-util')
 	historyUtil = require('./history-util')
-	licenseUtil = require('./license-util')
 	installUtil = require('./install-util')
+	licenseUtil = require('./license-util')
 	projectzUtil = require('./projectz-util')
 
 
@@ -384,15 +383,21 @@ Enhance keywords, with CSV format
 			if typeof @dataForPackagesMerged.keywords is 'string'
 				@dataForPackagesMerged.keywords = @dataForPackagesMerged.keywords.split(/[,\n]+/)
 
+Fallback sponsors
+
+			@dataForPackagesMerged.sponsors ?= []
+			@dataForPackagesMerged.sponsors = @dataForPackagesMerged.sponsors.split(/[,\n]/).map((i)->i.trim())  unless Array.isArray(@dataForPackagesMerged.sponsors)
+			delete @dataForPackagesMerged.sponsor
+
 Fallback authors
 
-			@dataForPackagesMerged.authors ?= @dataForPackagesMerged.author
-			@dataForPackagesMerged.authors = @dataForPackagesMerged.author.split(/[,\n]/).map((i)->i.trim())  unless Array.isArray(@dataForPackagesMerged.authors)
+			@dataForPackagesMerged.authors ?= @dataForPackagesMerged.author or ''
+			@dataForPackagesMerged.authors = @dataForPackagesMerged.authors.split(/[,\n]/).map((i)->i.trim())  unless Array.isArray(@dataForPackagesMerged.authors)
 			@dataForPackagesMerged.author = @dataForPackagesMerged.authors.join(', ')
 
 Fallback licenses
 
-			@dataForPackagesMerged.licenses ?= @dataForPackagesMerged.license
+			@dataForPackagesMerged.licenses ?= @dataForPackagesMerged.license or ''
 			@dataForPackagesMerged.licenses = @dataForPackagesMerged.licenses.split(/[,\n]/).map((i)->i.trim())  unless Array.isArray(@dataForPackagesMerged.licenses)
 			@dataForPackagesMerged.licenses.map (value) =>
 				value = {type:value}  if typeChecker.isString(value)
@@ -517,7 +522,9 @@ Finish up
 				data = projectzUtil.replaceSection(['BADGES', 'BADGE'], data, badgeUtil.getBadgesSection(opts))
 				data = projectzUtil.replaceSection(['DESCRIPTION'], data, "#{opts.description}")
 				data = projectzUtil.replaceSection(['INSTALL'], data, installUtil.getInstallInstructions(opts))
-				data = projectzUtil.replaceSection(['CONTRIBUTE', 'CONTRIBUTING'], data, contributeUtil.getContributingSection(opts))
+				data = projectzUtil.replaceSection(['CONTRIBUTE', 'CONTRIBUTING'], data, backerUtil.getContributingSection(opts))
+				data = projectzUtil.replaceSection(['BACKERS', 'BACKER'], data, backerUtil.getBackerSection(opts))
+				data = projectzUtil.replaceSection(['BACKERSFILE', 'BACKERFILE'], data, backerUtil.getBackerFile(opts))
 				data = projectzUtil.replaceSection(['HISTORY', 'CHANGES', 'CHANGELOG'], data, historyUtil.getHistorySection(opts))
 				data = projectzUtil.replaceSection(['LICENSE', 'LICENSES'], data, licenseUtil.getLicenseSection(opts))
 				data = projectzUtil.replaceSection(['LICENSEFILE'], data, licenseUtil.getLicenseFile(opts))
