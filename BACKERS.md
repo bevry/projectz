@@ -3,6 +3,12 @@
 
 # Backers
 
+## Maintainers
+
+These amazing people are maintaining this project:
+
+- Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)
+
 ## Sponsors
 
 No sponsors yet! Will you be the first?
@@ -18,12 +24,6 @@ These amazing people have contributed code to this project:
 - Benjamin Lupton <b@lupton.cc> (https://github.com/balupton) - [view contributions](https://github.com/bevry/projectz/commits?author=balupton)
 
 [Become a contributor!](https://github.com/bevry/projectz/blob/master/Contributing.md#files)
-
-## Maintainers
-
-These amazing people are maintaining this project:
-
-- Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)
 
 <!-- /BACKERSFILE -->
 
