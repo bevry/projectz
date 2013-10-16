@@ -64,13 +64,13 @@ module.exports = backerUtil =
 
 			#{backerUtil.getSponsorsText(opts)}
 
-			### Maintainers
-
-			#{backerUtil.getMaintainersText(opts)}
-
 			### Contributors
 
 			#{backerUtil.getContributorsText(opts)}
+
+			### Maintainers
+
+			#{backerUtil.getMaintainersText(opts)}
 			"""
 
 		# Return
@@ -88,13 +88,13 @@ module.exports = backerUtil =
 
 			#{backerUtil.getSponsorsText(opts)}
 
-			## Maintainers
-
-			#{backerUtil.getMaintainersText(opts)}
-
 			## Contributors
 
 			#{backerUtil.getContributorsText(opts)}
+
+			## Maintainers
+
+			#{backerUtil.getMaintainersText(opts)}
 			"""
 
 		# Return
