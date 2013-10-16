@@ -82,10 +82,6 @@ The enhanced data for each of our readme files
 
 		dataForReadmesEnhanced: null
 
-The data for the projects contributors
-
-		contributors: null
-
 Our log function to use
 
 		log: null
@@ -113,10 +109,6 @@ Apply our current working directory
 Apply our logging function
 
 			@log = opts.log or null
-
-Apply our contributors
-
-			@contributors = []
 
 Apply our determined paths for packages
 
@@ -213,8 +205,8 @@ If we do have a repo, then fetch the contributor data for it
 			fetchContributors = require('getcontributors').create(log: @log)
 			fetchContributors.fetchContributorsFromRepos [repo], (err,result) =>
 				return next(err)  if err
-				@contributors = fetchContributors.getContributors()
-				log('info', "Loaded #{@contributors.length} contributors from #{repo} repository")
+				@dataForPackagesMerged.contributors = contributors = fetchContributors.getContributors()
+				log('info', "Loaded #{contributors.length} contributors from #{repo} repository")
 				return next()
 
 Finish up
@@ -387,7 +379,12 @@ Fallback sponsors
 
 			@dataForPackagesMerged.sponsors ?= []
 			@dataForPackagesMerged.sponsors = @dataForPackagesMerged.sponsors.split(/[,\n]/).map((i)->i.trim())  unless Array.isArray(@dataForPackagesMerged.sponsors)
-			delete @dataForPackagesMerged.sponsor
+
+Fallback maintainers
+
+			@dataForPackagesMerged.maintainers ?= @dataForPackagesMerged.maintainer or ''
+			@dataForPackagesMerged.maintainers = @dataForPackagesMerged.maintainers.split(/[,\n]/).map((i)->i.trim())  unless Array.isArray(@dataForPackagesMerged.maintainers)
+			@dataForPackagesMerged.maintainer = @dataForPackagesMerged.maintainers.join(', ')
 
 Fallback authors
 
@@ -431,7 +428,7 @@ Create the data for the `package.json` format
 					keywords:               @dataForPackagesMerged.keywords
 					author:                 @dataForPackagesMerged.author
 					maintainers:            @dataForPackagesMerged.maintainers
-					contributors:           @contributors.map (contributor) -> contributor.text
+					contributors:           @dataForPackagesMerged.contributors.map (contributor) -> contributor.text
 					bugs:                   @dataForPackagesMerged.bugs
 					engines:                @dataForPackagesMerged.engines
 					dependencies:           @dataForPackagesMerged.dependencies

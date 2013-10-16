@@ -4,6 +4,10 @@ typeChecker = require('typechecker')
 # Utils
 module.exports = projectzUtil =
 
+	# Get Person Text
+	getPersonText: (person) ->
+		return person.markdown or person.text or person
+
 	# Get File URL
 	getFileUrl: (opts, file) ->
 		return "https://github.com/#{opts.username}/#{opts.name}/blob/master/#{file}#files"

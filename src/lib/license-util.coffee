@@ -1,7 +1,11 @@
+# Import
+projectzUtil = require('./projectz-util')
+
+# Define
 module.exports = licenseUtil =
 	getAuthorText: (author={}) ->
 		return """
-			Copyright &copy; #{author.markdown or author.text or author}
+			Copyright &copy; #{projectzUtil.getPersonText(author)}
 			"""
 
 	getLicenseText: (license) ->

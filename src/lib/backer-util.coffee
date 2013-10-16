@@ -5,9 +5,6 @@ badgeUtil = require('./badge-util')
 # Define
 module.exports = backerUtil =
 
-	getBackerText: (backer) ->
-		return backer.markdown or backer.text or backer
-
 	getSponsorsText: (opts) ->
 		result = ''
 
@@ -16,8 +13,20 @@ module.exports = backerUtil =
 			result += "No sponsors yet! Will you be the first?\n\n"
 			result += badgeUtil.getTypedBadges('donation', opts)
 		else
-			result += "Thank you to these amazing people for contributing finances to this project:\n\n"
-			result += '- '+(backerUtil.getBackerText(sponsor)  for sponsor in opts.sponsors).join('\n- ')
+			result += "These amazing people have contributed finances to this project:\n\n"
+			result += '- '+(projectzUtil.getPersonText(sponsor)  for sponsor in opts.sponsors).join('\n- ')
+
+		return result
+
+	getMaintainersText: (opts) ->
+		result = ''
+
+		if opts.maintainers.length is 0
+			# ignore
+			result += "No maintainers yet! Will you be the first?"
+		else
+			result += "These amazing people are maintaining this project:\n\n"
+			result += '- '+(projectzUtil.getPersonText(maintainer)  for maintainer in opts.maintainers).join('\n- ')
 
 		return result
 
@@ -28,8 +37,8 @@ module.exports = backerUtil =
 			# ignore
 			result += "No contributors yet! Will you be the first?"
 		else
-			result += "Thank you to these amazing people for contributing code to this project:\n\n"
-			result += '- '+(backerUtil.getBackerText(contributor)  for contributor in opts.contributors).join('\n- ')
+			result += "These amazing people have contributed code to this project:\n\n"
+			result += '- '+(projectzUtil.getPersonText(contributor)+" - [view contributions](https://github.com/#{opts.repo}/commits?author=#{contributor.username})"  for contributor in opts.contributors).join('\n- ')
 
 		return result
 
@@ -45,6 +54,10 @@ module.exports = backerUtil =
 			### Sponsors
 
 			#{backerUtil.getSponsorsText(opts)}
+
+			### Maintainers
+
+			#{backerUtil.getMaintainersText(opts)}
 
 			### Contributors
 
@@ -66,6 +79,10 @@ module.exports = backerUtil =
 			## Sponsors
 
 			#{backerUtil.getSponsorsText(opts)}
+
+			## Maintainers
+
+			#{backerUtil.getMaintainersText(opts)}
 
 			## Contributors
 
