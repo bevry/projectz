@@ -12,5 +12,5 @@ module.exports = historyUtil =
 		# Return
 		return """
 			## History
-			[You can discover the change history by heading on over to the `#{file}` file](#{url})
+			[Discover the change history by heading on over to the `#{file}` file](#{url})
 			"""
