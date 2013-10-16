@@ -15,7 +15,7 @@ module.exports = backerUtil =
 		else
 			result += "These amazing people have contributed finances to this project:\n\n"
 			result += '- '+(projectzUtil.getPersonText(sponsor)  for sponsor in opts.sponsors).join('\n- ')
-
+			result += badgeUtil.getTypedBadges('donation', opts)
 		return result
 
 	getMaintainersText: (opts) ->
@@ -36,13 +36,22 @@ module.exports = backerUtil =
 		if opts.contributors.length is 0
 			# ignore
 			result += "No contributors yet! Will you be the first?"
+			result += "\n#{backerUtil.getContributeText(opts)}"
 		else
 			result += "These amazing people have contributed code to this project:\n\n"
 			result += '- '+(projectzUtil.getPersonText(contributor)+" - [view contributions](https://github.com/#{opts.repo}/commits?author=#{contributor.username})"  for contributor in opts.contributors).join('\n- ')
+			result += "\n\nYou can be a contributor too! #{backerUtil.getContributeText(opts)}"
 
 		return result
 
-	# Get Backer Section
+	getContributeText: (opts) ->
+		# Prepare
+		file = 'Contributing.md'
+		url = projectzUtil.getFileUrl(opts, file)
+
+		# Return
+		return "[Find out how you can contribute by heading on over to the `#{file}` file](#{url})"
+
 	getBackerSection: (opts={}) ->
 		# Check
 		return '' if !opts.licenses
@@ -67,7 +76,6 @@ module.exports = backerUtil =
 		# Return
 		return result
 
-	# Get Backer File
 	getBackerFile: (opts={}) ->
 		# Check
 		return '' if !opts.licenses
@@ -92,14 +100,13 @@ module.exports = backerUtil =
 		# Return
 		return result
 
-	# Get Contributing Section
-	getContributingSection: (opts) ->
+	getContributeSection: (opts) ->
 		# Prepare
-		file = 'Contributing.md'
-		url = projectzUtil.getFileUrl(opts, file)
+		result = """
+			## Contribute
+
+			#{backerUtil.getContributeText(opts)}
+			"""
 
 		# Return
-		return """
-			## Contributing
-			[You can discover the contributing instructions inside the `#{file}` file](#{url})
-			"""
+		return result

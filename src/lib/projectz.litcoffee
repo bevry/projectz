@@ -519,7 +519,7 @@ Finish up
 				data = projectzUtil.replaceSection(['BADGES', 'BADGE'], data, badgeUtil.getBadgesSection(opts))
 				data = projectzUtil.replaceSection(['DESCRIPTION'], data, "#{opts.description}")
 				data = projectzUtil.replaceSection(['INSTALL'], data, installUtil.getInstallInstructions(opts))
-				data = projectzUtil.replaceSection(['CONTRIBUTE', 'CONTRIBUTING'], data, backerUtil.getContributingSection(opts))
+				data = projectzUtil.replaceSection(['CONTRIBUTE', 'CONTRIBUTING'], data, backerUtil.getContributeSection(opts))
 				data = projectzUtil.replaceSection(['BACKERS', 'BACKER'], data, backerUtil.getBackerSection(opts))
 				data = projectzUtil.replaceSection(['BACKERSFILE', 'BACKERFILE'], data, backerUtil.getBackerFile(opts))
 				data = projectzUtil.replaceSection(['HISTORY', 'CHANGES', 'CHANGELOG'], data, historyUtil.getHistorySection(opts))
