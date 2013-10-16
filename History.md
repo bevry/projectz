@@ -1,5 +1,8 @@
 # History
 
+- v0.2.1 October 16, 2013
+	- Fixed some issues. Now stable enough to use for your projects.
+
 - v0.2.0 October 16, 2013
 	- Added INSTALL, BACKER, and BACKERFILE tags
 
