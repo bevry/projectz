@@ -310,7 +310,7 @@ Finish up
 
 By first merging in all the package data together into the enhanced data
 
-			extendr.deepExtend(
+			extendr.extend(
 				@dataForPackagesMerged
 				@dataForPackages.component
 				@dataForPackages.bower
@@ -373,6 +373,10 @@ Fallback repository field, by scanning repo
 Enhance keywords, with CSV format
 
 			@dataForPackagesMerged.keywords = @dataForPackagesMerged.keywords.split(/[,\n]+/)  if typeChecker.isString(@dataForPackagesMerged.keywords)
+
+Fallback contributors
+
+			@dataForPackagesMerged.contributors ?= []
 
 Fallback sponsors
 
@@ -441,6 +445,20 @@ Create the data for the `package.json` format
 				# Explicit Data
 				@dataForPackagesMerged.packages.package
 			)
+
+			# Clean up licenses
+			switch @dataForPackagesEnhanced.package.licenses.length
+				when 0
+					delete @dataForPackagesEnhanced.package.licenses
+					delete @dataForPackagesEnhanced.package.license
+
+				when 1
+					@dataForPackagesEnhanced.package.license = @dataForPackagesEnhanced.package.licenses[0]
+					delete @dataForPackagesEnhanced.package.licenses
+
+				when 2
+					delete @dataForPackagesEnhanced.package.license
+
 
 Create the data for the `jquery.json` format, which is essentially exactly the same as the `package.json` format so just extend that
 

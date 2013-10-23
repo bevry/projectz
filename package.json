@@ -1,7 +1,7 @@
 {
   "title": "Projectz",
   "name": "projectz",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Stop wasting time syncing and updating your project's README and Package Files!",
   "homepage": "https://github.com/bevry/projectz",
   "keywords": [
@@ -26,7 +26,9 @@
     "type": "git",
     "url": "https://github.com/bevry/projectz.git"
   },
-  "license": "MIT",
+  "license": {
+    "type": "MIT"
+  },
   "engines": {
     "node": ">=0.4"
   },
@@ -59,10 +61,5 @@
     "gittip": "bevry",
     "flattr": "344188/balupton-on-Flattr",
     "paypal": "QB8GQPZAH84N6"
-  },
-  "licenses": [
-    {
-      "type": "MIT"
-    }
-  ]
+  }
 }

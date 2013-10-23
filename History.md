@@ -1,5 +1,9 @@
 # History
 
+- v0.2.2 October 23, 2013
+	- Fixed `license` and `licenses` duplicate in `package.json` file
+	- Fixed some issues with contributors and `package.json` files
+
 - v0.2.1 October 16, 2013
 	- Fixed some issues. Now stable enough to use for your projects.
 
