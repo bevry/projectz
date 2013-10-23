@@ -1,5 +1,8 @@
 # History
 
+- v0.2.3 October 23, 2013
+	- Fixed error when encountering an unknown license
+
 - v0.2.2 October 23, 2013
 	- Fixed `license` and `licenses` duplicate in `package.json` file
 	- Fixed some issues with contributors and `package.json` files

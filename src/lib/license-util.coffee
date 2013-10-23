@@ -66,7 +66,7 @@ module.exports = licenseUtil =
 		unknown: (license) ->
 			return """
 				## #{license.type}
-				#{badges.sections.unknown.call(@, license)}
+				#{licenseUtil.sections.unknown.call(@, license)}
 				"""
 
 	sections:
