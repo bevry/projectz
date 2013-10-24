@@ -7,7 +7,7 @@
 
 These amazing people are maintaining this project:
 
-- Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)
+- Benjamin Lupton (b@lupton.cc) (http://bevry.me)
 
 ## Sponsors
 
