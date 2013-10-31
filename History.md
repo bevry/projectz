@@ -1,5 +1,8 @@
 # History
 
+- v0.2.5 October 31, 2013
+	- Seems github doesn't like `//` urls
+
 - v0.2.4 October 31, 2013
 	- Updated badges to use `//` for their urls
 

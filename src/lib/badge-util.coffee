@@ -8,7 +8,7 @@ module.exports = badgeUtil =
 
 			# Return
 			return """
-				[![Build Status](//img.shields.io/travis-ci/#{opts.username}/#{opts.name}.png?branch=master)](http://travis-ci.org/#{opts.username}/#{opts.name} "Check this project's build status on TravisCI")
+				[![Build Status](http://img.shields.io/travis-ci/#{opts.username}/#{opts.name}.png?branch=master)](http://travis-ci.org/#{opts.username}/#{opts.name} "Check this project's build status on TravisCI")
 				"""
 
 		# Get NPM Badge
@@ -18,7 +18,7 @@ module.exports = badgeUtil =
 
 			# Return
 			return """
-				[![NPM version](//badge.fury.io/js/#{opts.name}.png)](https://npmjs.org/package/#{opts.name} "View this project on NPM")
+				[![NPM version](http://badge.fury.io/js/#{opts.name}.png)](https://npmjs.org/package/#{opts.name} "View this project on NPM")
 				"""
 
 	donationBadges:
@@ -30,7 +30,7 @@ module.exports = badgeUtil =
 
 			# Return
 			return """
-				[![Gittip donate button](//img.shields.io/gittip/#{opts.badges.gittip}.png)](#{url} "Donate weekly to this project using Gittip")
+				[![Gittip donate button](http://img.shields.io/gittip/#{opts.badges.gittip}.png)](#{url} "Donate weekly to this project using Gittip")
 				"""
 
 		# Get Flattr Badge
@@ -41,7 +41,7 @@ module.exports = badgeUtil =
 
 			# Return
 			return """
-				[![Flattr donate button](//img.shields.io/flattr/donate.png?color=yellow)](#{url} "Donate monthly to this project using Flattr")
+				[![Flattr donate button](http://img.shields.io/flattr/donate.png?color=yellow)](#{url} "Donate monthly to this project using Flattr")
 				"""
 
 		# Get Paypal Badge
@@ -52,7 +52,7 @@ module.exports = badgeUtil =
 
 			# Return
 			return """
-				[![PayPayl donate button](//img.shields.io/paypal/donate.png?color=yellow)](#{url} "Donate once-off to this project using Paypal")
+				[![PayPayl donate button](http://img.shields.io/paypal/donate.png?color=yellow)](#{url} "Donate once-off to this project using Paypal")
 				"""
 
 	# Get Badges Section
