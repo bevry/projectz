@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>contributing.coffee</title>
+  <title>history-util.coffee</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
   <link rel="stylesheet" media="all" href="docco.css" />
@@ -19,38 +19,38 @@
           <div id="jump_page">
             
               
-              <a class="source" href="backers.html">
-                backers.coffee
+              <a class="source" href="backer-util.html">
+                backer-util.coffee
               </a>
             
               
-              <a class="source" href="badges.html">
-                badges.coffee
+              <a class="source" href="badge-util.html">
+                badge-util.coffee
               </a>
             
               
-              <a class="source" href="contributing.html">
-                contributing.coffee
+              <a class="source" href="history-util.html">
+                history-util.coffee
               </a>
             
               
-              <a class="source" href="history.html">
-                history.coffee
+              <a class="source" href="install-util.html">
+                install-util.coffee
               </a>
             
               
-              <a class="source" href="licenses.html">
-                licenses.coffee
+              <a class="source" href="license-util.html">
+                license-util.coffee
               </a>
             
               
-              <a class="source" href="main.html">
-                main.litcoffee
+              <a class="source" href="projectz-util.html">
+                projectz-util.coffee
               </a>
             
               
-              <a class="source" href="utils.html">
-                utils.coffee
+              <a class="source" href="projectz.html">
+                projectz.litcoffee
               </a>
             
           </div>
@@ -61,7 +61,7 @@
         
           <li id="title">
               <div class="annotation">
-                  <h1>contributing.coffee</h1>
+                  <h1>history-util.coffee</h1>
               </div>
           </li>
         
@@ -73,11 +73,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <p>Define</p>
+              <p>Import</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>contributing =</pre></div></div>
+            <div class="content"><div class='highlight'><pre>projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div></div>
             
         </li>
         
@@ -88,11 +88,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>Get Contributing Section</p>
+              <p>Define</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	getContributingSection: -&gt;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>module.exports = historyUtil =</pre></div></div>
             
         </li>
         
@@ -103,12 +103,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>Prepare</p>
+              <p>Get History Section</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>		file = <span class="string">'Contributing.md'</span>
-		url = <span class="property">@getFileUrl</span>(file)</pre></div></div>
+            <div class="content"><div class='highlight'><pre>	getHistorySection: (opts) -&gt;</pre></div></div>
             
         </li>
         
@@ -119,6 +118,22 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
+              <p>Prepare</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		file = <span class="string">'History.md'</span>
+		url = projectzUtil.getFileUrl(opts, file)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
               <p>Return</p>
 
             </div>
@@ -128,34 +143,18 @@
         </li>
         
         
-        <li id="section-5">
-            <div class="annotation">
-              
-              <div class="pilwrap for-h1">
-                <a class="pilcrow" href="#section-5">&#182;</a>
-              </div>
-              <h1>Contributing</h1>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>			[You can discover the contributing instructions inside the `<span class="javascript">#{file}</span>` file](<span class="comment">#{url})</span>
-
-			<span class="string">"""</pre></div></div>
-            
-        </li>
-        
-        
         <li id="section-6">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h1">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
-              <p>Export</p>
+              <h1>History</h1>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>module.exports = contributing</pre></div></div>
+            <div class="content"><div class='highlight'><pre>			[Discover the change history <span class="keyword">by</span> heading <span class="literal">on</span> over to the `<span class="javascript">#{file}</span>` file.](<span class="comment">#{url})</span>
+			<span class="string">"""</pre></div></div>
             
         </li>
         

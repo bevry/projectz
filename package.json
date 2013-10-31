@@ -1,7 +1,7 @@
 {
   "title": "Projectz",
   "name": "projectz",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Stop wasting time syncing and updating your project's README and Package Files!",
   "homepage": "https://github.com/bevry/projectz",
   "keywords": [
@@ -43,14 +43,16 @@
     "caterpillar-human": "~2.1.0",
     "safefs": "~3.0.3",
     "commander": "~2.0.0",
-    "typechecker": "~2.0.6"
+    "typechecker": "~2.0.6",
+    "docco": "~0.6.2"
   },
   "devDependencies": {
     "coffee-script": "~1.6.2"
   },
   "main": "./out/lib/projectz.js",
   "scripts": {
-    "test": "node ./out/test/everything-test.js"
+    "test": "echo 'no tests yet'",
+    "start": "node ./node_modules/coffee-script/bin/cake watch"
   },
   "bin": {
     "projectz": "./bin/projectz"

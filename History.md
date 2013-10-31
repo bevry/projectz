@@ -1,5 +1,8 @@
 # History
 
+- v0.2.4 October 31, 2013
+	- Updated badges to use `//` for their urls
+
 - v0.2.3 October 23, 2013
 	- Fixed error when encountering an unknown license
 

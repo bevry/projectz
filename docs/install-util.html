@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>install-util.coffee</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              
+              <a class="source" href="backer-util.html">
+                backer-util.coffee
+              </a>
+            
+              
+              <a class="source" href="badge-util.html">
+                badge-util.coffee
+              </a>
+            
+              
+              <a class="source" href="history-util.html">
+                history-util.coffee
+              </a>
+            
+              
+              <a class="source" href="install-util.html">
+                install-util.coffee
+              </a>
+            
+              
+              <a class="source" href="license-util.html">
+                license-util.coffee
+              </a>
+            
+              
+              <a class="source" href="projectz-util.html">
+                projectz-util.coffee
+              </a>
+            
+              
+              <a class="source" href="projectz.html">
+                projectz.litcoffee
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>install-util.coffee</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>module.exports = installUtil =
+
+	getInstallInstructions: (opts) -&gt;
+		result = <span class="string">"## Install"</span>
+
+		<span class="keyword">if</span> opts.packages.package
+			result += <span class="string">"""
+				\n</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <h2><a href="http://nodejs.org/">Node</a>, <a href="http://browserify.org/">Browserify</a></h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>				- Use: `<span class="javascript">require(<span class="string">'#{opts.name}'</span>)</span>`
+				- Install: `<span class="javascript">npm install --save #{opts.name}</span>`</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <h2><a href="http://ender.jit.su/">Ender</a></h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>				- Use: `<span class="javascript">require(<span class="string">'#{opts.name}'</span>)</span>`
+				- Install: `<span class="javascript">ender add #{opts.name}</span>`
+				<span class="string">"""
+
+		if opts.packages.component
+			result += """</span>
+				\n</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <h2><a href="http://github.com/component/component">Component</a></h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>				- Use: `<span class="javascript">require(<span class="string">'#{opts.name}'</span>)</span>`
+				- Install: `<span class="javascript">component install #{opts.repo}</span>`
+				<span class="string">"""
+
+		if opts.packages.bower
+			result += """</span>
+				\n</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <h2><a href="http://bower.io/">Bower</a></h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>				- Use: `<span class="javascript">require(<span class="string">'#{opts.name}'</span>)</span>`
+				- Install: `<span class="javascript">bower install #{opts.name}</span>`
+				<span class="string">"""
+
+		return result</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

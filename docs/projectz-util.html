@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>utils.coffee</title>
+  <title>projectz-util.coffee</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
   <link rel="stylesheet" media="all" href="docco.css" />
@@ -19,38 +19,38 @@
           <div id="jump_page">
             
               
-              <a class="source" href="backers.html">
-                backers.coffee
+              <a class="source" href="backer-util.html">
+                backer-util.coffee
               </a>
             
               
-              <a class="source" href="badges.html">
-                badges.coffee
+              <a class="source" href="badge-util.html">
+                badge-util.coffee
               </a>
             
               
-              <a class="source" href="contributing.html">
-                contributing.coffee
+              <a class="source" href="history-util.html">
+                history-util.coffee
               </a>
             
               
-              <a class="source" href="history.html">
-                history.coffee
+              <a class="source" href="install-util.html">
+                install-util.coffee
               </a>
             
               
-              <a class="source" href="licenses.html">
-                licenses.coffee
+              <a class="source" href="license-util.html">
+                license-util.coffee
               </a>
             
               
-              <a class="source" href="main.html">
-                main.litcoffee
+              <a class="source" href="projectz-util.html">
+                projectz-util.coffee
               </a>
             
               
-              <a class="source" href="utils.html">
-                utils.coffee
+              <a class="source" href="projectz.html">
+                projectz.litcoffee
               </a>
             
           </div>
@@ -61,7 +61,7 @@
         
           <li id="title">
               <div class="annotation">
-                  <h1>utils.coffee</h1>
+                  <h1>projectz-util.coffee</h1>
               </div>
           </li>
         
@@ -73,11 +73,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <p>Utils</p>
+              <p>Import</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>utils =</pre></div></div>
+            <div class="content"><div class='highlight'><pre>typeChecker = require(<span class="string">'typechecker'</span>)</pre></div></div>
             
         </li>
         
@@ -87,6 +87,37 @@
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>Utils</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>module.exports = projectzUtil =</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>Get Person Text</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	getPersonText: (person) -&gt;
+		<span class="keyword">return</span> person.markdown <span class="keyword">or</span> person.text <span class="keyword">or</span> person</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
               <p>Get File URL</p>
 
@@ -98,11 +129,11 @@
         </li>
         
         
-        <li id="section-3">
+        <li id="section-5">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-3">&#182;</a>
+                <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
               <p>Get Function Named
 e.g. {getMitLicense,getLicenses} with &#39;mit&#39; returns getMitLicense</p>
@@ -114,11 +145,11 @@ e.g. {getMitLicense,getLicenses} with &#39;mit&#39; returns getMitLicense</p>
         </li>
         
         
-        <li id="section-4">
+        <li id="section-6">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-4">&#182;</a>
+                <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
               <p>Prepare</p>
 
@@ -129,11 +160,11 @@ e.g. {getMitLicense,getLicenses} with &#39;mit&#39; returns getMitLicense</p>
         </li>
         
         
-        <li id="section-5">
+        <li id="section-7">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-5">&#182;</a>
+                <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
               <p>Find</p>
 
@@ -146,11 +177,11 @@ e.g. {getMitLicense,getLicenses} with &#39;mit&#39; returns getMitLicense</p>
         </li>
         
         
-        <li id="section-6">
+        <li id="section-8">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-6">&#182;</a>
+                <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
               <p>Return</p>
 
@@ -161,11 +192,11 @@ e.g. {getMitLicense,getLicenses} with &#39;mit&#39; returns getMitLicense</p>
         </li>
         
         
-        <li id="section-7">
+        <li id="section-9">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-7">&#182;</a>
+                <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
               <p>Get Functions Ending With
 e.g. {getNpmBadge,getBadges} with &#39;Badge&#39; returns [getNpmBadge]</p>
@@ -177,11 +208,11 @@ e.g. {getNpmBadge,getBadges} with &#39;Badge&#39; returns [getNpmBadge]</p>
         </li>
         
         
-        <li id="section-8">
+        <li id="section-10">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-8">&#182;</a>
+                <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
               <p>Prepare</p>
 
@@ -192,11 +223,11 @@ e.g. {getNpmBadge,getBadges} with &#39;Badge&#39; returns [getNpmBadge]</p>
         </li>
         
         
-        <li id="section-9">
+        <li id="section-11">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-9">&#182;</a>
+                <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
               <p>Find</p>
 
@@ -209,11 +240,11 @@ e.g. {getNpmBadge,getBadges} with &#39;Badge&#39; returns [getNpmBadge]</p>
         </li>
         
         
-        <li id="section-10">
+        <li id="section-12">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-10">&#182;</a>
+                <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
               <p>Return</p>
 
@@ -224,17 +255,42 @@ e.g. {getNpmBadge,getBadges} with &#39;Badge&#39; returns [getNpmBadge]</p>
         </li>
         
         
-        <li id="section-11">
+        <li id="section-13">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-11">&#182;</a>
+                <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
-              <p>Export</p>
+              <p>Replace Section</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>module.exports = utils</pre></div></div>
+            <div class="content"><div class='highlight'><pre>	replaceSection: (names, source, inject) -&gt;
+		<span class="keyword">if</span> typeChecker.isArray(names)
+			regexName = <span class="string">'('</span>+names.join(<span class="string">'|'</span>)+<span class="string">')'</span>
+			sectionName = names[<span class="number">0</span>]
+		<span class="keyword">else</span>
+			regexName = sectionName = names
+
+		sectionName = sectionName.toUpperCase()
+
+		regex = <span class="regexp">///
+			\n(
+				&lt;!--\s*<span class="comment">#{regexName}\s*--&gt;</span>
+				|
+				&lt;!--\s*<span class="comment">#{regexName}/\s*--&gt;</span>
+				[\s\S]*?
+				&lt;!--\s*/<span class="comment">#{regexName}\s*--&gt;</span>
+			)\s*
+			///</span>gim
+
+		replace = <span class="string">"""
+			\n&lt;!-- <span class="subst">#{sectionName}</span>/ --&gt;\n\n<span class="subst">#{inject}</span>\n\n&lt;!-- /<span class="subst">#{sectionName}</span> --&gt;\n\n\n
+			"""</span>
+
+		result = source.replace(regex, replace)
+
+		<span class="keyword">return</span> result</pre></div></div>
             
         </li>
         
