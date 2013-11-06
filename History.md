@@ -1,5 +1,8 @@
 # History
 
+- v0.2.6 November 6, 2013
+	- Updated dependencies
+
 - v0.2.5 October 31, 2013
 	- Seems github doesn't like `//` urls
 

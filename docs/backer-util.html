@@ -77,8 +77,8 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>projectzUtil = require(<span class="string">'./projectz-util'</span>)
-badgeUtil = require(<span class="string">'./badge-util'</span>)</pre></div></div>
+            <div class="content"><div class='highlight'><pre>projectzUtil = <span class="built_in">require</span>(<span class="string">'./projectz-util'</span>)
+badgeUtil = <span class="built_in">require</span>(<span class="string">'./badge-util'</span>)</pre></div></div>
             
         </li>
         
@@ -93,9 +93,9 @@ badgeUtil = require(<span class="string">'./badge-util'</span>)</pre></div></div
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>module.exports = backerUtil =
+            <div class="content"><div class='highlight'><pre>module.<span class="built_in">exports</span> = backerUtil =
 
-	getSponsorsText: (opts) -&gt;
+	<span class="attribute">getSponsorsText</span>: <span class="function"><span class="params">(opts)</span> -&gt;</span>
 		result = <span class="string">''</span>
 
 		<span class="keyword">if</span> opts.sponsors.length <span class="keyword">is</span> <span class="number">0</span></pre></div></div>
@@ -118,10 +118,10 @@ badgeUtil = require(<span class="string">'./badge-util'</span>)</pre></div></div
 		<span class="keyword">else</span>
 			result += <span class="string">"These amazing people have contributed finances to this project:\n\n"</span>
 			result += <span class="string">'- '</span>+(projectzUtil.getPersonText(sponsor)  <span class="keyword">for</span> sponsor <span class="keyword">in</span> opts.sponsors).join(<span class="string">'\n- '</span>)
-			result += <span class="string">"\n\nBecome a sponsor!\n\n<span class="subst">#{badgeUtil.getTypedBadges('donation', opts)}</span>"</span>
+			result += <span class="string">"\n\nBecome a sponsor!\n\n<span class="subst">#{badgeUtil.getTypedBadges(<span class="string">'donation'</span>, opts)}</span>"</span>
 		<span class="keyword">return</span> result
 
-	getMaintainersText: (opts) -&gt;
+	<span class="attribute">getMaintainersText</span>: <span class="function"><span class="params">(opts)</span> -&gt;</span>
 		result = <span class="string">''</span>
 
 		<span class="keyword">if</span> opts.maintainers.length <span class="keyword">is</span> <span class="number">0</span></pre></div></div>
@@ -146,7 +146,7 @@ badgeUtil = require(<span class="string">'./badge-util'</span>)</pre></div></div
 
 		<span class="keyword">return</span> result
 
-	getContributorsText: (opts) -&gt;
+	<span class="attribute">getContributorsText</span>: <span class="function"><span class="params">(opts)</span> -&gt;</span>
 		result = <span class="string">''</span>
 
 		<span class="keyword">if</span> opts.contributors.length <span class="keyword">is</span> <span class="number">0</span></pre></div></div>
@@ -169,11 +169,11 @@ badgeUtil = require(<span class="string">'./badge-util'</span>)</pre></div></div
 		<span class="keyword">else</span>
 			result += <span class="string">"These amazing people have contributed code to this project:\n\n"</span>
 			result += <span class="string">'- '</span>+(projectzUtil.getPersonText(contributor)+<span class="string">" - [view contributions](https://github.com/<span class="subst">#{opts.repo}</span>/commits?author=<span class="subst">#{contributor.username}</span>)"</span>  <span class="keyword">for</span> contributor <span class="keyword">in</span> opts.contributors).join(<span class="string">'\n- '</span>)
-			result += <span class="string">"\n\n<span class="subst">#{backerUtil.getContributeText(opts, 'Become a contributor!')}</span>"</span>
+			result += <span class="string">"\n\n<span class="subst">#{backerUtil.getContributeText(opts, <span class="string">'Become a contributor!'</span>)}</span>"</span>
 
 		<span class="keyword">return</span> result
 
-	getContributeText: (opts, text) -&gt;</pre></div></div>
+	<span class="attribute">getContributeText</span>: <span class="function"><span class="params">(opts, text)</span> -&gt;</span></pre></div></div>
             
         </li>
         
@@ -207,7 +207,7 @@ badgeUtil = require(<span class="string">'./badge-util'</span>)</pre></div></div
             
             <div class="content"><div class='highlight'><pre>		<span class="keyword">return</span> <span class="string">"[<span class="subst">#{text}</span>](<span class="subst">#{url}</span>)"</span>
 
-	getBackerSection: (opts={}) -&gt;</pre></div></div>
+	<span class="attribute">getBackerSection</span>: <span class="function"><span class="params">(opts={})</span> -&gt;</span></pre></div></div>
             
         </li>
         
@@ -245,11 +245,11 @@ badgeUtil = require(<span class="string">'./badge-util'</span>)</pre></div></div
         <li id="section-10">
             <div class="annotation">
               
-              <div class="pilwrap for-h1">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
-              <h1>Backers</h1>
-<h2>Maintainers</h2>
+              <h1 id="backers">Backers</h1>
+<h2 id="maintainers">Maintainers</h2>
 
             </div>
             
@@ -261,10 +261,10 @@ badgeUtil = require(<span class="string">'./badge-util'</span>)</pre></div></div
         <li id="section-11">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
-              <h2>Sponsors</h2>
+              <h2 id="sponsors">Sponsors</h2>
 
             </div>
             
@@ -276,10 +276,10 @@ badgeUtil = require(<span class="string">'./badge-util'</span>)</pre></div></div
         <li id="section-12">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
-              <h2>Contributors</h2>
+              <h2 id="contributors">Contributors</h2>
 
             </div>
             
@@ -301,7 +301,7 @@ badgeUtil = require(<span class="string">'./badge-util'</span>)</pre></div></div
             
             <div class="content"><div class='highlight'><pre>		<span class="keyword">return</span> result
 
-	getBackerFile: (opts={}) -&gt;</pre></div></div>
+	<span class="attribute">getBackerFile</span>: <span class="function"><span class="params">(opts={})</span> -&gt;</span></pre></div></div>
             
         </li>
         
@@ -343,7 +343,7 @@ badgeUtil = require(<span class="string">'./badge-util'</span>)</pre></div></div
                 <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
               <p>Backers</p>
-<h1>Maintainers</h1>
+<h1 id="maintainers">Maintainers</h1>
 
             </div>
             
@@ -355,10 +355,10 @@ badgeUtil = require(<span class="string">'./badge-util'</span>)</pre></div></div
         <li id="section-17">
             <div class="annotation">
               
-              <div class="pilwrap for-h1">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
-              <h1>Sponsors</h1>
+              <h1 id="sponsors">Sponsors</h1>
 
             </div>
             
@@ -370,10 +370,10 @@ badgeUtil = require(<span class="string">'./badge-util'</span>)</pre></div></div
         <li id="section-18">
             <div class="annotation">
               
-              <div class="pilwrap for-h1">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
-              <h1>Contributors</h1>
+              <h1 id="contributors">Contributors</h1>
 
             </div>
             
@@ -395,7 +395,7 @@ badgeUtil = require(<span class="string">'./badge-util'</span>)</pre></div></div
             
             <div class="content"><div class='highlight'><pre>		<span class="keyword">return</span> result
 
-	getContributeSection: (opts) -&gt;</pre></div></div>
+	<span class="attribute">getContributeSection</span>: <span class="function"><span class="params">(opts)</span> -&gt;</span></pre></div></div>
             
         </li>
         
@@ -418,10 +418,10 @@ badgeUtil = require(<span class="string">'./badge-util'</span>)</pre></div></div
         <li id="section-21">
             <div class="annotation">
               
-              <div class="pilwrap for-h1">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
-              <h1>Contribute</h1>
+              <h1 id="contribute">Contribute</h1>
 
             </div>
             

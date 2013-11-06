@@ -77,7 +77,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>typeChecker = require(<span class="string">'typechecker'</span>)</pre></div></div>
+            <div class="content"><div class='highlight'><pre>typeChecker = <span class="built_in">require</span>(<span class="string">'typechecker'</span>)</pre></div></div>
             
         </li>
         
@@ -92,7 +92,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>module.exports = projectzUtil =</pre></div></div>
+            <div class="content"><div class='highlight'><pre>module.<span class="built_in">exports</span> = projectzUtil =</pre></div></div>
             
         </li>
         
@@ -107,7 +107,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	getPersonText: (person) -&gt;
+            <div class="content"><div class='highlight'><pre>	<span class="attribute">getPersonText</span>: <span class="function"><span class="params">(person)</span> -&gt;</span>
 		<span class="keyword">return</span> person.markdown <span class="keyword">or</span> person.text <span class="keyword">or</span> person</pre></div></div>
             
         </li>
@@ -123,7 +123,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	getFileUrl: (opts, file) -&gt;
+            <div class="content"><div class='highlight'><pre>	<span class="attribute">getFileUrl</span>: <span class="function"><span class="params">(opts, file)</span> -&gt;</span>
 		<span class="keyword">return</span> <span class="string">"https://github.com/<span class="subst">#{opts.username}</span>/<span class="subst">#{opts.name}</span>/blob/master/<span class="subst">#{file}</span>#files"</span></pre></div></div>
             
         </li>
@@ -140,7 +140,7 @@ e.g. {getMitLicense,getLicenses} with &#39;mit&#39; returns getMitLicense</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	getFunctionNamed: (str) -&gt;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>	<span class="attribute">getFunctionNamed</span>: <span class="function"><span class="params">(str)</span> -&gt;</span></pre></div></div>
             
         </li>
         
@@ -203,7 +203,7 @@ e.g. {getNpmBadge,getBadges} with &#39;Badge&#39; returns [getNpmBadge]</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	getFunctionsEndingWith: (str) -&gt;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>	<span class="attribute">getFunctionsEndingWith</span>: <span class="function"><span class="params">(str)</span> -&gt;</span></pre></div></div>
             
         </li>
         
@@ -265,7 +265,7 @@ e.g. {getNpmBadge,getBadges} with &#39;Badge&#39; returns [getNpmBadge]</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	replaceSection: (names, source, inject) -&gt;
+            <div class="content"><div class='highlight'><pre>	<span class="attribute">replaceSection</span>: <span class="function"><span class="params">(names, source, inject)</span> -&gt;</span>
 		<span class="keyword">if</span> typeChecker.isArray(names)
 			regexName = <span class="string">'('</span>+names.join(<span class="string">'|'</span>)+<span class="string">')'</span>
 			sectionName = names[<span class="number">0</span>]

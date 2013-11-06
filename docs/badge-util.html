@@ -77,8 +77,8 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>module.exports = badgeUtil =
-	miscBadges:</pre></div></div>
+            <div class="content"><div class='highlight'><pre>module.<span class="built_in">exports</span> = badgeUtil =
+	<span class="attribute">miscBadges</span>:</pre></div></div>
             
         </li>
         
@@ -93,7 +93,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>		travis: (opts={}) -&gt;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>		<span class="attribute">travis</span>: <span class="function"><span class="params">(opts={})</span> -&gt;</span></pre></div></div>
             
         </li>
         
@@ -140,7 +140,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>		npm: (opts={}) -&gt;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>		<span class="attribute">npm</span>: <span class="function"><span class="params">(opts={})</span> -&gt;</span></pre></div></div>
             
         </li>
         
@@ -155,7 +155,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>			<span class="keyword">return</span> <span class="string">''</span>  <span class="keyword">if</span> !opts.badges.npm <span class="keyword">or</span> !opts.name</pre></div></div>
+            <div class="content"><div class='highlight'><pre>			<span class="keyword">return</span> <span class="string">''</span>  <span class="keyword">if</span> !opts.badges.<span class="built_in">npm</span> <span class="keyword">or</span> !opts.name</pre></div></div>
             
         </li>
         
@@ -174,7 +174,7 @@
 				[![NPM version](http://badge.fury.io/js/<span class="subst">#{opts.name}</span>.png)](https://npmjs.org/package/<span class="subst">#{opts.name}</span> "View this project on NPM")
 				"""</span>
 
-	donationBadges:</pre></div></div>
+	<span class="attribute">donationBadges</span>:</pre></div></div>
             
         </li>
         
@@ -189,7 +189,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>		gittip: (opts={}) -&gt;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>		<span class="attribute">gittip</span>: <span class="function"><span class="params">(opts={})</span> -&gt;</span></pre></div></div>
             
         </li>
         
@@ -237,7 +237,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>		flattr: (opts={}) -&gt;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>		<span class="attribute">flattr</span>: <span class="function"><span class="params">(opts={})</span> -&gt;</span></pre></div></div>
             
         </li>
         
@@ -285,7 +285,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>		paypal: (opts={}) -&gt;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>		<span class="attribute">paypal</span>: <span class="function"><span class="params">(opts={})</span> -&gt;</span></pre></div></div>
             
         </li>
         
@@ -333,7 +333,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	getBadgesSection: (opts={}) -&gt;
+            <div class="content"><div class='highlight'><pre>	<span class="attribute">getBadgesSection</span>: <span class="function"><span class="params">(opts={})</span> -&gt;</span>
 		<span class="keyword">return</span> badgeUtil.getTypedBadges(<span class="string">'misc'</span>, opts)+<span class="string">'\n'</span>+badgeUtil.getTypedBadges(<span class="string">'donation'</span>, opts)</pre></div></div>
             
         </li>
@@ -349,7 +349,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	getTypedBadges: (type, opts={}) -&gt;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>	<span class="attribute">getTypedBadges</span>: <span class="function"><span class="params">(type, opts={})</span> -&gt;</span></pre></div></div>
             
         </li>
         

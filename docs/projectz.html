@@ -64,19 +64,19 @@
         <li id="section-1">
             <div class="annotation">
               
-              <div class="pilwrap for-h1">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <h1>Projectz</h1>
-<h2>Imports</h2>
+              <h1 id="projectz">Projectz</h1>
+<h2 id="imports">Imports</h2>
 <p>First we need to import the libraries we require.</p>
 <p>Load in the file system libraries.</p>
 <p><a href="https://github.com/bevry/safefs">SafeFS</a> is aliased to <code>fsUtil</code> as it provides protection against a lot of the common gotchas</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>fsUtil = require(<span class="string">'safefs'</span>)
-pathUtil = require(<span class="string">'path'</span>)</pre></div></div>
+            <div class="content"><div class='highlight'><pre>fsUtil = <span class="built_in">require</span>(<span class="string">'safefs'</span>)
+pathUtil = <span class="built_in">require</span>(<span class="string">'path'</span>)</pre></div></div>
             
         </li>
         
@@ -91,7 +91,7 @@ pathUtil = require(<span class="string">'path'</span>)</pre></div></div>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>CSON = require(<span class="string">'cson'</span>)</pre></div></div>
+            <div class="content"><div class='highlight'><pre>CSON = <span class="built_in">require</span>(<span class="string">'cson'</span>)</pre></div></div>
             
         </li>
         
@@ -106,7 +106,7 @@ pathUtil = require(<span class="string">'path'</span>)</pre></div></div>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>typeChecker = require(<span class="string">'typechecker'</span>)</pre></div></div>
+            <div class="content"><div class='highlight'><pre>typeChecker = <span class="built_in">require</span>(<span class="string">'typechecker'</span>)</pre></div></div>
             
         </li>
         
@@ -121,7 +121,7 @@ pathUtil = require(<span class="string">'path'</span>)</pre></div></div>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>{TaskGroup} = require(<span class="string">'taskgroup'</span>)</pre></div></div>
+            <div class="content"><div class='highlight'><pre>{TaskGroup} = <span class="built_in">require</span>(<span class="string">'taskgroup'</span>)</pre></div></div>
             
         </li>
         
@@ -136,7 +136,7 @@ pathUtil = require(<span class="string">'path'</span>)</pre></div></div>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>eachr = require(<span class="string">'eachr'</span>)</pre></div></div>
+            <div class="content"><div class='highlight'><pre>eachr = <span class="built_in">require</span>(<span class="string">'eachr'</span>)</pre></div></div>
             
         </li>
         
@@ -151,7 +151,7 @@ pathUtil = require(<span class="string">'path'</span>)</pre></div></div>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>extendr = require(<span class="string">'extendr'</span>)</pre></div></div>
+            <div class="content"><div class='highlight'><pre>extendr = <span class="built_in">require</span>(<span class="string">'extendr'</span>)</pre></div></div>
             
         </li>
         
@@ -166,12 +166,12 @@ pathUtil = require(<span class="string">'path'</span>)</pre></div></div>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>backerUtil = require(<span class="string">'./backer-util'</span>)
-badgeUtil = require(<span class="string">'./badge-util'</span>)
-historyUtil = require(<span class="string">'./history-util'</span>)
-installUtil = require(<span class="string">'./install-util'</span>)
-licenseUtil = require(<span class="string">'./license-util'</span>)
-projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div></div>
+            <div class="content"><div class='highlight'><pre>backerUtil = <span class="built_in">require</span>(<span class="string">'./backer-util'</span>)
+badgeUtil = <span class="built_in">require</span>(<span class="string">'./badge-util'</span>)
+historyUtil = <span class="built_in">require</span>(<span class="string">'./history-util'</span>)
+installUtil = <span class="built_in">require</span>(<span class="string">'./install-util'</span>)
+licenseUtil = <span class="built_in">require</span>(<span class="string">'./license-util'</span>)
+projectzUtil = <span class="built_in">require</span>(<span class="string">'./projectz-util'</span>)</pre></div></div>
             
         </li>
         
@@ -179,10 +179,10 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
         <li id="section-8">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
-              <h2>Definition</h2>
+              <h2 id="definition">Definition</h2>
 <p>Projects is defined as a class to ensure we can run multiple instances of it</p>
 
             </div>
@@ -195,15 +195,15 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
         <li id="section-9">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
-              <h3>Internal Properties</h3>
+              <h3 id="internal-properties">Internal Properties</h3>
 <p>The current working directory (the path) that projectz is working on</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	cwd: <span class="literal">null</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>	<span class="attribute">cwd</span>: <span class="literal">null</span></pre></div></div>
             
         </li>
         
@@ -218,7 +218,7 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	pathsForPackages: <span class="literal">null</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>	<span class="attribute">pathsForPackages</span>: <span class="literal">null</span></pre></div></div>
             
         </li>
         
@@ -233,7 +233,7 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	pathsForReadmes: <span class="literal">null</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>	<span class="attribute">pathsForReadmes</span>: <span class="literal">null</span></pre></div></div>
             
         </li>
         
@@ -248,7 +248,7 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	dataForPackages: <span class="literal">null</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>	<span class="attribute">dataForPackages</span>: <span class="literal">null</span></pre></div></div>
             
         </li>
         
@@ -263,7 +263,7 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	dataForPackagesMerged: <span class="literal">null</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>	<span class="attribute">dataForPackagesMerged</span>: <span class="literal">null</span></pre></div></div>
             
         </li>
         
@@ -278,7 +278,7 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	dataForPackagesEnhanced: <span class="literal">null</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>	<span class="attribute">dataForPackagesEnhanced</span>: <span class="literal">null</span></pre></div></div>
             
         </li>
         
@@ -293,7 +293,7 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	dataForReadmes: <span class="literal">null</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>	<span class="attribute">dataForReadmes</span>: <span class="literal">null</span></pre></div></div>
             
         </li>
         
@@ -308,7 +308,7 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	dataForReadmesEnhanced: <span class="literal">null</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>	<span class="attribute">dataForReadmesEnhanced</span>: <span class="literal">null</span></pre></div></div>
             
         </li>
         
@@ -323,7 +323,7 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	log: <span class="literal">null</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>	<span class="attribute">log</span>: <span class="literal">null</span></pre></div></div>
             
         </li>
         
@@ -331,10 +331,10 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
         <li id="section-18">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
-              <h3>Constructor</h3>
+              <h3 id="constructor">Constructor</h3>
 <p>Options:</p>
 <ul>
 <li><code>cwd</code> the directory that we wish to do our work on, defaults to <code>process.cwd()</code></li>
@@ -348,7 +348,7 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	constructor: (opts={}) -&gt;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>	<span class="attribute">constructor</span>: <span class="function"><span class="params">(opts={})</span> -&gt;</span></pre></div></div>
             
         </li>
         
@@ -395,11 +395,11 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
             </div>
             
             <div class="content"><div class='highlight'><pre>		<span class="property">@pathsForPackages</span> =
-			projectz:      pathUtil.join(<span class="property">@cwd</span>, <span class="string">'projectz.cson'</span>)
-			package:       pathUtil.join(<span class="property">@cwd</span>, <span class="string">'package.json'</span>)
-			bower:         pathUtil.join(<span class="property">@cwd</span>, <span class="string">'bower.json'</span>)
-			component:     pathUtil.join(<span class="property">@cwd</span>, <span class="string">'component.json'</span>)
-			jquery:        pathUtil.join(<span class="property">@cwd</span>, <span class="string">'jquery.json'</span>)</pre></div></div>
+			<span class="attribute">projectz</span>:      pathUtil.join(<span class="property">@cwd</span>, <span class="string">'projectz.cson'</span>)
+			<span class="attribute">package</span>:       pathUtil.join(<span class="property">@cwd</span>, <span class="string">'package.json'</span>)
+			<span class="attribute">bower</span>:         pathUtil.join(<span class="property">@cwd</span>, <span class="string">'bower.json'</span>)
+			<span class="attribute">component</span>:     pathUtil.join(<span class="property">@cwd</span>, <span class="string">'component.json'</span>)
+			<span class="attribute">jquery</span>:        pathUtil.join(<span class="property">@cwd</span>, <span class="string">'jquery.json'</span>)</pre></div></div>
             
         </li>
         
@@ -415,11 +415,11 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
             </div>
             
             <div class="content"><div class='highlight'><pre>		<span class="property">@pathsForReadmes</span> =
-			readme:        pathUtil.join(<span class="property">@cwd</span>, <span class="string">'README.md'</span>)
-			history:       pathUtil.join(<span class="property">@cwd</span>, <span class="string">'HISTORY.md'</span>)
-			contributing:  pathUtil.join(<span class="property">@cwd</span>, <span class="string">'CONTRIBUTING.md'</span>)
-			backers:       pathUtil.join(<span class="property">@cwd</span>, <span class="string">'BACKERS.md'</span>)
-			license:       pathUtil.join(<span class="property">@cwd</span>, <span class="string">'LICENSE.md'</span>)</pre></div></div>
+			<span class="attribute">readme</span>:        pathUtil.join(<span class="property">@cwd</span>, <span class="string">'README.md'</span>)
+			<span class="attribute">history</span>:       pathUtil.join(<span class="property">@cwd</span>, <span class="string">'HISTORY.md'</span>)
+			<span class="attribute">contributing</span>:  pathUtil.join(<span class="property">@cwd</span>, <span class="string">'CONTRIBUTING.md'</span>)
+			<span class="attribute">backers</span>:       pathUtil.join(<span class="property">@cwd</span>, <span class="string">'BACKERS.md'</span>)
+			<span class="attribute">license</span>:       pathUtil.join(<span class="property">@cwd</span>, <span class="string">'LICENSE.md'</span>)</pre></div></div>
             
         </li>
         
@@ -427,16 +427,16 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
         <li id="section-23">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
-              <h3>Log</h3>
+              <h3 id="log">Log</h3>
 <p>You can pass over your own logging function if you&#39;d like.</p>
 <p>Usage: <code>log (logLevel, args...) -&gt;</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	log: (args...) =&gt;
+            <div class="content"><div class='highlight'><pre>	<span class="attribute">log</span>: <span class="function"><span class="params">(args...)</span> =&gt;</span>
 		<span class="property">@config</span>.log?(args...)
 		@</pre></div></div>
             
@@ -446,16 +446,16 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
         <li id="section-24">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
-              <h3>Load</h3>
+              <h3 id="load">Load</h3>
 <p>Load in the files we will be working with</p>
 <p>Usage: <code>load (err) -&gt;</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	load: (next) -&gt;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>	<span class="attribute">load</span>: <span class="function"><span class="params">(next)</span> -&gt;</span></pre></div></div>
             
         </li>
         
@@ -587,16 +587,16 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
         <li id="section-33">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-33">&#182;</a>
               </div>
-              <h3>Load Contributors</h3>
+              <h3 id="load-contributors">Load Contributors</h3>
 <p>Fetch the contributors for the repo if we have it</p>
 <p>Usage: <code>loadContributors (err) -&gt;</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	loadContributors: (next) -&gt;
+            <div class="content"><div class='highlight'><pre>	<span class="attribute">loadContributors</span>: <span class="function"><span class="params">(next)</span> -&gt;</span>
 		log = <span class="property">@log</span></pre></div></div>
             
         </li>
@@ -630,8 +630,8 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>		fetchContributors = require(<span class="string">'getcontributors'</span>).create(log: <span class="property">@log</span>)
-		fetchContributors.fetchContributorsFromRepos [repo], (err,result) =&gt;
+            <div class="content"><div class='highlight'><pre>		fetchContributors = <span class="built_in">require</span>(<span class="string">'getcontributors'</span>).create(<span class="attribute">log</span>: <span class="property">@log</span>)
+		fetchContributors.fetchContributorsFromRepos [repo], <span class="function"><span class="params">(err,result)</span> =&gt;</span>
 			<span class="keyword">return</span> next(err)  <span class="keyword">if</span> err
 			<span class="property">@dataForPackagesMerged</span>.contributors = contributors = fetchContributors.getContributors()
 			log(<span class="string">'info'</span>, <span class="string">"Loaded <span class="subst">#{contributors.length}</span> contributors from <span class="subst">#{repo}</span> repository"</span>)
@@ -658,16 +658,16 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
         <li id="section-37">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-37">&#182;</a>
               </div>
-              <h3>Load Paths</h3>
+              <h3 id="load-paths">Load Paths</h3>
 <p>Load in the paths we have specified</p>
 <p>Usage: <code>loadPaths (err) -&gt;</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	loadPaths: (next) -&gt;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>	<span class="attribute">loadPaths</span>: <span class="function"><span class="params">(next)</span> -&gt;</span></pre></div></div>
             
         </li>
         
@@ -682,7 +682,7 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>		tasks = <span class="keyword">new</span> TaskGroup().setConfig(concurrency:<span class="number">0</span>).once(<span class="string">'complete'</span>, next)</pre></div></div>
+            <div class="content"><div class='highlight'><pre>		tasks = <span class="keyword">new</span> TaskGroup().setConfig(<span class="attribute">concurrency</span>:<span class="number">0</span>).once(<span class="string">'complete'</span>, next)</pre></div></div>
             
         </li>
         
@@ -697,8 +697,8 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>		tasks.addTask (complete) =&gt;
-			<span class="property">@loadPackages</span> <span class="property">@pathsForPackages</span>, (err,dataForPackages) =&gt;
+            <div class="content"><div class='highlight'><pre>		tasks.addTask <span class="function"><span class="params">(complete)</span> =&gt;</span>
+			<span class="property">@loadPackages</span> <span class="property">@pathsForPackages</span>, <span class="function"><span class="params">(err,dataForPackages)</span> =&gt;</span>
 				<span class="keyword">return</span> complete(err) <span class="keyword">if</span> err
 				<span class="property">@dataForPackages</span> = dataForPackages
 				<span class="keyword">return</span> complete()</pre></div></div>
@@ -716,8 +716,8 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>		tasks.addTask (complete) =&gt;
-			<span class="property">@loadReadmes</span> <span class="property">@pathsForReadmes</span>, (err,dataForReadmes) =&gt;
+            <div class="content"><div class='highlight'><pre>		tasks.addTask <span class="function"><span class="params">(complete)</span> =&gt;</span>
+			<span class="property">@loadReadmes</span> <span class="property">@pathsForReadmes</span>, <span class="function"><span class="params">(err,dataForReadmes)</span> =&gt;</span>
 				<span class="keyword">return</span> complete(err)  <span class="keyword">if</span> err
 				<span class="property">@dataForReadmes</span> = dataForReadmes
 				<span class="keyword">return</span> complete()</pre></div></div>
@@ -743,28 +743,28 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
         <li id="section-42">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-42">&#182;</a>
               </div>
-              <h3>Load Packages</h3>
+              <h3 id="load-packages">Load Packages</h3>
 <p>Load in the packages we have specified</p>
 <p>Usage: <code>loadPackages paths, (err, dataForPackages) -&gt;</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	loadPackages: (pathsForPackages, next) -&gt;
+            <div class="content"><div class='highlight'><pre>	<span class="attribute">loadPackages</span>: <span class="function"><span class="params">(pathsForPackages, next)</span> -&gt;</span>
 		dataForPackages = {}
 
-		tasks = <span class="keyword">new</span> TaskGroup().setConfig(concurrency:<span class="number">0</span>).once <span class="string">'complete'</span>, (err) -&gt;
+		tasks = <span class="keyword">new</span> TaskGroup<span class="function"><span class="params">()</span>.<span class="title">setConfig</span><span class="params">(concurrency:<span class="number">0</span>)</span>.<span class="title">once</span> '<span class="title">complete</span>', <span class="params">(err)</span> -&gt;</span>
 			<span class="keyword">return</span> next(err)  <span class="keyword">if</span> err
 			<span class="keyword">return</span> next(<span class="literal">null</span>, dataForPackages)
 
-		eachr pathsForPackages, (value,key) -&gt;
-			tasks.addTask (complete) -&gt;
+		eachr pathsForPackages, <span class="function"><span class="params">(value,key)</span> -&gt;</span>
+			tasks.addTask <span class="function"><span class="params">(complete)</span> -&gt;</span>
 				dataForPackages[key] = <span class="literal">null</span>
-				fsUtil.exists value, (exists) -&gt;
+				fsUtil.exists value, <span class="function"><span class="params">(exists)</span> -&gt;</span>
 					<span class="keyword">return</span> complete()  <span class="keyword">if</span> exists <span class="keyword">is</span> <span class="literal">false</span>
-					CSON.parseFile value, (err,data) -&gt;
+					CSON.parseFile value, <span class="function"><span class="params">(err,data)</span> -&gt;</span>
 						<span class="keyword">return</span> complete(err)  <span class="keyword">if</span> err
 						dataForPackages[key] = data
 						<span class="keyword">return</span> complete()
@@ -791,28 +791,28 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
         <li id="section-44">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-44">&#182;</a>
               </div>
-              <h3>Load Readmes</h3>
+              <h3 id="load-readmes">Load Readmes</h3>
 <p>Load in the readmes we have specified</p>
 <p>Usage: <code>loadPackages paths, (err, dataForReadmes) -&gt;</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	loadReadmes: (pathsForReadmes, next) -&gt;
+            <div class="content"><div class='highlight'><pre>	<span class="attribute">loadReadmes</span>: <span class="function"><span class="params">(pathsForReadmes, next)</span> -&gt;</span>
 		dataForReadmes = {}
 
-		tasks = <span class="keyword">new</span> TaskGroup().setConfig(concurrency:<span class="number">0</span>).once <span class="string">'complete'</span>, (err) -&gt;
+		tasks = <span class="keyword">new</span> TaskGroup<span class="function"><span class="params">()</span>.<span class="title">setConfig</span><span class="params">(concurrency:<span class="number">0</span>)</span>.<span class="title">once</span> '<span class="title">complete</span>', <span class="params">(err)</span> -&gt;</span>
 			<span class="keyword">return</span> next(err)  <span class="keyword">if</span> err
 			<span class="keyword">return</span> next(<span class="literal">null</span>, dataForReadmes)
 
-		eachr pathsForReadmes, (value,key) -&gt;
-			tasks.addTask (complete) -&gt;
+		eachr pathsForReadmes, <span class="function"><span class="params">(value,key)</span> -&gt;</span>
+			tasks.addTask <span class="function"><span class="params">(complete)</span> -&gt;</span>
 				dataForReadmes[key] = <span class="literal">null</span>
-				fsUtil.exists value, (exists) -&gt;
+				fsUtil.exists value, <span class="function"><span class="params">(exists)</span> -&gt;</span>
 					<span class="keyword">return</span> complete()  <span class="keyword">if</span> exists <span class="keyword">is</span> <span class="literal">false</span>
-					fsUtil.readFile value, (err,data) -&gt;
+					fsUtil.readFile value, <span class="function"><span class="params">(err,data)</span> -&gt;</span>
 						<span class="keyword">return</span> complete(err)  <span class="keyword">if</span> err
 						dataForReadmes[key] = data.toString()
 						<span class="keyword">return</span> complete()</pre></div></div>
@@ -838,14 +838,14 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
         <li id="section-46">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-46">&#182;</a>
               </div>
-              <h3>Merge Packages</h3>
+              <h3 id="merge-packages">Merge Packages</h3>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	mergePackages: (next) -&gt;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>	<span class="attribute">mergePackages</span>: <span class="function"><span class="params">(next)</span> -&gt;</span></pre></div></div>
             
         </li>
         
@@ -873,11 +873,11 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
 		<span class="property">@dataForPackagesMerged</span>.readmes ?= {}
 		<span class="property">@dataForPackagesMerged</span>.packages ?= {}
 
-		eachr <span class="property">@dataForReadmes</span>, (value, name) =&gt;
+		eachr <span class="property">@dataForReadmes</span>, <span class="function"><span class="params">(value, name)</span> =&gt;</span>
 			<span class="property">@dataForPackagesMerged</span>.readmes[name] = <span class="property">@dataForPackages</span>.readmes?[name] ? value?
 			<span class="keyword">return</span> <span class="literal">true</span>
 
-		eachr <span class="property">@dataForPackages</span>, (value, name) =&gt;
+		eachr <span class="property">@dataForPackages</span>, <span class="function"><span class="params">(value, name)</span> =&gt;</span>
 			<span class="property">@dataForPackagesMerged</span>.packages[name] = <span class="property">@dataForPackages</span>.packages?[name] ? value?
 			<span class="keyword">return</span> <span class="literal">true</span></pre></div></div>
             
@@ -930,7 +930,7 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
             </div>
             
             <div class="content"><div class='highlight'><pre>		<span class="keyword">if</span> <span class="property">@dataForPackagesMerged</span>.repo
-			<span class="property">@dataForPackagesMerged</span>.repo = <span class="property">@dataForPackagesMerged</span>.repo.replace(<span class="regexp">/^.+?github.com\//, '').replace(/(\.git|\/)+$/</span>, <span class="string">''</span>) <span class="keyword">or</span> <span class="literal">null</span></pre></div></div>
+			<span class="property">@dataForPackagesMerged</span>.repo = <span class="property">@dataForPackagesMerged</span>.repo.replace(<span class="regexp">/^.+?github.com\//</span>, <span class="string">''</span>).replace(<span class="regexp">/(\.git|\/)+$/</span>, <span class="string">''</span>) <span class="keyword">or</span> <span class="literal">null</span></pre></div></div>
             
         </li>
         
@@ -962,7 +962,7 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
             </div>
             
             <div class="content"><div class='highlight'><pre>		<span class="keyword">if</span> <span class="property">@dataForPackagesMerged</span>.repo
-			<span class="property">@dataForPackagesMerged</span>.username ?= <span class="property">@dataForPackagesMerged</span>.repo.replace(<span class="regexp">/\/.*$/</span>, <span class="string">''</span>)</pre></div></div>
+			<span class="property">@dataForPackagesMerged</span>.username ?= <span class="property">@dataForPackagesMerged</span>.repo.replace(<span class="regexp">/\/</span>.*$/, <span class="string">''</span>)</pre></div></div>
             
         </li>
         
@@ -979,11 +979,11 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
             
             <div class="content"><div class='highlight'><pre>		<span class="keyword">if</span> <span class="property">@dataForPackagesMerged</span>.repo
 			<span class="property">@dataForPackagesMerged</span>.repository ?= {
-				type: <span class="string">'git'</span>
-				url: <span class="string">"https://github.com/<span class="subst">#{@dataForPackagesMerged.repo}</span>.git"</span>
+				<span class="attribute">type</span>: <span class="string">'git'</span>
+				<span class="attribute">url</span>: <span class="string">"https://github.com/<span class="subst">#{<span class="property">@dataForPackagesMerged</span>.repo}</span>.git"</span>
 			}
 			<span class="property">@dataForPackagesMerged</span>.bugs ?= {
-				url: <span class="string">"https://github.com/<span class="subst">#{@dataForPackagesMerged.repo}</span>/issues"</span>
+				<span class="attribute">url</span>: <span class="string">"https://github.com/<span class="subst">#{<span class="property">@dataForPackagesMerged</span>.repo}</span>/issues"</span>
 			}</pre></div></div>
             
         </li>
@@ -1030,7 +1030,7 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
             </div>
             
             <div class="content"><div class='highlight'><pre>		<span class="property">@dataForPackagesMerged</span>.sponsors ?= []
-		<span class="property">@dataForPackagesMerged</span>.sponsors = <span class="property">@dataForPackagesMerged</span>.sponsors.split(<span class="regexp">/[,\n]/</span>).map((i)-&gt;i.trim())  <span class="keyword">if</span> typeChecker.isString(<span class="property">@dataForPackagesMerged</span>.sponsors)</pre></div></div>
+		<span class="property">@dataForPackagesMerged</span>.sponsors = <span class="property">@dataForPackagesMerged</span>.sponsors.split<span class="function"><span class="params">(<span class="regexp">/[,\n]/</span>)</span>.<span class="title">map</span><span class="params">((i)-&gt;i.trim())</span>  <span class="title">if</span> <span class="title">typeChecker</span>.<span class="title">isString</span><span class="params">(<span class="property">@dataForPackagesMerged</span>.sponsors)</span></pre></div></div>
             
         </li>
         
@@ -1046,9 +1046,9 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
             </div>
             
             <div class="content"><div class='highlight'><pre>		<span class="property">@dataForPackagesMerged</span>.maintainers ?= <span class="property">@dataForPackagesMerged</span>.maintainer <span class="keyword">or</span> <span class="string">''</span>
-		<span class="property">@dataForPackagesMerged</span>.maintainers = <span class="property">@dataForPackagesMerged</span>.maintainers.split(<span class="regexp">/[,\n]/</span>).map((i)-&gt;i.trim())  <span class="keyword">if</span> typeChecker.isString(<span class="property">@dataForPackagesMerged</span>.maintainers)
-		<span class="property">@dataForPackagesMerged</span>.maintainers = [<span class="property">@dataForPackagesMerged</span>.maintainers]  <span class="keyword">unless</span> typeChecker.isArray(<span class="property">@dataForPackagesMerged</span>.maintainers)
-		<span class="property">@dataForPackagesMerged</span>.maintainer = <span class="property">@dataForPackagesMerged</span>.maintainers.join(<span class="string">', '</span>)</pre></div></div>
+		<span class="property">@dataForPackagesMerged</span>.maintainers = <span class="property">@dataForPackagesMerged</span>.maintainers.split<span class="function"><span class="params">(<span class="regexp">/[,\n]/</span>)</span>.<span class="title">map</span><span class="params">((i)-&gt;i.trim())</span>  <span class="title">if</span> <span class="title">typeChecker</span>.<span class="title">isString</span><span class="params">(<span class="property">@dataForPackagesMerged</span>.maintainers)</span>
+		@<span class="title">dataForPackagesMerged</span>.<span class="title">maintainers</span> = [@<span class="title">dataForPackagesMerged</span>.<span class="title">maintainers</span>]  <span class="title">unless</span> <span class="title">typeChecker</span>.<span class="title">isArray</span><span class="params">(<span class="property">@dataForPackagesMerged</span>.maintainers)</span>
+		@<span class="title">dataForPackagesMerged</span>.<span class="title">maintainer</span> = @<span class="title">dataForPackagesMerged</span>.<span class="title">maintainers</span>.<span class="title">join</span><span class="params">(<span class="string">', '</span>)</span></pre></div></div>
             
         </li>
         
@@ -1064,9 +1064,9 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
             </div>
             
             <div class="content"><div class='highlight'><pre>		<span class="property">@dataForPackagesMerged</span>.authors ?= <span class="property">@dataForPackagesMerged</span>.author <span class="keyword">or</span> <span class="string">''</span>
-		<span class="property">@dataForPackagesMerged</span>.authors = <span class="property">@dataForPackagesMerged</span>.authors.split(<span class="regexp">/[,\n]/</span>).map((i)-&gt;i.trim())  <span class="keyword">if</span> typeChecker.isString(<span class="property">@dataForPackagesMerged</span>.authors)
-		<span class="property">@dataForPackagesMerged</span>.authors = [<span class="property">@dataForPackagesMerged</span>.authors]  <span class="keyword">unless</span> typeChecker.isArray(<span class="property">@dataForPackagesMerged</span>.authors)
-		<span class="property">@dataForPackagesMerged</span>.author = <span class="property">@dataForPackagesMerged</span>.authors.join(<span class="string">', '</span>)</pre></div></div>
+		<span class="property">@dataForPackagesMerged</span>.authors = <span class="property">@dataForPackagesMerged</span>.authors.split<span class="function"><span class="params">(<span class="regexp">/[,\n]/</span>)</span>.<span class="title">map</span><span class="params">((i)-&gt;i.trim())</span>  <span class="title">if</span> <span class="title">typeChecker</span>.<span class="title">isString</span><span class="params">(<span class="property">@dataForPackagesMerged</span>.authors)</span>
+		@<span class="title">dataForPackagesMerged</span>.<span class="title">authors</span> = [@<span class="title">dataForPackagesMerged</span>.<span class="title">authors</span>]  <span class="title">unless</span> <span class="title">typeChecker</span>.<span class="title">isArray</span><span class="params">(<span class="property">@dataForPackagesMerged</span>.authors)</span>
+		@<span class="title">dataForPackagesMerged</span>.<span class="title">author</span> = @<span class="title">dataForPackagesMerged</span>.<span class="title">authors</span>.<span class="title">join</span><span class="params">(<span class="string">', '</span>)</span></pre></div></div>
             
         </li>
         
@@ -1082,10 +1082,10 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
             </div>
             
             <div class="content"><div class='highlight'><pre>		<span class="property">@dataForPackagesMerged</span>.licenses ?= <span class="property">@dataForPackagesMerged</span>.license <span class="keyword">or</span> <span class="string">''</span>
-		<span class="property">@dataForPackagesMerged</span>.licenses = <span class="property">@dataForPackagesMerged</span>.licenses.split(<span class="regexp">/[,\n]/</span>).map((i)-&gt;i.trim())  <span class="keyword">if</span> typeChecker.isString(<span class="property">@dataForPackagesMerged</span>.licenses)
-		<span class="property">@dataForPackagesMerged</span>.licenses = [<span class="property">@dataForPackagesMerged</span>.licenses]  <span class="keyword">unless</span> typeChecker.isArray(<span class="property">@dataForPackagesMerged</span>.licenses)
-		<span class="property">@dataForPackagesMerged</span>.licenses = <span class="property">@dataForPackagesMerged</span>.licenses.map (value) =&gt;
-			value = {type:value}  <span class="keyword">if</span> typeChecker.isString(value)
+		<span class="property">@dataForPackagesMerged</span>.licenses = <span class="property">@dataForPackagesMerged</span>.licenses.split<span class="function"><span class="params">(<span class="regexp">/[,\n]/</span>)</span>.<span class="title">map</span><span class="params">((i)-&gt;i.trim())</span>  <span class="title">if</span> <span class="title">typeChecker</span>.<span class="title">isString</span><span class="params">(<span class="property">@dataForPackagesMerged</span>.licenses)</span>
+		@<span class="title">dataForPackagesMerged</span>.<span class="title">licenses</span> = [@<span class="title">dataForPackagesMerged</span>.<span class="title">licenses</span>]  <span class="title">unless</span> <span class="title">typeChecker</span>.<span class="title">isArray</span><span class="params">(<span class="property">@dataForPackagesMerged</span>.licenses)</span>
+		@<span class="title">dataForPackagesMerged</span>.<span class="title">licenses</span> = @<span class="title">dataForPackagesMerged</span>.<span class="title">licenses</span>.<span class="title">map</span> <span class="params">(value)</span> =&gt;</span>
+			value = {<span class="attribute">type</span>:value}  <span class="keyword">if</span> typeChecker.isString(value)
 			<span class="keyword">return</span> value
 		<span class="keyword">delete</span> <span class="property">@dataForPackagesMerged</span>.license</pre></div></div>
             
@@ -1110,14 +1110,14 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
         <li id="section-61">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-61">&#182;</a>
               </div>
-              <h3>Enhance Packages</h3>
+              <h3 id="enhance-packages">Enhance Packages</h3>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	enhancePackages: (next) -&gt;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>	<span class="attribute">enhancePackages</span>: <span class="function"><span class="params">(next)</span> -&gt;</span></pre></div></div>
             
         </li>
         
@@ -1178,19 +1178,19 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
             </div>
             
             <div class="content"><div class='highlight'><pre>			{
-				name:                   <span class="property">@dataForPackagesMerged</span>.name
-				version:                <span class="property">@dataForPackagesMerged</span>.version
-				licenses:               <span class="property">@dataForPackagesMerged</span>.licenses
-				description:            <span class="property">@dataForPackagesMerged</span>.description
-				keywords:               <span class="property">@dataForPackagesMerged</span>.keywords
-				author:                 <span class="property">@dataForPackagesMerged</span>.author
-				maintainers:            <span class="property">@dataForPackagesMerged</span>.maintainers
-				contributors:           <span class="property">@dataForPackagesMerged</span>.contributors.map (contributor) -&gt; contributor.text
-				bugs:                   <span class="property">@dataForPackagesMerged</span>.bugs
-				engines:                <span class="property">@dataForPackagesMerged</span>.engines
-				dependencies:           <span class="property">@dataForPackagesMerged</span>.dependencies
-				devDependencies:        <span class="property">@dataForPackagesMerged</span>.devDependencies
-				main:                   <span class="property">@dataForPackagesMerged</span>.main
+				<span class="attribute">name</span>:                   <span class="property">@dataForPackagesMerged</span>.name
+				<span class="attribute">version</span>:                <span class="property">@dataForPackagesMerged</span>.version
+				<span class="attribute">licenses</span>:               <span class="property">@dataForPackagesMerged</span>.licenses
+				<span class="attribute">description</span>:            <span class="property">@dataForPackagesMerged</span>.description
+				<span class="attribute">keywords</span>:               <span class="property">@dataForPackagesMerged</span>.keywords
+				<span class="attribute">author</span>:                 <span class="property">@dataForPackagesMerged</span>.author
+				<span class="attribute">maintainers</span>:            <span class="property">@dataForPackagesMerged</span>.maintainers
+				<span class="attribute">contributors</span>:           <span class="property">@dataForPackagesMerged</span>.contributors.map <span class="function"><span class="params">(contributor)</span> -&gt;</span> contributor.text
+				<span class="attribute">bugs</span>:                   <span class="property">@dataForPackagesMerged</span>.bugs
+				<span class="attribute">engines</span>:                <span class="property">@dataForPackagesMerged</span>.engines
+				<span class="attribute">dependencies</span>:           <span class="property">@dataForPackagesMerged</span>.dependencies
+				<span class="attribute">devDependencies</span>:        <span class="property">@dataForPackagesMerged</span>.devDependencies
+				<span class="attribute">main</span>:                   <span class="property">@dataForPackagesMerged</span>.main
 			}</pre></div></div>
             
         </li>
@@ -1369,14 +1369,14 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
             </div>
             
             <div class="content"><div class='highlight'><pre>			{
-				name:                   <span class="property">@dataForPackagesMerged</span>.name
-				version:                <span class="property">@dataForPackagesMerged</span>.version
-				license:                <span class="property">@dataForPackagesMerged</span>.licenses?[<span class="number">0</span>].type
-				description:            <span class="property">@dataForPackagesMerged</span>.description
-				keywords:               <span class="property">@dataForPackagesMerged</span>.keywords
-				demo:                   <span class="property">@dataForPackagesMerged</span>.demo
-				main:                   <span class="property">@dataForPackagesMerged</span>.main
-				scripts:                [<span class="property">@dataForPackagesMerged</span>.main]
+				<span class="attribute">name</span>:                   <span class="property">@dataForPackagesMerged</span>.name
+				<span class="attribute">version</span>:                <span class="property">@dataForPackagesMerged</span>.version
+				<span class="attribute">license</span>:                <span class="property">@dataForPackagesMerged</span>.licenses?[<span class="number">0</span>].type
+				<span class="attribute">description</span>:            <span class="property">@dataForPackagesMerged</span>.description
+				<span class="attribute">keywords</span>:               <span class="property">@dataForPackagesMerged</span>.keywords
+				<span class="attribute">demo</span>:                   <span class="property">@dataForPackagesMerged</span>.demo
+				<span class="attribute">main</span>:                   <span class="property">@dataForPackagesMerged</span>.main
+				<span class="attribute">scripts</span>:                [<span class="property">@dataForPackagesMerged</span>.main]
 			}</pre></div></div>
             
         </li>
@@ -1454,11 +1454,11 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
             </div>
             
             <div class="content"><div class='highlight'><pre>			{
-				name:                   <span class="property">@dataForPackagesMerged</span>.name
-				version:                <span class="property">@dataForPackagesMerged</span>.version
-				dependencies:           <span class="property">@dataForPackagesMerged</span>.dependencies
-				devDependencies:        <span class="property">@dataForPackagesMerged</span>.devDependencies
-				main:                   <span class="property">@dataForPackagesMerged</span>.main
+				<span class="attribute">name</span>:                   <span class="property">@dataForPackagesMerged</span>.name
+				<span class="attribute">version</span>:                <span class="property">@dataForPackagesMerged</span>.version
+				<span class="attribute">dependencies</span>:           <span class="property">@dataForPackagesMerged</span>.dependencies
+				<span class="attribute">devDependencies</span>:        <span class="property">@dataForPackagesMerged</span>.devDependencies
+				<span class="attribute">main</span>:                   <span class="property">@dataForPackagesMerged</span>.main
 			}</pre></div></div>
             
         </li>
@@ -1498,17 +1498,17 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
         <li id="section-84">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-84">&#182;</a>
               </div>
-              <h3>Enhance Readmes</h3>
+              <h3 id="enhance-readmes">Enhance Readmes</h3>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	enhanceReadmes: (next) -&gt;
+            <div class="content"><div class='highlight'><pre>	<span class="attribute">enhanceReadmes</span>: <span class="function"><span class="params">(next)</span> -&gt;</span>
 		opts = <span class="property">@dataForPackagesMerged</span>
 
-		eachr <span class="property">@dataForReadmes</span>, (data, name) =&gt;
+		eachr <span class="property">@dataForReadmes</span>, <span class="function"><span class="params">(data, name)</span> =&gt;</span>
 			<span class="keyword">return</span>  <span class="keyword">unless</span> data
 			data = projectzUtil.replaceSection([<span class="string">'TITLE'</span>, <span class="string">'NAME'</span>], data, <span class="string">"# <span class="subst">#{opts.title}</span>"</span>)
 			data = projectzUtil.replaceSection([<span class="string">'BADGES'</span>, <span class="string">'BADGE'</span>], data, badgeUtil.getBadgesSection(opts))
@@ -1544,21 +1544,21 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
         <li id="section-86">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-86">&#182;</a>
               </div>
-              <h3>Save</h3>
+              <h3 id="save">Save</h3>
 <p>Save the data we&#39;ve loaded into the files</p>
 <p>Usage: <code>save (err) -&gt;</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	save: (next) -&gt;
+            <div class="content"><div class='highlight'><pre>	<span class="attribute">save</span>: <span class="function"><span class="params">(next)</span> -&gt;</span>
 		log = <span class="property">@log</span>
 
 		log(<span class="string">'info'</span>, <span class="string">"Writing changes..."</span>)
 
-		tasks = <span class="keyword">new</span> TaskGroup().setConfig(concurrency:<span class="number">0</span>).once <span class="string">'complete'</span>, (err) -&gt;
+		tasks = <span class="keyword">new</span> TaskGroup<span class="function"><span class="params">()</span>.<span class="title">setConfig</span><span class="params">(concurrency:<span class="number">0</span>)</span>.<span class="title">once</span> '<span class="title">complete</span>', <span class="params">(err)</span> -&gt;</span>
 			<span class="keyword">return</span> next(err)  <span class="keyword">if</span> err
 			log(<span class="string">'info'</span>, <span class="string">"Wrote changes"</span>)
 			<span class="keyword">return</span> next()</pre></div></div>
@@ -1576,7 +1576,7 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>		eachr <span class="property">@dataForPackagesMerged</span>.packages, (enabled, name) =&gt;
+            <div class="content"><div class='highlight'><pre>		eachr <span class="property">@dataForPackagesMerged</span>.packages, <span class="function"><span class="params">(enabled, name)</span> =&gt;</span>
 			<span class="keyword">return</span>  <span class="keyword">if</span> name <span class="keyword">is</span> <span class="string">'projectz'</span>
 			<span class="keyword">unless</span> enabled
 				log(<span class="string">'info'</span>, <span class="string">"Skipping package file: <span class="subst">#{name}</span>"</span>)
@@ -1584,7 +1584,7 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
 
 			path = <span class="property">@pathsForPackages</span>[name]
 			log(<span class="string">'info'</span>, <span class="string">"Writing package file: <span class="subst">#{path}</span>"</span>)
-			tasks.addTask (complete) =&gt;
+			tasks.addTask <span class="function"><span class="params">(complete)</span> =&gt;</span>
 				data = JSON.stringify(<span class="property">@dataForPackagesEnhanced</span>[name], <span class="literal">null</span>, <span class="string">'  '</span>)
 				fsUtil.writeFile(path, data, complete)
 
@@ -1603,7 +1603,7 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>		eachr <span class="property">@dataForPackagesMerged</span>.readmes, (enabled, name) =&gt;
+            <div class="content"><div class='highlight'><pre>		eachr <span class="property">@dataForPackagesMerged</span>.readmes, <span class="function"><span class="params">(enabled, name)</span> =&gt;</span>
 			<span class="keyword">return</span>  <span class="keyword">if</span> name <span class="keyword">is</span> <span class="string">'projectz'</span>
 			<span class="keyword">unless</span> enabled
 				log(<span class="string">'info'</span>, <span class="string">"Skipping readme file: <span class="subst">#{name}</span>"</span>)
@@ -1611,7 +1611,7 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
 
 			path = <span class="property">@pathsForReadmes</span>[name]
 			log(<span class="string">'info'</span>, <span class="string">"Writing readme file: <span class="subst">#{name}</span>"</span>)
-			tasks.addTask (complete) =&gt;
+			tasks.addTask <span class="function"><span class="params">(complete)</span> =&gt;</span>
 				data = <span class="property">@dataForReadmesEnhanced</span>[name]
 				fsUtil.writeFile(path, data, complete)
 
@@ -1638,17 +1638,17 @@ projectzUtil = require(<span class="string">'./projectz-util'</span>)</pre></div
         <li id="section-90">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-90">&#182;</a>
               </div>
-              <h2>Export</h2>
+              <h2 id="export">Export</h2>
 <p>Merge the other parts of our program together and export it</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>module.exports =
-	Projectz: Projectz
-	create: (opts) -&gt; <span class="keyword">new</span> Projectz(opts)</pre></div></div>
+            <div class="content"><div class='highlight'><pre>module.<span class="built_in">exports</span> =
+	<span class="attribute">Projectz</span>: Projectz
+	<span class="attribute">create</span>: <span class="function"><span class="params">(opts)</span> -&gt;</span> <span class="keyword">new</span> Projectz(opts)</pre></div></div>
             
         </li>
         

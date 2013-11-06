@@ -76,9 +76,9 @@
               
             </div>
             
-            <div class="content"><div class='highlight'><pre>module.exports = installUtil =
+            <div class="content"><div class='highlight'><pre>module.<span class="built_in">exports</span> = installUtil =
 
-	getInstallInstructions: (opts) -&gt;
+	<span class="attribute">getInstallInstructions</span>: <span class="function"><span class="params">(opts)</span> -&gt;</span>
 		result = <span class="string">"## Install"</span>
 
 		<span class="keyword">if</span> opts.packages.package
@@ -91,15 +91,15 @@
         <li id="section-2">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <h2><a href="http://nodejs.org/">Node</a>, <a href="http://browserify.org/">Browserify</a></h2>
+              <h2 id="-node-http-nodejs-org-browserify-http-browserify-org-"><a href="http://nodejs.org/">Node</a>, <a href="http://browserify.org/">Browserify</a></h2>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>				- Use: `<span class="javascript">require(<span class="string">'#{opts.name}'</span>)</span>`
-				- Install: `<span class="javascript">npm install --save #{opts.name}</span>`</pre></div></div>
+            <div class="content"><div class='highlight'><pre>				- <span class="attribute">Use</span>: `<span class="javascript">require(<span class="string">'#{opts.name}'</span>)</span>`
+				- <span class="attribute">Install</span>: `<span class="javascript">npm install --save #{opts.name}</span>`</pre></div></div>
             
         </li>
         
@@ -107,15 +107,15 @@
         <li id="section-3">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <h2><a href="http://ender.jit.su/">Ender</a></h2>
+              <h2 id="-ender-http-ender-jit-su-"><a href="http://ender.jit.su/">Ender</a></h2>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>				- Use: `<span class="javascript">require(<span class="string">'#{opts.name}'</span>)</span>`
-				- Install: `<span class="javascript">ender add #{opts.name}</span>`
+            <div class="content"><div class='highlight'><pre>				- <span class="attribute">Use</span>: `<span class="javascript">require(<span class="string">'#{opts.name}'</span>)</span>`
+				- <span class="attribute">Install</span>: `<span class="javascript">ender add #{opts.name}</span>`
 				<span class="string">"""
 
 		if opts.packages.component
@@ -128,15 +128,15 @@
         <li id="section-4">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <h2><a href="http://github.com/component/component">Component</a></h2>
+              <h2 id="-component-http-github-com-component-component-"><a href="http://github.com/component/component">Component</a></h2>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>				- Use: `<span class="javascript">require(<span class="string">'#{opts.name}'</span>)</span>`
-				- Install: `<span class="javascript">component install #{opts.repo}</span>`
+            <div class="content"><div class='highlight'><pre>				- <span class="attribute">Use</span>: `<span class="javascript">require(<span class="string">'#{opts.name}'</span>)</span>`
+				- <span class="attribute">Install</span>: `<span class="javascript">component install #{opts.repo}</span>`
 				<span class="string">"""
 
 		if opts.packages.bower
@@ -149,15 +149,15 @@
         <li id="section-5">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <h2><a href="http://bower.io/">Bower</a></h2>
+              <h2 id="-bower-http-bower-io-"><a href="http://bower.io/">Bower</a></h2>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>				- Use: `<span class="javascript">require(<span class="string">'#{opts.name}'</span>)</span>`
-				- Install: `<span class="javascript">bower install #{opts.name}</span>`
+            <div class="content"><div class='highlight'><pre>				- <span class="attribute">Use</span>: `<span class="javascript">require(<span class="string">'#{opts.name}'</span>)</span>`
+				- <span class="attribute">Install</span>: `<span class="javascript">bower install #{opts.name}</span>`
 				<span class="string">"""
 
 		return result</pre></div></div>
