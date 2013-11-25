@@ -1030,7 +1030,9 @@ projectzUtil = <span class="built_in">require</span>(<span class="string">'./pro
             </div>
             
             <div class="content"><div class='highlight'><pre>		<span class="property">@dataForPackagesMerged</span>.sponsors ?= []
-		<span class="property">@dataForPackagesMerged</span>.sponsors = <span class="property">@dataForPackagesMerged</span>.sponsors.split<span class="function"><span class="params">(<span class="regexp">/[,\n]/</span>)</span>.<span class="title">map</span><span class="params">((i)-&gt;i.trim())</span>  <span class="title">if</span> <span class="title">typeChecker</span>.<span class="title">isString</span><span class="params">(<span class="property">@dataForPackagesMerged</span>.sponsors)</span></pre></div></div>
+		<span class="property">@dataForPackagesMerged</span>.sponsors = <span class="property">@dataForPackagesMerged</span>.sponsors.split<span class="function"><span class="params">(<span class="regexp">/[,\n]/</span>)</span>.<span class="title">map</span><span class="params">((i)-&gt;i.trim())</span>  <span class="title">if</span> <span class="title">typeChecker</span>.<span class="title">isString</span><span class="params">(<span class="property">@dataForPackagesMerged</span>.sponsors)</span>
+
+</span></pre></div></div>
             
         </li>
         
@@ -1048,7 +1050,9 @@ projectzUtil = <span class="built_in">require</span>(<span class="string">'./pro
             <div class="content"><div class='highlight'><pre>		<span class="property">@dataForPackagesMerged</span>.maintainers ?= <span class="property">@dataForPackagesMerged</span>.maintainer <span class="keyword">or</span> <span class="string">''</span>
 		<span class="property">@dataForPackagesMerged</span>.maintainers = <span class="property">@dataForPackagesMerged</span>.maintainers.split<span class="function"><span class="params">(<span class="regexp">/[,\n]/</span>)</span>.<span class="title">map</span><span class="params">((i)-&gt;i.trim())</span>  <span class="title">if</span> <span class="title">typeChecker</span>.<span class="title">isString</span><span class="params">(<span class="property">@dataForPackagesMerged</span>.maintainers)</span>
 		@<span class="title">dataForPackagesMerged</span>.<span class="title">maintainers</span> = [@<span class="title">dataForPackagesMerged</span>.<span class="title">maintainers</span>]  <span class="title">unless</span> <span class="title">typeChecker</span>.<span class="title">isArray</span><span class="params">(<span class="property">@dataForPackagesMerged</span>.maintainers)</span>
-		@<span class="title">dataForPackagesMerged</span>.<span class="title">maintainer</span> = @<span class="title">dataForPackagesMerged</span>.<span class="title">maintainers</span>.<span class="title">join</span><span class="params">(<span class="string">', '</span>)</span></pre></div></div>
+		@<span class="title">dataForPackagesMerged</span>.<span class="title">maintainer</span> = @<span class="title">dataForPackagesMerged</span>.<span class="title">maintainers</span>.<span class="title">join</span><span class="params">(<span class="string">', '</span>)</span>
+
+</span></pre></div></div>
             
         </li>
         
@@ -1066,7 +1070,9 @@ projectzUtil = <span class="built_in">require</span>(<span class="string">'./pro
             <div class="content"><div class='highlight'><pre>		<span class="property">@dataForPackagesMerged</span>.authors ?= <span class="property">@dataForPackagesMerged</span>.author <span class="keyword">or</span> <span class="string">''</span>
 		<span class="property">@dataForPackagesMerged</span>.authors = <span class="property">@dataForPackagesMerged</span>.authors.split<span class="function"><span class="params">(<span class="regexp">/[,\n]/</span>)</span>.<span class="title">map</span><span class="params">((i)-&gt;i.trim())</span>  <span class="title">if</span> <span class="title">typeChecker</span>.<span class="title">isString</span><span class="params">(<span class="property">@dataForPackagesMerged</span>.authors)</span>
 		@<span class="title">dataForPackagesMerged</span>.<span class="title">authors</span> = [@<span class="title">dataForPackagesMerged</span>.<span class="title">authors</span>]  <span class="title">unless</span> <span class="title">typeChecker</span>.<span class="title">isArray</span><span class="params">(<span class="property">@dataForPackagesMerged</span>.authors)</span>
-		@<span class="title">dataForPackagesMerged</span>.<span class="title">author</span> = @<span class="title">dataForPackagesMerged</span>.<span class="title">authors</span>.<span class="title">join</span><span class="params">(<span class="string">', '</span>)</span></pre></div></div>
+		@<span class="title">dataForPackagesMerged</span>.<span class="title">author</span> = @<span class="title">dataForPackagesMerged</span>.<span class="title">authors</span>.<span class="title">join</span><span class="params">(<span class="string">', '</span>)</span>
+
+</span></pre></div></div>
             
         </li>
         
