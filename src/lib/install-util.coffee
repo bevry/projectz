@@ -9,7 +9,7 @@ module.exports = installUtil =
 				### [Node](http://nodejs.org/) & [Browserify](http://browserify.org/)
 				- Use: `require('#{opts.name}')`
 				- Install: `npm install --save #{opts.name}`
-				- CDN URL: `//wzrd.in/bundle/#{opts.name}@#{opts.version}
+				- CDN URL: `//wzrd.in/bundle/#{opts.name}@#{opts.version}`
 
 				### [Ender](http://ender.jit.su/)
 				- Use: `require('#{opts.name}')`

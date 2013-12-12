@@ -31,7 +31,7 @@ Stop wasting time syncing and updating your project's README and Package Files!
 ### [Node](http://nodejs.org/) & [Browserify](http://browserify.org/)
 - Use: `require('projectz')`
 - Install: `npm install --save projectz`
-- CDN URL: `//wzrd.in/bundle/projectz@0.2.9
+- CDN URL: `//wzrd.in/bundle/projectz@0.2.9`
 
 ### [Ender](http://ender.jit.su/)
 - Use: `require('projectz')`
