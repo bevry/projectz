@@ -6,7 +6,7 @@ module.exports = historyUtil =
 	# Get History Section
 	getHistorySection: (opts) ->
 		# Prepare
-		file = 'History.md'
+		file = 'HISTORY.md'
 		url = projectzUtil.getFileUrl(opts, file)
 
 		# Return

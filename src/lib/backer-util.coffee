@@ -46,7 +46,7 @@ module.exports = backerUtil =
 
 	getContributeText: (opts, text) ->
 		# Prepare
-		file = 'Contributing.md'
+		file = 'CONTRIBUTING.md'
 		url = projectzUtil.getFileUrl(opts, file)
 		text ?= "Discover how you can contribute by heading on over to the `#{file}` file."
 

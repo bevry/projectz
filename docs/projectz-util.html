@@ -123,8 +123,9 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	<span class="attribute">getFileUrl</span>: <span class="function"><span class="params">(opts, file)</span> -&gt;</span>
-		<span class="keyword">return</span> <span class="string">"https://github.com/<span class="subst">#{opts.username}</span>/<span class="subst">#{opts.name}</span>/blob/master/<span class="subst">#{file}</span>#files"</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>	<span class="attribute">getFileUrl</span>: <span class="function"><span class="params">(opts, filename)</span> -&gt;</span>
+		url = <span class="string">"https://github.com/<span class="subst">#{opts.username}</span>/<span class="subst">#{opts.name}</span>/blob/master/<span class="subst">#{filename}</span>#files"</span>
+		<span class="keyword">return</span> url</pre></div></div>
             
         </li>
         

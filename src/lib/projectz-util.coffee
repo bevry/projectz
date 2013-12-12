@@ -9,8 +9,9 @@ module.exports = projectzUtil =
 		return person.markdown or person.text or person
 
 	# Get File URL
-	getFileUrl: (opts, file) ->
-		return "https://github.com/#{opts.username}/#{opts.name}/blob/master/#{file}#files"
+	getFileUrl: (opts, filename) ->
+		url = "https://github.com/#{opts.username}/#{opts.name}/blob/master/#{filename}#files"
+		return url
 
 	# Get Function Named
 	# e.g. {getMitLicense,getLicenses} with 'mit' returns getMitLicense

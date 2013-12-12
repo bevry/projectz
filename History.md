@@ -1,5 +1,9 @@
 # History
 
+- v0.2.8 December 12, 2013
+	- Changed `HISTORY.md` and `CONTRIBUTING.md` URLs and names to always be uppercase
+	- Added [wzrd.in](http://wzrd.in/) CDN URL to the Node/Browserify install section
+
 - v0.2.7 November 25, 2013
 	- Updated dependencies
 
