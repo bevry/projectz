@@ -28,14 +28,9 @@ Stop wasting time syncing and updating your project's README and Package Files!
 
 ## Install
 
-### [Node](http://nodejs.org/) & [Browserify](http://browserify.org/)
+### [Node](http://nodejs.org/)
 - Use: `require('projectz')`
 - Install: `npm install --save projectz`
-- CDN URL: `//wzrd.in/bundle/projectz@0.2.9`
-
-### [Ender](http://ender.jit.su/)
-- Use: `require('projectz')`
-- Install: `ender add projectz`
 
 <!-- /INSTALL -->
 
@@ -117,6 +112,10 @@ The special fields are as so:
 	bugs:
 		url: "https://github.com/bevry/projectz/issues"
 	
+	# Whether the project can run on the client-side in web browsers
+	# If the component or bower package information is set, then this becomes true automatically
+	browsers: true
+
 	# Project's badges for use in the readme files
 	badges:
 		travis: true
@@ -142,18 +141,23 @@ It does this by reading them, and replacing comment tags with the approriate dat
 
 The following comment tags are supported:
 
-- `<!-- TITLE -->`
-- `<!-- BADGES -->`
-- `<!-- DESCRIPTION -->`
-- `<!-- INSTALL -->`
-- `<!-- HISTORY -->`
-- `<!-- CONTRIBUTE -->`
-- `<!-- BACKERS -->`
-- `<!-- LICENSE -->`
+- `<!-- TITLE -->` — outputs the package's `title` field
+- `<!-- BADGES -->` — outputs the badges you have enabled from your package's `badges` field
+- `<!-- DESCRIPTION -->` — outputs the package's `description` field
+- `<!-- INSTALL -->` — supports installation instructions for:
+	- npm (if the `package.json` file exists)
+	- browserify, ender (if the `package.json` file exists and the `browsers` field is truthy)
+	- bower (if the `bower.json` file exists)
+	- component (if the `component.json` file exists)
+- `<!-- HISTORY -->` — outputs a link to the `HISTORY.md` file
+- `<!-- CONTRIBUTE -->` — outputs a link to the `CONTRIBUTE.md` file
+- `<!-- BACKERS -->` — outputs the information from the `sponsors` field, as well as any sponsor type badges
+- `<!-- LICENSE -->` — outputs a summary of the license information, and a link to the `LICENSE.md`
 
 As well as these comment tags for updating entire files:
-- `<!-- LICENSEFILE -->`
-- `<!-- BACKERSFILE -->`
+
+- `<!-- LICENSEFILE -->` — outputs the complete license information
+- `<!-- BACKERSFILE -->` — same as `<!-- BACKERS -->` but made for an individual file instead
 
 As an example, here is a a basic `README.md` file:
 
@@ -161,8 +165,10 @@ As an example, here is a a basic `README.md` file:
 	<!-- BADGES -->
 	<!-- DESCRIPTION -->
 	<!-- INSTALL -->
+	
 	## Usage
 	Usage instructions go here
+	
 	<!-- HISTORY -->
 	<!-- CONTRIBUTE -->
 	<!-- BACKERS -->

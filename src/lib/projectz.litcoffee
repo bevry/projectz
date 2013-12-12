@@ -331,6 +331,10 @@ By first merging in all the package data together into the enhanced data
 				@dataForPackagesMerged.packages[name] = @dataForPackages.packages?[name] ? value?
 				return true
 
+Fallback browsers field, by checking if `component` or `bower` package information exists
+
+			@dataForPackagesMerged.browsers ?= true  if @dataForPackagesMerged.packages.component or @dataForPackagesMerged.packages.bower
+
 Fallback demo field, by scanning homepage
 
 			@dataForPackagesMerged.homepage ?= @dataForPackagesMerged.homepage

@@ -6,7 +6,15 @@ module.exports = installUtil =
 		if opts.packages.package
 			result += """
 				\n
-				### [Node](http://nodejs.org/) & [Browserify](http://browserify.org/)
+				### [Node](http://nodejs.org/)
+				- Use: `require('#{opts.name}')`
+				- Install: `npm install --save #{opts.name}`
+				"""
+
+		if opts.packages.package and opts.browsers
+			result += """
+				\n
+				### [Browserify](http://browserify.org/)
 				- Use: `require('#{opts.name}')`
 				- Install: `npm install --save #{opts.name}`
 				- CDN URL: `//wzrd.in/bundle/#{opts.name}@#{opts.version}`

@@ -1,5 +1,9 @@
 # History
 
+- v0.3.0 December 12, 2013
+	- Client-side install instructions will only show if `browser` property is truthy
+	- Added new `browser` property that will default to true if `bower` or `component` packages are defined
+
 - v0.2.10 December 12, 2013
 	- Moved `docco` from `dependencies` into `devDependencies` where it belongs
 
