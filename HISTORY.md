@@ -1,5 +1,8 @@
 # History
 
+- v0.2.10 December 12, 2013
+	- Moved `docco` from `dependencies` into `devDependencies` where it belongs
+
 - v0.2.9 December 12, 2013
 	- Fixed CDN URL highlighting
 
