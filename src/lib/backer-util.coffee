@@ -39,7 +39,7 @@ module.exports = backerUtil =
 			result += "\n#{backerUtil.getContributeText(opts)}"
 		else
 			result += "These amazing people have contributed code to this project:\n\n"
-			result += '- '+(projectzUtil.getPersonText(contributor)+" - [view contributions](https://github.com/#{opts.repo}/commits?author=#{contributor.username})"  for contributor in opts.contributors).join('\n- ')
+			result += '- '+(projectzUtil.getPersonText(contributor)+" — [view contributions](https://github.com/#{opts.repo}/commits?author=#{contributor.username})"  for contributor in opts.contributors).join('\n— ')
 			result += "\n\n#{backerUtil.getContributeText(opts, 'Become a contributor!')}"
 
 		return result

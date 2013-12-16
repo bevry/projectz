@@ -214,7 +214,7 @@ No sponsors yet! Will you be the first?
 
 These amazing people have contributed code to this project:
 
-- Benjamin Lupton <b@lupton.cc> (https://github.com/balupton) - [view contributions](https://github.com/bevry/projectz/commits?author=balupton)
+- [Benjamin Lupton](https://github.com/balupton) <b@lupton.cc> — [view contributions](https://github.com/bevry/projectz/commits?author=balupton)
 
 [Become a contributor!](https://github.com/bevry/projectz/blob/master/CONTRIBUTING.md#files)
 
