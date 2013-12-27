@@ -7,7 +7,7 @@
 	version: "2.1.4"
 	license: "MIT"
 	description: "Execute a function ambidextrously (normalizes the differences between synchronous and asynchronous functions). Useful for treating synchronous functions as asynchronous functions (like supporting both synchronous and asynchronous event definitions automatically)."
-	keywords: "keywords, for, ambi"
+	keywords: "sync,async,fire,exec,execute,ambidextrous,flow"
 	authors: """
 		Bevry Pty Ltd <us@bevry.me> (http://bevry.me)
 		"""
@@ -29,13 +29,13 @@
 		"joe-reporter-console": "~1.2.0"
 		"chai": "~1.7.2"
 	engines:
-		node: ">0.4"
+		node: ">=0.8"
 	directories:
 		lib: './out/lib'
 	scripts:
 		preinstall: "node ./cyclic.js"
 		test: "node ./out/text/everything-test.js"
-	main: "./out/ambi.js"
+	main: "./out/lib/ambi.js"
 
 	# auto detected and enhanced
 	# - homepage
