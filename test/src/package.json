@@ -4,20 +4,17 @@
   "description": "Execute a function ambidextrously (normalizes the differences between synchronous and asynchronous functions). Useful for treating synchronous functions as asynchronous functions (like supporting both synchronous and asynchronous event definitions automatically).",
   "homepage": "https://github.com/bevry/ambi",
   "keywords": [
-    "sync",
-    "async",
-    "fire",
-    "exec",
-    "execute",
-    "ambidextrous",
-    "flow"
+    "keywords",
+    " for",
+    " ambi"
   ],
   "author": "Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
   "maintainers": [
     "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
   ],
   "contributors": [
-    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
+    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)",
+    "sfrdmn (https://github.com/sfrdmn)"
   ],
   "bugs": {
     "url": "https://github.com/bevry/ambi/issues"
@@ -26,9 +23,11 @@
     "type": "git",
     "url": "http://github.com/bevry/ambi.git"
   },
-  "license": "MIT",
+  "license": {
+    "type": "MIT"
+  },
   "engines": {
-    "node": ">=0.8"
+    "node": ">0.4"
   },
   "dependencies": {
     "typechecker": "~2.0.6"
@@ -46,5 +45,5 @@
     "preinstall": "node ./cyclic.js",
     "test": "node ./out/test/everything-test.js"
   },
-  "main": "./out/lib/ambi.js"
+  "main": "./out/ambi.js"
 }

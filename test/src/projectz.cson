@@ -2,6 +2,7 @@
 	# =================================
 	# META
 
+	title: "Ambi"
 	name: "ambi"
 	repo: "bevry/ambi"
 	version: "2.1.4"
@@ -9,8 +10,7 @@
 	description: "Execute a function ambidextrously (normalizes the differences between synchronous and asynchronous functions). Useful for treating synchronous functions as asynchronous functions (like supporting both synchronous and asynchronous event definitions automatically)."
 	keywords: "keywords, for, ambi"
 	authors: """
-		2013+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)
-		2011-2012 Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)
+		Bevry Pty Ltd <us@bevry.me> (http://bevry.me)
 		"""
 	maintainers: """
 		Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)
@@ -21,6 +21,7 @@
 		gittip: 'bevry'
 		flattr: '344188/balupton-on-Flattr'
 		paypal: 'QB8GQPZAH84N6'
+		daviddm: true
 	dependencies:
 		"typechecker": "~2.0.6"
 	devDependencies:
