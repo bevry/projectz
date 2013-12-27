@@ -60,9 +60,9 @@
   "badges": {
     "travis": true,
     "npm": true,
+    "daviddm": true,
     "gittip": "bevry",
     "flattr": "344188/balupton-on-Flattr",
-    "paypal": "QB8GQPZAH84N6",
-    "daviddm": true
+    "paypal": "QB8GQPZAH84N6"
   }
 }
