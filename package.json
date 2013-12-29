@@ -51,7 +51,7 @@
   },
   "main": "./out/lib/projectz.js",
   "scripts": {
-    "test": "cd test/src && ../../bin/projectz compile",
+    "test": "bin/projectz compile -p test/src",
     "start": "node ./node_modules/coffee-script/bin/cake watch"
   },
   "bin": {

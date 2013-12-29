@@ -121,6 +121,7 @@ The special fields are as so:
 	badges:
 		travis: true
 		npm: true
+		daviddm: true
 		gittip: true
 		flattr: "344188/balupton-on-Flattr"
 		paypal: "QB8GQPZAH84N6"
