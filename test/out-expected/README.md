@@ -1,38 +1,21 @@
-<!-- TITLE/ -->
-# Ambi
-<!-- /TITLE -->
+<!-- TITLE -->
 
 <!-- BADGES/ -->
-[![Build Status](https://secure.travis-ci.org/bevry/ambi.png?branch=master)](http://travis-ci.org/bevry/ambi "Check this project's build status on TravisCI")
-[![NPM version](https://badge.fury.io/js/ambi.png)](https://npmjs.org/package/ambi "View this project on NPM")
-[![Gittip donate button](http://badgr.co/gittip/bevry.png)](https://www.gittip.com/bevry/ "Donate weekly to this project using Gittip")
-[![Flattr donate button](https://raw.github.com/balupton/flattr-buttons/master/badge-89x18.gif)](http://flattr.com/thing/344188/balupton-on-Flattr "Donate monthly to this project using Flattr")
-[![PayPayl donate button](https://www.paypalobjects.com/en_AU/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6 "Donate once-off to this project using Paypal")
+
+[![Build Status](http://img.shields.io/travis-ci/bevry/ambi.png?branch=master)](http://travis-ci.org/bevry/ambi "Check this project's build status on TravisCI")
+[![Dependency Status](https://david-dm.org/bevry/ambi.png)](https://david-dm.org/bevry/ambi)
+[![Gittip donate button](http://img.shields.io/gittip/bevry.png)](https://www.gittip.com/bevry/ "Donate weekly to this project using Gittip")
+[![Flattr donate button](http://img.shields.io/flattr/donate.png?color=yellow)](http://flattr.com/thing/344188/balupton-on-Flattr "Donate monthly to this project using Flattr")
+[![PayPayl donate button](http://img.shields.io/paypal/donate.png?color=yellow)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6 "Donate once-off to this project using Paypal")
+
 <!-- /BADGES -->
 
+
 <!-- DESCRIPTION/ -->
+
 Execute a function ambidextrously (normalizes the differences between synchronous and asynchronous functions). Useful for treating synchronous functions as asynchronous functions (like supporting both synchronous and asynchronous event definitions automatically).
+
 <!-- /DESCRIPTION -->
-
-<!-- INSTALL/ -->
-## Install
-
-### [Node](http://nodejs.org/), [Browserify](http://browserify.org/)
-- Use: `require('ambi')`
-- Install: `npm install --save ambi`
-
-### [Ender](http://ender.jit.su/)
-- Use: `require('ambi')`
-- Install: `ender add ambi`
-
-### [Component](http://github.com/component/component)
-- Use: `require('ambi')`
-- Install: `component install bevry/ambi`
-
-### [Bower](http://bower.io/)
-- Use: `require('ambi')`
-- Install: `bower install ambi`
-<!-- /INSTALL -->
 
 
 ## Usage
@@ -83,14 +66,72 @@ console.log(result); // setTimeout - just like normal
 - Ambi can also introspect a different method than the one it fires, by passing `[methodToFire, methodToIntrospect]` as the `method` argument
 
 
+<!-- INSTALL/ -->
+
+## Install
+
+### [Node](http://nodejs.org/)
+- Use: `require('ambi')`
+- Install: `npm install --save ambi`
+
+<!-- /INSTALL -->
+
+
 <!-- HISTORY/ -->
+
 ## History
-[You can discover the version history inside the `History.md` file.](https://github.com/bevry/ambi/blob/master/History.md#files) file
+[Discover the change history by heading on over to the `HISTORY.md` file.](https://github.com/bevry/ambi/blob/master/HISTORY.md#files)
+
 <!-- /HISTORY -->
 
+
+<!-- CONTRIBUTE/ -->
+
+## Contribute
+
+[Discover how you can contribute by heading on over to the `CONTRIBUTING.md` file.](https://github.com/bevry/ambi/blob/master/CONTRIBUTING.md#files)
+
+<!-- /CONTRIBUTE -->
+
+
+<!-- BACKERS/ -->
+
+## Backers
+
+### Maintainers
+
+These amazing people are maintaining this project:
+
+- Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)
+
+### Sponsors
+
+No sponsors yet! Will you be the first?
+
+[![Gittip donate button](http://img.shields.io/gittip/bevry.png)](https://www.gittip.com/bevry/ "Donate weekly to this project using Gittip")
+[![Flattr donate button](http://img.shields.io/flattr/donate.png?color=yellow)](http://flattr.com/thing/344188/balupton-on-Flattr "Donate monthly to this project using Flattr")
+[![PayPayl donate button](http://img.shields.io/paypal/donate.png?color=yellow)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6 "Donate once-off to this project using Paypal")
+
+### Contributors
+
+These amazing people have contributed code to this project:
+
+- [Benjamin Lupton](https://github.com/balupton) <b@lupton.cc> — [view contributions](https://github.com/bevry/ambi/commits?author=balupton)
+- [sfrdmn](https://github.com/sfrdmn) — [view contributions](https://github.com/bevry/ambi/commits?author=sfrdmn)
+
+[Become a contributor!](https://github.com/bevry/ambi/blob/master/CONTRIBUTING.md#files)
+
+<!-- /BACKERS -->
+
+
 <!-- LICENSE/ -->
+
 ## License
-Licensed under the incredibly [permissive](http://en.wikipedia.org/wiki/Permissive_free_software_licence) [MIT License](http://creativecommons.org/licenses/MIT/)
-<br/>Copyright © 2013+ [Bevry Pty Ltd](http://bevry.me)
-<br/>Copyright © 2011-2012 [Benjamin Arthur Lupton](http://balupton.com)
+
+Licensed under the incredibly [permissive](http://en.wikipedia.org/wiki/Permissive_free_software_licence) [MIT license](http://creativecommons.org/licenses/MIT/)
+
+Copyright &copy; Bevry Pty Ltd <us@bevry.me> (http://bevry.me)
+
 <!-- /LICENSE -->
+
+
