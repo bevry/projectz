@@ -26,17 +26,17 @@ joe.suite 'projectz-compile', (suite,test) ->
 		safeps.spawnCommand 'node', command, {output:true}, (err) ->
 			return done(err) if err
 
-            # Check that the compiled files match correctly.
+			# Check that the compiled files match correctly.
 			suite 'files', (suite,test) ->
 				for file in fs.readdirSync(expectPath)
 					# Ensure the file context is kept across the asyncronous calls.
 					((file) ->
 						test file, (done) ->
 							# Load the expected source.
-							fs.readFile pathUtil.join(expectPath, file), {encoding:'utf8'}, (err, expected) ->
+							fs.readFile pathUtil.join(expectPath, file), 'utf8', (err, expected) ->
 								return done(err)  if err
 								# Load the actual source.
-								fs.readFile pathUtil.join(srcPath, file), {encoding:'utf8'}, (err, actual) ->
+								fs.readFile pathUtil.join(srcPath, file), 'utf8', (err, actual) ->
 									return done(err)  if err
 									expect(actual).to.equal(expected)
 									done()
