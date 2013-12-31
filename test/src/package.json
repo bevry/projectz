@@ -17,7 +17,8 @@
     "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
   ],
   "contributors": [
-    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
+    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)",
+    "sfrdmn (https://github.com/sfrdmn)"
   ],
   "bugs": {
     "url": "https://github.com/bevry/ambi/issues"
@@ -26,7 +27,9 @@
     "type": "git",
     "url": "http://github.com/bevry/ambi.git"
   },
-  "license": "MIT",
+  "license": {
+    "type": "MIT"
+  },
   "engines": {
     "node": ">=0.8"
   },

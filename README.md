@@ -10,6 +10,7 @@
 
 [![Build Status](http://img.shields.io/travis-ci/bevry/projectz.png?branch=master)](http://travis-ci.org/bevry/projectz "Check this project's build status on TravisCI")
 [![NPM version](http://badge.fury.io/js/projectz.png)](https://npmjs.org/package/projectz "View this project on NPM")
+[![Dependency Status](https://david-dm.org/bevry/projectz.png)](https://david-dm.org/bevry/projectz)
 [![Gittip donate button](http://img.shields.io/gittip/bevry.png)](https://www.gittip.com/bevry/ "Donate weekly to this project using Gittip")
 [![Flattr donate button](http://img.shields.io/flattr/donate.png?color=yellow)](http://flattr.com/thing/344188/balupton-on-Flattr "Donate monthly to this project using Flattr")
 [![PayPayl donate button](http://img.shields.io/paypal/donate.png?color=yellow)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6 "Donate once-off to this project using Paypal")
@@ -120,6 +121,7 @@ The special fields are as so:
 	badges:
 		travis: true
 		npm: true
+		daviddm: true
 		gittip: true
 		flattr: "344188/balupton-on-Flattr"
 		paypal: "QB8GQPZAH84N6"

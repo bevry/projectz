@@ -53,7 +53,7 @@
   },
   "main": "./out/lib/projectz.js",
   "scripts": {
-    "test": "echo 'no tests yet'",
+    "test": "bin/projectz compile -p test/src",
     "start": "node ./node_modules/coffee-script/bin/cake watch"
   },
   "bin": {
@@ -62,6 +62,7 @@
   "badges": {
     "travis": true,
     "npm": true,
+    "daviddm": true,
     "gittip": "bevry",
     "flattr": "344188/balupton-on-Flattr",
     "paypal": "QB8GQPZAH84N6"

@@ -21,6 +21,23 @@ module.exports = badgeUtil =
 				[![NPM version](http://badge.fury.io/js/#{opts.name}.png)](https://npmjs.org/package/#{opts.name} "View this project on NPM")
 				"""
 
+		# Get David DM
+		daviddm: (opts={}) ->
+			# Check
+			return ''  if !opts.badges.daviddm
+
+			# Use the repo value, if it's available, and daviddm is simply "true".
+			if opts.badges.daviddm is true and (opts.repo or false)
+				url = "https://david-dm.org/#{opts.repo}"
+			else
+				# Otherwise, assume it's the github repository name.
+				url = "https://david-dm.org/#{opts.badges.daviddm}"
+
+			# Return
+			return """
+				[![Dependency Status](#{url}.png)](#{url})
+				"""
+
 	donationBadges:
 		# Get Gittip Badge
 		gittip: (opts={}) ->
