@@ -21,7 +21,7 @@ module.exports = badgeUtil =
 				[![NPM version](http://badge.fury.io/js/#{opts.name}.png)](https://npmjs.org/package/#{opts.name} "View this project on NPM")
 				"""
 
-		# Get David DM Badge
+		# Get David DM Dependencies Badge
 		david: (opts={}) ->
 			# Check
 			return ''  if !opts.badges.david or (opts.badges.david is true and !opts.repo)
@@ -37,6 +37,24 @@ module.exports = badgeUtil =
 			# Return
 			return """
 				[![Dependency Status](#{url}.png)](#{url})
+				"""
+
+		# Get David DM Dev Dependencies Badge
+		daviddev: (opts={}) ->
+			# Check
+			return ''  if !opts.badges.daviddev or (opts.badges.daviddev is true and !opts.repo)
+
+			# Custom Value
+			if opts.badges.daviddev isnt true
+				url = "https://david-dm.org/#{opts.badges.daviddev}"
+
+			# Repo Value
+			else
+				url = "https://david-dm.org/#{opts.repo}"
+
+			# Return
+			return """
+				[![Development Dependency Status](#{url}/dev-status.png)](#{url}#info=devDependencies)
 				"""
 
 	donationBadges:

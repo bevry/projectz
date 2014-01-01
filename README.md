@@ -11,6 +11,7 @@
 [![Build Status](http://img.shields.io/travis-ci/bevry/projectz.png?branch=master)](http://travis-ci.org/bevry/projectz "Check this project's build status on TravisCI")
 [![NPM version](http://badge.fury.io/js/projectz.png)](https://npmjs.org/package/projectz "View this project on NPM")
 [![Dependency Status](https://david-dm.org/bevry/projectz.png)](https://david-dm.org/bevry/projectz)
+[![Development Dependency Status](https://david-dm.org/bevry/projectz/dev-status.png)](https://david-dm.org/bevry/projectz#info=devDependencies)
 [![Gittip donate button](http://img.shields.io/gittip/bevry.png)](https://www.gittip.com/bevry/ "Donate weekly to this project using Gittip")
 [![Flattr donate button](http://img.shields.io/flattr/donate.png?color=yellow)](http://flattr.com/thing/344188/balupton-on-Flattr "Donate monthly to this project using Flattr")
 [![PayPayl donate button](http://img.shields.io/paypal/donate.png?color=yellow)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6 "Donate once-off to this project using Paypal")
@@ -119,11 +120,29 @@ The special fields are as so:
 
 	# Project's badges for use in the readme files
 	badges:
+		# Travis CI Badge
+		# If not set, fallbacks to true if the `.travis.yml` file exists
 		travis: true
+
+		# NPM Badge
+		# If not set, fallbacks to true if the `package.json` file exists
 		npm: true
+
+		# David DM Dependency Badge
+		# If not set, fallbacks to true if the `package.json` file exists
 		david: true
-		gittip: true
+
+		# David DM Dev Dependency Badge
+		# If not set, fallbacks to the David DM Dependency Badge value
+		daviddev: true
+
+		# Gittip Badge
+		gittip: "balupton"
+
+		# Flattr Badge
 		flattr: "344188/balupton-on-Flattr"
+
+		# Paypal Badge
 		paypal: "QB8GQPZAH84N6"
 
 }

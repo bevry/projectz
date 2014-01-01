@@ -1,5 +1,9 @@
 # History
 
+- v0.3.4 January 01, 2014
+	- Added [david-dm](https://david-dm.org/) dev dependency badge support
+	- Automatic badge detection for `daviddev`
+
 - v0.3.3 January 01, 2014
 	- Added [david-dm](https://david-dm.org/) badge support
 		- Thanks to [Rob Loach](https://github.com/RobLoach) for [pull request #21](https://github.com/bevry/projectz/pull/21)
