@@ -1,5 +1,8 @@
 # History
 
+- v0.3.5 January 01, 2014
+	- Only show david dm badges if there actually are dependencies for that badge
+
 - v0.3.4 January 01, 2014
 	- Added [david-dm](https://david-dm.org/) dev dependency badge support
 	- Automatic badge detection for `daviddev`

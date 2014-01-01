@@ -130,10 +130,12 @@ The special fields are as so:
 
 		# David DM Dependency Badge
 		# If not set, fallbacks to true if the `package.json` file exists
+		# Will only run if dependencies is set
 		david: true
 
 		# David DM Dev Dependency Badge
 		# If not set, fallbacks to the David DM Dependency Badge value
+		# Will only run if dev dependencies is set
 		daviddev: true
 
 		# Gittip Badge

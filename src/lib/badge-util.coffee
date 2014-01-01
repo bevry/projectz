@@ -24,7 +24,11 @@ module.exports = badgeUtil =
 		# Get David DM Dependencies Badge
 		david: (opts={}) ->
 			# Check
-			return ''  if !opts.badges.david or (opts.badges.david is true and !opts.repo)
+			return ''  if !opts.badges.david or (
+				opts.badges.daviddev is true and (
+					!opts.repo or !opts.devDependencies or Object.keys(opts.devDependencies).length is 0
+				)
+			)
 
 			# Custom Value
 			if opts.badges.david isnt true
@@ -42,7 +46,11 @@ module.exports = badgeUtil =
 		# Get David DM Dev Dependencies Badge
 		daviddev: (opts={}) ->
 			# Check
-			return ''  if !opts.badges.daviddev or (opts.badges.daviddev is true and !opts.repo)
+			return ''  if !opts.badges.daviddev or (
+				opts.badges.daviddev is true and (
+					!opts.repo or !opts.dependencies or Object.keys(opts.dependencies).length is 0
+				)
+			)
 
 			# Custom Value
 			if opts.badges.daviddev isnt true
