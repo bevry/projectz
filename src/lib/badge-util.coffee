@@ -114,4 +114,4 @@ module.exports = badgeUtil =
 			results.push(result)  if result
 
 		# Return
-		return results.join('\n')
+		return results.join('&nbsp;')
