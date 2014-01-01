@@ -114,4 +114,4 @@ module.exports = badgeUtil =
 			results.push(result)  if result
 
 		# Return
-		return results.join('&nbsp;')
+		return results.join('\n')  # &nbsp; isn't rendered on github.com properly, treated just like a space
