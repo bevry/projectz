@@ -1,7 +1,7 @@
 {
   "title": "Projectz",
   "name": "projectz",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Stop wasting time syncing and updating your project's README and Package Files!",
   "homepage": "https://github.com/bevry/projectz",
   "keywords": [
@@ -12,6 +12,14 @@
     "component.json",
     "bower.json"
   ],
+  "badges": {
+    "travis": true,
+    "npm": true,
+    "david": true,
+    "gittip": "bevry",
+    "flattr": "344188/balupton-on-Flattr",
+    "paypal": "QB8GQPZAH84N6"
+  },
   "author": "2013+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
   "maintainers": [
     "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)",
@@ -43,7 +51,7 @@
     "caterpillar": "~2.0.4",
     "caterpillar-filter": "~2.0.1",
     "caterpillar-human": "~2.1.0",
-    "safefs": "~3.0.3",
+    "safefs": "~3.1.0",
     "commander": "~2.1.0",
     "typechecker": "~2.0.8"
   },
@@ -62,13 +70,5 @@
   },
   "bin": {
     "projectz": "./bin/projectz"
-  },
-  "badges": {
-    "travis": true,
-    "npm": true,
-    "daviddm": true,
-    "gittip": "bevry",
-    "flattr": "344188/balupton-on-Flattr",
-    "paypal": "QB8GQPZAH84N6"
   }
 }

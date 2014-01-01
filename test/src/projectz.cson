@@ -15,12 +15,9 @@
 		Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)
 		"""
 	badges:
-		travis: true
-		fury: true
 		gittip: 'bevry'
 		flattr: '344188/balupton-on-Flattr'
 		paypal: 'QB8GQPZAH84N6'
-		daviddm: true
 	dependencies:
 		"typechecker": "~2.0.6"
 	devDependencies:

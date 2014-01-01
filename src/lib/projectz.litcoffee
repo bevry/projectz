@@ -127,6 +127,7 @@ Apply our determined paths for readmes
 				contributing:  pathUtil.join(@cwd, 'CONTRIBUTING.md')
 				backers:       pathUtil.join(@cwd, 'BACKERS.md')
 				license:       pathUtil.join(@cwd, 'LICENSE.md')
+				travis:        pathUtil.join(@cwd, '.travis.yml')
 
 ### Log
 
@@ -330,6 +331,12 @@ By first merging in all the package data together into the enhanced data
 			eachr @dataForPackages, (value, name) =>
 				@dataForPackagesMerged.packages[name] = @dataForPackages.packages?[name] ? value?
 				return true
+
+Fallback badges, by checking if the relevant files exists
+
+			@dataForPackagesMerged.badges.travis ?= @dataForReadmes.travis?
+			@dataForPackagesMerged.badges.npm ?= @dataForPackages.package?
+			@dataForPackagesMerged.badges.david ?= @dataForPackages.package?
 
 Fallback browsers field, by checking if `component` or `bower` package information exists
 

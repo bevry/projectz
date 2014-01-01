@@ -1,5 +1,11 @@
 # History
 
+- v0.3.3 January 01, 2014
+	- Added [david-dm](https://david-dm.org/) badge support
+		- Thanks to [Rob Loach](https://github.com/RobLoach) for [pull request #21](https://github.com/bevry/projectz/pull/21)
+	- Automatic badge detection for `travis`, `npm`, and `david` badges
+	- Travis file is now regarded as a readme file
+
 - v0.3.2 December 16, 2013
 	- Formatting changes to backers listing
 
