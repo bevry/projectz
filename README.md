@@ -26,6 +26,38 @@ Stop wasting time syncing and updating your project's README and Package Files!
 
 <!-- /DESCRIPTION -->
 
+Feature summary:
+
+- Finally keep your projects data files synchronised appropriatly, supports:
+	- `package.json`
+	- `bower.json`
+	- `component.json`
+	- `jquery.json`
+- Create beautiful standardised readme files that stay in sync with your data files, supports:
+	- `README.md`
+	- `CONTRIBUTING.md`
+	- `LICENSE.md`
+	- `BACKERS.md`
+	- `HISTORY.md`
+- Automatic injection of the appropriate installation methods, supports:
+	- Node
+	- Browserify
+	- Ender
+	- Component
+	- Bower
+- Automatic injection of the appropriate badges for your project, supports:
+	- Development Badges
+		- Travis CI
+		- Fury.io NPM
+		- David DM Dependencies, and Dev Dependencies
+	- Donation Badges
+		- Gittip
+		- Flattr
+		- Paypal
+		- BitCoin
+- Keep your data and readme files up to date, supports:
+	- Pulling in your latest contributors from GitHub
+
 
 <!-- INSTALL/ -->
 
