@@ -1,5 +1,9 @@
 # History
 
+- v0.3.6 January 03, 2014
+	- Added bitcoin badge which accepts a URL via the `bitcoin` badge option
+	- Donation badges are now on their own line
+
 - v0.3.5 January 01, 2014
 	- Only show david dm badges if there actually are dependencies for that badge
 
