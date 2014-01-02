@@ -1,5 +1,8 @@
 # History
 
+- v0.3.x
+	- Updated [david-dm](https://david-dm.org/) to use the [Shields.io](http://shields.io/) theme
+
 - v0.3.6 January 03, 2014
 	- Added bitcoin badge which accepts a URL via the `bitcoin` badge option
 	- Donation badges are now on their own line
