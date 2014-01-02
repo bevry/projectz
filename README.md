@@ -55,8 +55,13 @@ Here's some of the things it can do:
 		- Flattr
 		- Paypal
 		- BitCoin
-- Keep your data and readme files up to date, supports:
+- Automatic injection of your license information, supports:
+	- MIT
+	- Dual Licenses
+	- More to come
+- Keep your data and readme files up to date with remote data, supports:
 	- Pulling in your latest contributors from GitHub
+	- Pulling in your latest financial backers from Flattr, etc (coming soon)
 
 
 <!-- INSTALL/ -->
