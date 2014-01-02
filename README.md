@@ -26,9 +26,9 @@ Stop wasting time syncing and updating your project's README and Package Files!
 
 <!-- /DESCRIPTION -->
 
-Feature summary:
+Here's some of the things it can do:
 
-- Finally keep your projects data files synchronised appropriatly, supports:
+- Keep your projects data files synchronised appropriately, supports:
 	- `package.json`
 	- `bower.json`
 	- `component.json`
