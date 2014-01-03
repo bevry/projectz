@@ -1,7 +1,8 @@
 # History
 
-- v0.3.x
+- v0.3.7 January 03, 2014
 	- Updated [david-dm](https://david-dm.org/) to use the [Shields.io](http://shields.io/) theme
+		- Thanks to [Rob Loach](https://github.com/RobLoach) for [pull request #26](https://github.com/bevry/projectz/pull/26)
 
 - v0.3.6 January 03, 2014
 	- Added bitcoin badge which accepts a URL via the `bitcoin` badge option
