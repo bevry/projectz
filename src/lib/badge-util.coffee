@@ -44,7 +44,7 @@ module.exports = badgeUtil =
 
 			# Return
 			return """
-				[![Dependency Status](#{url}.png)](#{url})
+				[![Dependency Status](#{url}.png?theme=shields.io)](#{url})
 				"""
 
 		# Get David DM Dev Dependencies Badge
@@ -66,7 +66,7 @@ module.exports = badgeUtil =
 
 			# Return
 			return """
-				[![Development Dependency Status](#{url}/dev-status.png)](#{url}#info=devDependencies)
+				[![Development Dependency Status](#{url}/dev-status.png?theme=shields.io)](#{url}#info=devDependencies)
 				"""
 
 	donationBadges:
