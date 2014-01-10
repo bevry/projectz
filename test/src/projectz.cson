@@ -18,6 +18,7 @@
 		gittip: 'bevry'
 		flattr: '344188/balupton-on-Flattr'
 		paypal: 'QB8GQPZAH84N6'
+		waffleio: true
 	dependencies:
 		"typechecker": "~2.0.6"
 	engines:

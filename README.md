@@ -93,9 +93,9 @@ Each file can serve as the master meta data file, however you can also define a 
 The special fields are as so:
 
 ``` coffee
-{	
+{
 	# Project's human readable name
-	title: "Projectz" 
+	title: "Projectz"
 
 	# Project slug name
 	name: "projectz"
@@ -107,14 +107,14 @@ The special fields are as so:
 	# Project's homepage URL
 	# If `repo`, `repository`, or `demo` is set, we set this automatically
 	homepage: "https://github.com/bevry/projectz"
-	
+
 	# Project's demo URL
 	# If `homepage` or  is set, we set this automatically
 	demo: "https://github.com/bevry/projectz"
-	
+
 	# Project description
 	description: "Stop wasting time syncing and updating your project's README and Package Files!"
-	
+
 	# Project keywords
 	# Can be an array or CSV string
 	keywords: "a, b, c"
@@ -141,18 +141,18 @@ The special fields are as so:
 	# Can be an array or CSV string
 	license: "MIT"  # {type:"MIT", url:"http://..."}
 	licenses: null
-	
+
 	# Project's repository details
 	# If `repo` is set, or if `homepage` is a GitHub URL, we set this automatically
 	repository:
 		type: "git"
 		url: "https://github.com/bevry/projectz.git"
-	
+
 	# Project's repository details
 	# If `repo` is set, or if `homepage` is a GitHub URL, we set this automatically
 	bugs:
 		url: "https://github.com/bevry/projectz/issues"
-	
+
 	# Whether the project can run on the client-side in web browsers
 	# If the component or bower package information is set, then this becomes true automatically
 	browsers: true
@@ -176,6 +176,11 @@ The special fields are as so:
 		# If not set, fallbacks to the David DM Dependency Badge value
 		# Will only run if dev dependencies is set
 		daviddev: true
+
+		# Waffle.io Badge
+		# If a string is provided, that will be used as the GitHub issue queue
+		# label. Otherwise, the label will default to "ready".
+		waffleio: true
 
 		# Gittip Badge
 		gittip: "balupton"
@@ -230,10 +235,10 @@ As an example, here is a a basic `README.md` file:
 	<!-- BADGES -->
 	<!-- DESCRIPTION -->
 	<!-- INSTALL -->
-	
+
 	## Usage
 	Usage instructions go here
-	
+
 	<!-- HISTORY -->
 	<!-- CONTRIBUTE -->
 	<!-- BACKERS -->
