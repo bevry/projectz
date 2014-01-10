@@ -1,4 +1,3 @@
-
 <!-- TITLE/ -->
 
 # Projectz
@@ -48,6 +47,7 @@ Here's some of the things it can do:
 	- Bower
 - Automatic injection of the appropriate badges for your project, supports:
 	- Development Badges
+		- Waffle.io
 		- Travis CI
 		- Fury.io NPM
 		- David DM Dependencies, and Dev Dependencies
