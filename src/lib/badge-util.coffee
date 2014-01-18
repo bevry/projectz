@@ -25,6 +25,19 @@ module.exports = badgeUtil =
 				[![NPM version](#{image})](#{url} "View this project on NPM")
 				"""
 
+		# Get Waffle.io Badge
+		waffleio: (opts={}) ->
+			# Check
+			return ''  if !opts.badges.waffleio or !opts.repo
+			label = if typeof opts.badges.waffleio == 'string' then opts.badges.waffleio else 'ready'
+			image = "https://badge.waffle.io/#{opts.repo}.png?label=#{label}"
+			url = "http://waffle.io/#{opts.repo}"
+
+			# Return
+			return """
+				[![Stories in Ready](#{image})](#{url})
+				"""
+
 		# Get David DM Dependencies Badge
 		david: (opts={}) ->
 			# Check
