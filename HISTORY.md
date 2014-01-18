@@ -1,5 +1,8 @@
 # History
 
+- v0.3.x
+	- Added [waffle.io](http://waffle.io) badge
+
 - v0.3.7 January 03, 2014
 	- Updated [david-dm](https://david-dm.org/) to use the [Shields.io](http://shields.io/) theme
 		- Thanks to [Rob Loach](https://github.com/RobLoach) for [pull request #26](https://github.com/bevry/projectz/pull/26)
