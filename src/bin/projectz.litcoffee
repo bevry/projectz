@@ -51,13 +51,13 @@ Load the the files for the new project
 
 			logger.log('info', 'Loading changes')
 			project.load (err) ->
-				return logger.err(err)  if err
+				return logger.log('err', err.stack)  if err
 				logger.log('info', 'Loaded changes')
 
 And apply the changes
 
 				project.save (err) ->
-					return logger.err(err)  if err
+					return logger.log('err', err.stack)  if err
 					logger.log('info', 'Saved changes')
 					# exit gracefully
 

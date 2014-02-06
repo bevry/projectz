@@ -1,7 +1,14 @@
 # History
 
-- v0.3.x
-	- Added [waffle.io](http://waffle.io) badge
+- v0.3.10 February 6, 2014
+	- Added [Waffle.io](http://waffle.io) badge
+	- Added Wishlist badge
+
+- v0.3.9
+	- Always show david dependency and dev dependency badges if they are enabled, rather than disabling them if there are no dependencies or dev dependencies
+
+- v0.3.8
+	- Cleaner badge determination
 
 - v0.3.7 January 03, 2014
 	- Updated [david-dm](https://david-dm.org/) to use the [Shields.io](http://shields.io/) theme
