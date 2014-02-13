@@ -11,6 +11,14 @@ module.exports = installUtil =
 				- Install: `npm install --save #{opts.name}`
 				"""
 
+		if opts.name.indexOf('docpad-plugin-') == 0
+			pluginName = opts.name.substring(14)
+			result += """
+				\n
+				### [DocPad](http://docpad.org/)
+				- Install: `docpad install #{pluginName}`
+				"""
+
 		if opts.packages.package and opts.browsers
 			result += """
 				\n
