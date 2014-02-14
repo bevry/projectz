@@ -11,7 +11,7 @@ module.exports = installUtil =
 				- Install: `npm install --save #{opts.name}`
 				"""
 
-		if opts.name.indexOf('docpad-plugin-') == 0
+		if opts.name.indexOf('docpad-plugin-') is 0
 			pluginName = opts.name.substring(14)
 			result += """
 				\n
