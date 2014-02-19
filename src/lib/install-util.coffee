@@ -3,7 +3,17 @@ module.exports = installUtil =
 	getInstallInstructions: (opts) ->
 		result = "## Install"
 
-		if opts.packages.package
+		# DocPad
+		if opts.name.indexOf('docpad-plugin-') is 0
+			pluginName = opts.name.substring(14)
+			result += """
+				\n
+				### [DocPad](http://docpad.org/)
+				- Install: `docpad install #{pluginName}`
+				"""
+
+		# Node
+		else if opts.packages.package
 			result += """
 				\n
 				### [Node](http://nodejs.org/)
