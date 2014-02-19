@@ -74,7 +74,7 @@ console.log(result); // setTimeout - just like normal
 
 ## Install
 
-### [Node](http://nodejs.org/)
+### [NPM](http://npmjs.org/)
 - Use: `require('ambi')`
 - Install: `npm install --save ambi`
 

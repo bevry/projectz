@@ -1,13 +1,17 @@
 # History
 
+- v0.3.11 February 19, 2014
+	- Added [DocPad](http://docpad.org) plugin install instructions
+	- Added support for the `browser` field, see readme
+
 - v0.3.10 February 6, 2014
 	- Added [Waffle.io](http://waffle.io) badge
 	- Added Wishlist badge
 
-- v0.3.9
+- v0.3.9 Unknown
 	- Always show david dependency and dev dependency badges if they are enabled, rather than disabling them if there are no dependencies or dev dependencies
 
-- v0.3.8
+- v0.3.8 Unknown
 	- Cleaner badge determination
 
 - v0.3.7 January 03, 2014

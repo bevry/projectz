@@ -23,21 +23,21 @@ module.exports = installUtil =
 					- Use: `require('#{opts.name}')`
 					- Install: `npm install --save #{opts.name}`
 					"""
-			
+
 				# Browser
-				if opts.browsers or opts.browser
+				if opts.browsers
 					result += """
 						\n
 						### [Browserify](http://browserify.org/)
 						- Use: `require('#{opts.name}')`
 						- Install: `npm install --save #{opts.name}`
 						- CDN URL: `//wzrd.in/bundle/#{opts.name}@#{opts.version}`
-		
+
 						### [Ender](http://ender.jit.su/)
 						- Use: `require('#{opts.name}')`
 						- Install: `ender add #{opts.name}`
 						"""
-			
+
 			# Component
 			if opts.packages.component
 				result += """
@@ -46,7 +46,7 @@ module.exports = installUtil =
 					- Use: `require('#{opts.name}')`
 					- Install: `component install #{opts.repo}`
 					"""
-			
+
 			# Bower
 			if opts.packages.bower
 				result += """

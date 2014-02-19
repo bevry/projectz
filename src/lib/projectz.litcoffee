@@ -341,7 +341,7 @@ Fallback badges, by checking if the relevant files exists
 
 Fallback browsers field, by checking if `component` or `bower` package information exists
 
-			@dataForPackagesMerged.browsers ?= true  if @dataForPackagesMerged.packages.component or @dataForPackagesMerged.packages.bower
+			@dataForPackagesMerged.browsers ?= true  if @dataForPackagesMerged.browser or @dataForPackagesMerged.packages.component or @dataForPackagesMerged.packages.bower
 
 Fallback demo field, by scanning homepage
 

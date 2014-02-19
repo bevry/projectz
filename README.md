@@ -71,7 +71,7 @@ Here's some of the things it can do:
 
 ## Install
 
-### [Node](http://nodejs.org/)
+### [NPM](http://npmjs.org/)
 - Use: `require('projectz')`
 - Install: `npm install --save projectz`
 
