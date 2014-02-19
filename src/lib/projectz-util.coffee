@@ -52,7 +52,7 @@ module.exports = projectzUtil =
 		sectionName = sectionName.toUpperCase()
 
 		regex = ///
-			(
+			\n(
 				<!--\s*#{regexName}\s*-->
 				|
 				<!--\s*#{regexName}/\s*-->
@@ -62,7 +62,7 @@ module.exports = projectzUtil =
 			///gim
 
 		replace = """
-			<!-- #{sectionName}/ -->\n\n#{inject}\n\n<!-- /#{sectionName} -->\n\n\n
+			\n<!-- #{sectionName}/ -->\n\n#{inject}\n\n<!-- /#{sectionName} -->\n\n\n
 			"""
 
 		result = source.replace(regex, replace)

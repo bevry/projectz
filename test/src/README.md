@@ -1,9 +1,4 @@
-<!-- TITLE/ -->
-
-# ambi
-
-<!-- /TITLE -->
-
+<!-- TITLE -->
 
 <!-- BADGES/ -->
 
@@ -73,7 +68,6 @@ console.log(result); // setTimeout - just like normal
 	- If the synchronous method throws an error or returns an error, we'll try to call the completion callback with a single `err` argument
 	- If the synchronous method executes without error, we'll try to call the completion callback with a `err` argument equal to null, and a `result` argument equal to the returned result of the synchronous method
 - Ambi can also introspect a different method than the one it fires, by passing `[methodToFire, methodToIntrospect]` as the `method` argument
-
 
 
 <!-- INSTALL/ -->
