@@ -82,7 +82,7 @@ Here's some of the things it can do:
 
 ### Directly
 
-Once installed locally, you can use compile your project using projectz by running the following in your terminal:
+Once installed locally, you can compile your project using projectz by running the following in your terminal:
 
 ``` bash
 node ./node_modules/projectz/bin/projectz compile 
@@ -91,7 +91,7 @@ node ./node_modules/projectz/bin/projectz compile
 
 ### Automatically
 
-To make projectz more automatic, we recommended adding this command to your build tool, whatever that is.
+To make projectz more automatic, we recommended adding the direct command to your build tool.
 
 If you don't use a build tool, but do use npm, then you can add the following to your project's `package.json` file:
 
