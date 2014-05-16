@@ -78,7 +78,39 @@ Here's some of the things it can do:
 <!-- /INSTALL -->
 
 
-## Usage
+## Running Projectz
+
+### Directly
+
+Once installed locally, you can use compile your project using projectz by running the following in your terminal:
+
+``` bash
+node ./node_modules/projectz/bin/projectz compile 
+```
+
+
+### Automatically
+
+To make projectz more automatic, we recommended adding this command to your build tool, whatever that is.
+
+If you don't use a build tool, but do use npm, then you can add the following to your project's `package.json` file:
+
+```
+{
+  "scripts": {
+    "compile": "node ./node_modules/projectz/bin/projectz compile",
+    "posttest": "node ./node_modules/projectz/bin/projectz compile"
+  }
+}
+```
+
+The `compile` script here lets you use `npm run-script compile` to compile your project with projectz.
+
+The `posttest` script here automaticaly compiles your project with projectz after your tests have successfully completed, providing you use `npm test` to run your tests. This is a great place to put projectz as projectz only updates meta documents so won't affect your test, and will always run before a publish.
+
+
+
+## Configuring Projectz
 
 ### Data Files
 Projectz helps you maintain the following data files:
