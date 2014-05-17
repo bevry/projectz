@@ -1,5 +1,8 @@
 # History
 
+- v0.3.13 May 17, 2014
+	- Keep contributor cache valid for one day
+
 - v0.3.12 May 17, 2014
 	- Updated dependencies
 

@@ -40,6 +40,10 @@ Load in our other project files
 	licenseUtil = require('./license-util')
 	projectzUtil = require('./projectz-util')
 
+Define some variables we'll use commonly
+
+	oneDay = 1000*60*60*24
+
 
 ## Definition
 
@@ -203,7 +207,7 @@ Check if we have the repo data, if we don't then we should exit and chain right 
 
 If we do have a repo, then fetch the contributor data for it
 
-			fetchContributors = require('getcontributors').create(log: @log)
+			fetchContributors = require('getcontributors').create(log: @log, cache:oneDay)
 			fetchContributors.fetchContributorsFromRepos [repo], (err,result) =>
 				return next(err)  if err
 				@dataForPackagesMerged.contributors = contributors = fetchContributors.getContributors()
