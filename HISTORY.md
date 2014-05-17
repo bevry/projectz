@@ -1,5 +1,8 @@
 # History
 
+- v0.3.12 May 17, 2014
+	- Updated dependencies
+
 - v0.3.11 February 19, 2014
 	- Added [DocPad](http://docpad.org) plugin install instructions
 	- Added support for the `browser` field, see readme
