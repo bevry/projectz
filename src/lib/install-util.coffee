@@ -16,13 +16,23 @@ module.exports = installUtil =
 		else
 			# Node
 			if opts.packages.package
-				# NPM
-				result += """
-					\n
-					### [NPM](http://npmjs.org/)
-					- Use: `require('#{opts.name}')`
-					- Install: `npm install --save #{opts.name}`
-					"""
+				if opts.preferGlobal
+					commands = '`'+Object.keys(opts.bin || {}).join('` ')+'`'
+					# NPM
+					result += """
+						\n
+						### [NPM](http://npmjs.org/)
+						- Use: #{commands}
+						- Install: `npm install --global #{opts.name}`
+						"""
+				else
+					# NPM
+					result += """
+						\n
+						### [NPM](http://npmjs.org/)
+						- Use: `require('#{opts.name}')`
+						- Install: `npm install --save #{opts.name}`
+						"""
 
 				# Browser
 				if opts.browsers
