@@ -326,6 +326,7 @@ These amazing people have contributed code to this project:
 
 - [Benjamin Lupton](https://github.com/balupton) <b@lupton.cc> — [view contributions](https://github.com/bevry/projectz/commits?author=balupton)
 - [Rob Loach](https://github.com/RobLoach) <robloach@gmail.com> — [view contributions](https://github.com/bevry/projectz/commits?author=RobLoach)
+- [Zearin](https://github.com/Zearin) — [view contributions](https://github.com/bevry/projectz/commits?author=Zearin)
 
 [Become a contributor!](https://github.com/bevry/projectz/blob/master/CONTRIBUTING.md#files)
 
