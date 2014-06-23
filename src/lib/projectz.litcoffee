@@ -162,7 +162,7 @@ Reset/apply our data for the different properties
 
 Create our serial task group to allot our tasks into and once it completes continue to the next handler
 
-			tasks = new TaskGroup().once('complete', next)
+			tasks = new TaskGroup().done(next)
 
 Load readme and package data
 
@@ -229,7 +229,7 @@ Usage: `loadPaths (err) ->`
 
 Create the parallel task group and once they've all completed fire our completion callback
 
-			tasks = new TaskGroup().setConfig(concurrency:0).once('complete', next)
+			tasks = new TaskGroup().setConfig(concurrency:0).done(next)
 
 First load in the packages
 
@@ -261,7 +261,7 @@ Usage: `loadPackages paths, (err, dataForPackages) ->`
 		loadPackages: (pathsForPackages, next) ->
 			dataForPackages = {}
 
-			tasks = new TaskGroup().setConfig(concurrency:0).once 'complete', (err) ->
+			tasks = new TaskGroup().setConfig(concurrency:0).done (err) ->
 				return next(err)  if err
 				return next(null, dataForPackages)
 
@@ -290,7 +290,7 @@ Usage: `loadPackages paths, (err, dataForReadmes) ->`
 		loadReadmes: (pathsForReadmes, next) ->
 			dataForReadmes = {}
 
-			tasks = new TaskGroup().setConfig(concurrency:0).once 'complete', (err) ->
+			tasks = new TaskGroup().setConfig(concurrency:0).done (err) ->
 				return next(err)  if err
 				return next(null, dataForReadmes)
 
@@ -579,7 +579,7 @@ Usage: `save (err) ->`
 
 			log('info', "Writing changes...")
 
-			tasks = new TaskGroup().setConfig(concurrency:0).once 'complete', (err) ->
+			tasks = new TaskGroup().setConfig(concurrency:0).done (err) ->
 				return next(err)  if err
 				log('info', "Wrote changes")
 				return next()

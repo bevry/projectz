@@ -23,7 +23,7 @@ joe.suite 'projectz-compile', (suite,test) ->
 
 		# Compile with Projectz using -p to switch to the source path.
 		command = [cliPath, 'compile', '-p', srcPath]
-		safeps.spawnCommand 'node', command, {output:true}, (err) ->
+		safeps.spawnCommand 'node', command, {stdio:'inherit'}, (err) ->
 			return done(err) if err
 
 			# Check that the compiled files match correctly.

@@ -123,6 +123,7 @@ These amazing people have contributed code to this project:
 
 - [Benjamin Lupton](https://github.com/balupton) <b@lupton.cc> — [view contributions](https://github.com/bevry/ambi/commits?author=balupton)
 - [sfrdmn](https://github.com/sfrdmn) — [view contributions](https://github.com/bevry/ambi/commits?author=sfrdmn)
+- [Zearin](https://github.com/Zearin) — [view contributions](https://github.com/bevry/ambi/commits?author=Zearin)
 
 [Become a contributor!](https://github.com/bevry/ambi/blob/master/CONTRIBUTING.md#files)
 

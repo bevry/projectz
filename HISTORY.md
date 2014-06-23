@@ -1,5 +1,8 @@
 # History
 
+## v0.3.15 June 23, 2014
+- Updated dependencies
+
 ## v0.3.14 May 31, 2014
 - Add support for global install instructions
 
