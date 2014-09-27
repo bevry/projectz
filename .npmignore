@@ -11,6 +11,9 @@ components/
 bower_components/
 node_modules/
 
+# Private Files
+.env
+
 # Development Files
 .editorconfig
 .jshintrc
