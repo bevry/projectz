@@ -10,7 +10,6 @@ install: "npm install -g npm && npm install coffee-script && npm install && ./no
 before_script: "./node_modules/.bin/cake compile"
 script: "npm test"
 node_js:
-  - "0.8"
   - "0.10"
 cache:
   directories:
