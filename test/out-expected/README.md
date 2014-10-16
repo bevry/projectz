@@ -5,6 +5,7 @@
 [![Build Status](http://img.shields.io/travis-ci/bevry/ambi.png?branch=master)](http://travis-ci.org/bevry/ambi "Check this project's build status on TravisCI")
 [![NPM version](http://badge.fury.io/js/ambi.png)](https://npmjs.org/package/ambi "View this project on NPM")
 [![Stories in Ready](https://badge.waffle.io/bevry/ambi.png?label=ready)](http://waffle.io/bevry/ambi)
+[![Coverage Status](https://coveralls.io/repos/bevry/ambi/badge.png)](https://coveralls.io/r/bevry/ambi)
 [![Dependency Status](https://david-dm.org/bevry/ambi.png?theme=shields.io)](https://david-dm.org/bevry/ambi)
 [![Development Dependency Status](https://david-dm.org/bevry/ambi/dev-status.png?theme=shields.io)](https://david-dm.org/bevry/ambi#info=devDependencies)<br/>
 [![Gittip donate button](http://img.shields.io/gittip/bevry.png)](https://www.gittip.com/bevry/ "Donate weekly to this project using Gittip")
