@@ -1,5 +1,8 @@
 # History
 
+## v0.3.17 December 11, 2014
+- Fixed david badges (regression from v0.3.16)
+
 ## v0.3.16 December 11, 2014
 - Better badges
 - New npm downloads badge

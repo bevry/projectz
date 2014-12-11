@@ -60,15 +60,27 @@ module.exports = badgeUtil =
 				"""
 
 		# Get David DM Dependencies Badge
+		# @NOTE: Don't try and simply this, it is already as simply as it can get
 		david: (opts={}) ->
-			repo = opts.badges.david ? opts.repo
-
 			# Check
-			if !repo
+			if !opts.badges.david
 				return ''
+
+			# Custom Value
+			else if opts.badges.daviddev isnt true
+				repo = opts.badges.david
+
+			# Repo Value
+			else if opts.repo
+				repo = opts.repo
+
+			# No Value
 			else
-				image = "https://img.shields.io/david/#{repo}.svg"
-				url = "https://david-dm.org/#{repo}"
+				return ''
+
+			# Assign
+			image = "https://img.shields.io/david/#{repo}.svg"
+			url = "https://david-dm.org/#{repo}"
 
 			# Return
 			return """
@@ -76,15 +88,27 @@ module.exports = badgeUtil =
 				"""
 
 		# Get David DM Dev Dependencies Badge
+		# @NOTE: Don't try and simply this, it is already as simply as it can get
 		daviddev: (opts={}) ->
-			repo = opts.badges.david ? opts.repo
-
 			# Check
-			if !repo
+			if !opts.badges.daviddev
 				return ''
+
+			# Custom Value
+			else if opts.badges.daviddev isnt true
+				repo = opts.badges.daviddev
+
+			# Repo Value
+			else if opts.repo
+				repo = opts.repo
+
+			# No Value
 			else
-				image = "https://img.shields.io/david/dev/#{repo}.svg"
-				url = "https://david-dm.org/#{repo}#info=devDependencies"
+				return ''
+
+			# Assign
+			image = "https://img.shields.io/david/dev/#{repo}.svg"
+			url = "https://david-dm.org/#{repo}#info=devDependencies"
 
 			# Return
 			return """
