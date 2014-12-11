@@ -1,7 +1,7 @@
 {
   "title": "Projectz",
   "name": "projectz",
-  "version": "0.3.15",
+  "version": "0.3.16",
   "description": "Stop wasting time syncing and updating your project's README and Package Files!",
   "homepage": "https://github.com/bevry/projectz",
   "keywords": [
@@ -21,7 +21,8 @@
     "flattr": "344188/balupton-on-Flattr",
     "paypal": "QB8GQPZAH84N6",
     "bitcoin": "https://coinbase.com/checkouts/9ef59f5479eec1d97d63382c9ebcb93a",
-    "wishlist": "http://amzn.com/w/2F8TXKSNAFG4V"
+    "wishlist": "http://amzn.com/w/2F8TXKSNAFG4V",
+    "npmdownloads": true
   },
   "author": "2013+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
   "maintainers": [

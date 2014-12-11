@@ -1,5 +1,10 @@
 # History
 
+## v0.3.16 December 11, 2014
+- Better badges
+- New npm downloads badge
+- Updated dependencies
+
 ## v0.3.15 June 23, 2014
 - Updated dependencies
 
