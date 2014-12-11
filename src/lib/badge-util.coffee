@@ -28,16 +28,16 @@ module.exports = badgeUtil =
 			return """
 				[![NPM version](#{image})](#{url} "View this project on NPM")
 				"""
-		
+
 		# Get NPM Downloads Badge
 		npmdownloads: (opts={}) ->
 			# Check
-			if !opts.badges.npmdownloads
+			if !opts.badges.npmdownloads or !opts.name
 				return ''
 			else
 				image = "https://img.shields.io/npm/dm/#{opts.name}.svg"
 				url = "https://npmjs.org/package/#{opts.name}"
-			
+
 			# Return
 			return """
 				[![NPM downloads](#{image})](#{url} "View this project on NPM")
@@ -61,48 +61,34 @@ module.exports = badgeUtil =
 
 		# Get David DM Dependencies Badge
 		david: (opts={}) ->
+			repo = opts.badges.david ? opts.repo
+
 			# Check
-			if !opts.badges.david
+			if !repo
 				return ''
-
-			# Custom Value
-			else if opts.badges.david isnt true
-				url = "https://img.shields.io/david/#{opts.badges.david}.svg"
-
-			# Repo Value
-			else if opts.repo
-				url = "https://david-dm.org/#{opts.repo}"
-
-			# No Value
 			else
-				return ''
+				image = "https://img.shields.io/david/#{repo}.svg"
+				url = "https://david-dm.org/#{repo}"
 
 			# Return
 			return """
-				[![Dependency Status](#{url}.png?theme=shields.io)](#{url})
+				[![Dependency Status](#{image})](#{url})
 				"""
 
 		# Get David DM Dev Dependencies Badge
 		daviddev: (opts={}) ->
+			repo = opts.badges.david ? opts.repo
+
 			# Check
-			if !opts.badges.daviddev
+			if !repo
 				return ''
-
-			# Custom Value
-			else if opts.badges.daviddev isnt true
-				url = "https://img.shields.io/david/dev/#{opts.badges.daviddev}.svg"
-
-			# Repo Value
-			else if opts.repo
-				url = "https://david-dm.org/#{opts.repo}"
-
-			# No Value
 			else
-				return ''
+				image = "https://img.shields.io/david/dev/#{repo}.svg"
+				url = "https://david-dm.org/#{repo}#info=devDependencies"
 
 			# Return
 			return """
-				[![Development Dependency Status](#{url}/dev-status.png?theme=shields.io)](#{url}#info=devDependencies)
+				[![Dev Dependency Status](#{image})](#{url})
 				"""
 
 	donationBadges:
@@ -110,7 +96,7 @@ module.exports = badgeUtil =
 		gratipay: (opts={}) ->
 			# Prepare
 			name = (opts.badges.gratipay or opts.badges.gittip)
-			
+
 			# Check
 			if !name
 				return ''

@@ -340,6 +340,7 @@ Fallback badges, by checking if the relevant files exists
 
 			@dataForPackagesMerged.badges.travis ?= @dataForReadmes.travis?
 			@dataForPackagesMerged.badges.npm ?= @dataForPackages.package?
+			@dataForPackagesMerged.badges.npmdownloads ?= @dataForPackages.package?
 			@dataForPackagesMerged.badges.david ?= @dataForPackages.package?
 			@dataForPackagesMerged.badges.daviddev ?= @dataForPackagesMerged.badges.david
 
