@@ -7,7 +7,7 @@ module.exports = badgeUtil =
 			if !opts.badges.travis or !opts.username or !opts.name
 				return ''
 			else
-				image = "http://img.shields.io/travis-ci/#{opts.username}/#{opts.name}.png?branch=master"
+				image = "https://img.shields.io/travis/#{opts.username}/#{opts.name}/master.svg"
 				url = "http://travis-ci.org/#{opts.username}/#{opts.name}"
 
 			# Return
@@ -15,18 +15,32 @@ module.exports = badgeUtil =
 				[![Build Status](#{image})](#{url} "Check this project's build status on TravisCI")
 				"""
 
-		# Get NPM Badge
+		# Get NPM Version Badge
 		npm: (opts={}) ->
 			# Check
 			if !opts.badges.npm or !opts.name
 				return ''
 			else
-				image = "http://badge.fury.io/js/#{opts.name}.png"
+				image = "https://img.shields.io/npm/v/#{opts.name}.svg"
 				url = "https://npmjs.org/package/#{opts.name}"
 
 			# Return
 			return """
 				[![NPM version](#{image})](#{url} "View this project on NPM")
+				"""
+		
+		# Get NPM Downloads Badge
+		npmdownloads: (opts={}) ->
+			# Check
+			if !opts.badges.npmdownloads
+				return ''
+			else
+				image = "https://img.shields.io/npm/dm/#{opts.name}.svg"
+				url = "https://npmjs.org/package/#{opts.name}"
+			
+			# Return
+			return """
+				[![NPM downloads](#{image})](#{url} "View this project on NPM")
 				"""
 
 		# Get Waffle.io Badge
@@ -53,7 +67,7 @@ module.exports = badgeUtil =
 
 			# Custom Value
 			else if opts.badges.david isnt true
-				url = "https://david-dm.org/#{opts.badges.david}"
+				url = "https://img.shields.io/david/#{opts.badges.david}.svg"
 
 			# Repo Value
 			else if opts.repo
@@ -76,7 +90,7 @@ module.exports = badgeUtil =
 
 			# Custom Value
 			else if opts.badges.daviddev isnt true
-				url = "https://david-dm.org/#{opts.badges.daviddev}"
+				url = "https://img.shields.io/david/dev/#{opts.badges.daviddev}.svg"
 
 			# Repo Value
 			else if opts.repo
@@ -93,17 +107,20 @@ module.exports = badgeUtil =
 
 	donationBadges:
 		# Get Gittip Badge
-		gittip: (opts={}) ->
+		gratipay: (opts={}) ->
+			# Prepare
+			name = (opts.badges.gratipay or opts.badges.gittip)
+			
 			# Check
-			if !opts.badges.gittip
+			if !name
 				return ''
 			else
-				image = "http://img.shields.io/gittip/#{opts.badges.gittip}.png"
-				url = "https://www.gittip.com/#{opts.badges.gittip}/"
+				image = "https://img.shields.io/gratipay/#{name}.svg"
+				url = "https://www.gratipay.com/#{name}/"
 
 			# Return
 			return """
-				[![Gittip donate button](#{image})](#{url} "Donate weekly to this project using Gittip")
+				[![Gratipay donate button](#{image})](#{url} "Donate weekly to this project using Gratipay")
 				"""
 
 		# Get Flattr Badge
@@ -112,7 +129,7 @@ module.exports = badgeUtil =
 			if !opts.badges.flattr
 				return ''
 			else
-				image = "http://img.shields.io/flattr/donate.png?color=yellow"
+				image = "https://img.shields.io/badge/flattr-donate-yellow.svg"
 				url = "http://flattr.com/thing/#{opts.badges.flattr}"
 
 			# Return
@@ -126,7 +143,7 @@ module.exports = badgeUtil =
 			if !opts.badges.paypal
 				return ''
 			else
-				image = "http://img.shields.io/paypal/donate.png?color=yellow"
+				image = "https://img.shields.io/badge/paypal-donate-yellow.svg"
 				url = "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=#{opts.badges.paypal}"
 
 			# Return
@@ -140,7 +157,7 @@ module.exports = badgeUtil =
 			if !opts.badges.bitcoin
 				return ''
 			else
-				image = "http://img.shields.io/bitcoin/donate.png?color=yellow"
+				image = "https://img.shields.io/badge/bitcoin-donate-yellow.svg"
 				url = opts.badges.bitcoin
 
 			# Return
@@ -154,7 +171,7 @@ module.exports = badgeUtil =
 			if !opts.badges.wishlist
 				return ''
 			else
-				image = "http://img.shields.io/wishlist/browse.png?color=yellow"
+				image = "https://img.shields.io/badge/wishlist-donate-yellow.svg"
 				url = opts.badges.wishlist
 
 			# Return
