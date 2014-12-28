@@ -2,16 +2,17 @@
 
 <!-- BADGES/ -->
 
-[![Build Status](http://img.shields.io/travis-ci/bevry/ambi.png?branch=master)](http://travis-ci.org/bevry/ambi "Check this project's build status on TravisCI")
-[![NPM version](http://badge.fury.io/js/ambi.png)](https://npmjs.org/package/ambi "View this project on NPM")
+[![Build Status](https://img.shields.io/travis/bevry/ambi/master.svg)](http://travis-ci.org/bevry/ambi "Check this project's build status on TravisCI")
+[![NPM version](https://img.shields.io/npm/v/ambi.svg)](https://npmjs.org/package/ambi "View this project on NPM")
+[![NPM downloads](https://img.shields.io/npm/dm/ambi.svg)](https://npmjs.org/package/ambi "View this project on NPM")
 [![Stories in Ready](https://badge.waffle.io/bevry/ambi.png?label=ready)](http://waffle.io/bevry/ambi)
 [![Coverage Status](https://coveralls.io/repos/bevry/ambi/badge.png)](https://coveralls.io/r/bevry/ambi)
-[![Dependency Status](https://david-dm.org/bevry/ambi.png?theme=shields.io)](https://david-dm.org/bevry/ambi)
-[![Development Dependency Status](https://david-dm.org/bevry/ambi/dev-status.png?theme=shields.io)](https://david-dm.org/bevry/ambi#info=devDependencies)<br/>
-[![Gittip donate button](http://img.shields.io/gittip/bevry.png)](https://www.gittip.com/bevry/ "Donate weekly to this project using Gittip")
-[![Flattr donate button](http://img.shields.io/flattr/donate.png?color=yellow)](http://flattr.com/thing/344188/balupton-on-Flattr "Donate monthly to this project using Flattr")
-[![PayPayl donate button](http://img.shields.io/paypal/donate.png?color=yellow)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6 "Donate once-off to this project using Paypal")
-[![Wishlist browse button](http://img.shields.io/wishlist/browse.png?color=yellow)](http://amzn.com/w/2F8TXKSNAFG4V "Buy an item on our wishlist for us")
+[![Dependency Status](https://img.shields.io/david/bevry/ambi.svg)](https://david-dm.org/bevry/ambi)
+[![Dev Dependency Status](https://img.shields.io/david/dev/bevry/ambi.svg)](https://david-dm.org/bevry/ambi#info=devDependencies)<br/>
+[![Gratipay donate button](https://img.shields.io/gratipay/bevry.svg)](https://www.gratipay.com/bevry/ "Donate weekly to this project using Gratipay")
+[![Flattr donate button](https://img.shields.io/badge/flattr-donate-yellow.svg)](http://flattr.com/thing/344188/balupton-on-Flattr "Donate monthly to this project using Flattr")
+[![PayPayl donate button](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6 "Donate once-off to this project using Paypal")
+[![Wishlist browse button](https://img.shields.io/badge/wishlist-donate-yellow.svg)](http://amzn.com/w/2F8TXKSNAFG4V "Buy an item on our wishlist for us")
 
 <!-- /BADGES -->
 
@@ -113,10 +114,10 @@ These amazing people are maintaining this project:
 
 No sponsors yet! Will you be the first?
 
-[![Gittip donate button](http://img.shields.io/gittip/bevry.png)](https://www.gittip.com/bevry/ "Donate weekly to this project using Gittip")
-[![Flattr donate button](http://img.shields.io/flattr/donate.png?color=yellow)](http://flattr.com/thing/344188/balupton-on-Flattr "Donate monthly to this project using Flattr")
-[![PayPayl donate button](http://img.shields.io/paypal/donate.png?color=yellow)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6 "Donate once-off to this project using Paypal")
-[![Wishlist browse button](http://img.shields.io/wishlist/browse.png?color=yellow)](http://amzn.com/w/2F8TXKSNAFG4V "Buy an item on our wishlist for us")
+[![Gratipay donate button](https://img.shields.io/gratipay/bevry.svg)](https://www.gratipay.com/bevry/ "Donate weekly to this project using Gratipay")
+[![Flattr donate button](https://img.shields.io/badge/flattr-donate-yellow.svg)](http://flattr.com/thing/344188/balupton-on-Flattr "Donate monthly to this project using Flattr")
+[![PayPayl donate button](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6 "Donate once-off to this project using Paypal")
+[![Wishlist browse button](https://img.shields.io/badge/wishlist-donate-yellow.svg)](http://amzn.com/w/2F8TXKSNAFG4V "Buy an item on our wishlist for us")
 
 ### Contributors
 
@@ -139,5 +140,3 @@ Licensed under the incredibly [permissive](http://en.wikipedia.org/wiki/Permissi
 Copyright &copy; Bevry Pty Ltd <us@bevry.me> (http://bevry.me)
 
 <!-- /LICENSE -->
-
-
