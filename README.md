@@ -53,6 +53,7 @@ Here's some of the things it can do:
 		- Travis CI
 		- Fury.io NPM
 		- David DM Dependencies, and Dev Dependencies
+		- [Coveralls](http://coveralls.io)
 	- Donation Badges
 		- Gittip
 		- Flattr
@@ -216,6 +217,11 @@ The special fields are as so:
 		# If a string is provided, that will be used as the GitHub issue queue
 		# label. Otherwise, the label will default to "ready".
 		waffleio: true
+
+		# Coveralls.io Badge
+		# If a string is provided, that will be used as the label for the badge.
+		# Otherwise, the label will default to "Coverage Status".
+		coveralls: true
 
 		# Gittip Badge
 		gittip: "balupton"
