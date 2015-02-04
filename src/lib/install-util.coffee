@@ -43,7 +43,7 @@ module.exports = installUtil =
 						- Install: `npm install --save #{opts.name}`
 						- CDN URL: `//wzrd.in/bundle/#{opts.name}@#{opts.version}`
 
-						### [Ender](http://ender.jit.su/)
+						### [Ender](http://enderjs.com)
 						- Use: `require('#{opts.name}')`
 						- Install: `ender add #{opts.name}`
 						"""
