@@ -50,7 +50,7 @@ console.log(result); // 10 - just like normal
 
 // Call the asynchronous function asynchronously
 result = ambi(asyncMethod, 5, 2, function(err,result){ // ambi doesn't do anything special here
-console.log(err, result); // null, 10
+	console.log(err, result); // null, 10
 });
 console.log(result); // setTimeout - just like normal
 ```
@@ -60,14 +60,14 @@ console.log(result); // setTimeout - just like normal
 ### Notes
 
 - Ambi accepts the arguments `(method, args...)`
-- `method` is the function to execute
-- `args...` is the arguments to send to the method
-- the last argument is expected to be the completion callback
-- the completion callback is optional, but if defined, is expected to have the signature of `(err, results...)`
+	- `method` is the function to execute
+	- `args...` is the arguments to send to the method
+		- the last argument is expected to be the completion callback
+		- the completion callback is optional, but if defined, is expected to have the signature of `(err, results...)`
 - If the method has the same amount of arguments as those ambi received, then we assume it is an asynchronous method and let it handle calling of the completion callback itself
 - If the method does not have the same amount of arguments as those ambi received, then we assume it is a synchronous method and we'll call the completion callback ourselves
-- If the synchronous method throws an error or returns an error, we'll try to call the completion callback with a single `err` argument
-- If the synchronous method executes without error, we'll try to call the completion callback with a `err` argument equal to null, and a `result` argument equal to the returned result of the synchronous method
+	- If the synchronous method throws an error or returns an error, we'll try to call the completion callback with a single `err` argument
+	- If the synchronous method executes without error, we'll try to call the completion callback with a `err` argument equal to null, and a `result` argument equal to the returned result of the synchronous method
 - Ambi can also introspect a different method than the one it fires, by passing `[methodToFire, methodToIntrospect]` as the `method` argument
 
 
@@ -78,6 +78,19 @@ console.log(result); // setTimeout - just like normal
 ### [NPM](http://npmjs.org/)
 - Use: `require('ambi')`
 - Install: `npm install --save ambi`
+
+### [Browserify](http://browserify.org/)
+- Use: `require('ambi')`
+- Install: `npm install --save ambi`
+- CDN URL: `//wzrd.in/bundle/ambi@2.1.4`
+
+### [Ender](http://enderjs.com)
+- Use: `require('ambi')`
+- Install: `ender add ambi`
+
+### [Bower](http://bower.io/)
+- Use: `require('ambi')`
+- Install: `bower install ambi`
 
 <!-- /INSTALL -->
 

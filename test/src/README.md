@@ -79,6 +79,19 @@ console.log(result); // setTimeout - just like normal
 - Use: `require('ambi')`
 - Install: `npm install --save ambi`
 
+### [Browserify](http://browserify.org/)
+- Use: `require('ambi')`
+- Install: `npm install --save ambi`
+- CDN URL: `//wzrd.in/bundle/ambi@2.1.4`
+
+### [Ender](http://enderjs.com)
+- Use: `require('ambi')`
+- Install: `ender add ambi`
+
+### [Bower](http://bower.io/)
+- Use: `require('ambi')`
+- Install: `bower install ambi`
+
 <!-- /INSTALL -->
 
 
