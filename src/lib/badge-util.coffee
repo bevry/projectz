@@ -1,6 +1,19 @@
 # Define
 module.exports = badgeUtil =
 	miscBadges:
+		# Get Sauce Labs Browser Matrix
+		sauceBM: (opts={}) ->
+			# Check
+			if !opts.badges.sauceBM
+				return ''
+			else
+				image = "https://saucelabs.com/browser-matrix/#{opts.badges.sauceBM}.svg"
+				url = "https://saucelabs.com/u/#{opts.badges.sauceBM}.svg"
+			# Return
+			return """
+				[![Sauce Labs Browser Matrix](#{image})](#{url} "Check this project's browser tests on Sauce Labs")
+				"""
+
 		# Get Travis CI Badge
 		travis: (opts={}) ->
 			# Check
