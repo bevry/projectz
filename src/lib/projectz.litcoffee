@@ -270,10 +270,12 @@ Usage: `loadPackages paths, (err, dataForPackages) ->`
 					dataForPackages[key] = null
 					fsUtil.exists value, (exists) ->
 						return complete()  if exists is false
-						CSON.parseFile value, (err,data) ->
-							return complete(err)  if err
-							dataForPackages[key] = data
-							return complete()
+						result = CSON.parseFile(value)
+						return complete(result) if result instanceof Error
+
+						dataForPackages[key] = result
+						return complete()
+
 				return true
 
 Finish up
