@@ -1,5 +1,9 @@
 # History
 
+## v0.4.0 February 09, 2015
+- Removed merging of dependencies between Package.json and Bower.json
+- Added Node v0.12.0 support
+
 ## v0.3.17 December 11, 2014
 - Fixed david badges (regression from v0.3.16)
 
