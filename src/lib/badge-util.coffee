@@ -2,7 +2,7 @@
 module.exports = badgeUtil =
 	miscBadges:
 		# Get Sauce Labs Browser Matrix
-		sauceBM: (opts={}) ->
+		saucebm: (opts={}) ->
 			# Check
 			if !opts.badges.sauceBM
 				return ''
