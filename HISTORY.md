@@ -1,5 +1,8 @@
 # History
 
+## v0.4.1 February 09, 2015
+- Fixes incorrect handling of CSON.parseFile
+
 ## v0.4.0 February 09, 2015
 - Removed merging of dependencies between Package.json and Bower.json
 - Added Node v0.12.0 support
