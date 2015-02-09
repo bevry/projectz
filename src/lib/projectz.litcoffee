@@ -531,8 +531,9 @@ Create the data for the `bower.json` format
 				{
 					name:                   @dataForPackagesMerged.name
 					version:                @dataForPackagesMerged.version
-					dependencies:           @dataForPackagesMerged.dependencies
-					devDependencies:        @dataForPackagesMerged.devDependencies
+					license:                @dataForPackagesMerged.licenses?[0].type
+					description:            @dataForPackagesMerged.description
+					keywords:               @dataForPackagesMerged.keywords
 					main:                   @dataForPackagesMerged.main
 				}
 

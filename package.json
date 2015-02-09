@@ -49,7 +49,7 @@
   },
   "dependencies": {
     "extendr": "~2.1.0",
-    "cson": "~1.6.1",
+    "cson": "~2.0.0",
     "taskgroup": "~4.0.5",
     "getcontributors": "~1.3.4",
     "eachr": "~2.0.2",
