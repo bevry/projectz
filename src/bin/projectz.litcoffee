@@ -6,7 +6,7 @@ Set up our logging abilities using caterpillar [Caterpillar](https://github.com/
 
 Import our logging lbiraries
 
-	level  = if '-d' in process.argv.indexOf('-d') then 7 else 6
+	level  = if '-d' in process.argv then 7 else 6
 	logger = new (require('caterpillar').Logger)({level:level})
 	filter  = new (require('caterpillar-filter').Filter)()
 	human   = new (require('caterpillar-human').Human)()
@@ -31,6 +31,7 @@ Extract out version out of our package and apply it to commander
 Add our cwd customisation
 
 	cli.option('-p, --path [value]', "Path to the project that you wish to work with, defaults to the current working directory")
+	cli.option('-d', "Outputs verbose logging.")
 
 Add the compile command that will create a new projectz instance and compile the project
 
