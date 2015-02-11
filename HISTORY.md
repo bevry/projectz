@@ -1,5 +1,9 @@
 # History
 
+## v0.4.2 February 11, 2015
+- Fixes cmd line -d option
+- Fixes CRLF issue that occurred in the v0.4.1 npm package
+
 ## v0.4.1 February 09, 2015
 - Fixes incorrect handling of CSON.parseFile
 
