@@ -326,6 +326,7 @@ No sponsors yet! Will you be the first?
 These amazing people have contributed code to this project:
 
 - [Benjamin Lupton](https://github.com/balupton) <b@lupton.cc> — [view contributions](https://github.com/bevry/projectz/commits?author=balupton)
+- [pflannery](https://github.com/pflannery) — [view contributions](https://github.com/bevry/projectz/commits?author=pflannery)
 - [Rob Loach](https://github.com/RobLoach) <robloach@gmail.com> — [view contributions](https://github.com/bevry/projectz/commits?author=RobLoach)
 - [Zearin](https://github.com/Zearin) — [view contributions](https://github.com/bevry/projectz/commits?author=Zearin)
 
