@@ -38,7 +38,7 @@ joe.suite 'projectz-compile', (suite,test) ->
 								# Load the actual source.
 								fs.readFile pathUtil.join(srcPath, file), 'utf8', (err, actual) ->
 									return done(err)  if err
-									expect(actual.replace(/\s+/g, '')).to.equal(expected.replace(/\s+/g, ''))
+									expect(actual).to.equal(expected)
 									done()
 					)(file);
 			done()

@@ -599,7 +599,7 @@ Save package files
 				path = @pathsForPackages[name]
 				log('info', "Writing package file: #{path}")
 				tasks.addTask (complete) =>
-					data = JSON.stringify(@dataForPackagesEnhanced[name], null, '  ')
+					data = JSON.stringify(@dataForPackagesEnhanced[name], null, '  ') + '\n'
 					fsUtil.writeFile(path, data, complete)
 
 				return true
