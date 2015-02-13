@@ -1,5 +1,8 @@
 # History
 
+## v0.4.3 February 13, 2015
+- Appends new line when saving packages
+
 ## v0.4.2 February 11, 2015
 - Fixes cmd line -d option
 - Fixes CRLF issue that occurred in the v0.4.1 npm package
