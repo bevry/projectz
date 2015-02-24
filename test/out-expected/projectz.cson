@@ -1,0 +1,64 @@
+{
+	# =================================
+	# META
+
+	name: "ambi"
+	repo: "bevry/ambi"
+	version: "2.1.4"
+	license: "MIT"
+	description: "Execute a function ambidextrously (normalizes the differences between synchronous and asynchronous functions). Useful for treating synchronous functions as asynchronous functions (like supporting both synchronous and asynchronous event definitions automatically)."
+	keywords: "sync,async,fire,exec,execute,ambidextrous,flow"
+	authors: """
+		Bevry Pty Ltd <us@bevry.me> (http://bevry.me)
+		"""
+	maintainers: """
+		Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)
+		"""
+	badges:
+		gittip: 'bevry'
+		flattr: '344188/balupton-on-Flattr'
+		paypal: 'QB8GQPZAH84N6'
+		waffleio: true
+		wishlist: "http://amzn.com/w/2F8TXKSNAFG4V"
+	dependencies:
+		"typechecker": "~2.0.6"
+	engines:
+		node: ">=0.8"
+	directories:
+		lib: './out/lib'
+	scripts:
+		preinstall: "node ./cyclic.js"
+		test: "node ./out/text/everything-test.js"
+	main: "./out/lib/ambi.js"
+
+	# auto detected and enhanced
+	# - homepage
+	# - authors
+	# - maintainers
+	# - keywords
+	# - license
+	# - repository
+	# - bugs
+	# - badges
+
+	# =================================
+	# PACKAGE FILES
+
+	packages:
+		package: true
+		component:
+			dependencies:
+				"bevry/typechecker": "master"
+		bower: true
+		jquery: true
+
+	# =================================
+	# README FILES
+
+	readmes:
+		history: true
+		contributing: true
+		backers: true
+		license: true
+		readme: true
+}

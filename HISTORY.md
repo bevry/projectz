@@ -1,5 +1,9 @@
 # History
 
+## v0.5.0 February 24, 2015
+- Support multiple licenses
+	- Currently only MIT and CC-BY-4.0 are supported
+
 ## v0.4.3 February 13, 2015
 - Appends new line when saving packages
 

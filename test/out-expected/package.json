@@ -27,9 +27,16 @@
     "type": "git",
     "url": "http://github.com/bevry/ambi.git"
   },
-  "license": {
-    "type": "MIT"
-  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "scope": "code"
+    },
+    {
+      "type": "CC-BY-4.0",
+      "scope": "everything else (including content, media and design)"
+    }
+  ],
   "engines": {
     "node": ">=0.8"
   },

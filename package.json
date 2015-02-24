@@ -1,7 +1,7 @@
 {
   "title": "Projectz",
   "name": "projectz",
-  "version": "0.4.3",
+  "version": "0.5.0",
   "description": "Stop wasting time syncing and updating your project's README and Package Files!",
   "homepage": "https://github.com/bevry/projectz",
   "keywords": [
@@ -15,14 +15,14 @@
   "badges": {
     "travis": true,
     "npm": true,
+    "npmdownloads": true,
     "david": true,
     "daviddev": true,
     "gittip": "bevry",
     "flattr": "344188/balupton-on-Flattr",
     "paypal": "QB8GQPZAH84N6",
     "bitcoin": "https://coinbase.com/checkouts/9ef59f5479eec1d97d63382c9ebcb93a",
-    "wishlist": "http://amzn.com/w/2F8TXKSNAFG4V",
-    "npmdownloads": true
+    "wishlist": "http://amzn.com/w/2F8TXKSNAFG4V"
   },
   "author": "2013+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
   "maintainers": [
@@ -49,25 +49,25 @@
     "node": ">=0.4"
   },
   "dependencies": {
-    "extendr": "~2.1.0",
-    "cson": "~2.0.0",
-    "taskgroup": "~4.0.5",
-    "getcontributors": "~1.3.4",
-    "eachr": "~2.0.2",
-    "caterpillar": "~2.0.7",
-    "caterpillar-filter": "~2.0.3",
-    "caterpillar-human": "~2.1.2",
-    "safefs": "~3.1.1",
-    "commander": "~2.5.0",
-    "typechecker": "~2.0.8"
+    "extendr": "^2.1.0",
+    "cson": "^2.0.0",
+    "taskgroup": "^4.2.0",
+    "getcontributors": "^1.3.4",
+    "eachr": "^2.0.2",
+    "caterpillar": "^2.0.7",
+    "caterpillar-filter": "^2.0.3",
+    "caterpillar-human": "^2.1.2",
+    "safefs": "^3.1.1",
+    "commander": "^2.6.0",
+    "typechecker": "^2.0.8"
   },
   "devDependencies": {
-    "docco": "~0.6.3",
-    "coffee-script": "~1.8.0",
-    "chai": "~1.10.0",
-    "joe": "~1.5.0",
-    "joe-reporter-console": "~1.2.1",
-    "safeps": "~2.2.12"
+    "docco": "^0.7.0",
+    "coffee-script": "^1.9.1",
+    "chai": "^2.1.0",
+    "joe": "^1.6.0",
+    "joe-reporter-console": "^1.2.1",
+    "safeps": "^2.2.12"
   },
   "main": "./out/lib/projectz.js",
   "scripts": {

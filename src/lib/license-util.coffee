@@ -1,86 +1,116 @@
 # Import
 projectzUtil = require('./projectz-util')
 
+# -------------------------------------
+# Variables
+
+licenses =
+	'cc-by-4.0':
+		title: 'Creative Commons Attribution 4.0 International License'
+		url: 'http://creativecommons.org/licenses/by/4.0/'
+		body: 'See http://creativecommons.org/licenses/by/4.0/ for full legal text.'
+
+	'mit':
+		title: 'MIT License'
+		category: 'permissive'
+		url: 'http://opensource.org/licenses/mit-license.php'
+		body: """
+			Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+			The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+			THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+			"""
+
+categories =
+	permissive:
+		description: 'incredibly [permissive](http://en.wikipedia.org/wiki/Permissive_free_software_licence)'
+
+
+# -------------------------------------
 # Define
+
 module.exports = licenseUtil =
 	getAuthorText: (author={}) ->
 		return """
 			Copyright &copy; #{projectzUtil.getPersonText(author)}
 			"""
 
-	getLicenseText: (license) ->
-		fn = licenseUtil.sections[license.type.toLowerCase()]
-		if fn
-			return fn.call(@, license)
-		else
-			return licenseUtil.sections.unknown.call(@, license)
-
-	getLicenseFileText: (license) ->
-		fn = licenseUtil.files[license.type.toLowerCase()]
-		if fn
-			return fn.call(@, license)
-		else
-			return licenseUtil.files.unknown.call(@, license)
-
 	getAuthors: (opts) ->
 		result = ''
 
-		if opts.authors.length is 0
-			# ignore
-		else if opts.authors.length is 1
-			author = opts.authors[0]
-			result += licenseUtil.getAuthorText(author)
-		else
-			result += (licenseUtil.getAuthorText(author)  for author in opts.authors).join('\n<br/>')
+		if opts.authors.length isnt 0
+			result += '- '+(
+				for author in opts.authors
+					entry = licenseUtil.getAuthorText(author)
+			).join('\n- ')
 
 		return result
 
-	getLicenses: (opts) ->
+	# Get Descriptions for Licenses
+	getDescriptionsForLicenses: (opts) ->
 		result = ''
 
-		if opts.licenses.length is 0
-			# ignore
-		else if opts.licenses.length is 1
-			license = opts.licenses[0]
-			result += "Licensed under #{licenseUtil.getLicenseText(license)}"
-		else
-			result += "Licensed under:\n\n"
-			result += '- '+(licenseUtil.getLicenseText(license)  for license in opts.licenses).join('\n- ')
+		if opts.licenses.length isnt 0
+			result += '- '+(
+				for license in opts.licenses
+					entry = ''
+					{type, scope} = license
+					type = type.toLowerCase()
+					if licenses[type]
+						entry += 'The'
+						{title, url, category} = licenses[type]
+						categoryDescription = categories[category]?.description
+						entry += ' '+categoryDescription  if categoryDescription
+						entry += ' ['+title+']('+url+')'
+						entry += ' for '+scope  if scope
+					else
+						entry += 'The #{type} License'
+					entry
+			).join('\n- ')
 
 		return result
 
-	getLicensesFiles: (opts) ->
-		return (licenseUtil.getLicenseFileText(license)  for license in opts.licenses).join('\n\n')
+	# Get Bodies for Licenses
+	getBodiesForLicenses: (opts) ->
+		result = ''
 
-	files:
-		mit: (opts={}) ->
-			return """
-				## The MIT License
-				Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+		if opts.licenses.length isnt 0
+			result += (
+				for license in opts.licenses
+					entry = ''
+					{type, scope} = license
+					type = type.toLowerCase()
+					if licenses[type]
+						entry += 'The'
+						{title, body} = licenses[type]
+						entry = '## '+title+'\n'+body
+					else
+						entry += '## The #{type} License\nMore information possibly available through the the [Open Source Initiative License Listing](http://opensource.org/licenses/alphabetical)'
+						# @TODO build a comprhensive listing from https://spdx.org/licenses/ and http://opensource.org/licenses
+			).join('\n\n')
 
-				The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+		return result
 
-				THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-				"""
+	# Get License Introduction
+	getLicenseIntroduction: (opts={}) ->
+		# Check
+		return '' if !opts.licenses
 
-		unknown: (license) ->
-			return """
-				## #{license.type}
-				#{licenseUtil.sections.unknown.call(@, license)}
-				"""
+		# Prepare
+		result = """
+			Unless stated otherwise all works are:
 
-	sections:
-		mit: (license) ->
-			url = license.url or 'http://creativecommons.org/licenses/MIT/'
-			return """
-				the incredibly [permissive](http://en.wikipedia.org/wiki/Permissive_free_software_licence) [MIT license](#{url})
-				"""
+			#{licenseUtil.getAuthors(opts)}
 
-		unknown: (license) ->
-			if license.url
-				"[#{license.type}](#{license.url})"
-			else
-				license.type
+			and licensed under:
+
+			#{licenseUtil.getDescriptionsForLicenses(opts)}
+			"""
+
+		# Return
+		return result
+
 
 	# Get License Section
 	getLicenseSection: (opts={}) ->
@@ -91,9 +121,7 @@ module.exports = licenseUtil =
 		result = """
 			## License
 
-			#{licenseUtil.getLicenses(opts)}
-
-			#{licenseUtil.getAuthors(opts)}
+			#{licenseUtil.getLicenseIntroduction(opts)}
 			"""
 
 		# Return
@@ -108,9 +136,9 @@ module.exports = licenseUtil =
 		result = """
 			# License
 
-			#{licenseUtil.getAuthors(opts)}
+			#{licenseUtil.getLicenseIntroduction(opts)}
 
-			#{licenseUtil.getLicensesFiles(opts)}
+			#{licenseUtil.getBodiesForLicenses(opts)}
 			"""
 
 		# Return
