@@ -339,9 +339,13 @@ These amazing people have contributed code to this project:
 
 ## License
 
-Licensed under the incredibly [permissive](http://en.wikipedia.org/wiki/Permissive_free_software_licence) [MIT license](http://creativecommons.org/licenses/MIT/)
+Unless stated otherwise all works are:
 
-Copyright &copy; 2013+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)
+- Copyright &copy; 2013+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)
+
+and licensed under:
+
+- The incredibly [permissive](http://en.wikipedia.org/wiki/Permissive_free_software_licence) [MIT License](http://opensource.org/licenses/mit-license.php)
 
 <!-- /LICENSE -->
 

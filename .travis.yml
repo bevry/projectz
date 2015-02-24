@@ -1,7 +1,7 @@
-# v1.3.21 June 23, 2014
+# February 19, 2015
 # https://github.com/bevry/base
 language: node_js
-# ensure npm is the latest (handled via npm install -g npm)
+# ensure npm is the latest version (ignore node versions that can't run it)
 # ensure coffee-script is installed (needed for cake commands)
 # ensure dev dependencies are installed (handled via npm install)
 # ensure test dependencies are installed (handled via cake install)
@@ -12,6 +12,7 @@ script: "npm test"
 node_js:
   - "0.10"
   - "0.12"
+  - iojs
 cache:
   directories:
     - node_modules
