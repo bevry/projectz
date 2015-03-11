@@ -59,6 +59,22 @@ module.exports = badgeUtil =
 				[![Stories in Ready](#{image})](#{url})
 				"""
 
+		# Get Coveralls Badge
+		coveralls: (opts={}) ->
+			# Check
+			if !opts.badges.coveralls or !opts.repo
+				return ''
+
+			image = "https://coveralls.io/repos/#{opts.repo}/badge.png"
+			url = "https://coveralls.io/r/#{opts.repo}"
+			label = opts.badges.coveralls
+			label = 'Coverage Status'  if label is true
+
+			# Return
+			return """
+				[![#{label}](#{image})](#{url})
+				"""
+
 		# Get David DM Dependencies Badge
 		# @NOTE: Don't try and simply this, it is already as simply as it can get
 		david: (opts={}) ->

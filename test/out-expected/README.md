@@ -6,6 +6,7 @@
 [![NPM version](https://img.shields.io/npm/v/ambi.svg)](https://npmjs.org/package/ambi "View this project on NPM")
 [![NPM downloads](https://img.shields.io/npm/dm/ambi.svg)](https://npmjs.org/package/ambi "View this project on NPM")
 [![Stories in Ready](https://badge.waffle.io/bevry/ambi.png?label=ready)](http://waffle.io/bevry/ambi)
+[![Coverage Status](https://coveralls.io/repos/bevry/ambi/badge.png)](https://coveralls.io/r/bevry/ambi)
 [![Dependency Status](https://img.shields.io/david/bevry/ambi.svg)](https://david-dm.org/bevry/ambi)
 [![Dev Dependency Status](https://img.shields.io/david/dev/bevry/ambi.svg)](https://david-dm.org/bevry/ambi#info=devDependencies)<br/>
 [![Gratipay donate button](https://img.shields.io/gratipay/bevry.svg)](https://www.gratipay.com/bevry/ "Donate weekly to this project using Gratipay")
@@ -157,5 +158,3 @@ and licensed under:
 - The [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/) for everything else (including content, media and design)
 
 <!-- /LICENSE -->
-
-

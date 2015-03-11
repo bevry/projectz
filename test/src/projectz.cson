@@ -20,6 +20,7 @@
 		paypal: 'QB8GQPZAH84N6'
 		waffleio: true
 		wishlist: "http://amzn.com/w/2F8TXKSNAFG4V"
+		coveralls: true
 	dependencies:
 		"typechecker": "~2.0.6"
 	engines:
