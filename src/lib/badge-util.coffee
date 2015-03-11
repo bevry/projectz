@@ -65,7 +65,7 @@ module.exports = badgeUtil =
 			if !opts.badges.coveralls or !opts.repo
 				return ''
 
-			image = "https://coveralls.io/repos/#{opts.repo}/badge.png"
+			image = "https://img.shields.io/coveralls/#{opts.repo}.svg"
 			url = "https://coveralls.io/r/#{opts.repo}"
 			label = opts.badges.coveralls
 			label = 'Coverage Status'  if label is true
