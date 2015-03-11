@@ -49,19 +49,22 @@ Here's some of the things it can do:
 	- Bower
 - Automatic injection of the appropriate badges for your project, supports:
 	- Development Badges
-		- Waffle.io
-		- Travis CI
-		- Fury.io NPM
-		- David DM Dependencies, and Dev Dependencies
+		- [NPM](https://www.npmjs.com) Package Version
+		- [NPM](https://www.npmjs.com) Package Downloads
+		- [Waffle.io](http://waffle.io) Stories
+		- [Travis CI](https://travis-ci.org) Build Status
+		- [David DM](https://david-dm.org) Dependencies, and Dev Dependencies
 		- [Coveralls](http://coveralls.io)
+		- [Sauce Labs Browser Matrix](https://saucelabs.com)
 	- Donation Badges
-		- Gittip
-		- Flattr
-		- Paypal
-		- BitCoin
-		- Wishlist
+		- [Gratipay](http://gratipay.com)
+		- [Flattr](http://flattr.com)
+		- [Paypal](http://paypal.com)
+		- BitCoin URL
+		- Wishlist URL
 - Automatic injection of your license information, supports:
-	- MIT
+	- [MIT](http://opensource.org/licenses/mit-license.php)
+	- [CC-BY-4.0](http://creativecommons.org/licenses/by/4.0/)
 	- Dual Licenses
 	- More to come
 - Keep your data and readme files up to date with remote data, supports:
@@ -199,9 +202,13 @@ The special fields are as so:
 		# If not set, fallbacks to true if the `.travis.yml` file exists
 		travis: true
 
-		# NPM Badge
+		# NPM Version Badge
 		# If not set, fallbacks to true if the `package.json` file exists
 		npm: true
+
+		# NPM Downloads Badge
+		# If not set, fallbacks to true if the `package.json` file exists
+		npmdownloads: true
 
 		# David DM Dependency Badge
 		# If not set, fallbacks to true if the `package.json` file exists
@@ -223,8 +230,12 @@ The special fields are as so:
 		# Otherwise, the label will default to "Coverage Status".
 		coveralls: true
 
-		# Gittip Badge
-		gittip: "balupton"
+		# Sauce Labs Browser Matrix Badge
+		# If a string is provided, that will be used as the user id for the badge.
+		saucebm: "user id"
+		
+		# Gratipay Badge
+		gratipay: "balupton"
 
 		# Flattr Badge
 		flattr: "344188/balupton-on-Flattr"
