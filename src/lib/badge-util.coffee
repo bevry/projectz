@@ -4,11 +4,11 @@ module.exports = badgeUtil =
 		# Get Sauce Labs Browser Matrix
 		saucebm: (opts={}) ->
 			# Check
-			if !opts.badges.sauceBM
+			if !opts.badges.saucebm
 				return ''
 			else
-				image = "https://saucelabs.com/browser-matrix/#{opts.badges.sauceBM}.svg"
-				url = "https://saucelabs.com/u/#{opts.badges.sauceBM}.svg"
+				image = "https://saucelabs.com/browser-matrix/#{opts.badges.saucebm}.svg"
+				url = "https://saucelabs.com/u/#{opts.badges.saucebm}.svg"
 			# Return
 			return """
 				[![Sauce Labs Browser Matrix](#{image})](#{url} "Check this project's browser tests on Sauce Labs")
