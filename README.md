@@ -42,11 +42,11 @@ Here's some of the things it can do:
 	- `BACKERS.md`
 	- `HISTORY.md`
 - Automatic injection of the appropriate installation methods, supports:
-	- Node
-	- Browserify
-	- Ender
-	- Component
-	- Bower
+	- [NPM](https://www.npmjs.com)
+	- [Browserify](http://browserify.org/)
+	- [Ender](http://enderjs.com)
+	- [Component](http://github.com/component/component)
+	- [Bower](http://bower.io/)
 - Automatic injection of the appropriate badges for your project, supports:
 	- Development Badges
 		- [NPM](https://www.npmjs.com) Package Version
