@@ -111,7 +111,7 @@ If you don't use a build tool, but do use npm, then you can add the following to
 
 The `compile` script here lets you use `npm run-script compile` to compile your project with projectz.
 
-The `posttest` script here automaticaly compiles your project with projectz after your tests have successfully completed, providing you use `npm test` to run your tests. This is a great place to put projectz as projectz only updates meta documents so won't affect your test, and will always run before a publish.
+The `posttest` script here automatically compiles your project with projectz after your tests have successfully completed, providing you use `npm test` to run your tests. This is a great place to put projectz as projectz only updates meta documents so won't affect your test, and will always run before a publish.
 
 
 
