@@ -187,7 +187,7 @@ module.exports = badgeUtil =
 
 			# Return
 			return """
-				[![PayPayl donate button](#{image})](#{url} "Donate once-off to this project using Paypal")
+				[![PayPal donate button](#{image})](#{url} "Donate once-off to this project using Paypal")
 				"""
 
 		# Get Bitcoin Badge
