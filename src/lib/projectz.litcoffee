@@ -456,8 +456,6 @@ Create the data for the `package.json` format
 					contributors:           @dataForPackagesMerged.contributors.map (contributor) -> contributor.text
 					bugs:                   @dataForPackagesMerged.bugs
 					engines:                @dataForPackagesMerged.engines
-					dependencies:           @dataForPackagesMerged.dependencies
-					devDependencies:        @dataForPackagesMerged.devDependencies
 					main:                   @dataForPackagesMerged.main
 				}
 
