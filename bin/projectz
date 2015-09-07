@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-require('../out/bin/projectz');
+require('../es5/bin/projectz')
