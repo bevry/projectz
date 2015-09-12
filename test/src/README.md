@@ -7,16 +7,14 @@
 
 <!-- BADGES/ -->
 
-[![NPM version](https://img.shields.io/npm/v/ambi.svg)](https://npmjs.org/package/ambi "View this project on NPM")
-[![NPM downloads](https://img.shields.io/npm/dm/ambi.svg)](https://npmjs.org/package/ambi "View this project on NPM")
-[![Stories in Ready](https://badge.waffle.io/bevry/ambi.png?label=ready)](http://waffle.io/bevry/ambi)
-[![Coverage Status](https://img.shields.io/coveralls/bevry/ambi.svg)](https://coveralls.io/r/bevry/ambi)
-[![Dependency Status](https://img.shields.io/david/bevry/ambi.svg)](https://david-dm.org/bevry/ambi)
-[![Dev Dependency Status](https://img.shields.io/david/dev/bevry/ambi.svg)](https://david-dm.org/bevry/ambi#info=devDependencies)<br/>
-[![Gratipay donate button](https://img.shields.io/gratipay/bevry.svg)](https://www.gratipay.com/bevry/ "Donate weekly to this project using Gratipay")
-[![Flattr donate button](https://img.shields.io/badge/flattr-donate-yellow.svg)](http://flattr.com/thing/344188/balupton-on-Flattr "Donate monthly to this project using Flattr")
-[![PayPal donate button](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6 "Donate once-off to this project using Paypal")
-[![Wishlist browse button](https://img.shields.io/badge/wishlist-donate-yellow.svg)](http://amzn.com/w/2F8TXKSNAFG4V "Buy an item on our wishlist for us")
+<a href="https://npmjs.org/package/ambi" title="View this project on NPM"><img src="https://img.shields.io/npm/v/ambi.svg" alt="NPM version" /></a>
+<a href="https://npmjs.org/package/ambi" title="View this project on NPM"><img src="https://img.shields.io/npm/dm/ambi.svg" alt="NPM downloads" /></a>
+<a href="http://waffle.io/bevry/ambi" title="View this project's stories on Waffle.io"><img src="https://badge.waffle.io/bevry/ambi.png?label=ready" alt="Stories in Ready" /></a>
+<a href="https://coveralls.io/r/bevry/ambi" title="View this project's coverage on Coveralls"><img src="https://img.shields.io/coveralls/bevry/ambi.svg" alt="Coverage Status" /></a><br/>
+<a href="https://www.gratipay.com/bevry/" title="Donate weekly to this project using Gratipay"><img src="https://img.shields.io/gratipay/bevry.svg" alt="Gratipay donate button" /></a>
+<a href="http://flattr.com/thing/344188/balupton-on-Flattr" title="Donate monthly to this project using Flattr"><img src="https://img.shields.io/badge/flattr-donate-yellow.svg" alt="Flattr donate button" /></a>
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6" title="Donate once-off to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a>
+<a href="http://amzn.com/w/2F8TXKSNAFG4V" title="Buy an item on our wishlist for us"><img src="https://img.shields.io/badge/wishlist-donate-yellow.svg" alt="Wishlist browse button" /></a>
 
 <!-- /BADGES -->
 
@@ -132,10 +130,10 @@ These amazing people are maintaining this project:
 
 No sponsors yet! Will you be the first?
 
-[![Gratipay donate button](https://img.shields.io/gratipay/bevry.svg)](https://www.gratipay.com/bevry/ "Donate weekly to this project using Gratipay")
-[![Flattr donate button](https://img.shields.io/badge/flattr-donate-yellow.svg)](http://flattr.com/thing/344188/balupton-on-Flattr "Donate monthly to this project using Flattr")
-[![PayPal donate button](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6 "Donate once-off to this project using Paypal")
-[![Wishlist browse button](https://img.shields.io/badge/wishlist-donate-yellow.svg)](http://amzn.com/w/2F8TXKSNAFG4V "Buy an item on our wishlist for us")
+<a href="https://www.gratipay.com/bevry/" title="Donate weekly to this project using Gratipay"><img src="https://img.shields.io/gratipay/bevry.svg" alt="Gratipay donate button" /></a>
+<a href="http://flattr.com/thing/344188/balupton-on-Flattr" title="Donate monthly to this project using Flattr"><img src="https://img.shields.io/badge/flattr-donate-yellow.svg" alt="Flattr donate button" /></a>
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6" title="Donate once-off to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a>
+<a href="http://amzn.com/w/2F8TXKSNAFG4V" title="Buy an item on our wishlist for us"><img src="https://img.shields.io/badge/wishlist-donate-yellow.svg" alt="Wishlist browse button" /></a>
 
 ### Contributors
 

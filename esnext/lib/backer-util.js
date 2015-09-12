@@ -9,13 +9,13 @@ export function getSponsorsText (opts) {
 		// ignore
 		result +=
 			'No sponsors yet! Will you be the first?\n\n' +
-			badgeUtil.getTypedBadges('donation', opts)
+			badgeUtil.getBadgesInCategory('funding', opts)
 	}
 	else {
 		result +=
 			'These amazing people have contributed finances to this project:\n\n' +
 			projectzUtil.getPeopleHTML(opts.sponsors, {githubSlug: opts.github.slug}) +
-			`\n\nBecome a sponsor!\n\n${badgeUtil.getTypedBadges('donation', opts)}`
+			`\n\nBecome a sponsor!\n\n${badgeUtil.getBadgesInCategory('funding', opts)}`
 	}
 
 	return result
