@@ -5,7 +5,6 @@
 <!-- /TITLE -->
 
 
-
 <!-- BADGES/ -->
 
 [![NPM version](https://img.shields.io/npm/v/ambi.svg)](https://npmjs.org/package/ambi "View this project on NPM")
@@ -20,7 +19,6 @@
 [![Wishlist browse button](https://img.shields.io/badge/wishlist-donate-yellow.svg)](http://amzn.com/w/2F8TXKSNAFG4V "Buy an item on our wishlist for us")
 
 <!-- /BADGES -->
-
 
 
 <!-- DESCRIPTION/ -->
@@ -81,6 +79,8 @@ console.log(result); // setTimeout - just like normal
 
 ## Install
 
+
+
 ### [NPM](http://npmjs.org/)
 - Use: `require('ambi')`
 - Install: `npm install --save ambi`
@@ -101,14 +101,12 @@ console.log(result); // setTimeout - just like normal
 <!-- /INSTALL -->
 
 
-
 <!-- HISTORY/ -->
 
 ## History
 [Discover the change history by heading on over to the `HISTORY.md` file.](https://github.com/undefined/ambi/blob/master/HISTORY.md#files)
 
 <!-- /HISTORY -->
-
 
 
 <!-- CONTRIBUTE/ -->
@@ -118,7 +116,6 @@ console.log(result); // setTimeout - just like normal
 [Discover how you can contribute by heading on over to the `CONTRIBUTING.md` file.](https://github.com/undefined/ambi/blob/master/CONTRIBUTING.md#files)
 
 <!-- /CONTRIBUTE -->
-
 
 
 <!-- BACKERS/ -->
@@ -152,7 +149,6 @@ These amazing people have contributed code to this project:
 <!-- /BACKERS -->
 
 
-
 <!-- LICENSE/ -->
 
 ## License
@@ -168,3 +164,5 @@ and licensed under:
 <li><a href="http://spdx.org/licenses/CC-BY-4.0.html">Creative Commons Attribution 4.0</a></li></ul>
 
 <!-- /LICENSE -->
+
+

@@ -1,15 +1,14 @@
 export function getInstallInstructions (opts) {
-	let result = '## Install'
+	const parts = []
 
 	// DocPad
 	if ( opts.name.indexOf('docpad-plugin-') === 0 ) {
 		const pluginName = opts.name.substring(14)
-		result += [
-			'\n',
+		parts.push([
 			'``` shell',
 			`docpad install ${pluginName}`,
 			'```'
-		].join('\n')
+		].join('\n'))
 	}
 
 	else {
@@ -19,60 +18,56 @@ export function getInstallInstructions (opts) {
 				const commands = '`' + Object.keys(opts.bin || {}).join('` ') + '`'
 
 				// Global NPM
-				result += [
-					'\n',
+				parts.push([
 					'### [NPM](http://npmjs.org/)',
 					`- Use: ${commands}`,
 					`- Install: \`npm install --global ${opts.name}\``
-				].join('\n')
+				].join('\n'))
 			}
 			else {
 				// Local NPM
-				result += [
+				parts.push([
 					'\n',
 					'### [NPM](http://npmjs.org/)',
 					`- Use: \`require('${opts.name}')\``,
 					`- Install: \`npm install --save ${opts.name}\``
-				].join('\n')
+				].join('\n'))
 			}
 
 			// Browser
 			if ( opts.browsers ) {
-				result += [
-					'\n',
+				parts.push([
 					'### [Browserify](http://browserify.org/)',
 					`- Use: \`require('${opts.name}')\``,
 					`- Install: \`npm install --save ${opts.name}\``,
 					`- CDN URL: \`//wzrd.in/bundle/${opts.name}@${opts.version}\``,
-					'',
-					'',
+				].join('\n'))
+				parts.push([
 					'### [Ender](http://enderjs.com)',
 					`- Use: \`require('${opts.name}')\``,
 					`- Install: \`ender add ${opts.name}\``
-				].join('\n')
+				].join('\n'))
 			}
 		}
 
 		// Component
 		if ( opts.packages.component ) {
-			result += [
-				'\n',
+			parts.push([
 				'### [Component](http://github.com/component/component)',
 				`- Use: \`require('${opts.name}')\``,
 				`- Install: \`component install ${opts.repo}\``
-			].join('\n')
+			].join('\n'))
 		}
 
 		// Bower
 		if ( opts.packages.bower ) {
-			result += [
-				'\n',
+			parts.push([
 				'### [Bower](http://bower.io/)',
 				`- Use: \`require('${opts.name}')\``,
 				`- Install: \`bower install ${opts.name}\``
-			].join('\n')
+			].join('\n'))
 		}
 	}
 
-	return result
+	return '## Install\n\n' + parts.join('\n\n')
 }
