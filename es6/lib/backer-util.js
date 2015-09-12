@@ -1,113 +1,136 @@
-# Import
-projectzUtil = require('./projectz-util')
-badgeUtil = require('./badge-util')
+// Import
+const projectzUtil = require('./projectz-util')
+const badgeUtil = require('./badge-util')
+const Fellow = require('fellow')
 
-# Define
-module.exports = backerUtil =
+// Define
+const backerUtil = {
 
-	getSponsorsText: (opts) ->
-		result = ''
+	getSponsorsText: function (opts) {
+		let result = ''
 
-		if opts.sponsors.length is 0
-			# ignore
-			result += "No sponsors yet! Will you be the first?\n\n"
-			result += badgeUtil.getTypedBadges('donation', opts)
-		else
-			result += "These amazing people have contributed finances to this project:\n\n"
-			result += '- '+(projectzUtil.getPersonText(sponsor)  for sponsor in opts.sponsors).join('\n- ')
-			result += "\n\nBecome a sponsor!\n\n#{badgeUtil.getTypedBadges('donation', opts)}"
-		return result
-
-	getMaintainersText: (opts) ->
-		result = ''
-
-		if opts.maintainers.length is 0
-			# ignore
-			result += "No maintainers yet! Will you be the first?"
-		else
-			result += "These amazing people are maintaining this project:\n\n"
-			result += '- '+(projectzUtil.getPersonText(maintainer)  for maintainer in opts.maintainers).join('\n- ')
+		if ( opts.sponsors.length === 0 ) {
+			// ignore
+			result +=
+				'No sponsors yet! Will you be the first?\n\n' +
+				badgeUtil.getTypedBadges('donation', opts)
+		}
+		else {
+			result +=
+				'These amazing people have contributed finances to this project:\n\n' +
+				projectzUtil.getPeopleHTML(opts.sponsors, {githubSlug: opts.github.slug}) +
+				`\n\nBecome a sponsor!\n\n${badgeUtil.getTypedBadges('donation', opts)}`
+		}
 
 		return result
+	},
 
-	getContributorsText: (opts) ->
-		result = ''
+	getMaintainersText: function (opts) {
+		let result = ''
 
-		if opts.contributors.length is 0
-			# ignore
-			result += "No contributors yet! Will you be the first?"
-			result += "\n#{backerUtil.getContributeText(opts)}"
-		else
-			result += "These amazing people have contributed code to this project:\n\n"
-			result += '- '+(projectzUtil.getPersonText(contributor)+" — [view contributions](https://github.com/#{opts.repo}/commits?author=#{contributor.username})"  for contributor in opts.contributors).join('\n- ')
-			result += "\n\n#{backerUtil.getContributeText(opts, 'Become a contributor!')}"
+		if ( opts.maintainers.length === 0 ) {
+			// ignore
+			result += 'No maintainers yet! Will you be the first?'
+		}
+		else {
+			result += 'These amazing people are maintaining this project:\n\n' +
+				projectzUtil.getPeopleHTML(opts.maintainers, {githubSlug: opts.github.slug})
+		}
 
 		return result
+	},
 
-	getContributeText: (opts, text) ->
-		# Prepare
-		file = 'CONTRIBUTING.md'
-		url = projectzUtil.getFileUrl(opts, file)
-		text ?= "Discover how you can contribute by heading on over to the `#{file}` file."
+	getContributorsText: function (opts) {
+		let result = ''
 
-		# Return
-		return "[#{text}](#{url})"
+		if ( opts.contributors.length === 0 ) {
+			// ignore
+			result +=
+				'No contributors yet! Will you be the first?' +
+				`\n${backerUtil.getContributeText(opts)}`
+		}
+		else {
+			result +=
+				'These amazing people have contributed code to this project:\n\n'
+					+ projectzUtil.getPeopleHTML(opts.contributors, {githubSlug: opts.github.slug}) +
+					`\n\n${backerUtil.getContributeText(opts, 'Become a contributor!')}`
+		}
 
-	getBackerSection: (opts={}) ->
-		# Check
-		return '' if !opts.licenses
-
-		# Prepare
-		result = """
-			## Backers
-
-			### Maintainers
-
-			#{backerUtil.getMaintainersText(opts)}
-
-			### Sponsors
-
-			#{backerUtil.getSponsorsText(opts)}
-
-			### Contributors
-
-			#{backerUtil.getContributorsText(opts)}
-			"""
-
-		# Return
 		return result
+	},
 
-	getBackerFile: (opts={}) ->
-		# Check
-		return '' if !opts.licenses
+	getContributeText: function (opts, text) {
+		// Prepare
+		const file = 'CONTRIBUTING.md'
+		const url = projectzUtil.getFileUrl(opts, file)
+		if ( text == null )  text = `Discover how you can contribute by heading on over to the \`${file}\` file.`
 
-		# Prepare
-		result = """
-			# Backers
+		// Return
+		return `[${text}](${url})`
+	},
 
-			## Maintainers
+	getBackerSection: function (opts) {
+		// Check
+		if ( !opts.licenses )  return ''
 
-			#{backerUtil.getMaintainersText(opts)}
+		// Prepare
+		const result = [
+			'## Backers',
+			'',
+			'### Maintainers',
+			'',
+			backerUtil.getMaintainersText(opts),
+			'',
+			'### Sponsors',
+			'',
+			backerUtil.getSponsorsText(opts),
+			'',
+			'### Contributors',
+			'',
+			backerUtil.getContributorsText(opts)
+		].join('\n')
 
-			## Sponsors
-
-			#{backerUtil.getSponsorsText(opts)}
-
-			## Contributors
-
-			#{backerUtil.getContributorsText(opts)}
-			"""
-
-		# Return
+		// Return
 		return result
+	},
 
-	getContributeSection: (opts) ->
-		# Prepare
-		result = """
-			## Contribute
+	getBackerFile: function (opts) {
+		// Check
+		if ( !opts.licenses )  return ''
 
-			#{backerUtil.getContributeText(opts)}
-			"""
+		// Prepare
+		const result = [
+			'# Backers',
+			'',
+			'## Maintainers',
+			'',
+			backerUtil.getMaintainersText(opts),
+			'',
+			'## Sponsors',
+			'',
+			backerUtil.getSponsorsText(opts),
+			'',
+			'## Contributors',
+			'',
+			backerUtil.getContributorsText(opts)
+		].join('\n')
 
-		# Return
+		// Return
 		return result
+	},
+
+	getContributeSection: function (opts) {
+		// Prepare
+		const result = [
+			'## Contribute',
+			'',
+			backerUtil.getContributeText(opts)
+		].join('\n')
+
+		// Return
+		return result
+	}
+}
+
+// Export
+export default backerUtil

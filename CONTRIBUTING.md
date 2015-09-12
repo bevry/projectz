@@ -1,5 +1,5 @@
 <!--
-April 5, 2015
+April 5 2015
 https://github.com/bevry/base
 -->
 

@@ -1,4 +1,4 @@
-# August 26, 2015
+# 9 September 2015
 # https://github.com/bevry/base
 
 # Use the latest travis infrastructure
@@ -8,7 +8,7 @@ sudo: false
 language: node_js
 node_js:
   - "0.12"
-  - iojs
+  - "4"
 cache:
   directories:
     - node_modules

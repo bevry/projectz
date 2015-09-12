@@ -1,5 +1,6 @@
-// 4 September 2015
+// 11 September 2015
 // https://github.com/bevry/base
+// http://eslint.org
 {
 	"parser": "babel-eslint",
 	"ecmaFeatures": {
@@ -139,8 +140,8 @@
 		// Seems like a good idea to error about this
 		"use-isnan": 2,
 
-		// Seems like a good idea to error about this
-		"valid-jsdoc": 2,
+		// We use YUIdoc, not JSDoc
+		"valid-jsdoc": 0,
 
 		// Seems like a good idea to error about this
 		"valid-typeof": 2,
