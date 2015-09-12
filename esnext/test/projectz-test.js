@@ -22,8 +22,8 @@ const cliPath      = pathUtil.join(projectzPath, 'bin', 'projectz')
 joe.suite('projectz integration suite', function (suite, test) {
 	// Compile with Projectz using -p to switch to the source path.
 	test('compile project with projectz', function (done) {
-		const command = [cliPath, 'compile', '-p', srcPath]
-		safeps.spawnCommand('node', command, {stdio: 'inherit'}, done)
+		const command = ['node', cliPath, 'compile', '-p', srcPath]
+		safeps.spawn(command, {stdio: 'inherit'}, done)
 	})
 
 	// Check that the compiled files match correctly.

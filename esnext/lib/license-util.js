@@ -1,49 +1,55 @@
 // Import
 const projectzUtil = require('./projectz-util')
 
+// Get License Introduction
+export function getLicenseIntroduction (opts) {
+	// Check
+	if ( !opts.licenses )  return ''
 
-// -------------------------------------
-// Define
+	// Prepare
+	const result = [
+		'Unless stated otherwise all works are:',
+		'',
+		projectzUtil.getPeopleHTML(opts.authors, {copyright: true, years: true}),
+		'',
+		'and licensed under:',
+		'',
+		opts.licenses.descriptionHTML
+	].join('\n')
 
-const licenseUtil = {
-	// Get License Introduction
-	getLicenseIntroduction: function (opts) {
-		// Check
-		if ( !opts.licenses )  return ''
-
-		// Prepare
-		const result = [
-			'Unless stated otherwise all works are:',
-			'',
-			projectzUtil.getPeopleHTML(opts.authors, {years: true}),
-			'',
-			'and licensed under:',
-			'',
-			opts.licenses.descriptionHTML
-		].join('\n')
-
-		// Return
-		return result
-	},
-
-	// Get License File
-	getLicenseFile: function (opts) {
-		// Check
-		if ( !opts.licenses )  return ''
-
-		// Prepare
-		const result = [
-			'# License',
-			'',
-			licenseUtil.getLicenseIntroduction(opts),
-			'',
-			opts.licenses.bodyHTML
-		].join('\n')
-
-		// Return
-		return result
-	}
+	// Return
+	return result
 }
 
-// Export
-export default licenseUtil
+// Get License File
+export function getLicenseFile (opts) {
+	// Check
+	if ( !opts.licenses )  return ''
+
+	// Prepare
+	const result = [
+		'# License',
+		'',
+		getLicenseIntroduction(opts),
+		'',
+		opts.licenses.bodyHTML
+	].join('\n')
+
+	// Return
+	return result
+}
+
+export function getLicenseSection (opts) {
+	// Check
+	if ( !opts.licenses )  return ''
+
+	// Prepare
+	const result = [
+		'## License',
+		'',
+		getLicenseIntroduction(opts)
+	].join('\n')
+
+	// Return
+	return result
+}

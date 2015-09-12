@@ -11,7 +11,7 @@ const historyUtil = {
 
 		// Return
 		return [
-			'## History'
+			'## History',
 			`[Discover the change history by heading on over to the \`${file}\` file.](${url})`
 		].join('\n')
 	}

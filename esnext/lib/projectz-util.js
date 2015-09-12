@@ -8,7 +8,8 @@ export class License {
 	}
 
 	setSPDX (spdx) {
-		const {id, name, body, url} = License.parseSDPX(spdx)
+		const result = License.parseSPDX(spdx)
+		const {id, name, body, url} = result
 		this.id = id
 		this.name = name
 		this.body = body
@@ -19,15 +20,15 @@ export class License {
 
 	updateHTML () {
 		this.descriptionHTML = `<a href="${this.url}">${this.name}</a>`
-		this.bodyHTML = `<h2>${this.name}</h2>\n${this.body}`
+		this.bodyHTML = this.body.replace(/^(.+?)\n/, '<h2>$1</h2>\n')
 		return this
 	}
 
 	static parseSPDX (spdx) {
-		const license = require('spdx-license-list/spdx-full')[spdx]
-		const id = license.id
-		const name = license.name
-		const body = license.license
+		const result = require('spdx-license-list/spdx-full')[spdx]
+		const id = spdx
+		const name = result.name
+		const body = result.license
 		const url = `http://spdx.org/licenses/${id}.html`
 		return {id, name, body, url}
 	}
@@ -41,57 +42,62 @@ export class Licenses {
 	}
 
 	setSPDX (spdx) {
-		this.licenses = Licenses.parseSDPX(spdx)
+		this.licenses = Licenses.parseSPDX(spdx)
 		this.updateHTML()
 		return this
 	}
 
 	updateHTML () {
-		this.html = Licenses.toHTML(this.licenses)
-		this.descriptionHTML = this.html.description
-		this.bodyHTML = this.html.body
+		const {descriptionHTML, bodyHTML} = Licenses.toHTML(this.licenses)
+		this.descriptionHTML = descriptionHTML
+		this.bodyHTML = bodyHTML
 		return this
 	}
 
-	static parseSPDX (value) {
-		if ( value === 'string' ) {
+	static parseSPDX (value, depth = 0) {
+		if ( typeof value === 'string' ) {
 			value = require('spdx').parse(value)
 		}
 
-		const licenses = []
-
 		if ( value.license ) {
 			const license = new License(value.license)
-			licenses.push(license)
+			if ( depth === 0 ) {
+				return [license]
+			}
+			else {
+				return license
+			}
 		}
 		else {
-			licenses.push(Licenses.parseSPDX(value.left))
-			licenses.push(value.conjuction)
-			licenses.push(Licenses.parseSPDX(value.right))
+			const licenses = []
+			licenses.push(Licenses.parseSPDX(value.left, depth + 1))
+			licenses.push(value.conjunction)
+			licenses.push(Licenses.parseSPDX(value.right, depth + 1))
+			return licenses
 		}
-
-		return licenses
 	}
 
-	static toHTML (licenses) {
+	// ['MIT', 'and', 'CC']
+	static toHTML (licenses, depth = 0) {
 		if ( licenses.length === 0 ) {
 			return {
-				description: '',
-				body: ''
+				descriptionHTML: '',
+				bodyHTML: ''
 			}
 		}
 		else {
 			const descriptions = []
 			const bodies = []
+
 			licenses.forEach((item) => {
 				if ( item instanceof License ) {
-					descriptions.push('<li>' + item.description + '</li>')
-					bodies.push(item.body)
+					descriptions.push('<li>' + item.descriptionHTML + '</li>')
+					bodies.push(item.bodyHTML)
 				}
 				else if ( Array.isArray(item) ) {
-					const items = Licenses.toHTML(item)
-					descriptions.push('<li>' + items.description + '</li>')
-					bodies.push(items.bodies)
+					const items = Licenses.toHTML(item, depth + 1)
+					descriptions.push('<li>' + items.descriptionHTML + '</li>')
+					bodies.push(items.bodyHTML)
 				}
 				else if ( typeof item === 'string' ) {
 					descriptions.push('<li>' + item + '</li>')
@@ -102,8 +108,8 @@ export class Licenses {
 			})
 
 			return {
-				description: '<ul>' + descriptions.join('\n') + '</ul>',
-				body: bodies.join('\n\n')
+				descriptionHTML: '<ul>' + descriptions.join('\n') + '</ul>',
+				bodyHTML: bodies.join('\n\n')
 			}
 		}
 	}
@@ -113,16 +119,16 @@ export class Licenses {
 // Get Person HTML
 export function getPersonHTML (person, opts = {}) {
 	if ( person.name ) {
-		let text = ''
+		let html = ''
 
-		if ( opts.years && person.years )  text += person.years + ' '
-		text += person.name
+		if ( opts.copyright )  html += 'Copyright &copy; '
+		if ( opts.years && person.years )  html += person.years + ' '
 
-		let html = person.url ? `<a href="${person.url}">${text}</a>` : person.name
+		html += person.url ? `<a href="${person.url}">${person.name}</a>` : person.name
 
 		if ( person.githubUsername && opts.githubSlug ) {
 			const contributionsURL = `https://github.com/${opts.githubSlug}/commits?author=${person.githubUsername}`
-			html += `<a href="${contributionsURL}" title="View the GitHub contributions of ${person.name} on repository ${opts.githubSlug}">view contributions</a>`
+			html += ` — <a href="${contributionsURL}" title="View the GitHub contributions of ${person.name} on repository ${opts.githubSlug}">view contributions</a>`
 		}
 		return html
 	}
@@ -138,7 +144,7 @@ export function getPeopleHTML (people, opts = {}) {
 	}
 	else {
 		return '<ul>' + people.map(function (person) {
-			return getPersonHTML(person, opts)
+			return '<li>' + getPersonHTML(person, opts) + '</li>'
 		}).join('\n') + '</ul>'
 	}
 }
@@ -164,6 +170,7 @@ export function getPeopleTextArray (people, opts = {}) {
 	else {
 		let textArray = []
 		people.forEach(function (person) {
+			if ( !person.name || person.name === 'null' ) throw new Error('For some reason the person doesn\'t have a name')
 			const text = getPersonText(person, opts)
 			if ( text )  textArray.push(text)
 		})
@@ -226,18 +233,27 @@ export function replaceSection (names, source, inject) {
 
 	/* eslint indent:0 */
 	const regex = new RegExp([
-		'\n(',
-			`<!--\s*${regexName}\s*-->`,
+		'^(',
+			`<!--\\s*${regexName}\\s*-->`,
 			'|',
-			`<!--\s*${regexName}/\s*-->`,
-			'[\s\S]*?',
-			`<!--\s*/${regexName}\s*-->`,
-		')\s*'
+			`<!--\\s*${regexName}/\\s*-->`,
+			'[\\s\\S]*?',
+			`<!--\\s*/${regexName}\\s*-->`,
+		')\\s+'
 	].join(''), 'gim')
 
-	const replace = `\n<!-- ${sectionName}/ -->\n\n${inject}\n\n<!-- /${sectionName} -->\n\n\n`
+	const replace = `<!-- ${sectionName}/ -->\n\n${inject}\n\n<!-- /${sectionName} -->\n\n\n`
 
 	const result = source.replace(regex, replace)
 
 	return result
+}
+
+export function csvToArray ( str ) {
+	if ( typeof str === 'string') {
+		return str.split(/[,\n]/).map(function (i) {
+			return i.trim()
+		})
+	}
+	return []
 }

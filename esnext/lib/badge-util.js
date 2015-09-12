@@ -77,7 +77,7 @@ const badgeUtil = {
 			// Create
 			const image = `https://img.shields.io/coveralls/${opts.repo}.svg`
 			const url = `https://coveralls.io/r/${opts.repo}`
-			const label = opts.badges.coveralls
+			let label = opts.badges.coveralls
 			if ( label === true )  label = 'Coverage Status'
 			return `[![${label}](${image})](${url})`
 		},

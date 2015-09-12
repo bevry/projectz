@@ -4,7 +4,7 @@
   "authors": [
     "me"
   ],
-  "license": "MIT",
+  "license": "(MIT AND CC-BY-4.0)",
   "ignore": [
     "**/.*",
     "node_modules",

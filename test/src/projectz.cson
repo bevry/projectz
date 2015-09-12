@@ -5,15 +5,15 @@
 	name: "ambi"
 	repo: "bevry/ambi"
 	version: "2.1.4"
-	license: "MIT"
+	license: "(MIT AND CC-BY-4.0)"
 	description: "Execute a function ambidextrously (normalizes the differences between synchronous and asynchronous functions). Useful for treating synchronous functions as asynchronous functions (like supporting both synchronous and asynchronous event definitions automatically)."
-	keywords: "sync,async,fire,exec,execute,ambidextrous,flow"
-	authors: """
-		Bevry Pty Ltd <us@bevry.me> (http://bevry.me)
-		"""
-	maintainers: """
-		Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)
-		"""
+	keywords: [
+		'sync', 'async', 'fire', 'exec', 'execute', 'ambidextrous', 'flow'
+	]
+	author: 'Bevry Pty Ltd <us@bevry.me> (http://bevry.me)'
+	maintainers: [
+		'Benjamin Lupton <b@lupton.cc> (http://balupton.com)'
+	]
 	badges:
 		gittip: 'bevry'
 		flattr: '344188/balupton-on-Flattr'
@@ -45,6 +45,7 @@
 	# =================================
 	# PACKAGE FILES
 
+	###
 	packages:
 		package: true
 		component:
@@ -62,4 +63,5 @@
 		backers: true
 		license: true
 		readme: true
+	###
 }
