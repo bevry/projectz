@@ -90,13 +90,13 @@ export default class Projectz {
 		}
 
 		// Apply our determined paths for readmes
+		// @TODO support other extensions than just markdown
 		this.pathsForMetaFiles = {
 			readme:        pathUtil.join(this.cwd, 'README.md'),
 			history:       pathUtil.join(this.cwd, 'HISTORY.md'),
 			contributing:  pathUtil.join(this.cwd, 'CONTRIBUTING.md'),
 			backers:       pathUtil.join(this.cwd, 'BACKERS.md'),
-			license:       pathUtil.join(this.cwd, 'LICENSE.md'),
-			travis:        pathUtil.join(this.cwd, '.travis.yml')
+			license:       pathUtil.join(this.cwd, 'LICENSE.md')
 		}
 	}
 
@@ -121,7 +121,7 @@ export default class Projectz {
 		tasks.addTask(this.mergeData.bind(this))
 
 		// Fetch the latest contributors. This is after the merging as we access merged properties to be able to do this.
-		tasks.addTask(this.loadContributors.bind(this))
+		tasks.addTask(this.loadGithubContributors.bind(this))
 
 		// Enhance our package data
 		tasks.addTask(this.enhancePackages.bind(this))
@@ -134,19 +134,28 @@ export default class Projectz {
 		return this
 	}
 
-	// Load Contributors
+	// Load Github Contributors
 	// Fetch the contributors for the repo if we have it
 	// Usage: `loadContributors(function (err) {})`
-	loadContributors (next) {
+	loadGithubContributors (next) {
 		// Prepare
 		const log = this.log
-		const repoSlug = this.mergedPackageData.repo
+
+		// Check
+		if ( !this.mergedPackageData.github || !this.mergedPackageData.github.username || !this.mergedPackageData.github.repository ) {
+			log('debug', 'Skipping loading github contributors as this does not appear to be a github repository')
+			next()
+			return this
+		}
+
+		// Prepare
+		const githubSlug = this.mergedPackageData.github.slug
 		const githubClientId = process.env.GITHUB_CLIENT_ID
 		const githubClientSecret = process.env.GITHUB_CLIENT_SECRET
-		const url = `https://api.github.com/repos/${repoSlug}/contributors?per_page=100&client_id=${githubClientId}&client_secret=${githubClientSecret}`
+		const url = `https://api.github.com/repos/${githubSlug}/contributors?per_page=100&client_id=${githubClientId}&client_secret=${githubClientSecret}`
 
 		// Fetch the github and package contributors for it
-		log('info', `Loading contributors for repository: ${repoSlug}`)
+		log('info', `Loading contributors for repository: ${githubSlug}`)
 		require('chainy-core').create().require('set feed map')
 			// Fetch the repositories contributors
 			.set(url)
@@ -180,12 +189,12 @@ export default class Projectz {
 					githubUrl: person.html_url
 				}
 				const fellow = Fellow.ensure(data)
-				fellow.contributesRepository(repoSlug)
+				fellow.contributesRepository(githubSlug)
 			})
 
 			// Log
 			.action(function (contributors) {
-				log('info', `Loaded ${contributors.length} contributors for repository: ${repoSlug}`)
+				log('info', `Loaded ${contributors.length} contributors for repository: ${githubSlug}`)
 			})
 
 			// And return our result
@@ -307,6 +316,12 @@ export default class Projectz {
 		// ----------------------------------
 		// Validation
 
+		// Validate badges field
+		if ( this.mergedPackageData.badges && !this.mergedPackageData.badges.list ) {
+			next(new Error('projectz: badges field must now be in the format of: {list: [], config: {}}\nSee https://github.com/bevry/badges for details.'))
+			return this
+		}
+
 		// Validate keywords field
 		if ( typeChecker.isString(this.mergedPackageData.keywords) ) {
 			next(new Error('projectz: keywords field must be array instead of CSV'))
@@ -359,6 +374,10 @@ export default class Projectz {
 			// authors: []
 		})
 
+		// Ensure badge config
+		if ( !this.mergedPackageData.badges.list )  this.mergedPackageData.badges.list = []
+		if ( !this.mergedPackageData.badges.config )  this.mergedPackageData.badges.config = {}
+
 		// Enable meta files based on whether they exist
 		eachr(this.dataForMetaFiles, (value, name) => {
 			if ( this.mergedPackageData.readmes[name] == null )  this.mergedPackageData.readmes[name] = value != null
@@ -367,18 +386,6 @@ export default class Projectz {
 		// Enable package files based on whether they exist
 		eachr(this.dataForPackageFiles, (value, name) => {
 			if ( this.mergedPackageData.packages[name] == null )  this.mergedPackageData.packages[name] = value != null
-		})
-
-		// Fallback some defaults on the badges property
-		extendr.defaults(this.mergedPackageData.badges, {
-			// Enable the travis badge by default if the travis file had data
-			travis:         this.dataForMetaFiles.travis != null,
-
-			// Enable these badges by default if the packge file had data
-			npm:            this.dataForPackageFiles.package != null,
-			npmdownloads:   this.dataForPackageFiles.package != null,
-			david:          this.dataForPackageFiles.package != null,
-			daviddev:       this.dataForPackageFiles.package != null,
 		})
 
 		// Fallback some defaults on the merged object
@@ -393,7 +400,7 @@ export default class Projectz {
 			title: this.mergedPackageData.name || null
 		})
 
-		// Extract github information
+		// Extract repository information
 		const githubMatch = (this.mergedPackageData.repository.url || this.mergedPackageData.homepage).match(/github\.com\/(.+?)(?:\.git|\/)?$/)
 		const githubMatchParts = (githubMatch && githubMatch[1] || '').split('/')
 		if ( githubMatchParts.length === 2 ) {
@@ -411,7 +418,11 @@ export default class Projectz {
 				url: githubUrl,
 				repositoryUrl: githubRepositoryUrl
 			}
-			this.mergedPackageData.repo = githubSlug
+			this.mergedPackageData.repoSlug = githubSlug
+
+			// Add github data to the badges
+			this.mergedPackageData.badges.config.githubUsername = githubUsername
+			this.mergedPackageData.badges.config.githubRepository = githubRepository
 
 			// Fallback fields
 			extendr.defaults(this.mergedPackageData, {
@@ -427,9 +438,20 @@ export default class Projectz {
 				}
 			})
 		}
+		else {
+			throw new Error('projectz: currently only github repositories are supported')
+		}
 
-		// Extract repo slug for easier work
-		const repoSlug = this.mergedPackageData.repo
+		// Shorthand repo slug
+		const repoSlug = this.mergedPackageData.repoSlug
+
+		// Add repo slug to the badges
+		this.mergedPackageData.badges.config.repoSlug = repoSlug
+
+		// Add npm data to the badges
+		if ( this.mergedPackageData.packages.package && this.mergedPackageData.name ) {
+			this.mergedPackageData.badges.config.npmPackageName = this.mergedPackageData.name
+		}
 
 		// Add people to the fellow singleton with their appropriate permissions
 		Fellow.add(this.mergedPackageData.author).forEach((fellow) => {

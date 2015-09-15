@@ -20,7 +20,15 @@ export class License {
 
 	updateHTML () {
 		this.descriptionHTML = `<a href="${this.url}">${this.name}</a>`
-		this.bodyHTML = this.body.replace(/^(.+?)\n/, '<h2>$1</h2>\n')
+		this.bodyHTML = this.body
+			// Remove useless copyright headers
+			.replace('\nCopyright (c) <year> <copyright holders>\n', '')
+
+			// Remove license introductions
+			.replace(/^[\s\S]+<<endOptional>>\s*/m, '')
+
+			// Convert the license into HTML
+			.replace(/^(.+?)\n\s*([\s\S]+)\s*$/, '<h2>$1</h2>\n\n<pre>\n$2\n</pre>')
 		return this
 	}
 

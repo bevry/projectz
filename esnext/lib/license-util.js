@@ -28,7 +28,7 @@ export function getLicenseFile (opts) {
 
 	// Prepare
 	const result = [
-		'# License',
+		'<h1>License</h1>',
 		'',
 		getLicenseIntroduction(opts),
 		'',

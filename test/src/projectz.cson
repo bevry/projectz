@@ -14,13 +14,32 @@
 	maintainers: [
 		'Benjamin Lupton <b@lupton.cc> (http://balupton.com)'
 	]
-	badges:
-		gratipay: 'bevry'
-		flattr: '344188/balupton-on-Flattr'
-		paypal: 'QB8GQPZAH84N6'
-		waffleio: true
-		wishlist: "http://amzn.com/w/2F8TXKSNAFG4V"
-		coveralls: true
+	badges: {
+		"list": [
+			"travisci",
+			"npmversion",
+			"npmdownloads",
+			"daviddm",
+			"daviddmdev",
+			"---",
+			"slackin",
+			"patreon",
+			"gratipay",
+			"flattr",
+			"paypal",
+			"bitcoin",
+			"wishlist"
+		],
+		"config": {
+			"patreonUsername": "bevry",
+			"gratipayUsername": "bevry",
+			"flattrCode": "344188/balupton-on-Flattr",
+			"paypalButtonID": "QB8GQPZAH84N6",
+			"bitcoinURL": "https://bevry.me/bitcoin",
+			"wishlistURL": "https://bevry.me/wishlist",
+			"slackinURL": "https://slack.bevry.me"
+		}
+	}
 	dependencies:
 		"typechecker": "~2.0.6"
 	engines:
@@ -45,7 +64,6 @@
 	# =================================
 	# PACKAGE FILES
 
-	###
 	packages:
 		package: true
 		component:
@@ -63,5 +81,4 @@
 		backers: true
 		license: true
 		readme: true
-	###
 }

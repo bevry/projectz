@@ -1,3 +1,5 @@
+/* eslint no-extra-parens:0 */
+
 // Projectz CLI
 
 // Logging

@@ -27,7 +27,6 @@ export function getInstallInstructions (opts) {
 			else {
 				// Local NPM
 				parts.push([
-					'\n',
 					'### [NPM](http://npmjs.org/)',
 					`- Use: \`require('${opts.name}')\``,
 					`- Install: \`npm install --save ${opts.name}\``

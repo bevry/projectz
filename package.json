@@ -51,6 +51,7 @@
     "node": ">=0.12"
   },
   "dependencies": {
+    "badges": "^0.1.0",
     "caterpillar": "^2.0.7",
     "caterpillar-filter": "^2.0.3",
     "caterpillar-human": "^2.1.2",
@@ -63,6 +64,7 @@
     "cson": "^3.0.1",
     "eachr": "^2.0.2",
     "extendr": "^3.0.0",
+    "fellow": "^1.0.0",
     "safefs": "^4.0.0",
     "spdx": "^0.4.1",
     "spdx-license-list": "^2.0.0",
