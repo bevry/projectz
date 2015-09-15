@@ -1,4 +1,4 @@
-// 11 September 2015
+// 14 September 2015
 // https://github.com/bevry/base
 // http://eslint.org
 {
@@ -168,8 +168,8 @@
 		// Use dot notation where possible
 		"dot-notation": 2,
 
-		// Unless you are does == null, then force === to avoid truthy/falsey mistakes
-		"eqeqeq": 2,
+		// Unless you are doing == null, then force === to avoid truthy/falsey mistakes
+		"eqeqeq": [2, "allow-null"],
 
 		// Always use hasOwnProperty when doing for in
 		"guard-for-in": 2,
