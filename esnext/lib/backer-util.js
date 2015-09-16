@@ -36,14 +36,22 @@ export function getMaintainersText (opts) {
 	return result
 }
 
-export function getContributeText (opts, text) {
+export function getContributeLink (opts, {optional = false}) {
 	// Prepare
-	const file = 'CONTRIBUTING.md'
+	const file = opts.filenamesForReadmeFiles.contributing
+	if ( !file ) {
+		if ( optional ) {
+			return ''
+		}
+		else {
+			throw new Error('Contributing section requires a CONTRIBUTING file to exist')
+		}
+	}
 	const url = projectzUtil.getFileUrl(opts, file)
-	if ( text == null )  text = `Discover how you can contribute by heading on over to the \`${file}\` file.`
+	const text = `Discover how you can contribute by heading on over to the <code>${file}</code> file.`
 
 	// Return
-	return `[${text}](${url})`
+	return projectzUtil.getLink({url, text})
 }
 
 export function getContributorsText (opts) {
@@ -53,13 +61,13 @@ export function getContributorsText (opts) {
 		// ignore
 		result +=
 			'No contributors yet! Will you be the first?' +
-			`\n${getContributeText(opts)}`
+			`\n${getContributeLink(opts, {optional: true})}`
 	}
 	else {
 		result +=
-			'These amazing people have contributed code to this project:\n\n'
-				+ projectzUtil.getPeopleHTML(opts.contributors, {githubSlug: opts.github.slug}) +
-				`\n\n${getContributeText(opts, 'Become a contributor!')}`
+			'These amazing people have contributed code to this project:\n\n' +
+			projectzUtil.getPeopleHTML(opts.contributors, {githubSlug: opts.github.slug}) +
+			`\n\n${getContributeLink(opts, {optional: true})}`
 	}
 
 	return result
@@ -71,17 +79,17 @@ export function getBackerSection (opts) {
 
 	// Prepare
 	const result = [
-		'## Backers',
+		'<h2>Backers</h2>',
 		'',
-		'### Maintainers',
+		'<h3>Maintainers</h3>',
 		'',
 		getMaintainersText(opts),
 		'',
-		'### Sponsors',
+		'<h3>Sponsors</h3>',
 		'',
 		getSponsorsText(opts),
 		'',
-		'### Contributors',
+		'<h3>Contributors</h3>',
 		'',
 		getContributorsText(opts)
 	].join('\n')
@@ -96,17 +104,17 @@ export function getBackerFile (opts) {
 
 	// Prepare
 	const result = [
-		'# Backers',
+		'<h1>Backers</h1>',
 		'',
-		'## Maintainers',
+		'<h2>Maintainers</h2>',
 		'',
 		getMaintainersText(opts),
 		'',
-		'## Sponsors',
+		'<h2>Sponsors</h2>',
 		'',
 		getSponsorsText(opts),
 		'',
-		'## Contributors',
+		'<h2>Contributors</h2>',
 		'',
 		getContributorsText(opts)
 	].join('\n')
@@ -118,9 +126,9 @@ export function getBackerFile (opts) {
 export function getContributeSection (opts) {
 	// Prepare
 	const result = [
-		'## Contribute',
+		'<h2>Contribute</h2>',
 		'',
-		getContributeText(opts)
+		getContributeLink(opts)
 	].join('\n')
 
 	// Return

@@ -31,7 +31,6 @@
     "node": ">=0.8"
   },
   "dependencies": {
-    "some-bower-lib": "1.2.3",
     "typechecker": "~2.0.6"
   },
   "directories": {

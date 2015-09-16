@@ -1,6 +1,6 @@
 <!-- TITLE/ -->
 
-# ambi
+<h1>ambi</h1>
 
 <!-- /TITLE -->
 
@@ -80,56 +80,35 @@ console.log(result); // setTimeout - just like normal
 
 <!-- INSTALL/ -->
 
-## Install
+<h2>Install</h2>
 
-### [NPM](http://npmjs.org/)
-- Use: `require('ambi')`
-- Install: `npm install --save ambi`
-
-### [Browserify](http://browserify.org/)
-- Use: `require('ambi')`
-- Install: `npm install --save ambi`
-- CDN URL: `//wzrd.in/bundle/ambi@2.1.4`
-
-### [Ender](http://enderjs.com)
-- Use: `require('ambi')`
-- Install: `ender add ambi`
-
-### [Bower](http://bower.io/)
-- Use: `require('ambi')`
-- Install: `bower install ambi`
+<h3><a href="https://github.com/component/component" title="Frontend package manager and build tool for modular web applications">Component</a></h3><ul>
+<li>Install: <code>component install ambi</code></li>
+<li>Use: <code>require('ambi')</code></li></ul>
 
 <!-- /INSTALL -->
 
 
 <!-- HISTORY/ -->
 
-## History
-[Discover the change history by heading on over to the `HISTORY.md` file.](https://github.com/undefined/ambi/blob/master/HISTORY.md#files)
+<h2>History</h2>
+
+<a href="https://github.com/bevry/ambi/releases">Discover the release history by heading on over to the releases page.</a>
 
 <!-- /HISTORY -->
 
 
-<!-- CONTRIBUTE/ -->
-
-## Contribute
-
-[Discover how you can contribute by heading on over to the `CONTRIBUTING.md` file.](https://github.com/undefined/ambi/blob/master/CONTRIBUTING.md#files)
-
-<!-- /CONTRIBUTE -->
-
-
 <!-- BACKERS/ -->
 
-## Backers
+<h2>Backers</h2>
 
-### Maintainers
+<h3>Maintainers</h3>
 
 These amazing people are maintaining this project:
 
 <ul><li><a href="http://balupton.com">Benjamin Lupton</a> — <a href="https://github.com/bevry/ambi/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/ambi">view contributions</a></li></ul>
 
-### Sponsors
+<h3>Sponsors</h3>
 
 No sponsors yet! Will you be the first?
 
@@ -140,21 +119,21 @@ No sponsors yet! Will you be the first?
 <span class="badge-bitcoin"><a href="https://bevry.me/bitcoin" title="Donate once-off to this project using Bitcoin"><img src="//img.shields.io/badge/bitcoin-donate-yellow.svg" alt="Bitcoin donate button" /></a></span>
 <span class="badge-wishlist"><a href="https://bevry.me/wishlist" title="Buy an item on our wishlist for us"><img src="//img.shields.io/badge/wishlist-donate-yellow.svg" alt="Wishlist browse button" /></a></span>
 
-### Contributors
+<h3>Contributors</h3>
 
 These amazing people have contributed code to this project:
 
 <ul><li><a href="http://balupton.com">Benjamin Lupton</a> — <a href="https://github.com/bevry/ambi/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/ambi">view contributions</a></li>
 <li><a href="www.seanfridman.com">Sean Fridman</a> — <a href="https://github.com/bevry/ambi/commits?author=sfrdmn" title="View the GitHub contributions of Sean Fridman on repository bevry/ambi">view contributions</a></li></ul>
 
-[Become a contributor!](https://github.com/undefined/ambi/blob/master/CONTRIBUTING.md#files)
+
 
 <!-- /BACKERS -->
 
 
 <!-- LICENSE/ -->
 
-## License
+<h2>License</h2>
 
 Unless stated otherwise all works are:
 
@@ -167,5 +146,3 @@ and licensed under:
 <li><a href="http://spdx.org/licenses/CC-BY-4.0.html">Creative Commons Attribution 4.0</a></li></ul>
 
 <!-- /LICENSE -->
-
-

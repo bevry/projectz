@@ -1,23 +1,7 @@
 {
   "name": "ambi",
   "version": "2.1.4",
-  "authors": [
-    "me"
-  ],
   "license": "(MIT AND CC-BY-4.0)",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "some-bower-lib": "1.2.3"
-  },
-  "dev-dependencies": {
-    "other-bower-lib": "1.2.3"
-  },
   "description": "Execute a function ambidextrously (normalizes the differences between synchronous and asynchronous functions). Useful for treating synchronous functions as asynchronous functions (like supporting both synchronous and asynchronous event definitions automatically).",
   "keywords": [
     "sync",
@@ -28,5 +12,12 @@
     "ambidextrous",
     "flow"
   ],
-  "main": "./out/lib/ambi.js"
+  "demo": "https://github.com/bevry/ambi",
+  "main": "./out/lib/ambi.js",
+  "scripts": [
+    "./out/lib/ambi.js"
+  ],
+  "dependencies": {
+    "bevry/typechecker": "master"
+  }
 }

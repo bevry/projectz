@@ -54,7 +54,7 @@ export default class Projectz {
 		this.cwd = opts.cwd ? pathUtil.resolve(opts.cwd) : process.cwd()
 
 		// The absolute paths for all the package files
-		this.pathsForPackageFiles = null
+		this.filenamesForPackageFiles = null
 
 		// The data for each of our package files
 		this.dataForPackageFiles = null
@@ -63,14 +63,14 @@ export default class Projectz {
 		this.dataForPackageFilesEnhanced = null
 
 
-		// The absolute paths for all the meta files
-		this.pathsForMetaFiles = null
+		// The absolute paths for all the readme files
+		this.filenamesForReadmeFiles = null
 
-		// The data for each of our meta files
-		this.dataForMetaFiles = null
+		// The data for each of our readme files
+		this.dataForReadmeFiles = null
 
-		// The enhanced data for each of our meta files
-		this.dataForMetaFilesEnhanced = null
+		// The enhanced data for each of our readme files
+		this.dataForReadmeFilesEnhanced = null
 
 
 		// The merged data for each of our package files
@@ -79,55 +79,56 @@ export default class Projectz {
 
 		// Our log function to use (logLevel, ...messages)
 		this.log = opts.log || function () {}
-
-		// Apply our determined paths for packages
-		this.pathsForPackageFiles = {
-			projectz:      pathUtil.join(this.cwd, 'projectz.cson'),
-			package:       pathUtil.join(this.cwd, 'package.json'),
-			bower:         pathUtil.join(this.cwd, 'bower.json'),
-			component:     pathUtil.join(this.cwd, 'component.json'),
-			jquery:        pathUtil.join(this.cwd, 'jquery.json')
-		}
-
-		// Apply our determined paths for readmes
-		// @TODO support other extensions than just markdown
-		this.pathsForMetaFiles = {
-			readme:        pathUtil.join(this.cwd, 'README.md'),
-			history:       pathUtil.join(this.cwd, 'HISTORY.md'),
-			contributing:  pathUtil.join(this.cwd, 'CONTRIBUTING.md'),
-			backers:       pathUtil.join(this.cwd, 'BACKERS.md'),
-			license:       pathUtil.join(this.cwd, 'LICENSE.md')
-		}
 	}
 
 	// Load
 	// Load in the files we will be working with
 	// Usage: `load(function (err) {})`
 	load (next) {
-		// Reset/apply our data for the different properties
+		// Reset package properties
+		this.filenamesForPackageFiles = {
+			// gets filled in with relative paths
+			projectz:      false,
+			package:       false,
+			bower:         false,
+			component:     false,
+			jquery:        false
+		}
 		this.dataForPackageFiles = {}
 		this.dataForPackageFilesEnhanced = {}
-		this.dataForMetaFiles = {}
-		this.dataForMetaFilesEnhanced = {}
+
+		// Reset readme properties
+		this.filenamesForReadmeFiles = {
+			// gets filled in with relative paths
+			readme:        false,
+			history:       false,
+			contributing:  false,
+			backers:       false,
+			license:       false
+		}
+		this.dataForReadmeFiles = {}
+		this.dataForReadmeFilesEnhanced = {}
+
+		// Reset merged data
 		this.mergedPackageData = {}
 
 		// Create our serial task group to allot our tasks into and once it completes continue to the next handler
 		const tasks = new TaskGroup().done(next)
 
 		// Load readme and package data
-		tasks.addTask(this.loadPaths.bind(this))
+		tasks.addTask('loadPaths', this.loadPaths.bind(this))
 
 		// Merge our package data
-		tasks.addTask(this.mergeData.bind(this))
+		tasks.addTask('mergeData', this.mergeData.bind(this))
 
 		// Fetch the latest contributors. This is after the merging as we access merged properties to be able to do this.
-		tasks.addTask(this.loadGithubContributors.bind(this))
+		tasks.addTask('loadGithubContributors', this.loadGithubContributors.bind(this))
 
 		// Enhance our package data
-		tasks.addTask(this.enhancePackages.bind(this))
+		tasks.addTask('enhancePackages', this.enhancePackages.bind(this))
 
 		// Enhance our readme data
-		tasks.addTask(this.enhanceReadmes.bind(this))
+		tasks.addTask('enhanceReadmes', this.enhanceReadmes.bind(this))
 
 		// Finish up
 		tasks.run()
@@ -208,90 +209,52 @@ export default class Projectz {
 	// Load Paths
 	// Load in the paths we have specified
 	// Usage: `loadPaths(function (err) {})`
-	// @TODO REWRITE THIS
 	loadPaths (next) {
 		// Create the parallel task group and once they've all completed fire our completion callback
 		const tasks = new TaskGroup().setConfig({concurrency: 0}).done(next)
 
-		// First load in the packages
+		// Apply our determined paths for packages
+		const packages = Object.keys(this.filenamesForPackageFiles)
+		const readmes = Object.keys(this.filenamesForReadmeFiles)
+
+		// Load
 		tasks.addTask((complete) => {
-			this.loadPackages(this.pathsForPackageFiles, (err, dataForPackageFiles) => {
+			fsUtil.readdir(this.cwd, (err, files) => {
 				if ( err )  return complete(err)
-				this.dataForPackageFiles = dataForPackageFiles
-				complete()
-			})
-		})
+				files.forEach((file) => {
+					const filePath = pathUtil.join(this.cwd, file)
 
-		// Then load in our readmes
-		tasks.addTask((complete) => {
-			this.loadMetas(this.pathsForMetaFiles, (err, dataForMetaFiles) => {
-				if ( err )  return complete(err)
-				this.dataForMetaFiles = dataForMetaFiles
-				complete()
-			})
-		})
+					packages.forEach((key) => {
+						if ( file.toLowerCase().indexOf(key) === 0 ) {
+							const message = `Reading package file: ${filePath}`
+							tasks.addTask(message, (complete) => {
+								this.log('info', message)
+								CSON.load(filePath, (err, data) => {
+									if ( err )  return complete(err)
+									this.filenamesForPackageFiles[key] = file
+									this.dataForPackageFiles[key] = data
+									complete(err)
+								})
+							})
+						}
+					})
 
-		// Finish up
-		tasks.run()
-		return this
-	}
-
-	// Load Packages
-	// Load in the packages we have specified
-	// Usage: `loadPackages(paths, function (err, dataForPackageFiles) {})`
-	// @TODO REWRITE THIS
-	loadPackages (pathsForPackageFiles, next) {
-		const dataForPackageFiles = {}
-
-		const tasks = new TaskGroup().setConfig({concurrency: 0}).done(function (err) {
-			if ( err )  return next(err)
-			next(null, dataForPackageFiles)
-		})
-
-		eachr(pathsForPackageFiles, function (value, key) {
-			tasks.addTask(function (complete) {
-				dataForPackageFiles[key] = null
-				fsUtil.exists(value, function (exists) {
-					if ( exists === false )  return complete()
-					const result = CSON.parseFile(value)
-					if ( result instanceof Error )  return complete(result)
-					dataForPackageFiles[key] = result
-					complete()
-				})
-			})
-
-			return true
-		})
-
-		// Finish up
-		tasks.run()
-		return this
-	}
-
-
-	// Load Metas
-	// Load in the readmes we have specified
-	// Usage: `loadPackages(paths, function (err, dataForMetaFiles) {})`
-	// @TODO REWRITE THIS
-	loadMetas (pathsForMetaFiles, next) {
-		const dataForMetaFiles = {}
-
-		const tasks = new TaskGroup().setConfig({concurrency: 0}).done(function (err) {
-			if ( err )  return next(err)
-			next(null, dataForMetaFiles)
-		})
-
-		eachr(pathsForMetaFiles, function (value, key) {
-			tasks.addTask(function (complete) {
-				dataForMetaFiles[key] = null
-				fsUtil.exists(value, function (exists) {
-					if ( exists === false )  return complete()
-					fsUtil.readFile(value, function (err, data) {
-						if ( err )  return complete(err)
-						dataForMetaFiles[key] = data.toString()
-						complete()
+					readmes.forEach((key) => {
+						if ( file.toLowerCase().indexOf(key) === 0 ) {
+							const message = `Reading readme file: ${filePath}`
+							tasks.addTask(message, (complete) => {
+								this.log('info', message)
+								fsUtil.readFile(filePath, (err, data) => {
+									if ( err )  return complete(err)
+									this.filenamesForReadmeFiles[key] = file
+									this.dataForReadmeFiles[key] = data.toString()
+									complete(err)
+								})
+							})
+						}
 					})
 				})
+				complete()
 			})
 		})
 
@@ -299,7 +262,6 @@ export default class Projectz {
 		tasks.run()
 		return this
 	}
-
 
 	// Merge Packages
 	mergeData (next) {
@@ -358,6 +320,18 @@ export default class Projectz {
 			return this
 		}
 
+		// Validate package valuees
+		for ( const name in this.mergedPackageData.packages ) {
+			if ( this.mergedPackageData.packages.hasOwnProperty(name) ) {
+				const value = this.mergedPackageData.packages[name]
+				if ( !typeChecker.isObject(value) ) {
+					next(new Error(`projectz: custom package data for package ${name} must be an object`))
+					return this
+				}
+			}
+		}
+
+
 		// ----------------------------------
 		// Merging
 
@@ -378,20 +352,14 @@ export default class Projectz {
 		if ( !this.mergedPackageData.badges.list )  this.mergedPackageData.badges.list = []
 		if ( !this.mergedPackageData.badges.config )  this.mergedPackageData.badges.config = {}
 
-		// Enable meta files based on whether they exist
-		eachr(this.dataForMetaFiles, (value, name) => {
-			if ( this.mergedPackageData.readmes[name] == null )  this.mergedPackageData.readmes[name] = value != null
-		})
-
-		// Enable package files based on whether they exist
-		eachr(this.dataForPackageFiles, (value, name) => {
-			if ( this.mergedPackageData.packages[name] == null )  this.mergedPackageData.packages[name] = value != null
-		})
+		// Add paths so that our helpers have access to them
+		this.mergedPackageData.filenamesForPackageFiles = this.filenamesForPackageFiles
+		this.mergedPackageData.filenamesForReadmeFiles = this.filenamesForReadmeFiles
 
 		// Fallback some defaults on the merged object
 		extendr.defaults(this.mergedPackageData, {
-			// Fallback browsers field, by checking if `component` or `bower` package information exists
-			browsers: this.mergedPackageData.browser || this.mergedPackageData.packages.component || this.mergedPackageData.packages.bower,
+			// Fallback browsers field, by checking if `component` or `bower` package files exists
+			browsers: !!(this.filenamesForPackageFiles.browser || this.filenamesForPackageFiles.component),
 
 			// Fallback demo field, by scanning homepage
 			demo: this.mergedPackageData.homepage,
@@ -401,6 +369,7 @@ export default class Projectz {
 		})
 
 		// Extract repository information
+		let repoSlug = null
 		const githubMatch = (this.mergedPackageData.repository.url || this.mergedPackageData.homepage).match(/github\.com\/(.+?)(?:\.git|\/)?$/)
 		const githubMatchParts = (githubMatch && githubMatch[1] || '').split('/')
 		if ( githubMatchParts.length === 2 ) {
@@ -418,7 +387,7 @@ export default class Projectz {
 				url: githubUrl,
 				repositoryUrl: githubRepositoryUrl
 			}
-			this.mergedPackageData.repoSlug = githubSlug
+			repoSlug = githubSlug
 
 			// Add github data to the badges
 			this.mergedPackageData.badges.config.githubUsername = githubUsername
@@ -442,14 +411,11 @@ export default class Projectz {
 			throw new Error('projectz: currently only github repositories are supported')
 		}
 
-		// Shorthand repo slug
-		const repoSlug = this.mergedPackageData.repoSlug
-
 		// Add repo slug to the badges
 		this.mergedPackageData.badges.config.repoSlug = repoSlug
 
 		// Add npm data to the badges
-		if ( this.mergedPackageData.packages.package && this.mergedPackageData.name ) {
+		if ( this.filenamesForPackageFiles.package && this.mergedPackageData.name ) {
 			this.mergedPackageData.badges.config.npmPackageName = this.mergedPackageData.name
 		}
 
@@ -505,7 +471,7 @@ export default class Projectz {
 		)
 
 		// Explicit data
-		if ( typeof this.mergedPackageData.packages.package === 'object' ) {
+		if ( this.mergedPackageData.packages.package ) {
 			extendr.extend(
 				this.dataForPackageFilesEnhanced.package,
 				this.mergedPackageData.packages.package
@@ -527,7 +493,7 @@ export default class Projectz {
 		)
 
 		// Explicit data
-		if ( typeof this.mergedPackageData.packages.jquery === 'object' ) {
+		if ( this.mergedPackageData.packages.jquery ) {
 			extendr.extend(
 				this.dataForPackageFilesEnhanced.jquery,
 				this.mergedPackageData.packages.jquery
@@ -558,7 +524,7 @@ export default class Projectz {
 		)
 
 		// Explicit data
-		if ( typeof this.mergedPackageData.packages.component === 'object' ) {
+		if ( this.mergedPackageData.packages.component ) {
 			extendr.extend(
 				this.dataForPackageFilesEnhanced.component,
 				this.mergedPackageData.packages.component
@@ -582,12 +548,13 @@ export default class Projectz {
 				license:                this.mergedPackageData.license,
 				description:            this.mergedPackageData.description,
 				keywords:               this.mergedPackageData.keywords,
+				authors:                projectzUtil.getPeopleTextArray(Fellow.authorsRepository(this.mergedPackageData.repo), {years: true}).join(', '),
 				main:                   this.mergedPackageData.main
 			}
 		)
 
 		// Explicit data
-		if ( typeof this.mergedPackageData.packages.bower === 'object' ) {
+		if ( this.mergedPackageData.packages.bower ) {
 			extendr.extend(
 				this.dataForPackageFilesEnhanced.bower,
 				this.mergedPackageData.packages.bower
@@ -602,23 +569,23 @@ export default class Projectz {
 	// Enhance Readmes
 	enhanceReadmes (next) {
 		const opts = this.mergedPackageData
-		eachr(this.dataForMetaFiles, (data, name) => {
+		eachr(this.dataForReadmeFiles, (data, name) => {
 			if ( !data ) {
-				this.log('debug', `Enhancing meta file: ${name} — skipped`)
+				this.log('debug', `Enhancing readme data: ${name} — skipped`)
 				return
 			}
-			data = projectzUtil.replaceSection(['TITLE', 'NAME'], data, `# ${opts.title}`)
-			data = projectzUtil.replaceSection(['BADGES', 'BADGE'], data, badgeUtil.getBadgesSection(opts))
+			data = projectzUtil.replaceSection(['TITLE', 'NAME'], data, `<h1>${opts.title}</h1>`)
+			data = projectzUtil.replaceSection(['BADGES', 'BADGE'], data, badgeUtil.getBadgesSection.bind(null, opts))
 			data = projectzUtil.replaceSection(['DESCRIPTION'], data, opts.description)
-			data = projectzUtil.replaceSection(['INSTALL'], data, installUtil.getInstallInstructions(opts))
-			data = projectzUtil.replaceSection(['CONTRIBUTE', 'CONTRIBUTING'], data, backerUtil.getContributeSection(opts))
-			data = projectzUtil.replaceSection(['BACKERS', 'BACKER'], data, backerUtil.getBackerSection(opts))
-			data = projectzUtil.replaceSection(['BACKERSFILE', 'BACKERFILE'], data, backerUtil.getBackerFile(opts))
-			data = projectzUtil.replaceSection(['HISTORY', 'CHANGES', 'CHANGELOG'], data, historyUtil.getHistorySection(opts))
-			data = projectzUtil.replaceSection(['LICENSE', 'LICENSES'], data, licenseUtil.getLicenseSection(opts))
-			data = projectzUtil.replaceSection(['LICENSEFILE'], data, licenseUtil.getLicenseFile(opts))
-			this.dataForMetaFilesEnhanced[name] = data
-			this.log('info', `Enhanced meta file: ${name}`)
+			data = projectzUtil.replaceSection(['INSTALL'], data, installUtil.getInstallInstructions.bind(null, opts))
+			data = projectzUtil.replaceSection(['CONTRIBUTE', 'CONTRIBUTING'], data, backerUtil.getContributeSection.bind(null, opts))
+			data = projectzUtil.replaceSection(['BACKERS', 'BACKER'], data, backerUtil.getBackerSection.bind(null, opts))
+			data = projectzUtil.replaceSection(['BACKERSFILE', 'BACKERFILE'], data, backerUtil.getBackerFile.bind(null, opts))
+			data = projectzUtil.replaceSection(['HISTORY', 'CHANGES', 'CHANGELOG'], data, historyUtil.getHistorySection.bind(null, opts))
+			data = projectzUtil.replaceSection(['LICENSE', 'LICENSES'], data, licenseUtil.getLicenseSection.bind(null, opts))
+			data = projectzUtil.replaceSection(['LICENSEFILE'], data, licenseUtil.getLicenseFile.bind(null, opts))
+			this.dataForReadmeFilesEnhanced[name] = projectzUtil.trim(data)
+			this.log('info', `Enhanced readme data: ${name}`)
 			return true
 		})
 
@@ -632,52 +599,35 @@ export default class Projectz {
 	// Usage: `save(function (err) {})`
 	save (next) {
 		// Prepare
-		const log = this.log
-		log('info', 'Writing changes...')
-		const tasks = new TaskGroup().setConfig({concurrency: 0}).done(function (err) {
+		this.log('info', 'Writing changes...')
+		const tasks = new TaskGroup().setConfig({concurrency: 0}).done((err) => {
 			if ( err )  return next(err)
-			log('info', 'Wrote changes')
+			this.log('info', 'Wrote changes')
 			return next()
 		})
 
 		// Save package files
-		eachr(this.mergedPackageData.packages, (enabled, name) => {
-			if ( name === 'projectz' ) {
-				return
-			}
-			if ( !enabled ) {
-				log('debug', `Saving package file: ${name} — skipped`)
-				return
-			}
-
-			const path = this.pathsForPackageFiles[name]
-			log('info', `Saving package file: ${path}`)
-			tasks.addTask((complete) => {
+		eachr(this.filenamesForPackageFiles, (filename, name) => {
+			if ( !filename || name === 'projectz' )  return
+			const filepath = pathUtil.join(this.cwd, filename)
+			const message = `Saving package file: ${filepath}`
+			tasks.addTask(message, (complete) => {
+				this.log('info', message)
 				const data = JSON.stringify(this.dataForPackageFilesEnhanced[name], null, '  ') + '\n'
-				fsUtil.writeFile(path, data, complete)
+				fsUtil.writeFile(filepath, data, complete)
 			})
-
-			return true
 		})
 
 		// Safe readme files
-		eachr(this.mergedPackageData.readmes, (enabled, name) => {
-			if ( name === 'projectz' ) {
-				return
-			}
-			if ( !enabled ) {
-				log('debug', `Saving readme file: ${name} — skipped`)
-				return
-			}
-
-			const path = this.pathsForMetaFiles[name]
-			log('info', `Saving readme file: ${name}`)
-			tasks.addTask((complete) => {
-				const data = this.dataForMetaFilesEnhanced[name]
-				fsUtil.writeFile(path, data, complete)
+		eachr(this.filenamesForReadmeFiles, (filename, name) => {
+			if ( !filename )  return
+			const filepath = pathUtil.join(this.cwd, filename)
+			const message = `Saving readme file: ${filepath}`
+			tasks.addTask(message, (complete) => {
+				this.log('info', message)
+				const data = this.dataForReadmeFilesEnhanced[name]
+				fsUtil.writeFile(filepath, data, complete)
 			})
-
-			return true
 		})
 
 		// Finish up

@@ -1,5 +1,21 @@
 # History
 
+## v1.0.0 September 16, 2015
+- Initial stable release
+- Readme and Package files are now extension independent
+- Readme sections are now outputted in HTML instead of Markdown to be more universal
+- Support SPDX licenses
+	- Implements [#72](https://github.com/bevry/projectz/issues/72), [#66](https://github.com/bevry/projectz/issues/66)
+	- Fixes [#65](https://github.com/bevry/projectz/issues/65)
+- Uses new [bevry/badges](https://github.com/bevry/badges) package for badge rendering
+	- Implements [#67](https://github.com/bevry/projectz/issues/67), [#55](https://github.com/bevry/projectz/issues/55), [#25](https://github.com/bevry/projectz/issues/25), [#10](https://github.com/bevry/projectz/issues/10)
+- Uses new [bevry/fellow](https://github.com/bevry/fellow) package for people handling
+	- Implements [#37](https://github.com/bevry/projectz/issues/37), [#11](https://github.com/bevry/projectz/issues/11)
+- Newline no longer required at start of readme file
+	- Fixes [#53](https://github.com/bevry/projectz/issues/53)
+- Moved from CoffeeScript to ES6+
+	- Fixes [#20](https://github.com/bevry/projectz/issues/20)
+
 ## v0.5.0 February 24, 2015
 - Support multiple licenses
 	- Currently only MIT and CC-BY-4.0 are supported

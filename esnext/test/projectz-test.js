@@ -37,10 +37,11 @@ joe.suite('projectz integration suite', function (suite, test) {
 					// Load the expected source.
 					fsUtil.readFile(pathUtil.join(expectPath, file), 'utf8', function (err, expected) {
 						if ( err )  return done(err)
+
 						// Load the actual source.
 						fsUtil.readFile(pathUtil.join(srcPath, file), 'utf8', function (err, actual) {
 							if ( err )  return done(err)
-							equal(actual, expected)
+							equal(actual.trim(), expected.trim())
 
 							// Complete the test for the file
 							done()

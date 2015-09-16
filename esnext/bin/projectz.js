@@ -52,7 +52,7 @@ cli.command('compile').description('Compile our project').action(function () {
 				logger.log('err', err.stack)
 				process.exit(1)
 			}
-			logger.log('info', 'Saved changes')
+			logger.log('info', 'Completed successfully')
 		})
 	})
 })

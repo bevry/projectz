@@ -45,7 +45,7 @@ export function getLicenseSection (opts) {
 
 	// Prepare
 	const result = [
-		'## License',
+		'<h2>License</h2>',
 		'',
 		getLicenseIntroduction(opts)
 	].join('\n')

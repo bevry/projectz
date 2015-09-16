@@ -188,43 +188,25 @@ export function getPeopleTextArray (people, opts = {}) {
 
 // Get File URL
 export function getFileUrl (opts, filename) {
-	return `https://github.com/${opts.username}/${opts.name}/blob/master/${filename}#files`
+	if ( opts.github.slug ) {
+		return `https://github.com/${opts.github.slug}/blob/master/${filename}#files`
+	}
+	else {
+		throw new Error('File links are currently only supported for github repositories')
+	}
 }
 
-// Get Function Named
-// e.g. {getMitLicense,getLicenses} with 'mit' returns getMitLicense
-export function getFunctionNamed (str) {
-	// Prepare
-	str = str.toLowerCase()
-
-	// Find
-	for ( const name of Object.keys(this) ) {
-		const fn = this[fn]
-		if ( name.substr(3).substr(str.length * -1).toLowerCase() === str ) {
-			return fn
-		}
+// Get HTML Link
+export function getLink ({url, title, text}) {
+	if ( !url || !text ) {
+		throw new Error('Links must have both a url and text')
 	}
-
-	// Return
-	return null
-}
-
-// Get Functions Ending With
-// e.g. {getNpmBadge,getBadges} with 'Badge' returns [getNpmBadge]
-export function getFunctionsEndingWith (str) {
-	// Prepare
-	const fns = []
-
-	// Find
-	for ( const name of Object.keys(this) ) {
-		const fn = this[fn]
-		if ( name.substr(str.length * -1) === str ) {
-			fns.push(fn)
-		}
+	if ( title ) {
+		return `<a href="${url}" title="${title}">${text}</a>`
 	}
-
-	// Return
-	return fns
+	else {
+		return `<a href="${url}">${text}</a>`
+	}
 }
 
 // Replace Section
@@ -250,18 +232,17 @@ export function replaceSection (names, source, inject) {
 		')\\s+'
 	].join(''), 'gim')
 
-	const replace = `<!-- ${sectionName}/ -->\n\n${inject}\n\n<!-- /${sectionName} -->\n\n\n`
+	function replace () {
+		const result = typeof inject === 'function' ? inject() : inject
+		return `<!-- ${sectionName}/ -->\n\n${result}\n\n<!-- /${sectionName} -->\n\n\n`
+	}
 
 	const result = source.replace(regex, replace)
 
 	return result
 }
 
-export function csvToArray ( str ) {
-	if ( typeof str === 'string') {
-		return str.split(/[,\n]/).map(function (i) {
-			return i.trim()
-		})
-	}
-	return []
+// Trim all whitespace at front and back
+export function trim (str) {
+	return str.replace(/^\s+|\s+$/g, '')
 }

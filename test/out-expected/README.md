@@ -1,18 +1,25 @@
-<!-- TITLE -->
+<!-- TITLE/ -->
+
+<h1>ambi</h1>
+
+<!-- /TITLE -->
+
 
 <!-- BADGES/ -->
 
-[![Build Status](https://img.shields.io/travis/bevry/ambi/master.svg)](http://travis-ci.org/bevry/ambi "Check this project's build status on TravisCI")
-[![NPM version](https://img.shields.io/npm/v/ambi.svg)](https://npmjs.org/package/ambi "View this project on NPM")
-[![NPM downloads](https://img.shields.io/npm/dm/ambi.svg)](https://npmjs.org/package/ambi "View this project on NPM")
-[![Stories in Ready](https://badge.waffle.io/bevry/ambi.png?label=ready)](http://waffle.io/bevry/ambi)
-[![Coverage Status](https://coveralls.io/repos/bevry/ambi/badge.png)](https://coveralls.io/r/bevry/ambi)
-[![Dependency Status](https://img.shields.io/david/bevry/ambi.svg)](https://david-dm.org/bevry/ambi)
-[![Dev Dependency Status](https://img.shields.io/david/dev/bevry/ambi.svg)](https://david-dm.org/bevry/ambi#info=devDependencies)<br/>
-[![Gratipay donate button](https://img.shields.io/gratipay/bevry.svg)](https://www.gratipay.com/bevry/ "Donate weekly to this project using Gratipay")
-[![Flattr donate button](https://img.shields.io/badge/flattr-donate-yellow.svg)](http://flattr.com/thing/344188/balupton-on-Flattr "Donate monthly to this project using Flattr")
-[![PayPayl donate button](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6 "Donate once-off to this project using Paypal")
-[![Wishlist browse button](https://img.shields.io/badge/wishlist-donate-yellow.svg)](http://amzn.com/w/2F8TXKSNAFG4V "Buy an item on our wishlist for us")
+<span class="badge-travisci"><a href="http://travis-ci.org/bevry/ambi" title="Check this project's build status on TravisCI"><img src="//img.shields.io/travis/bevry/ambi/master.svg" alt="Travis CI Build Status" /></a></span>
+<span class="badge-npmversion"><a href="https://npmjs.org/package/ambi" title="View this project on NPM"><img src="//img.shields.io/npm/v/ambi.svg" alt="NPM version" /></a></span>
+<span class="badge-npmdownloads"><a href="https://npmjs.org/package/ambi" title="View this project on NPM"><img src="//img.shields.io/npm/dm/ambi.svg" alt="NPM downloads" /></a></span>
+<span class="badge-daviddm"><a href="https://david-dm.org/bevry/ambi" title="View the status of this project's dependencies on DavidDM"><img src="//img.shields.io/david/bevry/ambi.svg" alt="Dependency Status" /></a></span>
+<span class="badge-daviddmdev"><a href="https://david-dm.org/bevry/ambi#info=devDependencies" title="View the status of this project's development dependencies on DavidDM"><img src="//img.shields.io/david/dev/bevry/ambi.svg" alt="Dev Dependency Status" /></a></span>
+<br class="badge-separator" />
+<span class="badge-slackin"><a href="https://slack.bevry.me" title="Join this project's slack community"><img src="https://slack.bevry.me/badge.svg" alt="Slack community badge" /></a></span>
+<span class="badge-patreon"><a href="http://patreon.com/bevry" title="Donate to this project using Patreon"><img src="//img.shields.io/badge/patreon-donate-yellow.svg" alt="Patreon donate button" /></a></span>
+<span class="badge-gratipay"><a href="https://www.gratipay.com/bevry" title="Donate weekly to this project using Gratipay"><img src="//img.shields.io/badge/gratipay-donate-yellow.svg" alt="Gratipay donate button" /></a></span>
+<span class="badge-flattr"><a href="http://flattr.com/thing/344188/balupton-on-Flattr" title="Donate to this project using Flattr"><img src="https://img.shields.io/badge/flattr-donate-yellow.svg" alt="Flattr donate button" /></a></span>
+<span class="badge-paypal"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6" title="Donate to this project using Paypal"><img src="//img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a></span>
+<span class="badge-bitcoin"><a href="https://bevry.me/bitcoin" title="Donate once-off to this project using Bitcoin"><img src="//img.shields.io/badge/bitcoin-donate-yellow.svg" alt="Bitcoin donate button" /></a></span>
+<span class="badge-wishlist"><a href="https://bevry.me/wishlist" title="Buy an item on our wishlist for us"><img src="//img.shields.io/badge/wishlist-donate-yellow.svg" alt="Wishlist browse button" /></a></span>
 
 <!-- /BADGES -->
 
@@ -56,8 +63,6 @@ result = ambi(asyncMethod, 5, 2, function(err,result){ // ambi doesn't do anythi
 console.log(result); // setTimeout - just like normal
 ```
 
-
-
 ### Notes
 
 - Ambi accepts the arguments `(method, args...)`
@@ -72,89 +77,72 @@ console.log(result); // setTimeout - just like normal
 - Ambi can also introspect a different method than the one it fires, by passing `[methodToFire, methodToIntrospect]` as the `method` argument
 
 
+
 <!-- INSTALL/ -->
 
-## Install
+<h2>Install</h2>
 
-### [NPM](http://npmjs.org/)
-- Use: `require('ambi')`
-- Install: `npm install --save ambi`
-
-### [Browserify](http://browserify.org/)
-- Use: `require('ambi')`
-- Install: `npm install --save ambi`
-- CDN URL: `//wzrd.in/bundle/ambi@2.1.4`
-
-### [Ender](http://enderjs.com)
-- Use: `require('ambi')`
-- Install: `ender add ambi`
-
-### [Bower](http://bower.io/)
-- Use: `require('ambi')`
-- Install: `bower install ambi`
+<h3><a href="https://github.com/component/component" title="Frontend package manager and build tool for modular web applications">Component</a></h3><ul>
+<li>Install: <code>component install ambi</code></li>
+<li>Use: <code>require('ambi')</code></li></ul>
 
 <!-- /INSTALL -->
 
 
 <!-- HISTORY/ -->
 
-## History
-[Discover the change history by heading on over to the `HISTORY.md` file.](https://github.com/bevry/ambi/blob/master/HISTORY.md#files)
+<h2>History</h2>
+
+<a href="https://github.com/bevry/ambi/releases">Discover the release history by heading on over to the releases page.</a>
 
 <!-- /HISTORY -->
 
 
-<!-- CONTRIBUTE/ -->
-
-## Contribute
-
-[Discover how you can contribute by heading on over to the `CONTRIBUTING.md` file.](https://github.com/bevry/ambi/blob/master/CONTRIBUTING.md#files)
-
-<!-- /CONTRIBUTE -->
-
-
 <!-- BACKERS/ -->
 
-## Backers
+<h2>Backers</h2>
 
-### Maintainers
+<h3>Maintainers</h3>
 
 These amazing people are maintaining this project:
 
-- Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)
+<ul><li><a href="http://balupton.com">Benjamin Lupton</a> — <a href="https://github.com/bevry/ambi/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/ambi">view contributions</a></li></ul>
 
-### Sponsors
+<h3>Sponsors</h3>
 
 No sponsors yet! Will you be the first?
 
-[![Gratipay donate button](https://img.shields.io/gratipay/bevry.svg)](https://www.gratipay.com/bevry/ "Donate weekly to this project using Gratipay")
-[![Flattr donate button](https://img.shields.io/badge/flattr-donate-yellow.svg)](http://flattr.com/thing/344188/balupton-on-Flattr "Donate monthly to this project using Flattr")
-[![PayPayl donate button](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6 "Donate once-off to this project using Paypal")
-[![Wishlist browse button](https://img.shields.io/badge/wishlist-donate-yellow.svg)](http://amzn.com/w/2F8TXKSNAFG4V "Buy an item on our wishlist for us")
+<span class="badge-patreon"><a href="http://patreon.com/bevry" title="Donate to this project using Patreon"><img src="//img.shields.io/badge/patreon-donate-yellow.svg" alt="Patreon donate button" /></a></span>
+<span class="badge-gratipay"><a href="https://www.gratipay.com/bevry" title="Donate weekly to this project using Gratipay"><img src="//img.shields.io/badge/gratipay-donate-yellow.svg" alt="Gratipay donate button" /></a></span>
+<span class="badge-flattr"><a href="http://flattr.com/thing/344188/balupton-on-Flattr" title="Donate to this project using Flattr"><img src="https://img.shields.io/badge/flattr-donate-yellow.svg" alt="Flattr donate button" /></a></span>
+<span class="badge-paypal"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6" title="Donate to this project using Paypal"><img src="//img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a></span>
+<span class="badge-bitcoin"><a href="https://bevry.me/bitcoin" title="Donate once-off to this project using Bitcoin"><img src="//img.shields.io/badge/bitcoin-donate-yellow.svg" alt="Bitcoin donate button" /></a></span>
+<span class="badge-wishlist"><a href="https://bevry.me/wishlist" title="Buy an item on our wishlist for us"><img src="//img.shields.io/badge/wishlist-donate-yellow.svg" alt="Wishlist browse button" /></a></span>
 
-### Contributors
+<h3>Contributors</h3>
 
 These amazing people have contributed code to this project:
 
-- [Benjamin Lupton](https://github.com/balupton) <b@lupton.cc> — [view contributions](https://github.com/bevry/ambi/commits?author=balupton)
-- [sfrdmn](https://github.com/sfrdmn) — [view contributions](https://github.com/bevry/ambi/commits?author=sfrdmn)
+<ul><li><a href="http://balupton.com">Benjamin Lupton</a> — <a href="https://github.com/bevry/ambi/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/ambi">view contributions</a></li>
+<li><a href="www.seanfridman.com">Sean Fridman</a> — <a href="https://github.com/bevry/ambi/commits?author=sfrdmn" title="View the GitHub contributions of Sean Fridman on repository bevry/ambi">view contributions</a></li></ul>
 
-[Become a contributor!](https://github.com/bevry/ambi/blob/master/CONTRIBUTING.md#files)
+
 
 <!-- /BACKERS -->
 
 
 <!-- LICENSE/ -->
 
-## License
+<h2>License</h2>
 
 Unless stated otherwise all works are:
 
-- Copyright &copy; Bevry Pty Ltd <us@bevry.me> (http://bevry.me)
+<ul><li>Copyright &copy; <a href="http://bevry.me">Bevry Pty Ltd</a></li></ul>
 
 and licensed under:
 
-- The incredibly [permissive](http://en.wikipedia.org/wiki/Permissive_free_software_licence) [MIT License](http://opensource.org/licenses/mit-license.php) for code
-- The [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/) for everything else (including content, media and design)
+<ul><li><a href="http://spdx.org/licenses/MIT.html">MIT License</a></li>
+<li>and</li>
+<li><a href="http://spdx.org/licenses/CC-BY-4.0.html">Creative Commons Attribution 4.0</a></li></ul>
 
 <!-- /LICENSE -->

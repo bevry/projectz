@@ -44,8 +44,6 @@
 		"typechecker": "~2.0.6"
 	engines:
 		node: ">=0.8"
-	directories:
-		lib: './out/lib'
 	scripts:
 		preinstall: "node ./cyclic.js"
 		test: "node ./out/text/everything-test.js"
@@ -62,23 +60,10 @@
 	# - badges
 
 	# =================================
-	# PACKAGE FILES
+	# Custom Configuration
 
 	packages:
-		package: true
 		component:
 			dependencies:
 				"bevry/typechecker": "master"
-		bower: true
-		jquery: true
-
-	# =================================
-	# README FILES
-
-	readmes:
-		history: true
-		contributing: true
-		backers: true
-		license: true
-		readme: true
 }

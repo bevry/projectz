@@ -36,40 +36,23 @@ Here's some of the things it can do:
 	- `component.json`
 	- `jquery.json`
 - Create beautiful standardised readme files that stay in sync with your data files, supports:
-	- `README.md`
-	- `CONTRIBUTING.md`
-	- `LICENSE.md`
-	- `BACKERS.md`
-	- `HISTORY.md`
+	- `README`
+	- `CONTRIBUTING`
+	- `LICENSE`
+	- `BACKERS`
+	- `HISTORY`
 - Automatic injection of the appropriate installation methods, supports:
 	- [NPM](https://www.npmjs.com)
 	- [Browserify](http://browserify.org/)
 	- [Ender](http://enderjs.com)
 	- [Component](http://github.com/component/component)
 	- [Bower](http://bower.io/)
-- Automatic injection of the appropriate badges for your project, supports:
-	- Development Badges
-		- [NPM](https://www.npmjs.com) Package Version
-		- [NPM](https://www.npmjs.com) Package Downloads
-		- [Waffle.io](http://waffle.io) Stories
-		- [Travis CI](https://travis-ci.org) Build Status
-		- [David DM](https://david-dm.org) Dependencies, and Dev Dependencies
-		- [Coveralls](http://coveralls.io)
-		- [Sauce Labs Browser Matrix](https://saucelabs.com)
-	- Donation Badges
-		- [Gratipay](http://gratipay.com)
-		- [Flattr](http://flattr.com)
-		- [Paypal](http://paypal.com)
-		- BitCoin URL
-		- Wishlist URL
-- Automatic injection of your license information, supports:
-	- [MIT](http://opensource.org/licenses/mit-license.php)
-	- [CC-BY-4.0](http://creativecommons.org/licenses/by/4.0/)
-	- Dual Licenses
-	- More to come
+	- [DocPad](https://docpad.org) Plugins
+- Automatic injection of your desired [badges](https://github.com/bevry/badges)
+- Automatic injection of your [SPDX](http://spdx.org/licenses/) license information
 - Keep your data and readme files up to date with remote data, supports:
 	- Pulling in your latest contributors from GitHub
-	- Pulling in your latest financial backers from Flattr, etc (coming soon)
+	- Pulling in your latest sponsors from remote APIs (coming soon)
 
 
 <!-- INSTALL/ -->
@@ -89,22 +72,22 @@ Here's some of the things it can do:
 
 Once installed locally, you can compile your project using projectz by running the following in your terminal:
 
-``` bash
-node ./node_modules/projectz/bin/projectz compile 
+``` shell
+node ./node_modules/.bin/projectz compile
 ```
 
 
 ### Automatically
 
-To make projectz more automatic, we recommended adding the direct command to your build tool.
+To make projectz more automatic, we recommended adding the direct command above to your build tool.
 
 If you don't use a build tool, but do use npm, then you can add the following to your project's `package.json` file:
 
 ```
 {
   "scripts": {
-    "compile": "node ./node_modules/projectz/bin/projectz compile",
-    "posttest": "node ./node_modules/projectz/bin/projectz compile"
+    "compile": "node ./node_modules/.bin/projectz compile",
+    "posttest": "node ./node_modules/.bin/projectz compile"
   }
 }
 ```
@@ -134,121 +117,68 @@ The special fields are as so:
 ``` coffee
 {
 	# Project's human readable name
-	title: "Projectz"
+	title: "Projectz",
 
-	# Project slug name
-	name: "projectz"
+	# Project name
+	name: "projectz",
 
-	# Project GitHub repository full name
-	# If `repository` is set, or if `homepage` is a GitHub URL, we set this automatically
-	repo: "bevry/projectz"
-
-	# Project's homepage URL
-	# If `repo`, `repository`, or `demo` is set, we set this automatically
-	homepage: "https://github.com/bevry/projectz"
+	# Project's Website URL
+	homepage: "https://github.com/bevry/projectz",
 
 	# Project's demo URL
-	# If `homepage` or  is set, we set this automatically
-	demo: "https://github.com/bevry/projectz"
+	# If this is missing, and `homepage` is set, we set it to the `homepage` value
+	demo: "https://github.com/bevry/projectz",
 
 	# Project description
-	description: "Stop wasting time syncing and updating your project's README and Package Files!"
+	description: "Stop wasting time syncing and updating your project's README and Package Files!",
 
-	# Project keywords
-	# Can be an array or CSV string
-	keywords: "a, b, c"
+	# Project's SPDX License
+	# Uses https://www.npmjs.com/packages/spdx for parsing
+	license: "MIT",
+
+	# Whether the project can run on the client-side in web browsers
+	# If this is missing, and the component or bower package files exist, then this becomes `true`
+	browsers: true,
 
 	# Project's author details
 	# Can be an array or CSV string
-	authors: ["2013+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)"]
-	author: null
+	author: "2013+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
 
 	# Maintainers
-	# Can be an array or CSV string
-	maintainers: ["Benjamin Lupton (b@lupton.cc) (http://bevry.me)"]
-	maintainer: null
+	maintainers: [
+		"Benjamin Lupton (b@lupton.cc) (http://balupton.com)"
+	],
 
 	# Sponsors
-	# Can be an array or CSV string
-	sponsors: ["Benjamin Lupton (b@lupton.cc) (http://bevry.me)"]
+	sponsors: [
+		"Benjamin Lupton (b@lupton.cc) (http://balupton.com)"
+	],
 
 	# Contributors
-	# Pulled in automatically from the GitHub Repository API and the GitHub Repository's `package.json` file
-	contributors: null
-
-	# Project's license details
-	# Can be an array or CSV string
-	license: "MIT"  # {type:"MIT", url:"http://..."}
-	licenses: null
+	# Automatically combined with the contributors from the GitHub Repository API
+	contributors: [
+		"Benjamin Lupton (b@lupton.cc) (http://balupton.com)"
+	],
 
 	# Project's repository details
-	# If `repo` is set, or if `homepage` is a GitHub URL, we set this automatically
-	repository:
-		type: "git"
+	# If this is missing, and `homepage` is a GitHub URL, this determined automatically
+	repository: {
+		type: "git",
 		url: "https://github.com/bevry/projectz.git"
+	},
 
-	# Project's repository details
-	# If `repo` is set, or if `homepage` is a GitHub URL, we set this automatically
-	bugs:
+	# Project's issue tracker
+	# If this is missing, and `repository` is a GitHub repository, this determined automatically
+	bugs: {
 		url: "https://github.com/bevry/projectz/issues"
-
-	# Whether the project can run on the client-side in web browsers
-	# If the component or bower package information is set, then this becomes true automatically
-	browsers: true
+	},
 
 	# Project's badges for use in the readme files
-	badges:
-		# Travis CI Badge
-		# If not set, fallbacks to true if the `.travis.yml` file exists
-		travis: true
-
-		# NPM Version Badge
-		# If not set, fallbacks to true if the `package.json` file exists
-		npm: true
-
-		# NPM Downloads Badge
-		# If not set, fallbacks to true if the `package.json` file exists
-		npmdownloads: true
-
-		# David DM Dependency Badge
-		# If not set, fallbacks to true if the `package.json` file exists
-		# Will only run if dependencies is set
-		david: true
-
-		# David DM Dev Dependency Badge
-		# If not set, fallbacks to the David DM Dependency Badge value
-		# Will only run if dev dependencies is set
-		daviddev: true
-
-		# Waffle.io Badge
-		# If a string is provided, that will be used as the GitHub issue queue
-		# label. Otherwise, the label will default to "ready".
-		waffleio: true
-
-		# Coveralls.io Badge
-		# If a string is provided, that will be used as the label for the badge.
-		# Otherwise, the label will default to "Coverage Status".
-		coveralls: true
-
-		# Sauce Labs Browser Matrix Badge
-		# If a string is provided, that will be used as the user id for the badge.
-		saucebm: "user id"
-		
-		# Gratipay Badge
-		gratipay: "balupton"
-
-		# Flattr Badge
-		flattr: "344188/balupton-on-Flattr"
-
-		# Paypal Badge
-		paypal: "QB8GQPZAH84N6"
-
-		# BitCoin Badge
-		bitcoin: "https://coinbase.com/checkouts/9ef59f5479eec1d97d63382c9ebcb93a"
-
-		# Wishlist Badge
-		wishlist: "http://amzn.com/w/2F8TXKSNAFG4V"
-
+	# Uses https://www.npmjs.com/packages/badges for parsing and rendering, see for usage
+	badges: {
+		list: []
+		config: {}
+	}
 }
 ```
 
@@ -269,15 +199,11 @@ The following comment tags are supported:
 - `<!-- TITLE -->` — outputs the package's `title` field
 - `<!-- BADGES -->` — outputs the badges you have enabled from your package's `badges` field
 - `<!-- DESCRIPTION -->` — outputs the package's `description` field
-- `<!-- INSTALL -->` — supports installation instructions for:
-	- npm (if the `package.json` file exists)
-	- browserify, ender (if the `package.json` file exists and the `browsers` field is truthy)
-	- bower (if the `bower.json` file exists)
-	- component (if the `component.json` file exists)
-- `<!-- HISTORY -->` — outputs a link to the `HISTORY.md` file
-- `<!-- CONTRIBUTE -->` — outputs a link to the `CONTRIBUTE.md` file
-- `<!-- BACKERS -->` — outputs the information from the `sponsors` field, as well as any sponsor type badges
-- `<!-- LICENSE -->` — outputs a summary of the license information, and a link to the `LICENSE.md`
+- `<!-- INSTALL -->` — outputs the package's installation instructions
+- `<!-- HISTORY -->` — outputs a link to the `HISTORY` file if it exists, otherwise if it is a Github repository, outputs a link to the releases page
+- `<!-- CONTRIBUTE -->` — outputs a link to the `CONTRIBUTE` file if it exists
+- `<!-- BACKERS -->` — outputs the information from the `sponsors` field, as well as any funding badges
+- `<!-- LICENSE -->` — outputs a summary of the license information
 
 As well as these comment tags for updating entire files:
 
@@ -365,5 +291,3 @@ and licensed under:
 - The incredibly [permissive](http://en.wikipedia.org/wiki/Permissive_free_software_licence) [MIT License](http://opensource.org/licenses/mit-license.php)
 
 <!-- /LICENSE -->
-
-

@@ -14,11 +14,11 @@
   ],
   "author": "Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
   "maintainers": [
-    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
+    "Benjamin Lupton <b@lupton.cc> (http://balupton.com)"
   ],
   "contributors": [
-    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)",
-    "sfrdmn (https://github.com/sfrdmn)"
+    "Benjamin Lupton <b@lupton.cc> (http://balupton.com)",
+    "Sean Fridman <fridman@mail.sfsu.edu> (www.seanfridman.com)"
   ],
   "bugs": {
     "url": "https://github.com/bevry/ambi/issues"
@@ -27,20 +27,11 @@
     "type": "git",
     "url": "http://github.com/bevry/ambi.git"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "scope": "code"
-    },
-    {
-      "type": "CC-BY-4.0",
-      "scope": "everything else (including content, media and design)"
-    }
-  ],
   "engines": {
     "node": ">=0.8"
   },
   "dependencies": {
+    "some-bower-lib": "1.2.3",
     "typechecker": "~2.0.6"
   },
   "directories": {
@@ -50,5 +41,6 @@
     "preinstall": "node ./cyclic.js",
     "test": "node ./out/test/everything-test.js"
   },
-  "main": "./out/lib/ambi.js"
+  "main": "./out/lib/ambi.js",
+  "license": "(MIT AND CC-BY-4.0)"
 }
