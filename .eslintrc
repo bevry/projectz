@@ -1,4 +1,4 @@
-// 14 September 2015
+// 16 September 2015
 // https://github.com/bevry/base
 // http://eslint.org
 {
@@ -444,8 +444,8 @@
 		// We use multiple empty lines for styling
 		"no-multiple-empty-lines": 0,
 
-		// Nested ternaries are too complicated, use if statement instead
-		"no-nested-ternary": 2,
+		// Sometimes these are useful
+		"no-nested-ternary": 0,
 
 		// Use {} instead of new Object()
 		"no-new-object": 2,

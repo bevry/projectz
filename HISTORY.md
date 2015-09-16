@@ -1,5 +1,8 @@
 # History
 
+## v1.0.1 September 16, 2015
+- Fixed github API auth for user api requests
+
 ## v1.0.0 September 16, 2015
 - Initial stable release
 - Readme and Package files are now extension independent

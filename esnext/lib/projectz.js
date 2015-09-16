@@ -151,9 +151,15 @@ export default class Projectz {
 
 		// Prepare
 		const githubSlug = this.mergedPackageData.github.slug
+		const githubAccessToken = process.env.GITHUB_ACCESS_TOKEN
 		const githubClientId = process.env.GITHUB_CLIENT_ID
 		const githubClientSecret = process.env.GITHUB_CLIENT_SECRET
-		const url = `https://api.github.com/repos/${githubSlug}/contributors?per_page=100&client_id=${githubClientId}&client_secret=${githubClientSecret}`
+		const githubAuthQueryString = githubAccessToken
+			? `access_token=${githubAccessToken}`
+			: githubClientId && githubClientSecret
+				? `client_id=${githubClientId}&client_secret=${githubClientSecret}`
+				: ''
+		const url = `https://api.github.com/repos/${githubSlug}/contributors?per_page=100&${githubAuthQueryString}`
 
 		// Fetch the github and package contributors for it
 		log('info', `Loading contributors for repository: ${githubSlug}`)
@@ -168,7 +174,7 @@ export default class Projectz {
 			// Now lets replace the shallow member details with their full github profile details via the profile api
 			.map(function (user, complete) {
 				this.create()
-					.set(user.url)
+					.set(user.url + '?' + githubAuthQueryString)
 					.feed()
 					.action(function (data) {
 						if ( data.message )  throw new Error(data.message)
