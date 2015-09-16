@@ -194,8 +194,9 @@ export default class Projectz {
 			})
 
 			// Log
-			.action(function (contributors) {
+			.action((contributors) => {
 				log('info', `Loaded ${contributors.length} contributors for repository: ${githubSlug}`)
+				this.mergedPackageData.contributors = Fellow.contributesRepository(githubSlug)
 			})
 
 			// And return our result
@@ -229,7 +230,7 @@ export default class Projectz {
 							const message = `Reading package file: ${filePath}`
 							tasks.addTask(message, (complete) => {
 								this.log('info', message)
-								CSON.load(filePath, (err, data) => {
+								CSON.parseFile(filePath, (err, data) => {
 									if ( err )  return complete(err)
 									this.filenamesForPackageFiles[key] = file
 									this.dataForPackageFiles[key] = data
@@ -266,7 +267,7 @@ export default class Projectz {
 	// Merge Packages
 	mergeData (next) {
 		// By first merging in all the package data together into the enhanced data
-		extendr.deep(
+		extendr.extend(
 			this.mergedPackageData,
 			this.dataForPackageFiles.component || {},
 			this.dataForPackageFiles.bower || {},
@@ -369,7 +370,7 @@ export default class Projectz {
 		})
 
 		// Extract repository information
-		let repoSlug = null
+		let repo = this.mergedPackageData.repository.url || null
 		const githubMatch = (this.mergedPackageData.repository.url || this.mergedPackageData.homepage).match(/github\.com\/(.+?)(?:\.git|\/)?$/)
 		const githubMatchParts = (githubMatch && githubMatch[1] || '').split('/')
 		if ( githubMatchParts.length === 2 ) {
@@ -387,11 +388,12 @@ export default class Projectz {
 				url: githubUrl,
 				repositoryUrl: githubRepositoryUrl
 			}
-			repoSlug = githubSlug
+			repo = githubSlug
 
 			// Add github data to the badges
 			this.mergedPackageData.badges.config.githubUsername = githubUsername
 			this.mergedPackageData.badges.config.githubRepository = githubRepository
+			this.mergedPackageData.badges.config.githubSlug = githubSlug
 
 			// Fallback fields
 			extendr.defaults(this.mergedPackageData, {
@@ -407,34 +409,41 @@ export default class Projectz {
 				}
 			})
 		}
-		else {
-			throw new Error('projectz: currently only github repositories are supported')
-		}
-
-		// Add repo slug to the badges
-		this.mergedPackageData.badges.config.repoSlug = repoSlug
 
 		// Add npm data to the badges
 		if ( this.filenamesForPackageFiles.package && this.mergedPackageData.name ) {
 			this.mergedPackageData.badges.config.npmPackageName = this.mergedPackageData.name
 		}
 
-		// Add people to the fellow singleton with their appropriate permissions
-		Fellow.add(this.mergedPackageData.author).forEach((fellow) => {
-			fellow.authorsRepository(repoSlug)
-		})
-		Fellow.add(this.mergedPackageData.contributors).forEach((fellow) => {
-			fellow.contributesRepository(repoSlug)
-		})
-		Fellow.add(this.mergedPackageData.maintainers).forEach((fellow) => {
-			fellow.maintainsRepository(repoSlug)
-		})
+		// Enhance authors, contributors and maintainers
+		if ( repo ) {
+			// Add people to the fellow singleton with their appropriate permissions
+			Fellow.add(this.mergedPackageData.author).forEach((fellow) => {  // package author string
+				fellow.authorsRepository(repo)
+			})
+			Fellow.add(this.mergedPackageData.authors).forEach((fellow) => {  // bower authors array
+				fellow.authorsRepository(repo)
+			})
+			Fellow.add(this.mergedPackageData.contributors).forEach((fellow) => {
+				fellow.contributesRepository(repo)
+			})
+			Fellow.add(this.mergedPackageData.maintainers).forEach((fellow) => {
+				fellow.maintainsRepository(repo)
+			})
 
-		// Add the enhanced collections to the merged data
+			// Add the enhanced collections to the merged data
+			this.mergedPackageData.authors = Fellow.authorsRepository(repo)
+			this.mergedPackageData.contributors = Fellow.contributesRepository(repo)
+			this.mergedPackageData.maintainers = Fellow.maintainsRepository(repo)
+		}
+		else {
+			this.mergedPackageData.authors = Fellow.add(this.mergedPackageData.author || this.mergedPackageData.authors)
+			this.mergedPackageData.contributors = Fellow.add(this.mergedPackageData.contributors)
+			this.mergedPackageData.maintainers = Fellow.add(this.mergedPackageData.maintainers)
+		}
+
+		// Enhance licenses and sponsors
 		this.mergedPackageData.licenses = new projectzUtil.Licenses(this.mergedPackageData.license)
-		this.mergedPackageData.authors = Fellow.authorsRepository(repoSlug)
-		this.mergedPackageData.contributors = Fellow.contributesRepository(repoSlug)
-		this.mergedPackageData.maintainers = Fellow.maintainsRepository(repoSlug)
 		this.mergedPackageData.sponsors = Fellow.add(this.mergedPackageData.sponsors)
 
 		// Finish up
@@ -459,9 +468,9 @@ export default class Projectz {
 				license:                this.mergedPackageData.license,
 				description:            this.mergedPackageData.description,
 				keywords:               this.mergedPackageData.keywords,
-				author:                 projectzUtil.getPeopleTextArray(Fellow.authorsRepository(this.mergedPackageData.repo), {years: true}).join(', '),
-				maintainers:            projectzUtil.getPeopleTextArray(Fellow.maintainsRepository(this.mergedPackageData.repo)),
-				contributors:           projectzUtil.getPeopleTextArray(Fellow.contributesRepository(this.mergedPackageData.repo)),
+				author:                 projectzUtil.getPeopleTextArray(this.mergedPackageData.authors, {years: true}).join(', '),
+				maintainers:            projectzUtil.getPeopleTextArray(this.mergedPackageData.maintainers),
+				contributors:           projectzUtil.getPeopleTextArray(this.mergedPackageData.contributors),
 				bugs:                   this.mergedPackageData.bugs,
 				engines:                this.mergedPackageData.engines,
 				dependencies:           this.mergedPackageData.dependencies,
@@ -548,7 +557,7 @@ export default class Projectz {
 				license:                this.mergedPackageData.license,
 				description:            this.mergedPackageData.description,
 				keywords:               this.mergedPackageData.keywords,
-				authors:                projectzUtil.getPeopleTextArray(Fellow.authorsRepository(this.mergedPackageData.repo), {years: true}).join(', '),
+				authors:                projectzUtil.getPeopleTextArray(this.mergedPackageData.authors, {years: true}),
 				main:                   this.mergedPackageData.main
 			}
 		)

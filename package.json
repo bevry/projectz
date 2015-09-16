@@ -4,9 +4,7 @@
   "version": "1.0.0",
   "description": "Stop wasting time syncing and updating your project's README and Package Files!",
   "homepage": "https://github.com/bevry/projectz",
-  "license": {
-    "type": "MIT"
-  },
+  "license": "MIT",
   "keywords": [
     "project",
     "readme",
@@ -18,27 +16,43 @@
     "bower.json"
   ],
   "badges": {
-    "travis": true,
-    "npm": true,
-    "npmdownloads": true,
-    "david": true,
-    "daviddev": true,
-    "gratipay": "bevry",
-    "flattr": "344188/balupton-on-Flattr",
-    "paypal": "QB8GQPZAH84N6",
-    "bitcoin": "https://bevry.me/bitcoin",
-    "wishlist": "https://bevry.me/wishlist"
+    "list": [
+      "travisci",
+      "npmversion",
+      "npmdownloads",
+      "daviddm",
+      "daviddmdev",
+      "---",
+      "slackin",
+      "patreon",
+      "gratipay",
+      "flattr",
+      "paypal",
+      "bitcoin",
+      "wishlist"
+    ],
+    "config": {
+      "patreonUsername": "bevry",
+      "gratipayUsername": "bevry",
+      "flattrCode": "344188/balupton-on-Flattr",
+      "paypalButtonID": "QB8GQPZAH84N6",
+      "bitcoinURL": "https://bevry.me/bitcoin",
+      "wishlistURL": "https://bevry.me/wishlist",
+      "slackinURL": "https://slack.bevry.me"
+    }
   },
   "author": "2013+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
   "maintainers": [
-    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)",
-    "Rob Loach <robloach@gmail.com> (https://github.com/RobLoach)"
+    "Benjamin Lupton <b@lupton.cc> (http://balupton.com)",
+    "Rob Loach <robloach@gmail.com> (http://robloach.net)"
   ],
   "contributors": [
-    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)",
-    "pflannery (https://github.com/pflannery)",
-    "Rob Loach <robloach@gmail.com> (https://github.com/RobLoach)",
-    "Zearin (https://github.com/Zearin)"
+    "Benjamin Lupton <b@lupton.cc> (http://balupton.com)",
+    "Peter Flannery (https://github.com/pflannery)",
+    "Rob Loach <robloach@gmail.com> (http://robloach.net)",
+    "Zearin (https://github.com/Zearin)",
+    "vsopvsop (https://github.com/vsopvsop)",
+    "Shahar Or <mightyiampresence@gmail.com> (http://mightyi.am)"
   ],
   "bugs": {
     "url": "https://github.com/bevry/projectz/issues"
@@ -51,7 +65,7 @@
     "node": ">=0.12"
   },
   "dependencies": {
-    "badges": "^0.1.0",
+    "badges": "^1.0.1",
     "caterpillar": "^2.0.7",
     "caterpillar-filter": "^2.0.3",
     "caterpillar-human": "^2.1.2",
@@ -64,7 +78,7 @@
     "cson": "^3.0.1",
     "eachr": "^2.0.2",
     "extendr": "^3.0.0",
-    "fellow": "^1.0.0",
+    "fellow": "^1.2.0",
     "safefs": "^4.0.0",
     "spdx": "^0.4.1",
     "spdx-license-list": "^2.0.0",

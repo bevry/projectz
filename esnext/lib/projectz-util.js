@@ -178,7 +178,10 @@ export function getPeopleTextArray (people, opts = {}) {
 	else {
 		let textArray = []
 		people.forEach(function (person) {
-			if ( !person.name || person.name === 'null' ) throw new Error('For some reason the person doesn\'t have a name')
+			if ( !person.name || person.name === 'null' ) {
+				console.error(person)
+				throw new Error('For some reason the person doesn\'t have a name')
+			}
 			const text = getPersonText(person, opts)
 			if ( text )  textArray.push(text)
 		})

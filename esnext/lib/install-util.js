@@ -11,13 +11,15 @@ export function getInstallInstructions (opts) {
 
 	else {
 		// Node
-		if ( opts.packages.package ) {
+		if ( opts.filenamesForPackageFiles.package ) {
+			const npmLink = projectzUtil.getLink({text: '<h3>NPM</h3>', url: 'https://npmjs.com', title: 'npm is a package manager for javascript'})
+
 			if ( opts.preferGlobal ) {
 				const commands = '<code>' + Object.keys(opts.bin || {}).join('</code> <code>') + '</code>'
 
 				// Global NPM
 				parts.push([
-					`<h3>${projectzUtil.getLink({text: 'NPM', url: 'https://npmjs.com', title: 'npm is a package manager for javascript'})}</h3><ul>`,
+					`${npmLink}<ul>`,
 					`<li>Install: <code>npm install --global ${opts.name}</code></li>`,
 					`<li>Use: ${commands}</li></ul>`
 				].join('\n'))
@@ -25,7 +27,7 @@ export function getInstallInstructions (opts) {
 			else {
 				// Local NPM
 				parts.push([
-					`<h3>${projectzUtil.getLink({text: 'NPM', url: 'https://npmjs.com', title: 'npm is a package manager for javascript'})}</h3><ul>`,
+					`${npmLink}<ul>`,
 					`<li>Install: <code>npm install --save ${opts.name}</code></li>`,
 					`<li>Use: <code>require('${opts.name}')</code></li></ul>`
 				].join('\n'))
@@ -33,14 +35,17 @@ export function getInstallInstructions (opts) {
 
 			// Browser
 			if ( opts.browsers ) {
+				const browserifyLink = projectzUtil.getLink({text: '<h3>Browserify</h3>', url: 'http://browserify.org', title: "Browserify lets you require('modules') in the browser by bundling up all of your dependencies"})
 				parts.push([
-					`<h3>${projectzUtil.getLink({text: 'Browserify', url: 'http://browserify.org', title: "Browserify lets you require('modules') in the browser by bundling up all of your dependencies"})}</h3><ul>`,
+					`${browserifyLink}<ul>`,
 					`<li>Install: <code>npm install --save ${opts.name}</code></li>`,
-					`<li>Use: <code>require('${opts.name}')</code></li>`
+					`<li>Use: <code>require('${opts.name}')</code></li>`,
 					`<li>CDN URL: <code>//wzrd.in/bundle/${opts.name}@${opts.version}</code></li></ul>`
 				].join('\n'))
+
+				const enderLink = projectzUtil.getLink({text: '<h3>Ender</h3>', url: 'http://enderjs.com', title: 'Ender is a full featured package manager for your browser'})
 				parts.push([
-					`<h3>${projectzUtil.getLink({text: 'Ender', url: 'http://enderjs.com', title: 'Ender is a full featured package manager for your browser'})}</h3><ul>`,
+					`${enderLink}<ul>`,
 					`<li>Install: <code>ender add ${opts.name}</code></li>`,
 					`<li>Use: <code>require('${opts.name}')</code></li></ul>`
 				].join('\n'))
@@ -48,18 +53,20 @@ export function getInstallInstructions (opts) {
 		}
 
 		// Component
-		if ( opts.packages.component ) {
+		if ( opts.filenamesForPackageFiles.component ) {
+			const componentLink = projectzUtil.getLink({text: '<h3>Component</h3>', url: 'https://github.com/component/component', title: 'Frontend package manager and build tool for modular web applications'})
 			parts.push([
-				`<h3>${projectzUtil.getLink({text: 'Component', url: 'https://github.com/component/component', title: 'Frontend package manager and build tool for modular web applications'})}</h3><ul>`,
+				`${componentLink}<ul>`,
 				`<li>Install: <code>component install ${opts.name}</code></li>`,
 				`<li>Use: <code>require('${opts.name}')</code></li></ul>`
 			].join('\n'))
 		}
 
 		// Bower
-		if ( opts.packages.bower ) {
+		if ( opts.filenamesForPackageFiles.bower ) {
+			const bowerLink = projectzUtil.getLink({text: '<h3>Bower</h3>', url: 'http://bower.io', title: 'A package manager for the web'})
 			parts.push([
-				`<h3>${projectzUtil.getLink({text: 'Bower', url: 'http://bower.io', title: 'A package manager for the web'})}</h3><ul>`,
+				`${bowerLink}<ul>`,
 				`<li>Install: <code>bower install ${opts.name}</code></li>`,
 				`<li>Use: <code>require('${opts.name}')</code></li></ul>`
 			].join('\n'))

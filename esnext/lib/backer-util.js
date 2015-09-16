@@ -61,7 +61,7 @@ export function getContributorsText (opts) {
 		// ignore
 		result +=
 			'No contributors yet! Will you be the first?' +
-			`\n${getContributeLink(opts, {optional: true})}`
+			`\n\n${getContributeLink(opts, {optional: true})}`
 	}
 	else {
 		result +=
@@ -128,7 +128,7 @@ export function getContributeSection (opts) {
 	const result = [
 		'<h2>Contribute</h2>',
 		'',
-		getContributeLink(opts)
+		getContributeLink(opts, {})
 	].join('\n')
 
 	// Return
