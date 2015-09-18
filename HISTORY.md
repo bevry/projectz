@@ -1,5 +1,8 @@
 # History
 
+## v1.0.2 September 18, 2015
+- Continue if fetching github contributors fails
+
 ## v1.0.1 September 16, 2015
 - Fixed github API auth for user api requests
 

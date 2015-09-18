@@ -122,7 +122,12 @@ export default class Projectz {
 		tasks.addTask('mergeData', this.mergeData.bind(this))
 
 		// Fetch the latest contributors. This is after the merging as we access merged properties to be able to do this.
-		tasks.addTask('loadGithubContributors', this.loadGithubContributors.bind(this))
+		tasks.addTask('loadGithubContributors', (complete) => {
+			this.loadGithubContributors((err) => {
+				if ( err )  this.log('warn', 'Loading contributer data failed, continuing anyway. Here was the error:\n' + err.stack)
+				complete()
+			})
+		})
 
 		// Enhance our package data
 		tasks.addTask('enhancePackages', this.enhancePackages.bind(this))
@@ -168,6 +173,7 @@ export default class Projectz {
 			.set(url)
 			.feed()
 			.action(function (data) {
+				if ( !data )  throw new Error('No contributor data was returned, likely because this repository is new')
 				if ( data.message )  throw new Error(data.message)
 			})
 
