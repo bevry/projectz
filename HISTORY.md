@@ -1,5 +1,8 @@
 # History
 
+## v1.0.4 September 20, 2015
+- Fixed missing esnextguardian dependency (regression since v1.0.3)
+
 ## v1.0.3 September 20, 2015
 - Readme files will correctly finish with a newline character
 - Updated dependencies

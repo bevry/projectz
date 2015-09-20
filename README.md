@@ -63,8 +63,8 @@ Here's some of the things it can do:
 <h2>Install</h2>
 
 <a href="https://npmjs.com" title="npm is a package manager for javascript"><h3>NPM</h3></a><ul>
-<li>Install: <code>npm install --save projectz</code></li>
-<li>Use: <code>require('projectz')</code></li></ul>
+<li>Install: <code>npm install --global projectz</code></li>
+<li>Use: <code>projectz</code></li></ul>
 
 <!-- /INSTALL -->
 
