@@ -154,7 +154,8 @@ These amazing people have contributed code to this project:
 
 Unless stated otherwise all works are:
 
-<ul><li>Copyright &copy; <a href="http://bevry.me">Bevry Pty Ltd</a></li></ul>
+<ul><li>Copyright &copy; 2015+ <a href="http://bevry.me">Bevry Pty Ltd</a></li>
+<li>Copyright &copy; 2011-2014 <a href="http://balupton.com">Benjamin Lupton</a></li></ul>
 
 and licensed under:
 

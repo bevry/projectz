@@ -23,10 +23,8 @@ const eachr = require('eachr')
 // [Extendr](https://github.com/bevry/extendr) gives us safe, deep, and shallow extending abilities
 const extendr = require('extendr')
 
-// [Fellow](https://github.com/bevry/fellow) gives us a Fellow class with singleton functions for list management
-const Fellow = require('fellow')
-
 // Load in our other project files
+const Person = require('./person')
 const backerUtil = require('./backer-util')
 const badgeUtil = require('./badge-util')
 const historyUtil = require('./history-util')
@@ -189,26 +187,26 @@ export default class Projectz {
 			})
 
 			// Now let's turn them into people
-			.map(function (person) {
+			.map(function (user) {
 				const data = {
-					name: person.name,
-					email: person.email,
-					description: person.bio,
-					company: person.company,
-					location: person.location,
-					homepage: person.blog,
-					hireable: person.hireable,
-					githubUsername: person.login,
-					githubUrl: person.html_url
+					name: user.name,
+					email: user.email,
+					description: user.bio,
+					company: user.company,
+					location: user.location,
+					homepage: user.blog,
+					hireable: user.hireable,
+					githubUsername: user.login,
+					githubUrl: user.html_url
 				}
-				const fellow = Fellow.ensure(data)
-				fellow.contributesRepository(githubSlug)
+				const person = Person.ensure(data)
+				person.contributesRepository(githubSlug)
 			})
 
 			// Log
 			.action((contributors) => {
 				log('info', `Loaded ${contributors.length} contributors for repository: ${githubSlug}`)
-				this.mergedPackageData.contributors = Fellow.contributesRepository(githubSlug)
+				this.mergedPackageData.contributors = Person.contributesRepository(githubSlug)
 			})
 
 			// And return our result
@@ -429,34 +427,34 @@ export default class Projectz {
 
 		// Enhance authors, contributors and maintainers
 		if ( repo ) {
-			// Add people to the fellow singleton with their appropriate permissions
-			Fellow.add(this.mergedPackageData.author).forEach((fellow) => {  // package author string
-				fellow.authorsRepository(repo)
+			// Add people to the Person singleton with their appropriate permissions
+			Person.add(this.mergedPackageData.author).forEach((person) => {  // package author string
+				person.authorsRepository(repo)
 			})
-			Fellow.add(this.mergedPackageData.authors).forEach((fellow) => {  // bower authors array
-				fellow.authorsRepository(repo)
+			Person.add(this.mergedPackageData.authors).forEach((person) => {  // bower authors array
+				person.authorsRepository(repo)
 			})
-			Fellow.add(this.mergedPackageData.contributors).forEach((fellow) => {
-				fellow.contributesRepository(repo)
+			Person.add(this.mergedPackageData.contributors).forEach((person) => {
+				person.contributesRepository(repo)
 			})
-			Fellow.add(this.mergedPackageData.maintainers).forEach((fellow) => {
-				fellow.maintainsRepository(repo)
+			Person.add(this.mergedPackageData.maintainers).forEach((person) => {
+				person.maintainsRepository(repo)
 			})
 
 			// Add the enhanced collections to the merged data
-			this.mergedPackageData.authors = Fellow.authorsRepository(repo)
-			this.mergedPackageData.contributors = Fellow.contributesRepository(repo)
-			this.mergedPackageData.maintainers = Fellow.maintainsRepository(repo)
+			this.mergedPackageData.authors = Person.authorsRepository(repo)
+			this.mergedPackageData.contributors = Person.contributesRepository(repo)
+			this.mergedPackageData.maintainers = Person.maintainsRepository(repo)
 		}
 		else {
-			this.mergedPackageData.authors = Fellow.add(this.mergedPackageData.author || this.mergedPackageData.authors)
-			this.mergedPackageData.contributors = Fellow.add(this.mergedPackageData.contributors)
-			this.mergedPackageData.maintainers = Fellow.add(this.mergedPackageData.maintainers)
+			this.mergedPackageData.authors = Person.add(this.mergedPackageData.author || this.mergedPackageData.authors)
+			this.mergedPackageData.contributors = Person.add(this.mergedPackageData.contributors)
+			this.mergedPackageData.maintainers = Person.add(this.mergedPackageData.maintainers)
 		}
 
 		// Enhance licenses and sponsors
 		this.mergedPackageData.licenses = new projectzUtil.Licenses(this.mergedPackageData.license)
-		this.mergedPackageData.sponsors = Fellow.add(this.mergedPackageData.sponsors)
+		this.mergedPackageData.sponsors = Person.add(this.mergedPackageData.sponsors)
 
 		// Finish up
 		next()
@@ -605,7 +603,7 @@ export default class Projectz {
 			data = projectzUtil.replaceSection(['HISTORY', 'CHANGES', 'CHANGELOG'], data, historyUtil.getHistorySection.bind(null, opts))
 			data = projectzUtil.replaceSection(['LICENSE', 'LICENSES'], data, licenseUtil.getLicenseSection.bind(null, opts))
 			data = projectzUtil.replaceSection(['LICENSEFILE'], data, licenseUtil.getLicenseFile.bind(null, opts))
-			this.dataForReadmeFilesEnhanced[name] = projectzUtil.trim(data)
+			this.dataForReadmeFilesEnhanced[name] = projectzUtil.trim(data) + '\n'
 			this.log('info', `Enhanced readme data: ${name}`)
 			return true
 		})

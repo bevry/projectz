@@ -2,7 +2,8 @@
   "name": "ambi",
   "version": "2.1.4",
   "authors": [
-    "Bevry Pty Ltd <us@bevry.me> (http://bevry.me)"
+    "2015+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
+    "2011-2014 Benjamin Lupton <b@lupton.cc> (http://balupton.com)"
   ],
   "license": "(MIT AND CC-BY-4.0)",
   "ignore": [

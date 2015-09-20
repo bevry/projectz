@@ -10,9 +10,9 @@
 	keywords: [
 		'sync', 'async', 'fire', 'exec', 'execute', 'ambidextrous', 'flow'
 	]
-	author: 'Bevry Pty Ltd <us@bevry.me> (http://bevry.me)'
+	author: '2015+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me), 2011-2014 Benjamin Lupton <b@lupton.cc> (http://balupton.com)'
 	maintainers: [
-		'Benjamin Lupton <b@lupton.cc> (http://balupton.com)'
+		'Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)'
 	]
 	badges: {
 		"list": [

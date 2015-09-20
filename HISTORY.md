@@ -1,5 +1,10 @@
 # History
 
+## v1.0.3 September 20, 2015
+- Readme files will correctly finish with a newline character
+- Updated dependencies
+- Fixed second author losing their year
+
 ## v1.0.2 September 18, 2015
 - Continue if fetching github contributors fails
 

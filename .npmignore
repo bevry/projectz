@@ -1,4 +1,4 @@
-# 27 March 2015
+# 18 September 2015
 # https://github.com/bevry/base
 
 # Temp Files
@@ -21,8 +21,10 @@ node_modules/
 .editorconfig
 .eslintrc
 .jshintrc
+.jscrc
 coffeelint.json
 .travis*
+nakefile.js
 Cakefile
 Makefile
 BACKERS.md
