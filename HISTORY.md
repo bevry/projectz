@@ -1,5 +1,8 @@
 # History
 
+## v1.0.6 September 21, 2015
+- Browser install instructions will now correctly display is bower or component configuration exists, or `browser` or `jspm` fields exist
+
 ## v1.0.5 September 21, 2015
 - Updated dependencies
 

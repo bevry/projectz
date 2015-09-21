@@ -1,7 +1,7 @@
 {
   "title": "Projectz",
   "name": "projectz",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Stop wasting time syncing and updating your project's README and Package Files!",
   "homepage": "https://github.com/bevry/projectz",
   "license": "MIT",
@@ -12,6 +12,11 @@
     "meta",
     "package.json",
     "jquery.json",
+    "component",
+    "bower",
+    "jspm",
+    "browserify",
+    "badges",
     "component.json",
     "bower.json"
   ],

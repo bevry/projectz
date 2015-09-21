@@ -369,8 +369,8 @@ export default class Projectz {
 
 		// Fallback some defaults on the merged object
 		extendr.defaults(this.mergedPackageData, {
-			// Fallback browsers field, by checking if `component` or `bower` package files exists
-			browsers: !!(this.filenamesForPackageFiles.browser || this.filenamesForPackageFiles.component),
+			// Fallback browsers field, by checking if `component` or `bower` package files exists, or if the `browser` or `jspm` fields are defined
+			browsers: !!(this.filenamesForPackageFiles.bower || this.filenamesForPackageFiles.component || this.mergedPackageData.browser || this.mergedPackageData.jspm),
 
 			// Fallback demo field, by scanning homepage
 			demo: this.mergedPackageData.homepage,
