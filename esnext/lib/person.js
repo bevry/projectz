@@ -1,4 +1,4 @@
-export default class Person extends require('fellow') {
+module.exports = class Person extends require('fellow') {
 
 	/**
 	If the name is empty, we will try to fallback to githubUsername then twitterUsername
@@ -8,6 +8,7 @@ export default class Person extends require('fellow') {
 	@property name
 	@type String
 	*/
+	/* eslint no-magic-numbers: 0 */
 	set name (value) {
 		const match = (/^((?:[0-9]+[\-\+]?)+)?(.+)$/).exec(value)
 		if ( match ) {

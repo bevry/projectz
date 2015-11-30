@@ -9,6 +9,7 @@ language: node_js
 node_js:
   - "0.12"
   - "4"
+  - "5"
 cache:
   directories:
     - node_modules
@@ -24,7 +25,7 @@ script: "npm test"
 # Custom notifications
 notifications:
   slack:
-    secure: KoE8tchP34C8NVJhH9ZjOhRS/Dc0f4y7aDvLfZgtCMRx+oJ9CdOlBJKx/E4w0OMyinNsNpj/linSesSyGkZn0ZMb/ujIRM4tx1xoiCCg/7glx1f+0NJxo90nCQVe/TIyIqL6RGdBHNn9DhbKvqGdjeoZmMmz9bK7T8uP2exOX7w=
+    secure: ath/YF/bWO5IpdVsYseEec5aMK2SWudls8lHmM6Qp/eVb1l0vyhk/1UWJIULmCGlWURrBnjnxaQmzhAuDGflyTwjgeWHviDfnT/xavn4oUDDYuSKY/6mA5RP344RT5tI5EK0AcQEpHBVKsrmLDtxXSLvCxyS0Y/cuvzJYyQpwAM=
   email:
     recipients:
-      secure: fAT4AkveX1yiSWi5Dzyl+wzftxQ/BlH5YWn3KIt88/zoV1OfxwJ3Ow9PS/XlXUnAmq+bQbQKdTXT5sfokVE6jfAGtmnsQtMhSPKaE5ROVcelGR4rXBovYtHJQz/lNlmvlPNRKBxtfiRPirWyoWVHWCyc8ouNd7Q3/0ocadRcIzI=
+      secure: yPsw3ZRtKosYOxE/ashjOJ+RsqPNFZxrciVne8cxaQwhHSBNu5x40AZ8AsbKwTk1XHtZZSj+cVj6PNBpvzPsbpLjclzKwuwBTu+3FPSoKAUC6VUudqvtym7gq5xlr+dbH2srDnI2qNckQ6qIbq86oxcvjSdWHcVzCLO2QdLupI4=

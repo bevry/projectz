@@ -34,7 +34,7 @@ const projectzUtil = require('./projectz-util')
 
 // Definition
 // Projects is defined as a class to ensure we can run multiple instances of it
-export default class Projectz {
+module.exports = class Projectz {
 	// Proectz.create(opts)
 	static create (...args) {
 		return new this(...args)
@@ -370,7 +370,7 @@ export default class Projectz {
 		// Fallback some defaults on the merged object
 		extendr.defaults(this.mergedPackageData, {
 			// Fallback browsers field, by checking if `component` or `bower` package files exists, or if the `browser` or `jspm` fields are defined
-			browsers: !!(this.filenamesForPackageFiles.bower || this.filenamesForPackageFiles.component || this.mergedPackageData.browser || this.mergedPackageData.jspm),
+			browsers: Boolean(this.filenamesForPackageFiles.bower || this.filenamesForPackageFiles.component || this.mergedPackageData.browser || this.mergedPackageData.jspm),
 
 			// Fallback demo field, by scanning homepage
 			demo: this.mergedPackageData.homepage,

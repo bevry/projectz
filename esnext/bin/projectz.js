@@ -6,8 +6,11 @@
 
 // Set up our logging abilities using caterpillar [Caterpillar](https://github.com/bevry/caterpillar) for logging
 // Import our logging lbiraries
-const level  = process.argv.indexOf('-d') === -1 ? 6 : 7
-const logger = new (require('caterpillar').Logger)({level: level})
+const LOG_LEVEL_INFO = 6
+const LOG_LEVEL_DEBUG = 7
+const EXIT_ERROR_CODE = 1
+const level  = process.argv.indexOf('-d') === -1 ? LOG_LEVEL_INFO : LOG_LEVEL_DEBUG
+const logger = new (require('caterpillar').Logger)({level})
 const filter = new (require('caterpillar-filter').Filter)()
 const human  = new (require('caterpillar-human').Human)()
 
@@ -42,7 +45,7 @@ cli.command('compile').description('Compile our project').action(function () {
 	project.load(function (err) {
 		if ( err ) {
 			logger.log('err', err.stack)
-			process.exit(1)
+			process.exit(EXIT_ERROR_CODE)
 		}
 		logger.log('info', 'Loaded changes')
 
@@ -50,7 +53,7 @@ cli.command('compile').description('Compile our project').action(function () {
 		project.save(function (err) {
 			if ( err ) {
 				logger.log('err', err.stack)
-				process.exit(1)
+				process.exit(EXIT_ERROR_CODE)
 			}
 			logger.log('info', 'Completed successfully')
 		})

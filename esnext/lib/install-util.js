@@ -4,8 +4,9 @@ export function getInstallInstructions (opts) {
 	const parts = []
 
 	// DocPad
-	if ( opts.name.indexOf('docpad-plugin-') === 0 ) {
-		const pluginName = opts.name.substring(14)
+	const prefix = 'docpad-plugin-'
+	if ( opts.name.indexOf(prefix) === 0 ) {
+		const pluginName = opts.name.substring(prefix.length)
 		parts.push(`Install this DocPad plugin by entering <code>docpad install ${pluginName}</code> into your terminal.`)
 	}
 

@@ -99,16 +99,16 @@ export class Licenses {
 
 			licenses.forEach((item) => {
 				if ( item instanceof License ) {
-					descriptions.push('<li>' + item.descriptionHTML + '</li>')
+					descriptions.push(`<li>${item.descriptionHTML}</li>`)
 					bodies.push(item.bodyHTML)
 				}
 				else if ( Array.isArray(item) ) {
 					const items = Licenses.toHTML(item, depth + 1)
-					descriptions.push('<li>' + items.descriptionHTML + '</li>')
+					descriptions.push(`<li>${items.descriptionHTML}</li>`)
 					bodies.push(items.bodyHTML)
 				}
 				else if ( typeof item === 'string' ) {
-					descriptions.push('<li>' + item + '</li>')
+					descriptions.push(`<li>${item}</li>`)
 				}
 				else {
 					throw new Error('Unknown item type')
@@ -176,7 +176,7 @@ export function getPeopleTextArray (people, opts = {}) {
 		return []
 	}
 	else {
-		let textArray = []
+		const textArray = []
 		people.forEach(function (person) {
 			if ( !person.name || person.name === 'null' ) {
 				console.error(person)
