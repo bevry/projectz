@@ -1,7 +1,7 @@
 {
   "title": "Projectz",
   "name": "projectz",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Stop wasting time syncing and updating your project's README and Package Files!",
   "homepage": "https://github.com/bevry/projectz",
   "license": "MIT",
@@ -97,7 +97,6 @@
   "devDependencies": {
     "assert-helpers": "^4.0.0",
     "babel-cli": "^6.2.0",
-    "babel-eslint": "^4.1.6",
     "babel-preset-es2015": "^6.1.18",
     "eslint": "^1.5.0",
     "joe": "^1.6.0",

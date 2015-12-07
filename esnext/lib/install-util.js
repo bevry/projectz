@@ -1,6 +1,10 @@
+'use strict'
+
+// Import
 const projectzUtil = require('./projectz-util')
 
-export function getInstallInstructions (opts) {
+// Define
+function getInstallInstructions (opts) {
 	const parts = []
 
 	// DocPad
@@ -76,3 +80,6 @@ export function getInstallInstructions (opts) {
 
 	return '<h2>Install</h2>\n\n' + parts.join('\n\n')
 }
+
+// Export
+module.exports = {getInstallInstructions}

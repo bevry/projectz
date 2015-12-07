@@ -1,8 +1,10 @@
+'use strict'
+
 // Import
 const typeChecker = require('typechecker')
 
 // License
-export class License {
+class License {
 	constructor (spdx) {
 		this.setSPDX(spdx)
 	}
@@ -44,7 +46,7 @@ export class License {
 }
 
 // Licenses
-export class Licenses {
+class Licenses {
 	constructor (spdx) {
 		this.setSPDX(spdx)
 	}
@@ -62,6 +64,7 @@ export class Licenses {
 		return this
 	}
 
+	/* eslint no-magic-numbers: 0 */
 	static parseSPDX (value, depth = 0) {
 		if ( typeof value === 'string' ) {
 			value = require('spdx').parse(value)
@@ -123,9 +126,8 @@ export class Licenses {
 	}
 }
 
-
 // Get Person HTML
-export function getPersonHTML (person, opts = {}) {
+function getPersonHTML (person, opts = {}) {
 	if ( person.name ) {
 		let html = ''
 
@@ -146,7 +148,7 @@ export function getPersonHTML (person, opts = {}) {
 }
 
 // Get People HTML
-export function getPeopleHTML (people, opts = {}) {
+function getPeopleHTML (people, opts = {}) {
 	if ( people.length === 0 ) {
 		return ''
 	}
@@ -157,7 +159,7 @@ export function getPeopleHTML (people, opts = {}) {
 	}
 }
 
-export function getPersonText (person, opts = {}) {
+function getPersonText (person, opts = {}) {
 	if ( person.name ) {
 		let text = ''
 		if ( opts.years && person.years )  text += person.years + ' '
@@ -171,7 +173,7 @@ export function getPersonText (person, opts = {}) {
 	}
 }
 
-export function getPeopleTextArray (people, opts = {}) {
+function getPeopleTextArray (people, opts = {}) {
 	if ( people.length === 0 ) {
 		return []
 	}
@@ -190,7 +192,7 @@ export function getPeopleTextArray (people, opts = {}) {
 }
 
 // Get File URL
-export function getFileUrl (opts, filename) {
+function getFileUrl (opts, filename) {
 	if ( opts.github.slug ) {
 		return `https://github.com/${opts.github.slug}/blob/master/${filename}#files`
 	}
@@ -200,7 +202,7 @@ export function getFileUrl (opts, filename) {
 }
 
 // Get HTML Link
-export function getLink ({url, title, text}) {
+function getLink ({url, title, text}) {
 	if ( !url || !text ) {
 		throw new Error('Links must have both a url and text')
 	}
@@ -213,7 +215,7 @@ export function getLink ({url, title, text}) {
 }
 
 // Replace Section
-export function replaceSection (names, source, inject) {
+function replaceSection (names, source, inject) {
 	let regexName, sectionName
 	if ( typeChecker.isArray(names) ) {
 		regexName = '(' + names.join('|') + ')'
@@ -246,6 +248,20 @@ export function replaceSection (names, source, inject) {
 }
 
 // Trim all whitespace at front and back
-export function trim (str) {
+function trim (str) {
 	return str.replace(/^\s+|\s+$/g, '')
+}
+
+// Exports
+module.exports = {
+	License,
+	Licenses,
+	getPersonHTML,
+	getPeopleHTML,
+	getPersonText,
+	getPeopleTextArray,
+	getFileUrl,
+	getLink,
+	replaceSection,
+	trim
 }

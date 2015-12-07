@@ -1,3 +1,5 @@
+'use strict'
+
 // Import
 const safeps = require('safeps')
 const joe = require('joe')

@@ -1,8 +1,10 @@
+'use strict'
+
 // Import
 const projectzUtil = require('./projectz-util')
 
 // Get License Introduction
-export function getLicenseIntroduction (opts) {
+function getLicenseIntroduction (opts) {
 	// Check
 	if ( !opts.licenses )  return ''
 
@@ -22,7 +24,7 @@ export function getLicenseIntroduction (opts) {
 }
 
 // Get License File
-export function getLicenseFile (opts) {
+function getLicenseFile (opts) {
 	// Check
 	if ( !opts.licenses )  return ''
 
@@ -39,7 +41,7 @@ export function getLicenseFile (opts) {
 	return result
 }
 
-export function getLicenseSection (opts) {
+function getLicenseSection (opts) {
 	// Check
 	if ( !opts.licenses )  return ''
 
@@ -52,4 +54,11 @@ export function getLicenseSection (opts) {
 
 	// Return
 	return result
+}
+
+// Export
+module.exports = {
+	getLicenseIntroduction,
+	getLicenseFile,
+	getLicenseSection
 }

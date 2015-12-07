@@ -1,4 +1,5 @@
 /* eslint key-spacing:0 */
+'use strict'
 
 // Imports
 // First we need to import the libraries we require.
@@ -34,7 +35,7 @@ const projectzUtil = require('./projectz-util')
 
 // Definition
 // Projects is defined as a class to ensure we can run multiple instances of it
-module.exports = class Projectz {
+class Projectz {
 	// Proectz.create(opts)
 	static create (...args) {
 		return new this(...args)
@@ -380,6 +381,7 @@ module.exports = class Projectz {
 		})
 
 		// Extract repository information
+		/* eslint no-magic-numbers: 0 */
 		let repo = this.mergedPackageData.repository.url || null
 		const githubMatch = (this.mergedPackageData.repository.url || this.mergedPackageData.homepage).match(/github\.com\/(.+?)(?:\.git|\/)?$/)
 		const githubMatchParts = (githubMatch && githubMatch[1] || '').split('/')
@@ -654,3 +656,6 @@ module.exports = class Projectz {
 		return this
 	}
 }
+
+// Export
+module.exports = Projectz

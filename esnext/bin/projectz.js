@@ -1,4 +1,4 @@
-/* eslint no-extra-parens:0 */
+'use strict'
 
 // Projectz CLI
 

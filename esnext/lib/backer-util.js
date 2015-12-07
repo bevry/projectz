@@ -1,8 +1,10 @@
+'use strict'
+
 // Import
 const projectzUtil = require('./projectz-util')
 const badgeUtil = require('./badge-util')
 
-export function getSponsorsText (opts) {
+function getSponsorsText (opts) {
 	let result = ''
 
 	if ( opts.sponsors.length === 0 ) {
@@ -21,7 +23,7 @@ export function getSponsorsText (opts) {
 	return result
 }
 
-export function getMaintainersText (opts) {
+function getMaintainersText (opts) {
 	let result = ''
 
 	if ( opts.maintainers.length === 0 ) {
@@ -36,7 +38,7 @@ export function getMaintainersText (opts) {
 	return result
 }
 
-export function getContributeLink (opts, {optional = false}) {
+function getContributeLink (opts, {optional = false}) {
 	// Prepare
 	const file = opts.filenamesForReadmeFiles.contributing
 	if ( !file ) {
@@ -54,7 +56,7 @@ export function getContributeLink (opts, {optional = false}) {
 	return projectzUtil.getLink({url, text})
 }
 
-export function getContributorsText (opts) {
+function getContributorsText (opts) {
 	let result = ''
 
 	if ( opts.contributors.length === 0 ) {
@@ -73,7 +75,7 @@ export function getContributorsText (opts) {
 	return result
 }
 
-export function getBackerSection (opts) {
+function getBackerSection (opts) {
 	// Check
 	if ( !opts.licenses )  return ''
 
@@ -98,7 +100,7 @@ export function getBackerSection (opts) {
 	return result
 }
 
-export function getBackerFile (opts) {
+function getBackerFile (opts) {
 	// Check
 	if ( !opts.licenses )  return ''
 
@@ -123,7 +125,7 @@ export function getBackerFile (opts) {
 	return result
 }
 
-export function getContributeSection (opts) {
+function getContributeSection (opts) {
 	// Prepare
 	const result = [
 		'<h2>Contribute</h2>',
@@ -133,4 +135,15 @@ export function getContributeSection (opts) {
 
 	// Return
 	return result
+}
+
+// Export
+module.exports = {
+	getSponsorsText,
+	getMaintainersText,
+	getContributeLink,
+	getContributorsText,
+	getBackerSection,
+	getBackerFile,
+	getContributeSection
 }

@@ -1,8 +1,10 @@
+'use strict'
+
 // Import
 const projectzUtil = require('./projectz-util')
 
 // Get History Section
-export function getHistorySection (opts) {
+function getHistorySection (opts) {
 	// Prepare
 	let link = null
 	const file = opts.filenamesForReadmeFiles.history
@@ -25,3 +27,6 @@ export function getHistorySection (opts) {
 	// Return
 	return '<h2>History</h2>\n\n' + link
 }
+
+// Export
+module.exports = {getHistorySection}

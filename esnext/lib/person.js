@@ -1,4 +1,7 @@
-module.exports = class Person extends require('fellow') {
+'use strict'
+
+// Define
+class Person extends require('fellow') {
 
 	/**
 	If the name is empty, we will try to fallback to githubUsername then twitterUsername
@@ -32,3 +35,6 @@ module.exports = class Person extends require('fellow') {
 	*/
 
 }
+
+// Exports
+module.exports = Person
