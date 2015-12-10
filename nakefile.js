@@ -1,4 +1,4 @@
-// 11 September 2015
+// 2015 September 11
 // https://github.com/bevry/base
 'use strict'
 

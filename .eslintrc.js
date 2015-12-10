@@ -1,4 +1,4 @@
-// 2015 December 7
+// 2015 December 1
 // https://github.com/bevry/base
 // http://eslint.org
 /* eslint no-warning-comments: 0 */

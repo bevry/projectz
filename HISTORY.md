@@ -1,5 +1,8 @@
 # History
 
+## v1.0.9 2015 December 10
+- Updated esnextguardian script
+
 ## v1.0.8 2015 December 7
 - Moved from ECMAScript Modules to CommonJS Modules due to lack of Node.js support
 - Updated base files
