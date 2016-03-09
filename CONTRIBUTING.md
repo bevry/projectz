@@ -1,5 +1,5 @@
 <!--
-2015 April 5
+2016 March 8
 https://github.com/bevry/base
 -->
 
@@ -7,7 +7,7 @@ https://github.com/bevry/base
 
 ## Support
 
-We offer support through our [Official Support Channels](https://discuss.bevry.me/t/official-bevry-support-channels/63). Do not use GitHub Issues for support, your issue will be closed.
+We offer support through our [Official Support Channels](https://bevry.me/support). Do not use GitHub Issues for support, your issue will be closed.
 
 
 ## Contribute
@@ -38,17 +38,13 @@ Our [Contributing Guide](https://learn.bevry.me/community/contribute) contains u
 
 ### Developing
 
-- Compiling changes
+1. Compile changes
 
 	``` bash
-	# Only once
 	npm run-script compile
-
-	# On every change
-	npm run-script watch
 	```
 
-5. Run tests
+1. Run tests
 
 	``` bash
 	npm run-script verify

@@ -1,4 +1,4 @@
-# 2015 September 18
+# 2015 March 8
 # https://github.com/bevry/base
 
 # Temp Files
@@ -19,19 +19,18 @@ node_modules/
 
 # Development Files
 .editorconfig
-.eslintrc
+.eslintrc*
 .jshintrc
 .jscrc
-coffeelint.json
+coffeelint*
 .travis*
-nakefile.js
+nakefile*
 Cakefile
 Makefile
 BACKERS.md
 CONTRIBUTING.md
 HISTORY.md
-**/src/
-**/test/
+**/test*
 
 # Other Package Definitions
 template.js
