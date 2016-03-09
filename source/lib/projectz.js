@@ -1,5 +1,5 @@
+/* @flow */
 /* eslint key-spacing:0 */
-'use strict'
 
 // Imports
 // First we need to import the libraries we require.
@@ -457,6 +457,28 @@ class Projectz {
 		// Enhance licenses and sponsors
 		this.mergedPackageData.licenses = new projectzUtil.Licenses(this.mergedPackageData.license)
 		this.mergedPackageData.sponsors = Person.add(this.mergedPackageData.sponsors)
+
+		/*
+		if ( this.mergedPackageData.esnext === true )  this.mergedPackageData.esnext = {}
+		if ( this.mergedPackageData.esnext ) {
+			const esnext = extendr.defaults(this.mergedPackageData.esnext, {
+				sourceDirectory: 'esnext',
+				compiledDirectory: 'es5',
+				guardianEntry: 'esnextguardian.js',
+				mainEntryRelative: 'lib/index.js',
+				testEntryRelative: 'test/index.js'
+			})
+			this.mergedPackageData.main = `./${esnext.guardianEntry}`
+			if ( this.mergedPackageData.browsers ) {
+				if ( this.mergedPackageData.jspm == null )  this.mergedPackageData.jspm = {}
+				this.mergedPackageData.jspm.main = this.mergedPackageData.browser = `./${esnext.compiledDirectory}/${esnext.mainEntryRelative}`
+			}
+			if ( esnext.testEntryRelative && this.mergedPackageData.scripts ) {
+				this.mergedPackageData.scripts.test = `node --harmony ${esnext.compiledDirectory}/${esnext.testEntryRelative}`
+				// this.mergedPackageData.scripts.test = `node --harmony esnextguardian "${esnext.sourceDirectory}/${esnext.testEntryRelative}" "${esnext.compiledDirectory}/${esnext.testEntryRelative}"`
+			}
+		}
+		*/
 
 		// Finish up
 		next()

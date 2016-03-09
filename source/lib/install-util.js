@@ -1,4 +1,4 @@
-'use strict'
+/* @flow */
 
 // Import
 const projectzUtil = require('./projectz-util')
@@ -18,25 +18,18 @@ function getInstallInstructions (opts) {
 		// Node
 		if ( opts.filenamesForPackageFiles.package ) {
 			const npmLink = projectzUtil.getLink({text: '<h3>NPM</h3>', url: 'https://npmjs.com', title: 'npm is a package manager for javascript'})
+			const flag = opts.preferGlobal ? '--global' : '--save'
+			const commands = typeof opts.bin === 'string' ? [opts.name] : Object.keys(opts.bin || {})
 
-			if ( opts.preferGlobal ) {
-				const commands = '<code>' + Object.keys(opts.bin || {}).join('</code> <code>') + '</code>'
-
-				// Global NPM
-				parts.push([
-					`${npmLink}<ul>`,
-					`<li>Install: <code>npm install --global ${opts.name}</code></li>`,
-					`<li>Use: ${commands}</li></ul>`
-				].join('\n'))
-			}
-			else {
-				// Local NPM
-				parts.push([
-					`${npmLink}<ul>`,
-					`<li>Install: <code>npm install --save ${opts.name}</code></li>`,
-					`<li>Use: <code>require('${opts.name}')</code></li></ul>`
-				].join('\n'))
-			}
+			// Global NPM
+			/* eslint no-magic-numbers:0 */
+			parts.push(
+				`${npmLink}<ul>` +
+				`\n<li>Install: <code>npm install ${flag} ${opts.name}</code></li>` +
+				(commands.length ? `\n<li>Executable${commands.length === 1 ? '' : 's'}: <code>${commands.join('</code>, <code>')}</code></li>` : '') +
+				(flag === '--save' ? `\n<li>Module: <code>require('${opts.name}')</code></li>` : '') +
+				'</ul>'
+			)
 
 			// Browser
 			if ( opts.browsers ) {
@@ -44,7 +37,7 @@ function getInstallInstructions (opts) {
 				parts.push([
 					`${browserifyLink}<ul>`,
 					`<li>Install: <code>npm install --save ${opts.name}</code></li>`,
-					`<li>Use: <code>require('${opts.name}')</code></li>`,
+					`<li>Module: <code>require('${opts.name}')</code></li>`,
 					`<li>CDN URL: <code>//wzrd.in/bundle/${opts.name}@${opts.version}</code></li></ul>`
 				].join('\n'))
 
@@ -52,7 +45,7 @@ function getInstallInstructions (opts) {
 				parts.push([
 					`${enderLink}<ul>`,
 					`<li>Install: <code>ender add ${opts.name}</code></li>`,
-					`<li>Use: <code>require('${opts.name}')</code></li></ul>`
+					`<li>Module: <code>require('${opts.name}')</code></li></ul>`
 				].join('\n'))
 			}
 		}
@@ -63,7 +56,7 @@ function getInstallInstructions (opts) {
 			parts.push([
 				`${componentLink}<ul>`,
 				`<li>Install: <code>component install ${opts.name}</code></li>`,
-				`<li>Use: <code>require('${opts.name}')</code></li></ul>`
+				`<li>Module: <code>require('${opts.name}')</code></li></ul>`
 			].join('\n'))
 		}
 
@@ -73,8 +66,49 @@ function getInstallInstructions (opts) {
 			parts.push([
 				`${bowerLink}<ul>`,
 				`<li>Install: <code>bower install ${opts.name}</code></li>`,
-				`<li>Use: <code>require('${opts.name}')</code></li></ul>`
+				`<li>Module: <code>require('${opts.name}')</code></li></ul>`
 			].join('\n'))
+		}
+
+		// Babel
+		if ( opts.editions ) {
+			const links = [
+				{text: 'ESNextGuardian', url: 'https://www.npmjs.com/package/esnextguardian', title: `Loads ES6+ files if the user's environment supports it, otherwise gracefully fallback to ES5 files.`},
+				{text: 'Babel', url: 'https://babeljs.io', title: 'The compiler for writing next generation JavaScript'},
+				{text: 'ESNext', url: 'https://babeljs.io/docs/learn-es2015/'},
+				{text: 'ES2015', url: 'http://babeljs.io/docs/plugins/preset-es2015/'},
+				{text: 'Flow Type', url: 'http://flowtype.org', title: 'Flow is a static type checker for JavaScript'}
+			]
+			const polyfillLink = projectzUtil.getLink({text: `Babel's Polyfill`, url: 'https://babeljs.io/docs/usage/polyfill/', title: 'A polyfill by the Babel project that emulates missing ECMAScript environment features'})
+			const otherLink = 'something else'
+
+			let defaultEdition = null
+			let part = [
+				`<h3>Editions</h3>`,
+				`<p>The published package includes the following editions:<ul>`
+			].concat(
+				opts.editions.map(function (edition) {
+					let suffix = ''
+					if ( edition.entry === opts.main ) {
+						defaultEdition = edition
+						suffix = ', this is the default entry'
+					}
+					return `<li>The ${edition.description} is at <code>${opts.name + '/' + edition.directory}</code> with entry at <code>${opts.name + '/' + edition.entry}</code>${suffix}</li>`
+				})
+			).concat([
+				((defaultEdition === null)
+					? ((opts.main || '').indexOf('esnextguardian') !== -1
+						? `<li>The default entry uses ESNextGuardian and is at <code>${opts.name + '/' + opts.main}</code></li>`
+						: `<li>The default entry is at <code>${opts.name + '/' + opts.main}</code></li>`)
+					: '') + '</ul>',
+				`Older ECMAScript environments may need ${polyfillLink} or ${otherLink}.</p>`
+			]).join('\n')
+
+			for ( const link of links ) {
+				part = part.replace(link.text, projectzUtil.getLink(link))
+			}
+
+			parts.push(part)
 		}
 	}
 

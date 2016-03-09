@@ -1,4 +1,4 @@
-'use strict'
+/* @flow */
 
 // Define
 class Person extends require('fellow') {
