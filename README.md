@@ -100,13 +100,13 @@ If you don't use a build tool, but do use npm, then you can add the following to
 ```
 {
   "scripts": {
-    "compile": "node ./node_modules/.bin/projectz compile",
-    "posttest": "node ./node_modules/.bin/projectz compile"
+    "compile": "projectz compile",
+    "posttest": "npm run compile"
   }
 }
 ```
 
-The `compile` script here lets you use `npm run-script compile` to compile your project with projectz.
+The `compile` script here is runnable via the command `npm run-script compile` and will compile your project with projectz.
 
 The `posttest` script here automatically compiles your project with projectz after your tests have successfully completed, providing you use `npm test` to run your tests. This is a great place to put projectz as projectz only updates meta documents so won't affect your test, and will always run before a publish.
 
