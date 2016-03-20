@@ -63,7 +63,8 @@
     "Rob Loach <robloach@gmail.com> (http://robloach.net)",
     "Zearin (https://github.com/Zearin)",
     "vsopvsop (https://github.com/vsopvsop)",
-    "Shahar Or <mightyiampresence@gmail.com> (http://mightyi.am)"
+    "Shahar Or <mightyiampresence@gmail.com> (http://mightyi.am)",
+    "Benjamin Lupton (https://balupton.com)"
   ],
   "bugs": {
     "url": "https://github.com/bevry/projectz/issues"
@@ -115,7 +116,7 @@
     "compile:es2015": "babel ./source --out-dir ./es2015 --presets es2015",
     "meta": "npm run meta:docs && npm run meta:projectz",
     "meta:docs": "documentation build -f html -g source/**.js -o docs",
-    "meta:projectz": "projectz compile",
+    "meta:projectz": "node --harmony ./bin.js compile",
     "prepare": "npm run compile && npm run test && npm run meta",
     "release": "npm run prepare && npm run release:tag && npm run release:push",
     "release:tag": "git tag v$npm_package_version -a",

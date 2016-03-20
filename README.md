@@ -16,8 +16,8 @@
 <span class="badge-slackin"><a href="https://slack.bevry.me" title="Join this project's slack community"><img src="https://slack.bevry.me/badge.svg" alt="Slack community badge" /></a></span>
 <span class="badge-patreon"><a href="http://patreon.com/bevry" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/patreon-donate-yellow.svg" alt="Patreon donate button" /></a></span>
 <span class="badge-gratipay"><a href="https://www.gratipay.com/bevry" title="Donate weekly to this project using Gratipay"><img src="https://img.shields.io/badge/gratipay-donate-yellow.svg" alt="Gratipay donate button" /></a></span>
-<span class="badge-flattr"><a href="http://flattr.com/thing/344188/balupton-on-Flattr" title="Donate to this project using Flattr"><img src="https://img.shields.io/badge/flattr-donate-yellow.svg" alt="Flattr donate button" /></a></span>
-<span class="badge-paypal"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=QB8GQPZAH84N6" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a></span>
+<span class="badge-flattr"><a href="https://flattr.com/profile/balupton" title="Donate to this project using Flattr"><img src="https://img.shields.io/badge/flattr-donate-yellow.svg" alt="Flattr donate button" /></a></span>
+<span class="badge-paypal"><a href="https://bevry.me/paypal" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a></span>
 <span class="badge-bitcoin"><a href="https://bevry.me/bitcoin" title="Donate once-off to this project using Bitcoin"><img src="https://img.shields.io/badge/bitcoin-donate-yellow.svg" alt="Bitcoin donate button" /></a></span>
 <span class="badge-wishlist"><a href="https://bevry.me/wishlist" title="Buy an item on our wishlist for us"><img src="https://img.shields.io/badge/wishlist-donate-yellow.svg" alt="Wishlist browse button" /></a></span>
 
@@ -64,7 +64,14 @@ Here's some of the things it can do:
 
 <a href="https://npmjs.com" title="npm is a package manager for javascript"><h3>NPM</h3></a><ul>
 <li>Install: <code>npm install --global projectz</code></li>
-<li>Use: <code>projectz</code></li></ul>
+<li>Executable: <code>projectz</code></li></ul>
+
+<h3>Editions</h3>
+<p>The published package includes the following editions:<ul>
+<li>The Source + <a href="https://babeljs.io/docs/learn-es2015/">ESNext</a> + Import + <a href="http://flowtype.org" title="Flow is a static type checker for JavaScript">Flow Type</a> Comments is at <code>projectz/source</code> with entry at <code>projectz/source/index.js</code></li>
+<li>The <a href="https://babeljs.io" title="The compiler for writing next generation JavaScript">Babel</a> Compiled + <a href="http://babeljs.io/docs/plugins/preset-es2015/">ES2015</a> + Require is at <code>projectz/es2015</code> with entry at <code>projectz/es2015/index.js</code></li>
+<li>The default entry is at <code>projectz/index.js</code></li></ul>
+Older ECMAScript environments may need <a href="https://babeljs.io/docs/usage/polyfill/" title="A polyfill by the Babel project that emulates missing ECMAScript environment features">Babel's Polyfill</a> or something else.</p>
 
 <!-- /INSTALL -->
 
@@ -255,7 +262,7 @@ As an example, here is a a basic `README.md` file:
 
 These amazing people are maintaining this project:
 
-<ul><li><a href="http://balupton.com">Benjamin Lupton</a> — <a href="https://github.com/bevry/projectz/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/projectz">view contributions</a></li>
+<ul><li><a href="http://balupton.com">Benjamin Lupton</a></li>
 <li><a href="http://robloach.net">Rob Loach</a> — <a href="https://github.com/bevry/projectz/commits?author=RobLoach" title="View the GitHub contributions of Rob Loach on repository bevry/projectz">view contributions</a></li></ul>
 
 <h3>Sponsors</h3>
@@ -264,8 +271,8 @@ No sponsors yet! Will you be the first?
 
 <span class="badge-patreon"><a href="http://patreon.com/bevry" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/patreon-donate-yellow.svg" alt="Patreon donate button" /></a></span>
 <span class="badge-gratipay"><a href="https://www.gratipay.com/bevry" title="Donate weekly to this project using Gratipay"><img src="https://img.shields.io/badge/gratipay-donate-yellow.svg" alt="Gratipay donate button" /></a></span>
-<span class="badge-flattr"><a href="http://flattr.com/thing/344188/balupton-on-Flattr" title="Donate to this project using Flattr"><img src="https://img.shields.io/badge/flattr-donate-yellow.svg" alt="Flattr donate button" /></a></span>
-<span class="badge-paypal"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=QB8GQPZAH84N6" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a></span>
+<span class="badge-flattr"><a href="https://flattr.com/profile/balupton" title="Donate to this project using Flattr"><img src="https://img.shields.io/badge/flattr-donate-yellow.svg" alt="Flattr donate button" /></a></span>
+<span class="badge-paypal"><a href="https://bevry.me/paypal" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a></span>
 <span class="badge-bitcoin"><a href="https://bevry.me/bitcoin" title="Donate once-off to this project using Bitcoin"><img src="https://img.shields.io/badge/bitcoin-donate-yellow.svg" alt="Bitcoin donate button" /></a></span>
 <span class="badge-wishlist"><a href="https://bevry.me/wishlist" title="Buy an item on our wishlist for us"><img src="https://img.shields.io/badge/wishlist-donate-yellow.svg" alt="Wishlist browse button" /></a></span>
 
@@ -273,12 +280,13 @@ No sponsors yet! Will you be the first?
 
 These amazing people have contributed code to this project:
 
-<ul><li><a href="http://balupton.com">Benjamin Lupton</a> — <a href="https://github.com/bevry/projectz/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/projectz">view contributions</a></li>
+<ul><li><a href="http://balupton.com">Benjamin Lupton</a></li>
 <li><a href="https://github.com/pflannery">Peter Flannery</a> — <a href="https://github.com/bevry/projectz/commits?author=pflannery" title="View the GitHub contributions of Peter Flannery on repository bevry/projectz">view contributions</a></li>
 <li><a href="http://robloach.net">Rob Loach</a> — <a href="https://github.com/bevry/projectz/commits?author=RobLoach" title="View the GitHub contributions of Rob Loach on repository bevry/projectz">view contributions</a></li>
 <li><a href="https://github.com/Zearin">Zearin</a> — <a href="https://github.com/bevry/projectz/commits?author=Zearin" title="View the GitHub contributions of Zearin on repository bevry/projectz">view contributions</a></li>
 <li><a href="https://github.com/vsopvsop">vsopvsop</a> — <a href="https://github.com/bevry/projectz/commits?author=vsopvsop" title="View the GitHub contributions of vsopvsop on repository bevry/projectz">view contributions</a></li>
-<li><a href="http://mightyi.am">Shahar Or</a> — <a href="https://github.com/bevry/projectz/commits?author=mightyiam" title="View the GitHub contributions of Shahar Or on repository bevry/projectz">view contributions</a></li></ul>
+<li><a href="http://mightyi.am">Shahar Or</a> — <a href="https://github.com/bevry/projectz/commits?author=mightyiam" title="View the GitHub contributions of Shahar Or on repository bevry/projectz">view contributions</a></li>
+<li><a href="https://balupton.com">Benjamin Lupton</a> — <a href="https://github.com/bevry/projectz/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/projectz">view contributions</a></li></ul>
 
 <a href="https://github.com/bevry/projectz/blob/master/CONTRIBUTING.md#files">Discover how you can contribute by heading on over to the <code>CONTRIBUTING.md</code> file.</a>
 
@@ -295,6 +303,6 @@ Unless stated otherwise all works are:
 
 and licensed under:
 
-<ul><li><a href="http://spdx.org/licenses/MIT.html">MIT License</a></li></ul>
+<a href="http://spdx.org/licenses/MIT.html">MIT License</a>
 
 <!-- /LICENSE -->
