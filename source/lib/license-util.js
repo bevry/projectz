@@ -28,15 +28,15 @@ function renderSpdxObject (spdxObject /* :Object */, output /* :"description"|"b
 				// Convert the license into HTML
 				.replace(/^(.+?)\n\s*([\s\S]+)\s*$/, '<h2>$1</h2>\n\n<pre>\n$2\n</pre>')
 	}
-	else if ( spdxObject.conjuction ) {
+	else if ( spdxObject.conjunction ) {
 		return '<ul>' + [
 			'<li>' + renderSpdxObject(spdxObject.left, output) + '</li>',
-			'<li>' + spdxObject.conjuction + '</li>',
+			'<li>' + spdxObject.conjunction + '</li>',
 			'<li>' + renderSpdxObject(spdxObject.right, output) + '</li>'
 		].join('') + '</ul>'
 	}
 	else {
-		throw new Error('Unknown spdx object value')
+		throw new Error(`Unknown spdx object value: ${JSON.stringify(spdxObject, null, '  ')}`)
 	}
 }
 
@@ -47,7 +47,9 @@ export function getLicensesHTML (spdxString /* :string */, output /* :"descripti
 
 export function getLicenseIntroduction (data /* :Object */) /* :string */ {
 	// Check
-	if ( !data.licenses )  return ''
+	if ( !data.license ) {
+		throw new Error('License file was requested, but no license was specified')
+	}
 
 	// Prepare
 	const result = [
@@ -57,7 +59,7 @@ export function getLicenseIntroduction (data /* :Object */) /* :string */ {
 		'',
 		'and licensed under:',
 		'',
-		getLicensesHTML(data.licenses, 'description')
+		getLicensesHTML(data.license, 'description')
 	].join('\n')
 
 	// Return
@@ -66,7 +68,9 @@ export function getLicenseIntroduction (data /* :Object */) /* :string */ {
 
 export function getLicenseFile (data /* :Object */) /* :string */ {
 	// Check
-	if ( !data.licenses )  return ''
+	if ( !data.license ) {
+		throw new Error('License file was requested, but no license was specified')
+	}
 
 	// Prepare
 	const result = [
@@ -74,7 +78,7 @@ export function getLicenseFile (data /* :Object */) /* :string */ {
 		'',
 		getLicenseIntroduction(data),
 		'',
-		getLicensesHTML(data.licenses, 'body')
+		getLicensesHTML(data.license, 'body')
 	].join('\n')
 
 	// Return
@@ -82,9 +86,6 @@ export function getLicenseFile (data /* :Object */) /* :string */ {
 }
 
 export function getLicenseSection (data /* :Object */) /* :string */ {
-	// Check
-	if ( !data.licenses )  return ''
-
 	// Prepare
 	const result = [
 		'<h2>License</h2>',
