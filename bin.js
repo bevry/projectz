@@ -1,3 +1,2 @@
-// 2016 March 8
-// https://github.com/bevry/editions
+#!/usr/bin/env node
 module.exports = require('editions').requirePackage(__dirname, require, 'bin.js')
