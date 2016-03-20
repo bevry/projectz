@@ -11,3 +11,4 @@ source/
 
 [options]
 module.ignore_non_literal_requires=true
+unsafe.enable_getters_and_setters=true

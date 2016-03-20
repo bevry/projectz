@@ -1,2 +1,2 @@
 /* @flow */
-module.exports = require('./lib/projectz.js')
+export {Projectz} from './lib/projectz'

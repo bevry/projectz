@@ -1,29 +1,36 @@
 /* @flow */
 // Projectz CLI
 
-// Logging
+// Import caterpillar [Caterpillar](https://github.com/bevry/caterpillar) for logging
+import {Logger} from 'caterpillar'
+import {Filter} from 'caterpillar-filter'
+import {Human} from 'caterpillar-human'
 
-// Set up our logging abilities using caterpillar [Caterpillar](https://github.com/bevry/caterpillar) for logging
-// Import our logging lbiraries
+// Import [Commander](https://github.com/visionmedia/commander.js/) for command and option parsing
+import cli from 'commander'
+
+// Import our package data for versioning
+import {version} from '../package.json'
+
+// Import out projectz utility
+import {Projectz} from './index'
+
+// Prepare our logging configuration
 const LOG_LEVEL_INFO = 6
 const LOG_LEVEL_DEBUG = 7
 const EXIT_ERROR_CODE = 1
-const level  = process.argv.indexOf('-d') === -1 ? LOG_LEVEL_INFO : LOG_LEVEL_DEBUG
-const logger = new (require('caterpillar').Logger)({level})
-const filter = new (require('caterpillar-filter').Filter)()
-const human  = new (require('caterpillar-human').Human)()
+const level = process.argv.indexOf('-d') === -1 ? LOG_LEVEL_INFO : LOG_LEVEL_DEBUG
+
+// Setup our logging
+const logger = new Logger({level})
+const filter = new Filter()
+const human  = new Human()
 
 // Pipe logger output to filter, then filter output to stdout
 logger.pipe(filter).pipe(human).pipe(process.stdout)
 
-
-// Commands
-
-// Use [Commander](https://github.com/visionmedia/commander.js/) for command and option parsing
-const cli = require('commander')
-
 // Extract out version out of our package and apply it to commander
-cli.version(require('../../package.json').version)
+cli.version(version)
 
 // Add our cwd customisation
 cli.option('-p, --path [value]', 'Path to the project that you wish to work with, defaults to the current working directory')
@@ -33,7 +40,7 @@ cli.option('-d', 'Outputs verbose logging.')
 cli.command('compile').description('Compile our project').action(function () {
 	// Create our new project and use our caterpillar logger instance for the logging
 	logger.log('info', 'Initialising project')
-	const project = require('../../').create({
+	const project = Projectz.create({
 		log: logger.log.bind(logger),
 		cwd: cli.path || null
 	})

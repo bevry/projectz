@@ -1,28 +1,20 @@
 /* @flow */
+import {renderBadges} from 'badges'
 
-// Import
-const badges = require('badges')
-
-function getBadgesInCategory (category, opts) {
-	if ( opts.badges && opts.badges.list ) {
-		return badges.renderBadges(opts.badges.list, opts.badges.config, {filterCategory: category, filterScripts: true})
+export function getBadgesInCategory (category /* :string */, data /* :Object */) /* :string */ {
+	if ( data.badges && data.badges.list ) {
+		return renderBadges(data.badges.list, data.badges.config, {filterCategory: category, filterScripts: true})
 	}
 	else {
 		return ''
 	}
 }
 
-function getBadgesSection (opts) {
-	if ( opts.badges && opts.badges.list ) {
-		return badges.renderBadges(opts.badges.list, opts.badges.config, {filterScripts: true})
+export function getBadgesSection (data /* :Object */) /* :string */ {
+	if ( data.badges && data.badges.list ) {
+		return renderBadges(data.badges.list, data.badges.config, {filterScripts: true})
 	}
 	else {
 		return ''
 	}
-}
-
-// Export
-module.exports = {
-	getBadgesInCategory,
-	getBadgesSection
 }

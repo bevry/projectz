@@ -1,46 +1,44 @@
 /* @flow */
+import {getPeopleHTML, getFileUrl, getLink} from './projectz-util'
+import {getBadgesInCategory} from './badge-util'
 
-// Import
-const projectzUtil = require('./projectz-util')
-const badgeUtil = require('./badge-util')
-
-function getSponsorsText (opts) {
+export function getSponsorsText (data /* :Object */) /* :string */ {
 	let result = ''
 
-	if ( opts.sponsors.length === 0 ) {
+	if ( data.sponsors.length === 0 ) {
 		// ignore
 		result +=
 			'No sponsors yet! Will you be the first?\n\n' +
-			badgeUtil.getBadgesInCategory('funding', opts)
+			getBadgesInCategory('funding', data)
 	}
 	else {
 		result +=
 			'These amazing people have contributed finances to this project:\n\n' +
-			projectzUtil.getPeopleHTML(opts.sponsors, {githubSlug: opts.github.slug}) +
-			`\n\nBecome a sponsor!\n\n${badgeUtil.getBadgesInCategory('funding', opts)}`
+			getPeopleHTML(data.sponsors, {githubSlug: data.github.slug}) +
+			`\n\nBecome a sponsor!\n\n${getBadgesInCategory('funding', data)}`
 	}
 
 	return result
 }
 
-function getMaintainersText (opts) {
+export function getMaintainersText (data /* :Object */) /* :string */ {
 	let result = ''
 
-	if ( opts.maintainers.length === 0 ) {
+	if ( data.maintainers.length === 0 ) {
 		// ignore
 		result += 'No maintainers yet! Will you be the first?'
 	}
 	else {
 		result += 'These amazing people are maintaining this project:\n\n' +
-			projectzUtil.getPeopleHTML(opts.maintainers, {githubSlug: opts.github.slug})
+			getPeopleHTML(data.maintainers, {githubSlug: data.github.slug})
 	}
 
 	return result
 }
 
-function getContributeLink (opts, {optional = false}) {
+export function getContributeLink (data /* :Object */, {optional = false} /* :Object */ ) /* :string */ {
 	// Prepare
-	const file = opts.filenamesForReadmeFiles.contributing
+	const file = data.filenamesForReadmeFiles.contributing
 	if ( !file ) {
 		if ( optional ) {
 			return ''
@@ -49,35 +47,35 @@ function getContributeLink (opts, {optional = false}) {
 			throw new Error('Contributing section requires a CONTRIBUTING file to exist')
 		}
 	}
-	const url = projectzUtil.getFileUrl(opts, file)
+	const url = getFileUrl(data, file)
 	const text = `Discover how you can contribute by heading on over to the <code>${file}</code> file.`
 
 	// Return
-	return projectzUtil.getLink({url, text})
+	return getLink({url, text})
 }
 
-function getContributorsText (opts) {
+export function getContributorsText (data /* :Object */) /* :string */ {
 	let result = ''
 
-	if ( opts.contributors.length === 0 ) {
+	if ( data.contributors.length === 0 ) {
 		// ignore
 		result +=
 			'No contributors yet! Will you be the first?' +
-			`\n\n${getContributeLink(opts, {optional: true})}`
+			`\n\n${getContributeLink(data, {optional: true})}`
 	}
 	else {
 		result +=
 			'These amazing people have contributed code to this project:\n\n' +
-			projectzUtil.getPeopleHTML(opts.contributors, {githubSlug: opts.github.slug}) +
-			`\n\n${getContributeLink(opts, {optional: true})}`
+			getPeopleHTML(data.contributors, {githubSlug: data.github.slug}) +
+			`\n\n${getContributeLink(data, {optional: true})}`
 	}
 
 	return result
 }
 
-function getBackerSection (opts) {
+export function getBackerSection (data /* :Object */) /* :string */ {
 	// Check
-	if ( !opts.licenses )  return ''
+	if ( !data.licenses )  return ''
 
 	// Prepare
 	const result = [
@@ -85,24 +83,24 @@ function getBackerSection (opts) {
 		'',
 		'<h3>Maintainers</h3>',
 		'',
-		getMaintainersText(opts),
+		getMaintainersText(data),
 		'',
 		'<h3>Sponsors</h3>',
 		'',
-		getSponsorsText(opts),
+		getSponsorsText(data),
 		'',
 		'<h3>Contributors</h3>',
 		'',
-		getContributorsText(opts)
+		getContributorsText(data)
 	].join('\n')
 
 	// Return
 	return result
 }
 
-function getBackerFile (opts) {
+export function getBackerFile (data /* :Object */) /* :string */ {
 	// Check
-	if ( !opts.licenses )  return ''
+	if ( !data.licenses )  return ''
 
 	// Prepare
 	const result = [
@@ -110,40 +108,29 @@ function getBackerFile (opts) {
 		'',
 		'<h2>Maintainers</h2>',
 		'',
-		getMaintainersText(opts),
+		getMaintainersText(data),
 		'',
 		'<h2>Sponsors</h2>',
 		'',
-		getSponsorsText(opts),
+		getSponsorsText(data),
 		'',
 		'<h2>Contributors</h2>',
 		'',
-		getContributorsText(opts)
+		getContributorsText(data)
 	].join('\n')
 
 	// Return
 	return result
 }
 
-function getContributeSection (opts) {
+export function getContributeSection (data /* :Object */) /* :string */ {
 	// Prepare
 	const result = [
 		'<h2>Contribute</h2>',
 		'',
-		getContributeLink(opts, {})
+		getContributeLink(data, {})
 	].join('\n')
 
 	// Return
 	return result
-}
-
-// Export
-module.exports = {
-	getSponsorsText,
-	getMaintainersText,
-	getContributeLink,
-	getContributorsText,
-	getBackerSection,
-	getBackerFile,
-	getContributeSection
 }

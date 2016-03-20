@@ -1,23 +1,21 @@
 /* @flow */
-
-// Import
-const projectzUtil = require('./projectz-util')
+import {getLink, getFileUrl} from './projectz-util'
 
 // Get History Section
-function getHistorySection (opts) {
+export function getHistorySection (data /* :Object */) /* :string */ {
 	// Prepare
 	let link = null
-	const file = opts.filenamesForReadmeFiles.history
+	const file = data.filenamesForReadmeFiles.history
 	if ( file ) {
-		link = projectzUtil.getLink({
-			url: projectzUtil.getFileUrl(opts, file),
+		link = getLink({
+			url: getFileUrl(data, file),
 			text: `Discover the release history by heading on over to the <code>${file}</code> file.`
 		})
 	}
-	else if ( opts.github.slug ) {
-		link = projectzUtil.getLink({
-			url: `https://github.com/${opts.github.slug}/releases`,
-			text: `Discover the release history by heading on over to the releases page.`
+	else if ( data.github.slug ) {
+		link = getLink({
+			url: `https://github.com/${data.github.slug}/releases`,
+			text: 'Discover the release history by heading on over to the releases page.'
 		})
 	}
 	else {
@@ -27,6 +25,3 @@ function getHistorySection (opts) {
 	// Return
 	return '<h2>History</h2>\n\n' + link
 }
-
-// Export
-module.exports = {getHistorySection}

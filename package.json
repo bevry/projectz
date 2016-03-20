@@ -10,6 +10,9 @@
     "readme",
     "license",
     "meta",
+    "build",
+    "buildtool",
+    "metabuild",
     "generator",
     "markdown",
     "documentation",
@@ -42,8 +45,8 @@
     "config": {
       "patreonUsername": "bevry",
       "gratipayUsername": "bevry",
-      "flattrCode": "344188/balupton-on-Flattr",
-      "paypalButtonID": "QB8GQPZAH84N6",
+      "flattrUsername": "balupton",
+      "paypalURL": "https://bevry.me/paypal",
       "bitcoinURL": "https://bevry.me/bitcoin",
       "wishlistURL": "https://bevry.me/wishlist",
       "slackinURL": "https://slack.bevry.me"
@@ -72,9 +75,58 @@
   "engines": {
     "node": ">=0.12"
   },
-  "browsers": false,
+  "editions": [
+    {
+      "description": "Source + ESNext + Import + Flow Type Comments",
+      "directory": "source",
+      "entry": "source/index.js",
+      "syntaxes": [
+        "javascript",
+        "esnext",
+        "import",
+        "classes",
+        "arrows",
+        "destructuring",
+        "defaults",
+        "spread",
+        "const",
+        "let",
+        "flow type comments"
+      ]
+    },
+    {
+      "description": "Babel Compiled + ES2015 + Require",
+      "directory": "es2015",
+      "entry": "es2015/index.js",
+      "syntaxes": [
+        "javascript",
+        "es2015",
+        "require"
+      ]
+    }
+  ],
+  "preferGlobal": true,
+  "bin": "bin.js",
+  "main": "index.js",
+  "scripts": {
+    "setup": "npm install",
+    "clean": "rm -Rf ./docs ./es2015",
+    "compile": "npm run compile:es2015",
+    "compile:es2015": "babel ./source --out-dir ./es2015 --presets es2015",
+    "meta": "npm run meta:docs && npm run meta:projectz",
+    "meta:docs": "documentation build -f html -g source/**.js -o docs",
+    "meta:projectz": "projectz compile",
+    "prepare": "npm run compile && npm run test && npm run meta",
+    "release": "npm run prepare && npm run release:tag && npm run release:push",
+    "release:tag": "git tag v$npm_package_version -a",
+    "release:push": "git push origin master && git push origin --tags",
+    "pretest": "npm run test:eslint && npm run test:flow",
+    "test:eslint": "eslint ./source",
+    "test:flow": "flow check",
+    "test": "node --harmony -e \"require('editions').requirePackage(process.cwd(), require, 'test.js')\""
+  },
   "dependencies": {
-    "badges": "^1.0.2",
+    "badges": "^1.1.2",
     "caterpillar": "^2.0.9",
     "caterpillar-filter": "^2.0.3",
     "caterpillar-human": "^2.1.2",
@@ -83,50 +135,28 @@
     "chainy-plugin-feed": "^1.0.0",
     "chainy-plugin-map": "^1.0.3",
     "chainy-plugin-set": "^1.0.2",
-    "commander": "^2.8.1",
+    "commander": "^2.9.0",
     "cson": "^3.0.2",
-    "eachr": "^3.0.0",
-    "esnextguardian": "^1.1.0",
-    "extendr": "^3.0.0",
-    "fellow": "^2.0.0",
-    "safefs": "^4.0.0",
-    "spdx": "^0.5.0",
-    "spdx-license-list": "^2.0.0",
-    "taskgroup": "^4.3.0",
-    "typechecker": "^4.0.0"
+    "eachr": "^3.1.1",
+    "editions": "^1.1.0",
+    "extendr": "^3.1.0",
+    "fellow": "^2.1.0",
+    "safefs": "^4.0.1",
+    "spdx": "^0.5.1",
+    "spdx-license-list": "^2.1.0",
+    "taskgroup": "^4.3.1",
+    "typechecker": "^4.2.1"
   },
   "devDependencies": {
     "assert-helpers": "^4.1.0",
     "babel-cli": "^6.6.5",
     "babel-preset-es2015": "^6.6.0",
-    "documentation": "^4.0.0-beta",
-    "editions": "^1.0.0",
-    "eslint": "^2.3.0",
+    "documentation": "^4.0.0-beta1",
+    "eslint": "^2.4.0",
     "eslint-plugin-babel": "^3.1.0",
     "flow-bin": "^0.22.1",
     "joe": "^1.6.0",
     "joe-reporter-console": "^1.2.1",
-    "safeps": "^6.0.0"
-  },
-  "preferGlobal": true,
-  "main": "./esnextguardian.js",
-  "bin": {
-    "projectz": "./bin/projectz"
-  },
-  "scripts": {
-    "clean": "node --harmony nakefile.js clean",
-    "setup": "node --harmony nakefile.js setup",
-    "compile": "node --harmony nakefile.js compile",
-    "watch": "node --harmony nakefile.js watch",
-    "verify": "node --harmony nakefile.js verify",
-    "meta": "node --harmony nakefile.js meta",
-    "prepare": "node --harmony nakefile.js prepare",
-    "release": "node --harmony nakefile.js release",
-    "test": "node --harmony ./es5/test/projectz-test.js"
-  },
-  "nakeConfiguration": {
-    "BABEL_SRC_PATH": "esnext",
-    "ESLINT_SRC_PATH": "esnext",
-    "YUIDOC_SRC_PATH": "esnext"
+    "safeps": "^6.0.2"
   }
 }

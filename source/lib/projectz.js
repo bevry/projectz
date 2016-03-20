@@ -6,37 +6,47 @@
 
 // Load in the file system libraries.
 // [SafeFS](https://github.com/bevry/safefs) is aliased to `fsUtil` as it provides protection against a lot of the common gotchas
-const fsUtil = require('safefs')
-const pathUtil = require('path')
+import {readdir, readFile, writeFile} from 'safefs'
+import {resolve, join} from 'path'
 
 // [CSON](https://github.com/bevry/cson) is used for loading in our configuration files
-const CSON = require('cson')
+import CSON from 'cson'
 
 // [TypeChecker](https://github.com/bevry/typechecker) is used for checking data types
-const typeChecker = require('typechecker')
+import {isString, isObject} from 'typechecker'
 
 // [TaskGroup](https://github.com/bevry/taskgroup) is used for bundling tasks together and waiting for their completion
-const TaskGroup = require('taskgroup')
+import TaskGroup from 'taskgroup'
 
 // [Eachr](https://github.com/bevry/eachr) lets us cycle arrays and objects easily
-const eachr = require('eachr')
+import eachr from 'eachr'
 
 // [Extendr](https://github.com/bevry/extendr) gives us safe, deep, and shallow extending abilities
-const extendr = require('extendr')
+import extendr from 'extendr'
 
 // Load in our other project files
-const Person = require('./person')
-const backerUtil = require('./backer-util')
-const badgeUtil = require('./badge-util')
-const historyUtil = require('./history-util')
-const installUtil = require('./install-util')
-const licenseUtil = require('./license-util')
-const projectzUtil = require('./projectz-util')
+import Person from './person'
+import * as backerUtil from './backer-util'
+import * as badgeUtil from './badge-util'
+import * as historyUtil from './history-util'
+import * as installUtil from './install-util'
+import * as licenseUtil from './license-util'
+import * as projectzUtil from './projectz-util'
 
 // Definition
 // Projects is defined as a class to ensure we can run multiple instances of it
-class Projectz {
-	// Proectz.create(opts)
+export class Projectz {
+	/* :: cwd:string; */
+	/* :: filenamesForPackageFiles:Object; */
+	/* :: dataForPackageFiles:Object; */
+	/* :: dataForPackageFilesEnhanced:Object; */
+	/* :: filenamesForReadmeFiles:Object; */
+	/* :: dataForReadmeFiles:Object; */
+	/* :: dataForReadmeFilesEnhanced:Object; */
+	/* :: mergedPackageData:Object; */
+	/* :: log:function; */
+
+	// Projectz.create(opts)
 	static create (...args) {
 		return new this(...args)
 	}
@@ -48,43 +58,17 @@ class Projectz {
 	// Usage:
 	// - `project = require('projectz').create(opts)`
 	// - `project = new (require('projectz').Projectz)(opts)`
-	constructor (opts) {
+	constructor (opts /* :Object */) {
 		// The current working directory (the path) that projectz is working on
-		this.cwd = opts.cwd ? pathUtil.resolve(opts.cwd) : process.cwd()
-
-		// The absolute paths for all the package files
-		this.filenamesForPackageFiles = null
-
-		// The data for each of our package files
-		this.dataForPackageFiles = null
-
-		// The enhanced data for each of our package files
-		this.dataForPackageFilesEnhanced = null
-
-
-		// The absolute paths for all the readme files
-		this.filenamesForReadmeFiles = null
-
-		// The data for each of our readme files
-		this.dataForReadmeFiles = null
-
-		// The enhanced data for each of our readme files
-		this.dataForReadmeFilesEnhanced = null
-
-
-		// The merged data for each of our package files
-		this.mergedPackageData = null
-
+		this.cwd = opts.cwd ? resolve(opts.cwd) : process.cwd()
 
 		// Our log function to use (logLevel, ...messages)
 		this.log = opts.log || function () {}
 	}
 
-	// Load
-	// Load in the files we will be working with
-	// Usage: `load(function (err) {})`
-	load (next) {
-		// Reset package properties
+	// Reset the properties of this class
+	reset () /* :this */ {
+		// The absolute paths for all the package files
 		this.filenamesForPackageFiles = {
 			// gets filled in with relative paths
 			projectz:      false,
@@ -93,10 +77,14 @@ class Projectz {
 			component:     false,
 			jquery:        false
 		}
+
+		// The data for each of our package files
 		this.dataForPackageFiles = {}
+
+		// The enhanced data for each of our package files
 		this.dataForPackageFilesEnhanced = {}
 
-		// Reset readme properties
+		// The absolute paths for all the readme files
 		this.filenamesForReadmeFiles = {
 			// gets filled in with relative paths
 			readme:        false,
@@ -105,11 +93,26 @@ class Projectz {
 			backers:       false,
 			license:       false
 		}
+
+		// The data for each of our readme files
 		this.dataForReadmeFiles = {}
+
+		// The enhanced data for each of our readme files
 		this.dataForReadmeFilesEnhanced = {}
 
-		// Reset merged data
+		// The merged data for each of our package files
 		this.mergedPackageData = {}
+
+		// Chain
+		return this
+	}
+
+	// Load
+	// Load in the files we will be working with
+	// Usage: `load(function (err) {})`
+	load (next /* :function */) /* :this */ {
+		// Reset
+		this.reset()
 
 		// Create our serial task group to allot our tasks into and once it completes continue to the next handler
 		const tasks = new TaskGroup().done(next)
@@ -142,7 +145,8 @@ class Projectz {
 	// Load Github Contributors
 	// Fetch the contributors for the repo if we have it
 	// Usage: `loadContributors(function (err) {})`
-	loadGithubContributors (next) {
+	/* eslint array-callback-return:0 */
+	loadGithubContributors (next /* :function */) /* :this */ {
 		// Prepare
 		const log = this.log
 
@@ -221,7 +225,7 @@ class Projectz {
 	// Load Paths
 	// Load in the paths we have specified
 	// Usage: `loadPaths(function (err) {})`
-	loadPaths (next) {
+	loadPaths (next /* :function */) /* :this */ {
 		// Create the parallel task group and once they've all completed fire our completion callback
 		const tasks = new TaskGroup().setConfig({concurrency: 0}).done(next)
 
@@ -231,10 +235,10 @@ class Projectz {
 
 		// Load
 		tasks.addTask((complete) => {
-			fsUtil.readdir(this.cwd, (err, files) => {
+			readdir(this.cwd, (err, files) => {
 				if ( err )  return complete(err)
 				files.forEach((file) => {
-					const filePath = pathUtil.join(this.cwd, file)
+					const filePath = join(this.cwd, file)
 
 					packages.forEach((key) => {
 						if ( file.toLowerCase().indexOf(key) === 0 ) {
@@ -256,7 +260,7 @@ class Projectz {
 							const message = `Reading readme file: ${filePath}`
 							tasks.addTask(message, (complete) => {
 								this.log('info', message)
-								fsUtil.readFile(filePath, (err, data) => {
+								readFile(filePath, (err, data) => {
 									if ( err )  return complete(err)
 									this.filenamesForReadmeFiles[key] = file
 									this.dataForReadmeFiles[key] = data.toString()
@@ -276,7 +280,7 @@ class Projectz {
 	}
 
 	// Merge Packages
-	mergeData (next) {
+	mergeData (next /* :function */) /* :this */ {
 		// By first merging in all the package data together into the enhanced data
 		extendr.extend(
 			this.mergedPackageData,
@@ -297,7 +301,7 @@ class Projectz {
 		}
 
 		// Validate keywords field
-		if ( typeChecker.isString(this.mergedPackageData.keywords) ) {
+		if ( isString(this.mergedPackageData.keywords) ) {
 			next(new Error('projectz: keywords field must be array instead of CSV'))
 			return this
 		}
@@ -307,7 +311,7 @@ class Projectz {
 			next(new Error('projectz: sponsor field is deprecated, use sponsors field'))
 			return this
 		}
-		if ( typeChecker.isString(this.mergedPackageData.sponsors) ) {
+		if ( isString(this.mergedPackageData.sponsors) ) {
 			next(new Error('projectz: sponsors field must be array instead of CSV'))
 			return this
 		}
@@ -317,17 +321,17 @@ class Projectz {
 			next(new Error('projectz: maintainer field is deprecated, use maintainers field'))
 			return this
 		}
-		if ( typeChecker.isString(this.mergedPackageData.maintainers) ) {
+		if ( isString(this.mergedPackageData.maintainers) ) {
 			next(new Error('projectz: maintainers field must be array instead of CSV'))
 			return this
 		}
 
 		// Validate license SPDX string
-		if ( typeChecker.isObject(this.mergedPackageData.license) ) {
+		if ( isObject(this.mergedPackageData.license) ) {
 			next(new Error('projectz: license field must now be a valid SPDX string: https://docs.npmjs.com/files/package.json#license'))
 			return this
 		}
-		if ( typeChecker.isObject(this.mergedPackageData.licenses) ) {
+		if ( isObject(this.mergedPackageData.licenses) ) {
 			next(new Error('projectz: licenses field is deprecated, you must now use the license field as a valid SPDX string: https://docs.npmjs.com/files/package.json#license'))
 			return this
 		}
@@ -336,7 +340,7 @@ class Projectz {
 		for ( const name in this.mergedPackageData.packages ) {
 			if ( this.mergedPackageData.packages.hasOwnProperty(name) ) {
 				const value = this.mergedPackageData.packages[name]
-				if ( !typeChecker.isObject(value) ) {
+				if ( !isObject(value) ) {
 					next(new Error(`projectz: custom package data for package ${name} must be an object`))
 					return this
 				}
@@ -455,30 +459,7 @@ class Projectz {
 		}
 
 		// Enhance licenses and sponsors
-		this.mergedPackageData.licenses = new projectzUtil.Licenses(this.mergedPackageData.license)
 		this.mergedPackageData.sponsors = Person.add(this.mergedPackageData.sponsors)
-
-		/*
-		if ( this.mergedPackageData.esnext === true )  this.mergedPackageData.esnext = {}
-		if ( this.mergedPackageData.esnext ) {
-			const esnext = extendr.defaults(this.mergedPackageData.esnext, {
-				sourceDirectory: 'esnext',
-				compiledDirectory: 'es5',
-				guardianEntry: 'esnextguardian.js',
-				mainEntryRelative: 'lib/index.js',
-				testEntryRelative: 'test/index.js'
-			})
-			this.mergedPackageData.main = `./${esnext.guardianEntry}`
-			if ( this.mergedPackageData.browsers ) {
-				if ( this.mergedPackageData.jspm == null )  this.mergedPackageData.jspm = {}
-				this.mergedPackageData.jspm.main = this.mergedPackageData.browser = `./${esnext.compiledDirectory}/${esnext.mainEntryRelative}`
-			}
-			if ( esnext.testEntryRelative && this.mergedPackageData.scripts ) {
-				this.mergedPackageData.scripts.test = `node --harmony ${esnext.compiledDirectory}/${esnext.testEntryRelative}`
-				// this.mergedPackageData.scripts.test = `node --harmony esnextguardian "${esnext.sourceDirectory}/${esnext.testEntryRelative}" "${esnext.compiledDirectory}/${esnext.testEntryRelative}"`
-			}
-		}
-		*/
 
 		// Finish up
 		next()
@@ -486,7 +467,7 @@ class Projectz {
 	}
 
 	// Enhance Packages
-	enhancePackages (next) {
+	enhancePackages (next /* :function */) /* :this */ {
 		// Create the data for the `package.json` format
 		this.dataForPackageFilesEnhanced.package = extendr.extend(
 			// New Object
@@ -610,25 +591,25 @@ class Projectz {
 	}
 
 	// Enhance Readmes
-	enhanceReadmes (next) {
-		const opts = this.mergedPackageData
-		eachr(this.dataForReadmeFiles, (data, name) => {
-			if ( !data ) {
-				this.log('debug', `Enhancing readme data: ${name} — skipped`)
+	enhanceReadmes (next /* :function */) /* :this */ {
+		const data = this.mergedPackageData
+		eachr(this.dataForReadmeFiles, (value, name) => {
+			if ( !value ) {
+				this.log('debug', `Enhancing readme value: ${name} — skipped`)
 				return
 			}
-			data = projectzUtil.replaceSection(['TITLE', 'NAME'], data, `<h1>${opts.title}</h1>`)
-			data = projectzUtil.replaceSection(['BADGES', 'BADGE'], data, badgeUtil.getBadgesSection.bind(null, opts))
-			data = projectzUtil.replaceSection(['DESCRIPTION'], data, opts.description)
-			data = projectzUtil.replaceSection(['INSTALL'], data, installUtil.getInstallInstructions.bind(null, opts))
-			data = projectzUtil.replaceSection(['CONTRIBUTE', 'CONTRIBUTING'], data, backerUtil.getContributeSection.bind(null, opts))
-			data = projectzUtil.replaceSection(['BACKERS', 'BACKER'], data, backerUtil.getBackerSection.bind(null, opts))
-			data = projectzUtil.replaceSection(['BACKERSFILE', 'BACKERFILE'], data, backerUtil.getBackerFile.bind(null, opts))
-			data = projectzUtil.replaceSection(['HISTORY', 'CHANGES', 'CHANGELOG'], data, historyUtil.getHistorySection.bind(null, opts))
-			data = projectzUtil.replaceSection(['LICENSE', 'LICENSES'], data, licenseUtil.getLicenseSection.bind(null, opts))
-			data = projectzUtil.replaceSection(['LICENSEFILE'], data, licenseUtil.getLicenseFile.bind(null, opts))
-			this.dataForReadmeFilesEnhanced[name] = projectzUtil.trim(data) + '\n'
-			this.log('info', `Enhanced readme data: ${name}`)
+			value = projectzUtil.replaceSection(['TITLE', 'NAME'], value, `<h1>${data.title}</h1>`)
+			value = projectzUtil.replaceSection(['BADGES', 'BADGE'], value, badgeUtil.getBadgesSection.bind(null, data))
+			value = projectzUtil.replaceSection(['DESCRIPTION'], value, data.description)
+			value = projectzUtil.replaceSection(['INSTALL'], value, installUtil.getInstallInstructions.bind(null, data))
+			value = projectzUtil.replaceSection(['CONTRIBUTE', 'CONTRIBUTING'], value, backerUtil.getContributeSection.bind(null, data))
+			value = projectzUtil.replaceSection(['BACKERS', 'BACKER'], value, backerUtil.getBackerSection.bind(null, data))
+			value = projectzUtil.replaceSection(['BACKERSFILE', 'BACKERFILE'], value, backerUtil.getBackerFile.bind(null, data))
+			value = projectzUtil.replaceSection(['HISTORY', 'CHANGES', 'CHANGELOG'], value, historyUtil.getHistorySection.bind(null, data))
+			value = projectzUtil.replaceSection(['LICENSE', 'LICENSES'], value, licenseUtil.getLicenseSection.bind(null, data))
+			value = projectzUtil.replaceSection(['LICENSEFILE'], value, licenseUtil.getLicenseFile.bind(null, data))
+			this.dataForReadmeFilesEnhanced[name] = projectzUtil.trim(value) + '\n'
+			this.log('info', `Enhanced readme value: ${name}`)
 			return true
 		})
 
@@ -640,7 +621,7 @@ class Projectz {
 	// Save
 	// Save the data we've loaded into the files
 	// Usage: `save(function (err) {})`
-	save (next) {
+	save (next /* :function */) /* :this */ {
 		// Prepare
 		this.log('info', 'Writing changes...')
 		const tasks = new TaskGroup().setConfig({concurrency: 0}).done((err) => {
@@ -652,24 +633,24 @@ class Projectz {
 		// Save package files
 		eachr(this.filenamesForPackageFiles, (filename, name) => {
 			if ( !filename || name === 'projectz' )  return
-			const filepath = pathUtil.join(this.cwd, filename)
+			const filepath = join(this.cwd, filename)
 			const message = `Saving package file: ${filepath}`
 			tasks.addTask(message, (complete) => {
 				this.log('info', message)
 				const data = JSON.stringify(this.dataForPackageFilesEnhanced[name], null, '  ') + '\n'
-				fsUtil.writeFile(filepath, data, complete)
+				writeFile(filepath, data, complete)
 			})
 		})
 
 		// Safe readme files
 		eachr(this.filenamesForReadmeFiles, (filename, name) => {
 			if ( !filename )  return
-			const filepath = pathUtil.join(this.cwd, filename)
+			const filepath = join(this.cwd, filename)
 			const message = `Saving readme file: ${filepath}`
 			tasks.addTask(message, (complete) => {
 				this.log('info', message)
 				const data = this.dataForReadmeFilesEnhanced[name]
-				fsUtil.writeFile(filepath, data, complete)
+				writeFile(filepath, data, complete)
 			})
 		})
 
@@ -678,6 +659,3 @@ class Projectz {
 		return this
 	}
 }
-
-// Export
-module.exports = Projectz

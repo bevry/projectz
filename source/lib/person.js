@@ -1,7 +1,16 @@
 /* @flow */
+export default class Person extends require('fellow') {
+	/* :: _years:?string; */
+	/* :: _name:?string; */
+	/* :: githubUsername:string; */
+	/* :: twitterUsername:string; */
+	/* :: facebookUsername:string; */
 
-// Define
-class Person extends require('fellow') {
+	/**
+	The years that this fellow has
+	@property years
+	@type String
+	*/
 
 	/**
 	If the name is empty, we will try to fallback to githubUsername then twitterUsername
@@ -12,7 +21,7 @@ class Person extends require('fellow') {
 	@type String
 	*/
 	/* eslint no-magic-numbers: 0 */
-	set name (value) {
+	set name (value /* :string */) {
 		const match = (/^((?:[0-9]+[\-\+]?)+)?(.+)$/).exec(value)
 		if ( match ) {
 			const years = String(match[1] || '').trim() || null
@@ -24,17 +33,8 @@ class Person extends require('fellow') {
 		}
 	}
 
-	get name () {
+	get name () /* :any */ {
 		return this._name || this.githubUsername || this.twitterUsername || this.facebookUsername || null
 	}
 
-	/**
-	The years that this fellow has
-	@property years
-	@type String
-	*/
-
 }
-
-// Exports
-module.exports = Person
