@@ -483,7 +483,7 @@ export class Projectz {
 				license:                this.mergedPackageData.license,
 				description:            this.mergedPackageData.description,
 				keywords:               this.mergedPackageData.keywords,
-				author:                 projectzUtil.getPeopleTextArray(this.mergedPackageData.authors, {years: true}).join(', '),
+				author:                 projectzUtil.getPeopleTextArray(this.mergedPackageData.authors, {displayYears: true}).join(', '),
 				maintainers:            projectzUtil.getPeopleTextArray(this.mergedPackageData.maintainers),
 				contributors:           projectzUtil.getPeopleTextArray(this.mergedPackageData.contributors),
 				bugs:                   this.mergedPackageData.bugs,
@@ -572,7 +572,7 @@ export class Projectz {
 				license:                this.mergedPackageData.license,
 				description:            this.mergedPackageData.description,
 				keywords:               this.mergedPackageData.keywords,
-				authors:                projectzUtil.getPeopleTextArray(this.mergedPackageData.authors, {years: true}),
+				authors:                projectzUtil.getPeopleTextArray(this.mergedPackageData.authors, {displayYears: true}),
 				main:                   this.mergedPackageData.main
 			}
 		)

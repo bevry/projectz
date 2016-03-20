@@ -53,7 +53,7 @@ export function getLicenseIntroduction (data /* :Object */) /* :string */ {
 	const result = [
 		'Unless stated otherwise all works are:',
 		'',
-		getPeopleHTML(data.authors, {copyright: true, years: true}),
+		getPeopleHTML(data.authors, {displayCopyright: true, displayYears: true}),
 		'',
 		'and licensed under:',
 		'',

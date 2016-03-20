@@ -1,7 +1,7 @@
 /* @flow */
 
 /* :: declare type Person = Object; */
-/* :: declare type PersonOptions = {displayCopyright?:string; displayYears?:string; githubSlug?:string}; */
+/* :: declare type PersonOptions = {displayCopyright?:boolean; displayYears?:boolean; githubSlug?:string}; */
 
 export function getPersonHTML (person /* :Person */, opts /* :PersonOptions */ = {}) /* :string */ {
 	if ( person.name ) {
