@@ -50,6 +50,7 @@ Here's some of the things it can do:
 	- [Ender](http://enderjs.com)
 	- [Component](http://github.com/component/component)
 	- [Bower](http://bower.io/)
+	- [Editions](https://github.com/bevry/editions)
 	- [DocPad](https://docpad.org) Plugins
 - Automatic injection of your desired [badges](https://github.com/bevry/badges)
 - Automatic injection of your [SPDX](http://spdx.org/licenses/) license information
