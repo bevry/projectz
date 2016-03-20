@@ -54,17 +54,16 @@
   },
   "author": "2013+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
   "maintainers": [
-    "Benjamin Lupton <b@lupton.cc> (http://balupton.com)",
+    "Benjamin Lupton <b@lupton.cc> (https://balupton.com)",
     "Rob Loach <robloach@gmail.com> (http://robloach.net)"
   ],
   "contributors": [
-    "Benjamin Lupton <b@lupton.cc> (http://balupton.com)",
+    "Benjamin Lupton <b@lupton.cc> (https://balupton.com)",
     "Peter Flannery (https://github.com/pflannery)",
     "Rob Loach <robloach@gmail.com> (http://robloach.net)",
     "Zearin (https://github.com/Zearin)",
     "vsopvsop (https://github.com/vsopvsop)",
-    "Shahar Or <mightyiampresence@gmail.com> (http://mightyi.am)",
-    "Benjamin Lupton (https://balupton.com)"
+    "Shahar Or <mightyiampresence@gmail.com> (http://mightyi.am)"
   ],
   "bugs": {
     "url": "https://github.com/bevry/projectz/issues"
@@ -102,6 +101,7 @@
       "syntaxes": [
         "javascript",
         "es2015",
+        "symbols",
         "require"
       ]
     }

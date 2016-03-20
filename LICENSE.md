@@ -8,7 +8,7 @@ Unless stated otherwise all works are:
 
 and licensed under:
 
-<a href="http://spdx.org/licenses/MIT.html">MIT License</a>
+<ul><li><a href="http://spdx.org/licenses/MIT.html">MIT License</a></li></ul>
 
 <h2>MIT License</h2>
 
