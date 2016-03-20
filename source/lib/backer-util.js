@@ -74,9 +74,6 @@ export function getContributorsText (data /* :Object */) /* :string */ {
 }
 
 export function getBackerSection (data /* :Object */) /* :string */ {
-	// Check
-	if ( !data.licenses )  return ''
-
 	// Prepare
 	const result = [
 		'<h2>Backers</h2>',
@@ -99,9 +96,6 @@ export function getBackerSection (data /* :Object */) /* :string */ {
 }
 
 export function getBackerFile (data /* :Object */) /* :string */ {
-	// Check
-	if ( !data.licenses )  return ''
-
 	// Prepare
 	const result = [
 		'<h1>Backers</h1>',

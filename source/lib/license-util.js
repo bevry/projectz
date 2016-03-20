@@ -29,11 +29,12 @@ function renderSpdxObject (spdxObject /* :Object */, output /* :"description"|"b
 				.replace(/^(.+?)\n\s*([\s\S]+)\s*$/, '<h2>$1</h2>\n\n<pre>\n$2\n</pre>')
 	}
 	else if ( spdxObject.conjunction ) {
-		return '<ul>' + [
-			'<li>' + renderSpdxObject(spdxObject.left, output) + '</li>',
-			'<li>' + spdxObject.conjunction + '</li>',
-			'<li>' + renderSpdxObject(spdxObject.right, output) + '</li>'
-		].join('') + '</ul>'
+		const left = renderSpdxObject(spdxObject.left, output)
+		const middle = spdxObject.conjunction
+		const right = renderSpdxObject(spdxObject.right, output)
+		return output === 'description'
+			? `<ul><li>${left}</li>\n<li>${middle}</li>\n<li>${right}</li></ul>`
+			: `${left}\n\n${right}\n\n`.trim()
 	}
 	else {
 		throw new Error(`Unknown spdx object value: ${JSON.stringify(spdxObject, null, '  ')}`)
