@@ -1,5 +1,8 @@
 # History
 
+## v1.1.2 2016 March 20
+- Repackaged
+
 ## v1.1.1 2016 March 20
 - Fix `projectz: line 1: //: is a directory`
 
