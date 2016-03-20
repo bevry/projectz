@@ -70,43 +70,61 @@ export function getInstallInstructions (data /* :Object */) /* :string */ {
 
 		// Babel
 		if ( data.editions ) {
-			const links = [
-				{text: 'ESNextGuardian', url: 'https://www.npmjs.com/package/esnextguardian', title: "Loads ES6+ files if the user's environment supports it, otherwise gracefully fallback to ES5 files."},
-				{text: 'Babel', url: 'https://babeljs.io', title: 'The compiler for writing next generation JavaScript'},
-				{text: 'ESNext', url: 'https://babeljs.io/docs/learn-es2015/'},
-				{text: 'ES2015', url: 'http://babeljs.io/docs/plugins/preset-es2015/'},
-				{text: 'Flow Type', url: 'http://flowtype.org', title: 'Flow is a static type checker for JavaScript'}
-			]
-			const polyfillLink = getLink({text: "Babel's Polyfill", url: 'https://babeljs.io/docs/usage/polyfill/', title: 'A polyfill by the Babel project that emulates missing ECMAScript environment features'})
-			const otherLink = 'something else'
+			let hasDefaultEdition = false
+			const editions = []
+			data.editions.forEach(function (edition) {
+				const entry = edition.entry // .replace('/index.js', '')
+				if ( edition.entry === data.main ) {
+					hasDefaultEdition = true
+					editions.push(`<code>${data.name}</code> aliases <code>${data.name}/${entry}</code>`)
+				}
+				editions.push(`<code>${data.name}/${entry}</code> is ${edition.description}`)
+			})
 
-			let defaultEdition = null
-			let part = [
-				'<h3>Editions</h3>',
-				'<p>The published package includes the following editions:<ul>'
-			].concat(
-				data.editions.map(function (edition) {
-					let suffix = ''
-					if ( edition.entry === data.main ) {
-						defaultEdition = edition
-						suffix = ', this is the default entry'
-					}
-					return `<li>The ${edition.description} is at <code>${data.name + '/' + edition.directory}</code> with entry at <code>${data.name + '/' + edition.entry}</code>${suffix}</li>`
-				})
-			).concat([
-				((defaultEdition === null)
-					? ((data.main || '').indexOf('esnextguardian') !== -1
-						? `<li>The default entry uses ESNextGuardian and is at <code>${data.name + '/' + data.main}</code></li>`
-						: `<li>The default entry is at <code>${data.name + '/' + data.main}</code></li>`)
-					: '') + '</ul>',
-				`Older ECMAScript environments may need ${polyfillLink} or ${otherLink}.</p>`
-			]).join('\n')
-
-			for ( const link of links ) {
-				part = part.replace(link.text, getLink(link))
+			// Autoloaders
+			if ( !hasDefaultEdition ) {
+				if ( 'editions' in data.dependencies ) {
+					editions.unshift(`<code>${data.name}</code> aliases <code>${data.name}/${data.main}</code> which uses Editions to automatically select the correct edition for the consumers environment`)
+				}
+				else if ( 'esnextguardian' in data.dependencies ) {
+					editions.unshift(`<code>${data.name}</code> aliases <code>${data.name}/${data.main}</code> which uses ESNextGuardian to automatically select the correct edition for the consumers environment`)
+				}
 			}
 
-			parts.push(part)
+			// Compile result
+			let result = `<h3>Editions</h3>\n\n<p>This package is published with the following editions:</p>\n\n<ul><li>${editions.join('</li>\n<li>')}</li></ul>`
+
+			// Is the last edition node 0.10 compatible?
+			const syntaxes = data.editions[data.editions.length - 1].syntaxes
+			if ( syntaxes.indexOf('symbols') !== -1 || syntaxes.indexOf('esnext') !== -1 || syntaxes.indexOf('es2015') !== -1 ) {
+				result += "\n\n<p>Older environments may need Babel's Polyfill or something similar.</p>"
+			}
+
+			// Add links
+			const linksArray = [
+				{text: 'Editions', url: 'https://github.com/bevry/editions', title: 'Editions are the best way to produce and consume packages you care about.'},
+				{text: 'ESNextGuardian', url: 'https://github.com/bevry/esnextguardian', title: "Loads ES6+ files if the user's environment supports it, otherwise gracefully fallback to ES5 files."},
+				{text: "Babel's Polyfill", url: 'https://babeljs.io/docs/usage/polyfill/', title: 'A polyfill that emulates missing ECMAScript environment features'},
+				{text: 'Babel', url: 'https://babeljs.io', title: 'The compiler for writing next generation JavaScript'},
+				{text: 'Require', url: 'https://nodejs.org/dist/latest-v5.x/docs/api/modules.html', title: 'Node/CJS Modules'},
+				{text: 'Import', url: 'https://babeljs.io/docs/learn-es2015/#modules', title: 'ECMAScript Modules'},
+				{text: 'ESNext', url: 'https://babeljs.io/docs/learn-es2015/', title: 'ECMAScript Next'},
+				{text: 'ES2015', url: 'http://babeljs.io/docs/plugins/preset-es2015/', title: 'ECMAScript 2015'},
+				{text: 'Flow Type Comments', url: 'http://flowtype.org/blog/2015/02/20/Flow-Comments.html', title: 'Flow is a static type checker for JavaScript'},
+				{text: 'Flow Type', url: 'http://flowtype.org', title: 'Flow is a static type checker for JavaScript'},
+				{text: 'JSX', url: 'https://facebook.github.io/jsx/', title: 'XML/HTML inside your JavaScript'}
+			]
+			const linksMap = {}
+			const linksMatch = new RegExp(linksArray.map((link) => link.text).join('|'), 'g')
+			linksArray.forEach(function (link) {
+				linksMap[link.text] = getLink(link)
+			})
+			result = result.replace(linksMatch, function (match) {
+				return linksMap[match]
+			})
+
+			// Push result
+			parts.push(result)
 		}
 	}
 
