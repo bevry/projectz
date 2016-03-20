@@ -1,5 +1,9 @@
 # History
 
+## v1.1.0 2016 March 20
+- Repackaged with [Editions](https://github.com/bevry/editions)
+- Added editions rendering
+
 ## v1.0.9 2015 December 10
 - Updated esnextguardian script
 
