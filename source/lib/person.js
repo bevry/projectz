@@ -1,5 +1,5 @@
 /* @flow */
-export default class Person extends require('fellow') {
+export default class Person extends require('fellow/es2015') {
 	/* :: _years:?string; */
 	/* :: _name:?string; */
 	/* :: githubUsername:string; */
