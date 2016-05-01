@@ -1,7 +1,7 @@
 {
   "title": "Projectz",
   "name": "projectz",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "Stop wasting time syncing and updating your project's README and Package Files!",
   "homepage": "https://github.com/bevry/projectz",
   "license": "MIT",
@@ -141,7 +141,7 @@
     "eachr": "^3.1.1",
     "editions": "^1.1.0",
     "extendr": "^3.1.0",
-    "fellow": "^2.1.0",
+    "fellow": "^2.2.0",
     "safefs": "^4.0.1",
     "spdx": "^0.5.1",
     "spdx-license-list": "^2.1.0",

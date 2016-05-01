@@ -1,5 +1,9 @@
 # History
 
+## v1.1.4 2016 May 2
+- Fix error if have a cached version of fellow
+- Updated base files
+
 ## v1.1.3 2016 May 2
 - Use es2015 edition of [fellow](https://github.com/bevry/fellow)
 	- Fixes https://github.com/bevry/projectz/issues/81
