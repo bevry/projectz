@@ -3,8 +3,8 @@
 
 // Import caterpillar [Caterpillar](https://github.com/bevry/caterpillar) for logging
 import {Logger} from 'caterpillar'
-import {Filter} from 'caterpillar-filter'
-import {Human} from 'caterpillar-human'
+import Filter from 'caterpillar-filter'
+import Human from 'caterpillar-human'
 
 // Import [Commander](https://github.com/visionmedia/commander.js/) for command and option parsing
 import cli from 'commander'

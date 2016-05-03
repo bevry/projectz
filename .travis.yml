@@ -7,8 +7,9 @@ sudo: false
 # We use node
 language: node_js
 node_js:
-  - "0.12"
-  - "4"
+  #- "0.12"
+  #- "4"
+  # ^ disabled while flow is busted: https://github.com/facebook/flow/issues/1721#issuecomment-216077420
   - "5"
   - "6"
 cache:
@@ -26,7 +27,7 @@ script: "npm test"
 # Custom notifications
 notifications:
   slack:
-    secure: ath/YF/bWO5IpdVsYseEec5aMK2SWudls8lHmM6Qp/eVb1l0vyhk/1UWJIULmCGlWURrBnjnxaQmzhAuDGflyTwjgeWHviDfnT/xavn4oUDDYuSKY/6mA5RP344RT5tI5EK0AcQEpHBVKsrmLDtxXSLvCxyS0Y/cuvzJYyQpwAM=
+    secure: lhfe4KMe005dapdKa29BVcLLL3hkTfqTv34GWB7NXELkv3phftGa3c3yNGQJWqxf0TFnR53a/8aMNHTaJlroW7xZNOT1RNnfQgwifdfIGZLf/ARYoFotEPXCU0IlF7gk5qS7vfXw2gwH/qJWw4YS686Ck229LwJ+8QcMageE8eY=
   email:
     recipients:
-      secure: yPsw3ZRtKosYOxE/ashjOJ+RsqPNFZxrciVne8cxaQwhHSBNu5x40AZ8AsbKwTk1XHtZZSj+cVj6PNBpvzPsbpLjclzKwuwBTu+3FPSoKAUC6VUudqvtym7gq5xlr+dbH2srDnI2qNckQ6qIbq86oxcvjSdWHcVzCLO2QdLupI4=
+      secure: c0N+AukbVG94XPAsXZSUYwdZvG+5o++QYABIQyKjLUqV73VKMyE+yu7w3wwdiXREYQ24jmee8kfKjhwgCMQCjlTitUwRHJ0BAPoUAhaJxdj5RqM5O2bDl+pfe1bzvueXEJjEPCyiApsmv1P084isPJzrlE41u7Xwyi8q7OtHc7k=

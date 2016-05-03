@@ -1,5 +1,8 @@
 # History
 
+## v1.1.5 2016 May 4
+- Updated dependencies
+
 ## v1.1.4 2016 May 2
 - Fix error if have a cached version of fellow
 - Updated base files
