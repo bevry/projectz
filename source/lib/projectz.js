@@ -6,36 +6,36 @@
 
 // Load in the file system libraries.
 // [SafeFS](https://github.com/bevry/safefs) is aliased to `fsUtil` as it provides protection against a lot of the common gotchas
-import {readdir, readFile, writeFile} from 'safefs'
-import {resolve, join} from 'path'
+const {readdir, readFile, writeFile} = require('safefs')
+const {resolve, join} = require('path')
 
 // [CSON](https://github.com/bevry/cson) is used for loading in our configuration files
-import CSON from 'cson'
+const CSON = require('cson')
 
 // [TypeChecker](https://github.com/bevry/typechecker) is used for checking data types
-import {isString, isObject} from 'typechecker'
+const {isString, isObject} = require('typechecker')
 
 // [TaskGroup](https://github.com/bevry/taskgroup) is used for bundling tasks together and waiting for their completion
-import TaskGroup from 'taskgroup'
+const {TaskGroup} = require('taskgroup')
 
 // [Eachr](https://github.com/bevry/eachr) lets us cycle arrays and objects easily
-import eachr from 'eachr'
+const eachr = require('eachr')
 
 // [Extendr](https://github.com/bevry/extendr) gives us safe, deep, and shallow extending abilities
-import extendr from 'extendr'
+const extendr = require('extendr')
 
 // Load in our other project files
-import Person from './person'
-import * as backerUtil from './backer-util'
-import * as badgeUtil from './badge-util'
-import * as historyUtil from './history-util'
-import * as installUtil from './install-util'
-import * as licenseUtil from './license-util'
-import * as projectzUtil from './projectz-util'
+const Person = require('./person.js')
+const backerUtil = require('./backer-util.js')
+const badgeUtil = require('./badge-util.js')
+const historyUtil = require('./history-util.js')
+const installUtil = require('./install-util.js')
+const licenseUtil = require('./license-util.js')
+const projectzUtil = require('./projectz-util.js')
 
 // Definition
 // Projects is defined as a class to ensure we can run multiple instances of it
-export class Projectz {
+class Projectz {
 	/* :: cwd:string; */
 	/* :: filenamesForPackageFiles:Object; */
 	/* :: dataForPackageFiles:Object; */
@@ -659,3 +659,6 @@ export class Projectz {
 		return this
 	}
 }
+
+// Exports
+module.exports = {Projectz}

@@ -1,7 +1,7 @@
 /* @flow */
-import {getPeopleHTML} from './projectz-util'
-import {parse as spdxParse} from 'spdx'
-import spdxList from 'spdx-license-list/spdx-full'
+const {getPeopleHTML} = require('./projectz-util.js')
+const spdxParse = require('spdx').parse
+const spdxList = require('spdx-license-list/spdx-full')
 
 function renderSpdxObject (spdxObject /* :Object */, output /* :"description"|"body" */, depth = 0) /* :string */ {
 	if ( spdxObject.license ) {
@@ -44,12 +44,12 @@ function renderSpdxObject (spdxObject /* :Object */, output /* :"description"|"b
 	}
 }
 
-export function getLicensesHTML (spdxString /* :string */, output /* :"description"|"body" */) /* :string */ {
+function getLicensesHTML (spdxString /* :string */, output /* :"description"|"body" */) /* :string */ {
 	const sdpxObject = spdxParse(spdxString)
 	return renderSpdxObject(sdpxObject, output)
 }
 
-export function getLicenseIntroduction (data /* :Object */) /* :string */ {
+function getLicenseIntroduction (data /* :Object */) /* :string */ {
 	// Check
 	if ( !data.license ) {
 		throw new Error('License file was requested, but no license was specified')
@@ -70,7 +70,7 @@ export function getLicenseIntroduction (data /* :Object */) /* :string */ {
 	return result
 }
 
-export function getLicenseFile (data /* :Object */) /* :string */ {
+function getLicenseFile (data /* :Object */) /* :string */ {
 	// Check
 	if ( !data.license ) {
 		throw new Error('License file was requested, but no license was specified')
@@ -89,7 +89,7 @@ export function getLicenseFile (data /* :Object */) /* :string */ {
 	return result
 }
 
-export function getLicenseSection (data /* :Object */) /* :string */ {
+function getLicenseSection (data /* :Object */) /* :string */ {
 	// Prepare
 	const result = [
 		'<h2>License</h2>',
@@ -100,3 +100,6 @@ export function getLicenseSection (data /* :Object */) /* :string */ {
 	// Return
 	return result
 }
+
+// Exports
+module.exports = {getLicensesHTML, getLicenseIntroduction, getLicenseFile, getLicenseSection}

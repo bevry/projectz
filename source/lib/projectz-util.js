@@ -3,7 +3,7 @@
 /* :: declare type Person = Object; */
 /* :: declare type PersonOptions = {displayCopyright?:boolean; displayYears?:boolean; githubSlug?:string}; */
 
-export function getPersonHTML (person /* :Person */, opts /* :PersonOptions */ = {}) /* :string */ {
+function getPersonHTML (person /* :Person */, opts /* :PersonOptions */ = {}) /* :string */ {
 	if ( person.name ) {
 		let html = ''
 
@@ -23,7 +23,7 @@ export function getPersonHTML (person /* :Person */, opts /* :PersonOptions */ =
 	}
 }
 
-export function getPeopleHTML (people /* :Array<Person> */, opts /* :PersonOptions */ = {}) /* :string */ {
+function getPeopleHTML (people /* :Array<Person> */, opts /* :PersonOptions */ = {}) /* :string */ {
 	if ( people.length === 0 ) {
 		return ''
 	}
@@ -34,7 +34,7 @@ export function getPeopleHTML (people /* :Array<Person> */, opts /* :PersonOptio
 	}
 }
 
-export function getPersonText (person /* :Person */, opts /* :PersonOptions */ = {}) /* :string */ {
+function getPersonText (person /* :Person */, opts /* :PersonOptions */ = {}) /* :string */ {
 	if ( person.name ) {
 		let text = ''
 		if ( opts.displayYears && person.years )  text += person.years + ' '
@@ -48,7 +48,7 @@ export function getPersonText (person /* :Person */, opts /* :PersonOptions */ =
 	}
 }
 
-export function getPeopleTextArray (people /* :Array<Person> */, opts /* :PersonOptions */ = {}) /* :Array<string> */ {
+function getPeopleTextArray (people /* :Array<Person> */, opts /* :PersonOptions */ = {}) /* :Array<string> */ {
 	if ( people.length === 0 ) {
 		return []
 	}
@@ -65,7 +65,7 @@ export function getPeopleTextArray (people /* :Array<Person> */, opts /* :Person
 	}
 }
 
-export function getFileUrl (data /* :Object */, filename /* :string */) /* :string */ {
+function getFileUrl (data /* :Object */, filename /* :string */) /* :string */ {
 	if ( data.github.slug ) {
 		return `https://github.com/${data.github.slug}/blob/master/${filename}#files`
 	}
@@ -74,7 +74,7 @@ export function getFileUrl (data /* :Object */, filename /* :string */) /* :stri
 	}
 }
 
-export function getLink ({url, text, title} /* :Object */) /* :string */ {
+function getLink ({url, text, title} /* :Object */) /* :string */ {
 	if ( !url || !text ) {
 		throw new Error('Links must have both a url and text')
 	}
@@ -86,7 +86,7 @@ export function getLink ({url, text, title} /* :Object */) /* :string */ {
 	}
 }
 
-export function replaceSection (names /* :string|Array<string> */, source /* :string */, inject /* :: :string|function */) /* :string */ {
+function replaceSection (names /* :string|Array<string> */, source /* :string */, inject /* :: :string|function */) /* :string */ {
 	let regexName, sectionName
 	if ( Array.isArray(names) ) {
 		regexName = '(' + names.join('|') + ')'
@@ -117,6 +117,9 @@ export function replaceSection (names /* :string|Array<string> */, source /* :st
 	return result
 }
 
-export function trim (str /* :string */) /* :string */ {
+function trim (str /* :string */) /* :string */ {
 	return str.replace(/^\s+|\s+$/g, '')
 }
+
+// Exports
+module.exports = {getPersonHTML, getPeopleHTML, getPersonText, getPeopleTextArray, getFileUrl, getLink, replaceSection, trim}

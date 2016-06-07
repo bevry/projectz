@@ -1,11 +1,11 @@
 /* @flow */
 
 // Import
-import {spawn} from 'safeps'
-import {suite} from 'joe'
-import {join} from 'path'
-import {readdir, readFile} from 'safefs'
-import {equal} from 'assert-helpers'
+const {spawn} = require('safeps')
+const {suite} = require('joe')
+const {join} = require('path')
+const {readdir, readFile} = require('safefs')
+const {equal} = require('assert-helpers')
 
 
 // -------------------------------------

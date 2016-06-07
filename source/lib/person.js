@@ -1,5 +1,8 @@
 /* @flow */
-export default class Person extends require('fellow/es2015') {
+const Fellow = require('fellow/es2015')
+
+// Define
+class Person extends Fellow {
 	/* :: _years:?string; */
 	/* :: _name:?string; */
 	/* :: githubUsername:string; */
@@ -38,3 +41,6 @@ export default class Person extends require('fellow/es2015') {
 	}
 
 }
+
+// Exports
+module.exports = Person

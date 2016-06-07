@@ -2,18 +2,18 @@
 // Projectz CLI
 
 // Import caterpillar [Caterpillar](https://github.com/bevry/caterpillar) for logging
-import {Logger} from 'caterpillar'
-import Filter from 'caterpillar-filter'
-import Human from 'caterpillar-human'
+const {Logger} = require('caterpillar')
+const Filter = require('caterpillar-filter')
+const Human = require('caterpillar-human')
 
 // Import [Commander](https://github.com/visionmedia/commander.js/) for command and option parsing
-import cli from 'commander'
+const cli = require('commander')
 
 // Import our package data for versioning
-import {version} from '../package.json'
+const {version} = require('../package.json')
 
 // Import out projectz utility
-import {Projectz} from './index'
+const {Projectz} = require('./index.js')
 
 // Prepare our logging configuration
 const LOG_LEVEL_INFO = 6

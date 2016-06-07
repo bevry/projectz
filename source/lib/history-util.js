@@ -1,8 +1,8 @@
 /* @flow */
-import {getLink, getFileUrl} from './projectz-util'
+const {getLink, getFileUrl} = require('./projectz-util.js')
 
 // Get History Section
-export function getHistorySection (data /* :Object */) /* :string */ {
+function getHistorySection (data /* :Object */) /* :string */ {
 	// Prepare
 	let link = null
 	const file = data.filenamesForReadmeFiles.history
@@ -25,3 +25,6 @@ export function getHistorySection (data /* :Object */) /* :string */ {
 	// Return
 	return '<h2>History</h2>\n\n' + link
 }
+
+// Exports
+module.exports = {getHistorySection}

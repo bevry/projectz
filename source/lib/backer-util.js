@@ -1,8 +1,8 @@
 /* @flow */
-import {getPeopleHTML, getFileUrl, getLink} from './projectz-util'
-import {getBadgesInCategory} from './badge-util'
+const {getPeopleHTML, getFileUrl, getLink} = require('./projectz-util.js')
+const {getBadgesInCategory} = require('./badge-util.js')
 
-export function getSponsorsText (data /* :Object */) /* :string */ {
+function getSponsorsText (data /* :Object */) /* :string */ {
 	let result = ''
 
 	if ( data.sponsors.length === 0 ) {
@@ -21,7 +21,7 @@ export function getSponsorsText (data /* :Object */) /* :string */ {
 	return result
 }
 
-export function getMaintainersText (data /* :Object */) /* :string */ {
+function getMaintainersText (data /* :Object */) /* :string */ {
 	let result = ''
 
 	if ( data.maintainers.length === 0 ) {
@@ -36,7 +36,7 @@ export function getMaintainersText (data /* :Object */) /* :string */ {
 	return result
 }
 
-export function getContributeLink (data /* :Object */, {optional = false} /* :Object */ ) /* :string */ {
+function getContributeLink (data /* :Object */, {optional = false} /* :Object */ ) /* :string */ {
 	// Prepare
 	const file = data.filenamesForReadmeFiles.contributing
 	if ( !file ) {
@@ -54,7 +54,7 @@ export function getContributeLink (data /* :Object */, {optional = false} /* :Ob
 	return getLink({url, text})
 }
 
-export function getContributorsText (data /* :Object */) /* :string */ {
+function getContributorsText (data /* :Object */) /* :string */ {
 	let result = ''
 
 	if ( data.contributors.length === 0 ) {
@@ -73,7 +73,7 @@ export function getContributorsText (data /* :Object */) /* :string */ {
 	return result
 }
 
-export function getBackerSection (data /* :Object */) /* :string */ {
+function getBackerSection (data /* :Object */) /* :string */ {
 	// Prepare
 	const result = [
 		'<h2>Backers</h2>',
@@ -95,7 +95,7 @@ export function getBackerSection (data /* :Object */) /* :string */ {
 	return result
 }
 
-export function getBackerFile (data /* :Object */) /* :string */ {
+function getBackerFile (data /* :Object */) /* :string */ {
 	// Prepare
 	const result = [
 		'<h1>Backers</h1>',
@@ -117,7 +117,7 @@ export function getBackerFile (data /* :Object */) /* :string */ {
 	return result
 }
 
-export function getContributeSection (data /* :Object */) /* :string */ {
+function getContributeSection (data /* :Object */) /* :string */ {
 	// Prepare
 	const result = [
 		'<h2>Contribute</h2>',
@@ -128,3 +128,6 @@ export function getContributeSection (data /* :Object */) /* :string */ {
 	// Return
 	return result
 }
+
+// Exports
+module.exports = {getSponsorsText, getMaintainersText, getContributeLink, getContributorsText, getBackerSection, getBackerFile, getContributeSection}

@@ -1,7 +1,7 @@
 /* @flow */
-import {renderBadges} from 'badges'
+const {renderBadges} = require('badges')
 
-export function getBadgesInCategory (category /* :string */, data /* :Object */) /* :string */ {
+function getBadgesInCategory (category /* :string */, data /* :Object */) /* :string */ {
 	if ( data.badges && data.badges.list ) {
 		return renderBadges(data.badges.list, data.badges.config, {filterCategory: category, filterScripts: true})
 	}
@@ -10,7 +10,7 @@ export function getBadgesInCategory (category /* :string */, data /* :Object */)
 	}
 }
 
-export function getBadgesSection (data /* :Object */) /* :string */ {
+function getBadgesSection (data /* :Object */) /* :string */ {
 	if ( data.badges && data.badges.list ) {
 		return renderBadges(data.badges.list, data.badges.config, {filterScripts: true})
 	}
@@ -18,3 +18,6 @@ export function getBadgesSection (data /* :Object */) /* :string */ {
 		return ''
 	}
 }
+
+// Exports
+module.exports = {getBadgesInCategory, getBadgesSection}

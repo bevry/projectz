@@ -141,7 +141,7 @@ No sponsors yet! Will you be the first?
 These amazing people have contributed code to this project:
 
 <ul><li><a href="https://balupton.com">Benjamin Lupton</a> — <a href="https://github.com/bevry/ambi/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/ambi">view contributions</a></li>
-<li><a href="http://seanfridman.com">Sean Fridman</a> — <a href="https://github.com/bevry/ambi/commits?author=sfrdmn" title="View the GitHub contributions of Sean Fridman on repository bevry/ambi">view contributions</a></li></ul>
+<li><a href="http://seanfridman.com">Sean Fridman</a></li></ul>
 
 
 

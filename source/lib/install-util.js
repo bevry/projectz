@@ -1,8 +1,8 @@
 /* @flow */
-import {getLink} from './projectz-util'
+const {getLink} = require('./projectz-util.js')
 
 // Define
-export function getInstallInstructions (data /* :Object */) /* :string */ {
+function getInstallInstructions (data /* :Object */) /* :string */ {
 	const parts = []
 
 	// DocPad
@@ -130,3 +130,6 @@ export function getInstallInstructions (data /* :Object */) /* :string */ {
 
 	return '<h2>Install</h2>\n\n' + parts.join('\n\n')
 }
+
+// Exports
+module.exports = {getInstallInstructions}

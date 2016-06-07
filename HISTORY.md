@@ -1,5 +1,9 @@
 # History
 
+## v1.1.6 2016 June 8
+- Updated dependencies
+- Updated internal conventions
+
 ## v1.1.5 2016 May 4
 - Updated dependencies
 
@@ -8,7 +12,7 @@
 - Updated base files
 
 ## v1.1.3 2016 May 2
-- Use es2015 edition of [fellow](https://github.com/bevry/fellow)
+- Use ES2015 edition of [fellow](https://github.com/bevry/fellow)
 	- Fixes https://github.com/bevry/projectz/issues/81
 
 ## v1.1.2 2016 March 20
