@@ -216,7 +216,7 @@ The following comment tags are supported:
 - `<!-- INSTALL -->` — outputs the package's installation instructions
 - `<!-- HISTORY -->` — outputs a link to the `HISTORY` file if it exists, otherwise if it is a Github repository, outputs a link to the releases page
 - `<!-- CONTRIBUTE -->` — outputs a link to the `CONTRIBUTE` file if it exists
-- `<!-- BACKERS -->` — outputs the information from the `sponsors` field, as well as any funding badges
+- `<!-- BACKERS -->` — outputs who the backers are for the project, including maintainers, sponsors, funding badges, and contributors
 - `<!-- LICENSE -->` — outputs a summary of the license information
 
 As well as these comment tags for updating entire files:
@@ -238,6 +238,8 @@ As an example, here is a a basic `README.md` file:
 	<!-- CONTRIBUTE -->
 	<!-- BACKERS -->
 	<!-- LICENSE -->
+
+This README is also, expectedly, built with projectz. [View its source.](https://raw.githubusercontent.com/bevry/projectz/master/README.md)
 
 
 <!-- HISTORY/ -->
