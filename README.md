@@ -33,12 +33,12 @@ Stop wasting time syncing and updating your project's README and Package Files!
 
 Here's some of the things it can do:
 
-- Keep your projects data files synchronised appropriately, supports:
+- [Keep your projects data files synchronised appropriately](https://github.com/bevry/projectz#data-files), supports:
 	- `package.json`
 	- `bower.json`
 	- `component.json`
 	- `jquery.json`
-- Create beautiful standardised readme files that stay in sync with your data files, supports:
+- [Create beautiful standardised readme files that stay in sync with your data files](https://github.com/bevry/projectz#readme-files), supports:
 	- `README`
 	- `CONTRIBUTING`
 	- `LICENSE`
@@ -56,7 +56,7 @@ Here's some of the things it can do:
 - Automatic injection of your [SPDX](http://spdx.org/licenses/) license information
 - Keep your data and readme files up to date with remote data, supports:
 	- Pulling in your latest contributors from GitHub
-	- Pulling in your latest sponsors from remote APIs (coming soon)
+	- Pulling in your latest sponsors from remote APIs ([coming soon](https://github.com/bevry/projectz/issues/80))
 
 
 <!-- INSTALL/ -->
