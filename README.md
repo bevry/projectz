@@ -111,6 +111,17 @@ The `compile` script here is runnable via the command `npm run-script compile` a
 The `posttest` script here automatically compiles your project with projectz after your tests have successfully completed, providing you use `npm test` to run your tests. This is a great place to put projectz as projectz only updates meta documents so won't affect your test, and will always run before a publish.
 
 
+### GitHub Rate Limiting
+
+If you get a rate limit warning, you will need to add `GITHUB_ACCESS_TOKEN` (or a `GITHUB_CLIENT_ID` AND `GITHUB_CLIENT_SECRET` combination) to your environment. To do this:
+
+1. Create a personal access token for your computer at: https://github.com/settings/tokens
+2. Projectz needs the readonly/access permissions for repos and users
+3. Generate the token and copy it
+4. Inside your dotfile profile (`.bashrc`, `.zshrc`) add `export GITHUB_ACCESS_TOKEN="the token value"`
+5. Open a new shell, or run `export GITHUB_ACCESS_TOKEN="the token value"` in your current shell
+6. Run projectz again
+
 
 ## Configuring Projectz
 
