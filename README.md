@@ -199,10 +199,36 @@ The special fields are as so:
 	},
 
 	# Project's badges for use in the readme files
-	# Uses https://www.npmjs.com/packages/badges for parsing and rendering, see for usage
+	# Projects renders badges by sending the `badges` field to the `badges` package.
+	# Below is some sample projectz configuration for this field to render our most common badges.
+	# Even more badge types and configurations are available than just those included below.
+	# Complete details of what is available can be found over at the badges package:
+	# https://github.com/bevry/badges
 	badges: {
-		list: []
-		config: {}
+		"list": [
+			"travisci",
+			"npmversion",
+			"npmdownloads",
+			"daviddm",
+			"daviddmdev",
+			"---",
+			"slackin",
+			"patreon",
+			"gratipay",
+			"flattr",
+			"paypal",
+			"bitcoin",
+			"wishlist"
+		],
+		"config": {
+			"patreonUsername": "bevry",
+			"gratipayUsername": "bevry",
+			"flattrUsername": "balupton",
+			"paypalURL": "https://bevry.me/paypal",
+			"bitcoinURL": "https://bevry.me/bitcoin",
+			"wishlistURL": "https://bevry.me/wishlist",
+			"slackinURL": "https://slack.bevry.me"
+		}
 	}
 }
 ```
