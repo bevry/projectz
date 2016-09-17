@@ -141,65 +141,65 @@ The special fields are as so:
 
 ``` coffee
 {
-	# Project's human readable name
+	# Specify your project's human readable name
 	title: "Projectz",
 
-	# Project name
+	# Specify your project name
 	name: "projectz",
 
-	# Project's Website URL
+	# Specify your project's Website URL
 	homepage: "https://github.com/bevry/projectz",
 
-	# Project's demo URL
+	# Specify your project's demo URL
 	# If this is missing, and `homepage` is set, we set it to the `homepage` value
 	demo: "https://github.com/bevry/projectz",
 
-	# Project description
+	# Specify your project description
 	description: "Stop wasting time syncing and updating your project's README and Package Files!",
 
-	# Project's SPDX License
+	# Specify your project's SPDX License
 	# Uses https://www.npmjs.com/packages/spdx for parsing
 	license: "MIT",
 
-	# Whether the project can run on the client-side in web browsers
+	# Specify your whether the project can run on the client-side in web browsers
 	# If this is missing, and the component or bower package files exist, then this becomes `true`
 	browsers: true,
 
-	# Project's author details
+	# Specify your project's author details
 	# Can be an array or CSV string
 	author: "2013+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
 
-	# Maintainers
+	# Specify your maintainers
 	maintainers: [
 		"Benjamin Lupton (b@lupton.cc) (http://balupton.com)"
 	],
 
-	# Sponsors
+	# Specify your sponsors
 	sponsors: [
 		"Benjamin Lupton (b@lupton.cc) (http://balupton.com)"
 	],
 
-	# Contributors
-	# Automatically combined with the contributors from the GitHub Repository API
+	# Specify your contributors
+	# This is automatically combined with the contributors from the GitHub Repository API
 	contributors: [
 		"Benjamin Lupton (b@lupton.cc) (http://balupton.com)"
 	],
 
-	# Project's repository details
+	# Specify your project's repository details
 	# If this is missing, and `homepage` is a GitHub URL, this determined automatically
 	repository: {
 		type: "git",
 		url: "https://github.com/bevry/projectz.git"
 	},
 
-	# Project's issue tracker
+	# Specify your project's issue tracker
 	# If this is missing, and `repository` is a GitHub repository, this determined automatically
 	bugs: {
 		url: "https://github.com/bevry/projectz/issues"
 	},
 
-	# Project's badges for use in the readme files
-	# Projects renders badges by sending the `badges` field to the `badges` package.
+	# Specify your project's badges for use in the readme files
+	# Projectz renders badges by sending the `badges` field to the `badges` package.
 	# Below is some sample projectz configuration for this field to render our most common badges.
 	# Even more badge types and configurations are available than just those included below.
 	# Complete details of what is available can be found over at the badges package:
