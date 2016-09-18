@@ -68,10 +68,7 @@
   "bugs": {
     "url": "https://github.com/bevry/projectz/issues"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bevry/projectz.git"
-  },
+  "repository": "bevry/projectz",
   "engines": {
     "node": ">=0.12"
   },

@@ -386,8 +386,9 @@ class Projectz {
 
 		// Extract repository information
 		/* eslint no-magic-numbers: 0 */
-		let repo = this.mergedPackageData.repository.url || null
-		const githubMatch = (this.mergedPackageData.repository.url || this.mergedPackageData.homepage).match(/github\.com\/(.+?)(?:\.git|\/)?$/)
+		let repo = this.mergedPackageData.repository || null
+		const githubMatch = (this.mergedPackageData.repository.url || this.mergedPackageData.homepage).match(/github\.com\/(.+?)(?:\.git|\/)?$/) ||
+			(this.mergedPackageData.repository.match(/^(.+\/.+)$/) && !this.mergedPackageData.repository.match(/^(.+:.+\/.+)$/))
 		const githubMatchParts = (githubMatch && githubMatch[1] || '').split('/')
 		if ( githubMatchParts.length === 2 ) {
 			// Extract parts
@@ -414,10 +415,7 @@ class Projectz {
 			// Fallback fields
 			extendr.defaults(this.mergedPackageData, {
 				// Fallback repository field by use of repo
-				repository: {
-					type: 'git',
-					url: `https://github.com/${githubSlug}.git`
-				},
+				repository: `${githubSlug}`,
 
 				// Fallback bugs field by use of repo
 				bugs: {
