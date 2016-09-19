@@ -412,7 +412,7 @@ class Projectz {
 			// Fallback fields
 			extendr.defaults(this.mergedPackageData, {
 				// Fallback repository field by use of repo
-				repository: `${githubSlug}`,
+				repository: githubSlug,
 
 				// Fallback bugs field by use of repo
 				bugs: {
