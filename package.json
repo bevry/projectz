@@ -124,7 +124,7 @@
     "test": "node --harmony -e \"require('editions').requirePackage(process.cwd(), require, 'test.js')\""
   },
   "dependencies": {
-    "badges": "^1.2.0",
+    "badges": "^1.2.1",
     "caterpillar": "^3.0.0",
     "caterpillar-filter": "^3.0.0",
     "caterpillar-human": "^3.0.0",
@@ -151,7 +151,7 @@
     "babel-preset-es2015": "^6.9.0",
     "eslint": "^2.13.0",
     "eslint-plugin-babel": "^3.2.0",
-    "flow-bin": "^0.27.0",
+    "flow-bin": "^0.32.0",
     "joe": "^1.8.0",
     "joe-reporter-console": "^1.2.1",
     "safeps": "^6.3.0"
