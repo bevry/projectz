@@ -387,13 +387,10 @@ class Projectz {
 		// Extract repository information
 		/* eslint no-magic-numbers: 0 */
 		let repo = this.mergedPackageData.repository || null
-		const githubMatch = (this.mergedPackageData.repository.url || this.mergedPackageData.homepage).match(/github\.com\/(.+?)(?:\.git|\/)?$/) ||
-			(this.mergedPackageData.repository.match(/^(.+\/.+)$/) && !this.mergedPackageData.repository.match(/^(.+:.+\/.+)$/))
-		const githubMatchParts = (githubMatch && githubMatch[1] || '').split('/')
-		if ( githubMatchParts.length === 2 ) {
+		const githubSlug = projectzUtil.getGithubSlug(this.mergedPackageData)
+		if ( githubSlug ) {
 			// Extract parts
-			const [githubUsername, githubRepository] = githubMatchParts
-			const githubSlug = githubUsername + '/' + githubRepository
+			const [githubUsername, githubRepository] = githubSlug.split('/')
 			const githubUrl = 'https://github.com/' + githubSlug
 			const githubRepositoryUrl = githubUrl + '.git'
 

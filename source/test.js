@@ -1,6 +1,7 @@
 /* @flow */
 
 // Import
+const projectzUtil = require('./lib/projectz-util')
 const {spawn} = require('safeps')
 const {suite} = require('joe')
 const {join} = require('path')
@@ -21,7 +22,30 @@ const cliPath      = join(projectzPath, 'bin.js')
 // -------------------------------------
 // Tests
 
-suite('projectz integration suite', function (suite, test) {
+suite('projectz unit tests', function (suite, test) {
+	suite('getGithubSlug', function (suite, test) {
+		test('short repo', function () {
+			equal(projectzUtil.getGithubSlug({repository: 'bevry/projectz'}), 'bevry/projectz')
+		})
+		test('gist failure', function () {
+			equal(projectzUtil.getGithubSlug({repository: 'gist:11081aaa281'}), null)
+		})
+		test('bitbucket failure', function () {
+			equal(projectzUtil.getGithubSlug({repository: 'bitbucket:bb/repo'}), null)
+		})
+		test('gitlab failure', function () {
+			equal(projectzUtil.getGithubSlug({repository: 'gitlab:gl/repo'}), null)
+		})
+		test('full repo', function () {
+			equal(projectzUtil.getGithubSlug({repository: {url: 'https://github.com/bevry/projectz'}}), 'bevry/projectz')
+		})
+		test('full repo with .git', function () {
+			equal(projectzUtil.getGithubSlug({repository: {url: 'https://github.com/bevry/projectz.git'}}), 'bevry/projectz')
+		})
+	})
+})
+
+suite('projectz integration tests', function (suite, test) {
 	// Compile with Projectz using -p to switch to the source path.
 	test('compile project with projectz', function (done) {
 		const command = ['node', cliPath, 'compile', '-p', srcPath]

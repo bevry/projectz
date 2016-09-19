@@ -3,6 +3,27 @@
 /* :: declare type Person = Object; */
 /* :: declare type PersonOptions = {displayCopyright?:boolean; displayYears?:boolean; githubSlug?:string}; */
 
+function getGithubSlug (data /* :{homepage?:string, repository?:string|{url?:string}} */ ) {
+	let match = null
+	if ( typeof data.repository === 'string' ) {
+		match = data.repository.match(/^(?:github:)?([^\/:]+\/[^\/:]+)$/)
+	}
+	else {
+		let url = null
+		if ( data.repository && typeof data.repository.url === 'string' ) {
+			url = data.repository && data.repository.url
+		}
+		else if ( typeof data.homepage === 'string' ) {
+			url = data.homepage
+		}
+		else {
+			return null
+		}
+		match = url.match(/github\.com\/([^\/:]+\/[^\/:]+?)(?:\.git|\/)?$/)
+	}
+	return match && match[1] || null
+}
+
 function getPersonHTML (person /* :Person */, opts /* :PersonOptions */ = {}) /* :string */ {
 	if ( person.name ) {
 		let html = ''
@@ -122,4 +143,4 @@ function trim (str /* :string */) /* :string */ {
 }
 
 // Exports
-module.exports = {getPersonHTML, getPeopleHTML, getPersonText, getPeopleTextArray, getFileUrl, getLink, replaceSection, trim}
+module.exports = {getGithubSlug, getPersonHTML, getPeopleHTML, getPersonText, getPeopleTextArray, getFileUrl, getLink, replaceSection, trim}
