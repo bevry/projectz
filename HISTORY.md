@@ -1,5 +1,9 @@
 # History
 
+## v1.2.0 2016 September 19
+- Add support for `repository` field being github repo shortname, and prefer it
+	- Thanks to [Zlatan Vasović](https://github.com/zdroid) for [pull request #83](https://github.com/bevry/projectz/pull/83)
+
 ## v1.1.6 2016 June 8
 - Updated dependencies
 - Updated internal conventions
