@@ -30,6 +30,7 @@ Stop wasting time syncing and updating your project's README and Package Files!
 
 <!-- /DESCRIPTION -->
 
+[Watch the talk.](https://youtu.be/IAB8_UlcNWI)
 
 Here's some of the things it can do:
 
