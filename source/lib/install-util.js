@@ -68,17 +68,19 @@ function getInstallInstructions (data /* :Object */) /* :string */ {
 			].join('\n'))
 		}
 
-		// Babel
+		// Editions
 		if ( data.editions ) {
 			let hasDefaultEdition = false
 			const editions = []
 			data.editions.forEach(function (edition) {
-				const entry = edition.entry // .replace('/index.js', '')
-				if ( edition.entry === data.main ) {
+				// handle the editions standard 1.3 and below
+				const entryTrimmed = edition.directory ? edition.entry.replace(`${edition.directory}/`, '') : edition.entry
+				const entryFull = edition.directory ? `${edition.directory}/${entryTrimmed}` : entryTrimmed
+				if ( entryFull === data.main ) {
 					hasDefaultEdition = true
-					editions.push(`<code>${data.name}</code> aliases <code>${data.name}/${entry}</code>`)
+					editions.push(`<code>${data.name}</code> aliases <code>${data.name}/${data.main}</code>`)
 				}
-				editions.push(`<code>${data.name}/${entry}</code> is ${edition.description}`)
+				editions.push(`<code>${data.name}/${entryFull}</code> is ${edition.description}`)
 			})
 
 			// Autoloaders

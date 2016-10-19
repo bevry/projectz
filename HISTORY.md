@@ -1,5 +1,8 @@
 # History
 
+## v1.3.0 2016 October 19
+- Add new support for the newer editions standard while keeping support for the old standard
+
 ## v1.2.0 2016 September 19
 - Add support for `repository` field being github repo shortname, and prefer it
 	- Thanks to [Zlatan Vasović](https://github.com/zdroid) for [pull request #83](https://github.com/bevry/projectz/pull/83)
