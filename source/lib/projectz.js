@@ -337,7 +337,7 @@ class Projectz {
 			return this
 		}
 
-		// Validate package valuees
+		// Validate package values
 		for ( const name in this.mergedPackageData.packages ) {
 			if ( this.mergedPackageData.packages.hasOwnProperty(name) ) {
 				const value = this.mergedPackageData.packages[name]
