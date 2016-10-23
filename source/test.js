@@ -1,4 +1,5 @@
 /* @flow */
+'use strict'
 
 // Import
 const projectzUtil = require('./lib/projectz-util')

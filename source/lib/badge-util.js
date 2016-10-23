@@ -1,4 +1,6 @@
 /* @flow */
+'use strict'
+
 const {renderBadges} = require('badges')
 
 function getBadgesInCategory (category /* :string */, data /* :Object */) /* :string */ {

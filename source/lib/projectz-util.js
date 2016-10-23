@@ -1,4 +1,5 @@
 /* @flow */
+'use strict'
 
 /* :: declare type Person = Object; */
 /* :: declare type PersonOptions = {displayCopyright?:boolean; displayYears?:boolean; githubSlug?:string}; */
@@ -21,7 +22,7 @@ function getGithubSlug (data /* :{homepage?:string, repository?:string|{url?:str
 		}
 		match = url.match(/github\.com\/([^\/:]+\/[^\/:]+?)(?:\.git|\/)?$/)
 	}
-	return match && match[1] || null
+	return (match && match[1]) || null
 }
 
 function getPersonHTML (person /* :Person */, opts /* :PersonOptions */ = {}) /* :string */ {

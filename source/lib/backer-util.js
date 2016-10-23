@@ -1,4 +1,6 @@
 /* @flow */
+'use strict'
+
 const {getPeopleHTML, getFileUrl, getLink} = require('./projectz-util.js')
 const {getBadgesInCategory} = require('./badge-util.js')
 

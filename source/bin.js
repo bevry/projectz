@@ -1,5 +1,6 @@
-/* @flow */
 // Projectz CLI
+/* @flow */
+'use strict'
 
 // Import caterpillar [Caterpillar](https://github.com/bevry/caterpillar) for logging
 const {Logger} = require('caterpillar')

@@ -1,4 +1,6 @@
 /* @flow */
+'use strict'
+
 const {getLink, getFileUrl} = require('./projectz-util.js')
 
 // Get History Section

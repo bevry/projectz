@@ -1,4 +1,6 @@
 /* @flow */
+'use strict'
+
 const {getPeopleHTML} = require('./projectz-util.js')
 const spdxParse = require('spdx').parse
 const spdxList = require('spdx-license-list/spdx-full')

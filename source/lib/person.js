@@ -1,4 +1,6 @@
 /* @flow */
+'use strict'
+
 const Fellow = require('fellow/es2015')
 
 // Define

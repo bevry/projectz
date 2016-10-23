@@ -1,5 +1,6 @@
 /* @flow */
 /* eslint key-spacing:0 */
+'use strict'
 
 // Imports
 // First we need to import the libraries we require.

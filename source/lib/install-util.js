@@ -1,4 +1,6 @@
 /* @flow */
+'use strict'
+
 const {getLink} = require('./projectz-util.js')
 
 // Define
