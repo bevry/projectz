@@ -137,76 +137,76 @@ Projectz helps you maintain the following data files:
 
 It does this by reading them, combining their data in memory, and then outputting the appropriate fields and over-rides for each file.
 
-Each file can serve as the master meta data file, however you can also define a `projectz.cson` [CSON](https://github.com/bevry/cson) file that you can use if you'd like to have the benefit of comments, optional commas, multiline strings, etc for your primary meta data file.
+If you are making use of multiple meta data files, you may find defining a projectz meta file (`projectz.json` for JSON, or `projectz.cson` for [CSON](https://github.com/bevry/cson)) to be useful. The projectz meta file can serve as a central location for the configuration of all the other files. However, if you only require one meta data file, then you can ignore this ability.
 
-The special fields are as so:
+Projectz takes notes of these meta data fields:
 
-``` coffee
+``` javascript
 {
-	# Specify your project's human readable name
-	title: "Projectz",
+	// Specify your project's human readable name
+	"title": "Projectz",
 
-	# Specify your project name
-	name: "projectz",
+	// Specify your project name
+	"name": "projectz",
 
-	# Specify your project's Website URL
-	homepage: "https://github.com/bevry/projectz",
+	// Specify your project's Website URL
+	"homepage": "https://github.com/bevry/projectz",
 
-	# Specify your project's demo URL
-	# If this is missing, and `homepage` is set, we set it to the `homepage` value
-	demo: "https://github.com/bevry/projectz",
+	// Specify your project's demo URL
+	// If this is missing, and `homepage` is set, we set it to the `homepage` value
+	"demo": "https://github.com/bevry/projectz",
 
-	# Specify your project description
-	description: "Stop wasting time syncing and updating your project's README and Package Files!",
+	// Specify your project description
+	"description": "Stop wasting time syncing and updating your project's README and Package Files!",
 
-	# Specify your project's SPDX License
-	# Uses https://www.npmjs.com/packages/spdx for parsing
-	license: "MIT",
+	// Specify your project's SPDX License
+	// Uses https://www.npmjs.com/packages/spdx for parsing
+	"license": "MIT",
 
-	# Specify your whether the project can run on the client-side in web browsers
-	# If this is missing, and the component or bower package files exist, then this becomes `true`
-	browsers: true,
+	// Specify your whether the project can run on the client-side in web browsers
+	// If this is missing, and the component or bower package files exist, then this becomes `true`
+	"browsers": true,
 
-	# Specify your project's author details
-	# Can be an array or CSV string
-	author: "2013+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
+	// Specify your project's author details
+	// Can be an array or CSV string
+	"author": "2013+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
 
-	# Specify your maintainers
-	maintainers: [
+	// Specify your maintainers
+	"maintainers": [
 		"Benjamin Lupton (b@lupton.cc) (http://balupton.com)"
 	],
 
-	# Specify your sponsors
-	sponsors: [
+	// Specify your sponsors
+	"sponsors": [
 		"Benjamin Lupton (b@lupton.cc) (http://balupton.com)"
 	],
 
-	# Specify your contributors
-	# This is automatically combined with the contributors from the GitHub Repository API
-	contributors: [
+	// Specify your contributors
+	// This is automatically combined with the contributors from the GitHub Repository API
+	"contributors": [
 		"Benjamin Lupton (b@lupton.cc) (http://balupton.com)"
 	],
 
-	# Specify your project's repository details
-	# If this is missing, and `homepage` is a GitHub URL, this determined automatically
-	repository: {
-		type: "git",
-		url: "https://github.com/bevry/projectz.git"
+	// Specify your project's repository details
+	// If this is missing, and `homepage` is a GitHub URL, this determined automatically
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/bevry/projectz.git"
 	},
 
-	# Specify your project's issue tracker
-	# If this is missing, and `repository` is a GitHub repository, this determined automatically
-	bugs: {
-		url: "https://github.com/bevry/projectz/issues"
+	// Specify your project's issue tracker
+	// If this is missing, and `repository` is a GitHub repository, this determined automatically
+	"bugs": {
+		"url": "https://github.com/bevry/projectz/issues"
 	},
 
-	# Specify your project's badges for use in the readme files
-	# Projectz renders badges by sending the `badges` field to the `badges` package.
-	# Below is some sample projectz configuration for this field to render our most common badges.
-	# Even more badge types and configurations are available than just those included below.
-	# Complete details of what is available can be found over at the badges package:
-	# https://github.com/bevry/badges
-	badges: {
+	// Specify your project's badges for use in the readme files
+	// Projectz renders badges by sending the `badges` field to the `badges` package.
+	// Below is some sample projectz configuration for this field to render our most common badges.
+	// Even more badge types and configurations are available than just those included below.
+	// Complete details of what is available can be found over at the badges package:
+	// https://github.com/bevry/badges
+	"badges": {
 		"list": [
 			"travisci",
 			"npmversion",
@@ -231,7 +231,15 @@ The special fields are as so:
 			"wishlistURL": "https://bevry.me/wishlist",
 			"slackinURL": "https://slack.bevry.me"
 		}
-	}
+	},
+
+  // If you are using the projectz meta file, you can also define this field
+  // it allows you to set the configuration for other package systems
+  "packages": {
+    "bower": {},
+    "component": {},
+    "jquery": {}
+  }
 }
 ```
 
