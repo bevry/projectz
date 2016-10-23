@@ -1,5 +1,8 @@
 # History
 
+## v1.3.2 2016 October 24
+- Load the fellow edition that corresponds with the projectz edition
+
 ## v1.3.1 2016 October 23
 - Update dependencies
 
