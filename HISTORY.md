@@ -1,5 +1,8 @@
 # History
 
+## v1.3.1 2016 October 23
+- Update dependencies
+
 ## v1.3.0 2016 October 19
 - Add new support for the newer editions standard while keeping support for the old standard
 
