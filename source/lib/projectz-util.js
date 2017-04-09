@@ -7,7 +7,7 @@
 function getGithubSlug (data /* :{homepage?:string, repository?:string|{url?:string}} */ ) {
 	let match = null
 	if ( typeof data.repository === 'string' ) {
-		match = data.repository.match(/^(?:github:)?([^\/:]+\/[^\/:]+)$/)
+		match = data.repository.match(/^(?:github:)?([^/:]+\/[^/:]+)$/)
 	}
 	else {
 		let url = null
@@ -20,7 +20,7 @@ function getGithubSlug (data /* :{homepage?:string, repository?:string|{url?:str
 		else {
 			return null
 		}
-		match = url.match(/github\.com\/([^\/:]+\/[^\/:]+?)(?:\.git|\/)?$/)
+		match = url.match(/github\.com\/([^/:]+\/[^/:]+?)(?:\.git|\/)?$/)
 	}
 	return (match && match[1]) || null
 }

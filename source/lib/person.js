@@ -31,7 +31,7 @@ class Person extends Fellow {
 	*/
 	/* eslint no-magic-numbers: 0 */
 	set name (value /* :string */) {
-		const match = (/^((?:[0-9]+[\-\+]?)+)?(.+)$/).exec(value)
+		const match = (/^((?:[0-9]+[-+]?)+)?(.+)$/).exec(value)
 		if ( match ) {
 			const years = String(match[1] || '').trim() || null
 			const name = match[2].trim() || null
