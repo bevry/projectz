@@ -30,6 +30,7 @@ Stop wasting time syncing and updating your project's README and Package Files!
 
 <!-- /DESCRIPTION -->
 
+Used by over [300 repositories](https://libraries.io/npm/projectz/dependent-repositories) and [200 projects](https://libraries.io/npm/projectz/dependents) thus far!
 
 [Watch the talk.](https://youtu.be/IAB8_UlcNWI)
 
