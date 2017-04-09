@@ -1,4 +1,4 @@
-// 2016 October 23
+// 2017 April 5
 // https://github.com/bevry/base
 // http://eslint.org
 // This code must be able to run on Node 0.10
@@ -847,11 +847,17 @@ if ( data.editions ) {
 			break
 		}
 	}
-	config.parserOptions.ecmaFeatures.sourceType = sourceEdition.syntaxes.indexOf('import') !== -1 ? 'module' : 'script'
+	config.parserOptions.sourceType = sourceEdition.syntaxes.indexOf('import') !== -1 ? 'module' : 'script'
 	config.parserOptions.ecmaFeatures.jsx = sourceEdition.syntaxes.indexOf('jsx') !== -1
+}
+else {
+	// node version
+	const node = data.engines && data.engines.node && data.engines.node.replace('>=', '').replace(/ /g, '').replace(/\..+$/, '')
+	config.parserOptions.ecmaVersion = node >= 6 ? 6 : 5
 }
 
 // Set the environments depending on whether we need them or not
+config.env.es6 = Boolean(config.parserOptions.ecmaVersion && config.parserOptions.ecmaVersion >= 6)
 config.env.node = Boolean(data.engines && data.engines.node)
 config.env.browser = Boolean(data.browser)
 if ( config.env.browser ) {
@@ -859,6 +865,12 @@ if ( config.env.browser ) {
 	if ( config.env.node ) {
 		config.env['shared-node-browser'] = true
 	}
+}
+
+// If not on legacy javascript, disable esnext rules
+if ( config.parserOptions.ecmaVersion && config.parserOptions.ecmaVersion <= 5 ) {
+	config.rules['no-var'] = IGNORE
+	config.rules['object-shorthand'] = [ERROR, 'never']
 }
 
 // Add babel parsing if installed

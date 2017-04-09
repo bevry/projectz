@@ -1,46 +1,25 @@
-# 2016 October 21
-# https://github.com/bevry/base
-
-# Use the latest travis infrastructure
 sudo: false
-
-# We use node
 language: node_js
 node_js:
-  - "0.12"
-  - "4"
-  - "6"
+- '0.12'
+- '4'
+- '6'
+- '7'
+matrix:
+  fast_finish: true
 cache:
   directories:
-    - node_modules
-
-# Ensure dependencies are installed using an LTS node version
-install: >
-  if nvm ls-remote --lts | grep "$(nvm current)"; then
-    npm install
-  else
-    nvm install --lts
-    export LTS_NODE_VERSION="$(nvm current)"
-    npm install
-    nvm use "$TRAVIS_NODE_VERSION"
-  fi
-
-# Ensure compilation and linting occur on an LTS node version
-before_script: >
-  if nvm ls-remote --lts | grep "$(nvm current)"; then
-    echo "running on a LTS node version, compiling and linting"
-    npm run our:compile && npm run our:verify
-  else
-    echo "running on a non-LTS node version, compiling with lts, skipping linting"
-    nvm use "$LTS_NODE_VERSION"
-    npm run our:compile
-    nvm use "$TRAVIS_NODE_VERSION"
-  fi
-
-# Custom notifications
+  - "$HOME/.npm"
+  - "$HOME/.yarn-cache"
+install:
+- eval "$(curl -s https://raw.githubusercontent.com/balupton/awesome-travis/master/scripts/node-install.bash)"
+before_script:
+- eval "$(curl -s https://raw.githubusercontent.com/balupton/awesome-travis/master/scripts/node-verify.bash)"
+after_success:
+- eval "$(curl -s https://raw.githubusercontent.com/balupton/awesome-travis/master/scripts/node-publish.bash)"
 notifications:
   slack:
-    secure: lhfe4KMe005dapdKa29BVcLLL3hkTfqTv34GWB7NXELkv3phftGa3c3yNGQJWqxf0TFnR53a/8aMNHTaJlroW7xZNOT1RNnfQgwifdfIGZLf/ARYoFotEPXCU0IlF7gk5qS7vfXw2gwH/qJWw4YS686Ck229LwJ+8QcMageE8eY=
+    secure: aCo5sM7KD6b3lz2iJdyIJQace1tnVXB0I08A8pWA+pT1E72AyZ2JKWPTepFX0kNcQYwynUcnOPh3dN9RRw+O6UGyBnaKQ9J57ixlOPK8yJK1IdR3ektu15VHHrMD3mpWQHrZyZ6Cwm3FO+s8eayqn1t+8tmv8zuI5UQ+qrfu0eI=
   email:
     recipients:
-      secure: c0N+AukbVG94XPAsXZSUYwdZvG+5o++QYABIQyKjLUqV73VKMyE+yu7w3wwdiXREYQ24jmee8kfKjhwgCMQCjlTitUwRHJ0BAPoUAhaJxdj5RqM5O2bDl+pfe1bzvueXEJjEPCyiApsmv1P084isPJzrlE41u7Xwyi8q7OtHc7k=
+      secure: YaVoOerLVL4tFLTqKu9xh9723V+YgScW0gJk3jQa6w+yqTJ6pVrdFuwnkEkZVMGIzLSWZwygH9/AS63S+Jd41SjWtCSaESSIrHpoM+BWZ3bm/MV0Ql00R9wsfwTyX7d4pfjh8e9O4qkKIfHdpO08j0rQz2yu51gqn0dPM4cPt9c=
