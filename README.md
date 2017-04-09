@@ -103,7 +103,7 @@ To make projectz more automatic, we recommended adding the direct command above 
 
 If you don't use a build tool, but do use npm, then you can add the following to your project's `package.json` file:
 
-```
+``` json
 {
   "scripts": {
     "compile": "projectz compile",
