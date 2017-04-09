@@ -3,7 +3,7 @@
 
 const {getPeopleHTML} = require('./projectz-util.js')
 const spdxParse = require('spdx').parse
-const spdxList = require('spdx-license-list/spdx-full')
+const spdxList = require('spdx-license-list/full')
 
 function renderSpdxObject (spdxObject /* :Object */, output /* :"description"|"body" */, depth = 0) /* :string */ {
 	if ( spdxObject.license ) {
@@ -15,7 +15,7 @@ function renderSpdxObject (spdxObject /* :Object */, output /* :"description"|"b
 		}
 
 		const name = details.name
-		const body = details.license
+		const body = details.licenseText
 		const url = `http://spdx.org/licenses/${code}.html`
 
 		return output === 'description'

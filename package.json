@@ -114,7 +114,7 @@
   "preferGlobal": true,
   "main": "index.js",
   "dependencies": {
-    "badges": "^1.2.1",
+    "badges": "^1.2.4",
     "caterpillar": "^3.0.1",
     "caterpillar-filter": "^3.0.0",
     "caterpillar-human": "^3.0.0",
@@ -131,9 +131,9 @@
     "fellow": "^2.3.0",
     "safefs": "^4.1.0",
     "spdx": "^0.5.1",
-    "spdx-license-list": "^2.1.0",
+    "spdx-license-list": "^3.0.1",
     "taskgroup": "5",
-    "typechecker": "^4.3.0"
+    "typechecker": "^4.4.1"
   },
   "devDependencies": {
     "assert-helpers": "^4.5.0",
