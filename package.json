@@ -1,9 +1,12 @@
 {
   "title": "Projectz",
-  "name": "projectz",
-  "version": "1.4.0",
+  "name": "@utdx/projectz",
+  "version": "1.4.1",
   "description": "Stop wasting time syncing and updating your project's README and Package Files!",
-  "homepage": "https://github.com/bevry/projectz",
+  "homepage": "https://github.com/kreig303/projectz",
+  "publishConfig": {
+    "registry": "http://kaizen.eastus.cloudapp.azure.com/nexus/content/repositories/npm-internal/"
+  },
   "license": "MIT",
   "keywords": [
     "project",
@@ -70,11 +73,11 @@
     "Zlatan Vasović <zlatanvasovic@gmail.com> (http://zdroid.github.io)"
   ],
   "bugs": {
-    "url": "https://github.com/bevry/projectz/issues"
+    "url": "https://github.com/kreig303/projectz/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bevry/projectz.git"
+    "url": "https://github.com/kreig303/projectz.git"
   },
   "engines": {
     "node": ">=0.12"
