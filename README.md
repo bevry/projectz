@@ -346,7 +346,7 @@ These amazing people have contributed code to this project:
 <li><a href="http://robloach.net">Rob Loach</a> — <a href="https://github.com/bevry/projectz/commits?author=RobLoach" title="View the GitHub contributions of Rob Loach on repository bevry/projectz">view contributions</a></li>
 <li><a href="https://github.com/Zearin">Zearin</a> — <a href="https://github.com/bevry/projectz/commits?author=Zearin" title="View the GitHub contributions of Zearin on repository bevry/projectz">view contributions</a></li>
 <li><a href="https://github.com/vsopvsop">vsopvsop</a> — <a href="https://github.com/bevry/projectz/commits?author=vsopvsop" title="View the GitHub contributions of vsopvsop on repository bevry/projectz">view contributions</a></li>
-<li><a href="http://mightyi.am">Shahar Or</a> — <a href="https://github.com/bevry/projectz/commits?author=mightyiam" title="View the GitHub contributions of Shahar Or on repository bevry/projectz">view contributions</a></li>
+<li><a href="http://mightyi.am">Shahar Or</a></li>
 <li><a href="http://zdroid.github.io">Zlatan Vasović</a> — <a href="https://github.com/bevry/projectz/commits?author=zdroid" title="View the GitHub contributions of Zlatan Vasović on repository bevry/projectz">view contributions</a></li>
 <li><a href="https://github.com/mightyiam">Shahar Or</a> — <a href="https://github.com/bevry/projectz/commits?author=mightyiam" title="View the GitHub contributions of Shahar Or on repository bevry/projectz">view contributions</a></li></ul>
 

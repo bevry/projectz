@@ -2,8 +2,9 @@
 
 ## v1.5.0 2018 November 15
 - Removed compiled editions as they are no longer needed with modern node versions
-- Updated editions format for editions v2.1.0
-- Updated base files and dependencies
+- Updated editions format for [editions](https://github.com/bevry/editions) v2.1.0
+- Updated [base files](https://github.com/bevry/base) using [boundation](https://github.com/bevry/boundation)
+- Updated for latest dependencies
 
 ## v1.4.0 2017 April 10
 - Updated base files
