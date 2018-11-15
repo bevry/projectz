@@ -1,5 +1,8 @@
 # History
 
+## v1.5.2 2018 November 15
+- Update [githubauthquerystring](https://github.com/bevry/githubauthquerystring) to v1 and make use of its redaction abilities
+
 ## v1.5.1 2018 November 15
 - Fixed failures in fetching contributors causing projectz to crash
 - Now uses [githubauthquerystring](https://github.com/bevry/githubauthquerystring) to generate the GitHub Auth Query Strings.

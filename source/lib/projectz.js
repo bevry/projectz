@@ -26,7 +26,7 @@ const eachr = require('eachr')
 const extendr = require('extendr')
 
 // Fetch the github auth query string
-const githubAuthQueryString = require('githubauthquerystring').fetch()
+const { fetchGithubAuthQueryString, redactGithubAuthQueryString } = require('githubauthquerystring')
 
 // Load in node-fetch so we can fetch contributors
 const fetch = require('node-fetch')
@@ -166,6 +166,7 @@ class Projectz {
 
 		// Prepare
 		const githubSlug = this.mergedPackageData.github.slug
+		const githubAuthQueryString = fetchGithubAuthQueryString()
 		const url = `https://api.github.com/repos/${githubSlug}/contributors?per_page=100&${githubAuthQueryString}`
 
 		// Fetch the github and package contributors for it
@@ -231,7 +232,8 @@ class Projectz {
 			// Return our result
 			.then(() => next())
 			.catch((err) => {
-				err.message = err.message.replace(/https.+/, 'redacted to prevent secrets from leaking')
+				err.message = redactGithubAuthQueryString(err.message || err.toString())
+				err.stack = redactGithubAuthQueryString((err.stack || '').toString())
 				next(err)
 			})
 
