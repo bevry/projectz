@@ -1,13 +1,15 @@
-# 2016 December 29
+# 2018 November 15
 # https://github.com/bevry/base
 [ignore]
 .*/docs/.*
 .*/es2015/.*
 .*/test/.*
+.*/edition-*/.*
+.*/node_modules/documentation/.*
+.*/node_modules/projectz/.*
 
 [options]
 module.ignore_non_literal_requires=true
-unsafe.enable_getters_and_setters=true
 esproposal.class_static_fields=enable
 esproposal.class_instance_fields=enable
 

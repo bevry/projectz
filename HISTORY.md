@@ -1,5 +1,10 @@
 # History
 
+## v1.5.0 2018 November 15
+- Removed compiled editions as they are no longer needed with modern node versions
+- Updated editions format for editions v2.1.0
+- Updated base files and dependencies
+
 ## v1.4.0 2017 April 10
 - Updated base files
 - Updated dependencies

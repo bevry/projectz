@@ -1,2 +1,4 @@
 #!/usr/bin/env node
-module.exports = require('editions').requirePackage(__dirname, require, 'bin.js')
+'use strict'
+
+module.exports = require('./source/bin.js')

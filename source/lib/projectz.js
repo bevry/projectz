@@ -7,23 +7,26 @@
 
 // Load in the file system libraries.
 // [SafeFS](https://github.com/bevry/safefs) is aliased to `fsUtil` as it provides protection against a lot of the common gotchas
-const {readdir, readFile, writeFile} = require('safefs')
-const {resolve, join} = require('path')
+const { readdir, readFile, writeFile } = require('safefs')
+const { resolve, join } = require('path')
 
 // [CSON](https://github.com/bevry/cson) is used for loading in our configuration files
 const CSON = require('cson')
 
 // [TypeChecker](https://github.com/bevry/typechecker) is used for checking data types
-const {isString, isObject} = require('typechecker')
+const { isString, isObject } = require('typechecker')
 
 // [TaskGroup](https://github.com/bevry/taskgroup) is used for bundling tasks together and waiting for their completion
-const {TaskGroup} = require('taskgroup')
+const { TaskGroup } = require('taskgroup')
 
 // [Eachr](https://github.com/bevry/eachr) lets us cycle arrays and objects easily
 const eachr = require('eachr')
 
 // [Extendr](https://github.com/bevry/extendr) gives us safe, deep, and shallow extending abilities
 const extendr = require('extendr')
+
+// Load in node-fetch so we can fetch contributors
+const fetch = require('node-fetch')
 
 // Load in our other project files
 const Person = require('./person.js')
@@ -48,7 +51,7 @@ class Projectz {
 	/* :: log:function; */
 
 	// Projectz.create(opts)
-	static create (...args) {
+	static create (...args /* :Array<*> */) {
 		return new this(...args)
 	}
 
@@ -64,7 +67,7 @@ class Projectz {
 		this.cwd = opts.cwd ? resolve(opts.cwd) : process.cwd()
 
 		// Our log function to use (logLevel, ...messages)
-		this.log = opts.log || function () {}
+		this.log = opts.log || function () { }
 	}
 
 	// Reset the properties of this class
@@ -72,11 +75,11 @@ class Projectz {
 		// The absolute paths for all the package files
 		this.filenamesForPackageFiles = {
 			// gets filled in with relative paths
-			projectz:      false,
-			package:       false,
-			bower:         false,
-			component:     false,
-			jquery:        false
+			projectz: false,
+			package: false,
+			bower: false,
+			component: false,
+			jquery: false
 		}
 
 		// The data for each of our package files
@@ -88,11 +91,11 @@ class Projectz {
 		// The absolute paths for all the readme files
 		this.filenamesForReadmeFiles = {
 			// gets filled in with relative paths
-			readme:        false,
-			history:       false,
-			contributing:  false,
-			backers:       false,
-			license:       false
+			readme: false,
+			history: false,
+			contributing: false,
+			backers: false,
+			license: false
 		}
 
 		// The data for each of our readme files
@@ -127,7 +130,7 @@ class Projectz {
 		// Fetch the latest contributors. This is after the merging as we access merged properties to be able to do this.
 		tasks.addTask('loadGithubContributors', (complete) => {
 			this.loadGithubContributors((err) => {
-				if ( err )  this.log('warn', 'Loading contributer data failed, continuing anyway. Here was the error:\n' + err.stack)
+				if (err) this.log('warn', 'Loading contributer data failed, continuing anyway. Here was the error:\n' + err.stack)
 				complete()
 			})
 		})
@@ -152,7 +155,7 @@ class Projectz {
 		const log = this.log
 
 		// Check
-		if ( !this.mergedPackageData.github || !this.mergedPackageData.github.username || !this.mergedPackageData.github.repository ) {
+		if (!this.mergedPackageData.github || !this.mergedPackageData.github.username || !this.mergedPackageData.github.repository) {
 			log('debug', 'Skipping loading github contributors as this does not appear to be a github repository')
 			next()
 			return this
@@ -172,51 +175,66 @@ class Projectz {
 
 		// Fetch the github and package contributors for it
 		log('info', `Loading contributors for repository: ${githubSlug}`)
-		require('chainy-core').create().require('set feed map')
-			// Fetch the repositories contributors
-			.set(url)
-			.feed()
-			.action(function (data) {
-				if ( !data )  throw new Error('No contributor data was returned, likely because this repository is new')
-				if ( data.message )  throw new Error(data.message)
-			})
 
-			// Now lets replace the shallow member details with their full github profile details via the profile api
-			.map(function (user, complete) {
-				this.create()
-					.set(user.url + '?' + githubAuthQueryString)
-					.feed()
-					.action(function (data) {
-						if ( data.message )  throw new Error(data.message)
-					})
-					.done(complete)
-			})
-
-			// Now let's turn them into people
-			.map(function (user) {
-				const data = {
-					name: user.name,
-					email: user.email,
-					description: user.bio,
-					company: user.company,
-					location: user.location,
-					homepage: user.blog,
-					hireable: user.hireable,
-					githubUsername: user.login,
-					githubUrl: user.html_url
+		// Fetch the repositories contributors
+		fetch(url)
+			.then((response) => response.json())
+			.then((data) => {
+				if (!data) {
+					return Promise.reject(
+						new Error('No contributor data was returned, likely because this repository is new')
+					)
 				}
-				const person = Person.ensure(data)
-				person.contributesRepository(githubSlug)
+				if (data.message) {
+					return Promise.reject(
+						new Error(data.message)
+					)
+				}
+				return data
 			})
+
+			// Replace the shallow member details with their full github profile details via the profile api
+			.then((users) =>
+				Promise.all(
+					users.map((user) =>
+						fetch(user.url + '?' + githubAuthQueryString)
+							.then((response) => response.json())
+							.then((value) => {
+								if (value.message) {
+									return Promise.reject(
+										new Error(value.message)
+									)
+								}
+
+								// Let's turn them into people
+								const data = {
+									name: value.name,
+									email: value.email,
+									description: value.bio,
+									company: value.company,
+									location: value.location,
+									homepage: value.blog,
+									hireable: value.hireable,
+									githubUsername: value.login,
+									githubUrl: value.html_url
+								}
+								const person = Person.ensure(data)
+								person.contributesRepository(githubSlug)
+								return person
+							})
+					)
+				)
+			)
 
 			// Log
-			.action((contributors) => {
-				log('info', `Loaded ${contributors.length} contributors for repository: ${githubSlug}`)
-				this.mergedPackageData.contributors = Person.contributesRepository(githubSlug)
+			.then((contributors) => {
+				const unique = this.mergedPackageData.contributors = Person.contributesRepository(githubSlug)
+				log('info', `Loaded ${contributors.length} contributors (${unique.length} unique) for repository: ${githubSlug}`)
 			})
 
-			// And return our result
-			.done(next)
+			// Return our result
+			.catch(next)
+			.then(() => next())
 
 		// Chain
 		return this
@@ -228,7 +246,7 @@ class Projectz {
 	// Usage: `loadPaths(function (err) {})`
 	loadPaths (next /* :function */) /* :this */ {
 		// Create the parallel task group and once they've all completed fire our completion callback
-		const tasks = new TaskGroup().setConfig({concurrency: 0}).done(next)
+		const tasks = new TaskGroup().setConfig({ concurrency: 0 }).done(next)
 
 		// Apply our determined paths for packages
 		const packages = Object.keys(this.filenamesForPackageFiles)
@@ -237,17 +255,17 @@ class Projectz {
 		// Load
 		tasks.addTask((complete) => {
 			readdir(this.cwd, (err, files) => {
-				if ( err )  return complete(err)
+				if (err) return complete(err)
 				files.forEach((file) => {
 					const filePath = join(this.cwd, file)
 
 					packages.forEach((key) => {
-						if ( file.toLowerCase().indexOf(key) === 0 ) {
+						if (file.toLowerCase().indexOf(key) === 0) {
 							const message = `Reading package file: ${filePath}`
 							tasks.addTask(message, (complete) => {
 								this.log('info', message)
 								CSON.parseFile(filePath, (err, data) => {
-									if ( err )  return complete(err)
+									if (err) return complete(err)
 									this.filenamesForPackageFiles[key] = file
 									this.dataForPackageFiles[key] = data
 									complete(err)
@@ -257,12 +275,12 @@ class Projectz {
 					})
 
 					readmes.forEach((key) => {
-						if ( file.toLowerCase().indexOf(key) === 0 ) {
+						if (file.toLowerCase().indexOf(key) === 0) {
 							const message = `Reading readme file: ${filePath}`
 							tasks.addTask(message, (complete) => {
 								this.log('info', message)
 								readFile(filePath, (err, data) => {
-									if ( err )  return complete(err)
+									if (err) return complete(err)
 									this.filenamesForReadmeFiles[key] = file
 									this.dataForReadmeFiles[key] = data.toString()
 									complete(err)
@@ -296,52 +314,52 @@ class Projectz {
 		// Validation
 
 		// Validate badges field
-		if ( this.mergedPackageData.badges && !this.mergedPackageData.badges.list ) {
+		if (this.mergedPackageData.badges && !this.mergedPackageData.badges.list) {
 			next(new Error('projectz: badges field must now be in the format of: {list: [], config: {}}\nSee https://github.com/bevry/badges for details.'))
 			return this
 		}
 
 		// Validate keywords field
-		if ( isString(this.mergedPackageData.keywords) ) {
+		if (isString(this.mergedPackageData.keywords)) {
 			next(new Error('projectz: keywords field must be array instead of CSV'))
 			return this
 		}
 
 		// Validate sponsors array
-		if ( this.mergedPackageData.sponsor ) {
+		if (this.mergedPackageData.sponsor) {
 			next(new Error('projectz: sponsor field is deprecated, use sponsors field'))
 			return this
 		}
-		if ( isString(this.mergedPackageData.sponsors) ) {
+		if (isString(this.mergedPackageData.sponsors)) {
 			next(new Error('projectz: sponsors field must be array instead of CSV'))
 			return this
 		}
 
 		// Validate maintainers array
-		if ( this.mergedPackageData.maintainer ) {
+		if (this.mergedPackageData.maintainer) {
 			next(new Error('projectz: maintainer field is deprecated, use maintainers field'))
 			return this
 		}
-		if ( isString(this.mergedPackageData.maintainers) ) {
+		if (isString(this.mergedPackageData.maintainers)) {
 			next(new Error('projectz: maintainers field must be array instead of CSV'))
 			return this
 		}
 
 		// Validate license SPDX string
-		if ( isObject(this.mergedPackageData.license) ) {
+		if (isObject(this.mergedPackageData.license)) {
 			next(new Error('projectz: license field must now be a valid SPDX string: https://docs.npmjs.com/files/package.json#license'))
 			return this
 		}
-		if ( isObject(this.mergedPackageData.licenses) ) {
+		if (isObject(this.mergedPackageData.licenses)) {
 			next(new Error('projectz: licenses field is deprecated, you must now use the license field as a valid SPDX string: https://docs.npmjs.com/files/package.json#license'))
 			return this
 		}
 
 		// Validate package values
-		for ( const name in this.mergedPackageData.packages ) {
-			if ( this.mergedPackageData.packages.hasOwnProperty(name) ) {
+		for (const name in this.mergedPackageData.packages) {
+			if (this.mergedPackageData.packages.hasOwnProperty(name)) {
 				const value = this.mergedPackageData.packages[name]
-				if ( !isObject(value) ) {
+				if (!isObject(value)) {
 					next(new Error(`projectz: custom package data for package ${name} must be an object`))
 					return this
 				}
@@ -366,8 +384,8 @@ class Projectz {
 		})
 
 		// Ensure badge config
-		if ( !this.mergedPackageData.badges.list )  this.mergedPackageData.badges.list = []
-		if ( !this.mergedPackageData.badges.config )  this.mergedPackageData.badges.config = {}
+		if (!this.mergedPackageData.badges.list) this.mergedPackageData.badges.list = []
+		if (!this.mergedPackageData.badges.config) this.mergedPackageData.badges.config = {}
 
 		// Add paths so that our helpers have access to them
 		this.mergedPackageData.filenamesForPackageFiles = this.filenamesForPackageFiles
@@ -389,7 +407,7 @@ class Projectz {
 		/* eslint no-magic-numbers: 0 */
 		let repo = this.mergedPackageData.repository || null
 		const githubSlug = projectzUtil.getGithubSlug(this.mergedPackageData)
-		if ( githubSlug ) {
+		if (githubSlug) {
 			// Extract parts
 			const [githubUsername, githubRepository] = githubSlug.split('/')
 			const githubUrl = 'https://github.com/' + githubSlug
@@ -423,12 +441,12 @@ class Projectz {
 		}
 
 		// Add npm data to the badges
-		if ( this.filenamesForPackageFiles.package && this.mergedPackageData.name ) {
+		if (this.filenamesForPackageFiles.package && this.mergedPackageData.name) {
 			this.mergedPackageData.badges.config.npmPackageName = this.mergedPackageData.name
 		}
 
 		// Enhance authors, contributors and maintainers
-		if ( repo ) {
+		if (repo) {
 			// Add people to the Person singleton with their appropriate permissions
 			Person.add(this.mergedPackageData.author).forEach((person) => {  // package author string
 				person.authorsRepository(repo)
@@ -474,24 +492,24 @@ class Projectz {
 
 			// Enhanced Data
 			{
-				name:                   this.mergedPackageData.name,
-				version:                this.mergedPackageData.version,
-				license:                this.mergedPackageData.license,
-				description:            this.mergedPackageData.description,
-				keywords:               this.mergedPackageData.keywords,
-				author:                 projectzUtil.getPeopleTextArray(this.mergedPackageData.authors, {displayYears: true}).join(', '),
-				maintainers:            projectzUtil.getPeopleTextArray(this.mergedPackageData.maintainers),
-				contributors:           projectzUtil.getPeopleTextArray(this.mergedPackageData.contributors),
-				bugs:                   this.mergedPackageData.bugs,
-				engines:                this.mergedPackageData.engines,
-				dependencies:           this.mergedPackageData.dependencies,
-				devDependencies:        this.mergedPackageData.devDependencies,
-				main:                   this.mergedPackageData.main
+				name: this.mergedPackageData.name,
+				version: this.mergedPackageData.version,
+				license: this.mergedPackageData.license,
+				description: this.mergedPackageData.description,
+				keywords: this.mergedPackageData.keywords,
+				author: projectzUtil.getPeopleTextArray(this.mergedPackageData.authors, { displayYears: true }).join(', '),
+				maintainers: projectzUtil.getPeopleTextArray(this.mergedPackageData.maintainers),
+				contributors: projectzUtil.getPeopleTextArray(this.mergedPackageData.contributors),
+				bugs: this.mergedPackageData.bugs,
+				engines: this.mergedPackageData.engines,
+				dependencies: this.mergedPackageData.dependencies,
+				devDependencies: this.mergedPackageData.devDependencies,
+				main: this.mergedPackageData.main
 			}
 		)
 
 		// Explicit data
-		if ( this.mergedPackageData.packages.package ) {
+		if (this.mergedPackageData.packages.package) {
 			extendr.extend(
 				this.dataForPackageFilesEnhanced.package,
 				this.mergedPackageData.packages.package
@@ -513,7 +531,7 @@ class Projectz {
 		)
 
 		// Explicit data
-		if ( this.mergedPackageData.packages.jquery ) {
+		if (this.mergedPackageData.packages.jquery) {
 			extendr.extend(
 				this.dataForPackageFilesEnhanced.jquery,
 				this.mergedPackageData.packages.jquery
@@ -532,19 +550,19 @@ class Projectz {
 
 			// Enhanced Data
 			{
-				name:                   this.mergedPackageData.name,
-				version:                this.mergedPackageData.version,
-				license:                this.mergedPackageData.license,
-				description:            this.mergedPackageData.description,
-				keywords:               this.mergedPackageData.keywords,
-				demo:                   this.mergedPackageData.demo,
-				main:                   this.mergedPackageData.main,
-				scripts:                [this.mergedPackageData.main]
+				name: this.mergedPackageData.name,
+				version: this.mergedPackageData.version,
+				license: this.mergedPackageData.license,
+				description: this.mergedPackageData.description,
+				keywords: this.mergedPackageData.keywords,
+				demo: this.mergedPackageData.demo,
+				main: this.mergedPackageData.main,
+				scripts: [this.mergedPackageData.main]
 			}
 		)
 
 		// Explicit data
-		if ( this.mergedPackageData.packages.component ) {
+		if (this.mergedPackageData.packages.component) {
 			extendr.extend(
 				this.dataForPackageFilesEnhanced.component,
 				this.mergedPackageData.packages.component
@@ -563,18 +581,18 @@ class Projectz {
 
 			// Enhanced Data
 			{
-				name:                   this.mergedPackageData.name,
-				version:                this.mergedPackageData.version,
-				license:                this.mergedPackageData.license,
-				description:            this.mergedPackageData.description,
-				keywords:               this.mergedPackageData.keywords,
-				authors:                projectzUtil.getPeopleTextArray(this.mergedPackageData.authors, {displayYears: true}),
-				main:                   this.mergedPackageData.main
+				name: this.mergedPackageData.name,
+				version: this.mergedPackageData.version,
+				license: this.mergedPackageData.license,
+				description: this.mergedPackageData.description,
+				keywords: this.mergedPackageData.keywords,
+				authors: projectzUtil.getPeopleTextArray(this.mergedPackageData.authors, { displayYears: true }),
+				main: this.mergedPackageData.main
 			}
 		)
 
 		// Explicit data
-		if ( this.mergedPackageData.packages.bower ) {
+		if (this.mergedPackageData.packages.bower) {
 			extendr.extend(
 				this.dataForPackageFilesEnhanced.bower,
 				this.mergedPackageData.packages.bower
@@ -590,7 +608,7 @@ class Projectz {
 	enhanceReadmes (next /* :function */) /* :this */ {
 		const data = this.mergedPackageData
 		eachr(this.dataForReadmeFiles, (value, name) => {
-			if ( !value ) {
+			if (!value) {
 				this.log('debug', `Enhancing readme value: ${name} — skipped`)
 				return
 			}
@@ -620,15 +638,15 @@ class Projectz {
 	save (next /* :function */) /* :this */ {
 		// Prepare
 		this.log('info', 'Writing changes...')
-		const tasks = new TaskGroup().setConfig({concurrency: 0}).done((err) => {
-			if ( err )  return next(err)
+		const tasks = new TaskGroup().setConfig({ concurrency: 0 }).done((err) => {
+			if (err) return next(err)
 			this.log('info', 'Wrote changes')
 			return next()
 		})
 
 		// Save package files
 		eachr(this.filenamesForPackageFiles, (filename, name) => {
-			if ( !filename || name === 'projectz' )  return
+			if (!filename || name === 'projectz') return
 			const filepath = join(this.cwd, filename)
 			const message = `Saving package file: ${filepath}`
 			tasks.addTask(message, (complete) => {
@@ -640,7 +658,7 @@ class Projectz {
 
 		// Safe readme files
 		eachr(this.filenamesForReadmeFiles, (filename, name) => {
-			if ( !filename )  return
+			if (!filename) return
 			const filepath = join(this.cwd, filename)
 			const message = `Saving readme file: ${filepath}`
 			tasks.addTask(message, (complete) => {
@@ -657,4 +675,4 @@ class Projectz {
 }
 
 // Exports
-module.exports = {Projectz}
+module.exports = { Projectz }
