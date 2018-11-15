@@ -25,6 +25,9 @@ const eachr = require('eachr')
 // [Extendr](https://github.com/bevry/extendr) gives us safe, deep, and shallow extending abilities
 const extendr = require('extendr')
 
+// Fetch the github auth query string
+const githubAuthQueryString = require('githubauthquerystring').fetch()
+
 // Load in node-fetch so we can fetch contributors
 const fetch = require('node-fetch')
 
@@ -163,14 +166,6 @@ class Projectz {
 
 		// Prepare
 		const githubSlug = this.mergedPackageData.github.slug
-		const githubAccessToken = process.env.GITHUB_ACCESS_TOKEN
-		const githubClientId = process.env.GITHUB_CLIENT_ID
-		const githubClientSecret = process.env.GITHUB_CLIENT_SECRET
-		const githubAuthQueryString = githubAccessToken
-			? `access_token=${githubAccessToken}`
-			: githubClientId && githubClientSecret
-				? `client_id=${githubClientId}&client_secret=${githubClientSecret}`
-				: ''
 		const url = `https://api.github.com/repos/${githubSlug}/contributors?per_page=100&${githubAuthQueryString}`
 
 		// Fetch the github and package contributors for it
@@ -179,6 +174,7 @@ class Projectz {
 		// Fetch the repositories contributors
 		fetch(url)
 			.then((response) => response.json())
+			.catch(() => Promise.reject(new Error('The request for contributors returned invalid JSON. This can happen if the repository currently has no contributors.')))
 			.then((data) => {
 				if (!data) {
 					return Promise.reject(
@@ -233,8 +229,11 @@ class Projectz {
 			})
 
 			// Return our result
-			.catch(next)
 			.then(() => next())
+			.catch((err) => {
+				err.message = err.message.replace(/https.+/, 'redacted to prevent secrets from leaking')
+				next(err)
+			})
 
 		// Chain
 		return this

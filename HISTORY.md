@@ -1,5 +1,9 @@
 # History
 
+## v1.5.1 2018 November 15
+- Fixed failures in fetching contributors causing projectz to crash
+- Now uses [githubauthquerystring](https://github.com/bevry/githubauthquerystring) to generate the GitHub Auth Query Strings.
+
 ## v1.5.0 2018 November 15
 - Removed compiled editions as they are no longer needed with modern node versions
 - Updated editions format for [editions](https://github.com/bevry/editions) v2.1.0
