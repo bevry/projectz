@@ -175,7 +175,7 @@ class Projectz {
 		// Fetch the repositories contributors
 		fetch(url)
 			.then((response) => response.json())
-			.catch(() => Promise.reject(new Error('The request for contributors returned invalid JSON. This can happen if the repository currently has no contributors.')))
+			.catch(() => Promise.reject(new Error('The request for contributors returned invalid JSON. This can happen if the repository currently has no contributors, or if you are disconnected from the internet.')))
 			.then((data) => {
 				if (!data) {
 					return Promise.reject(

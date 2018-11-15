@@ -1,5 +1,8 @@
 # History
 
+## v1.5.3 2018 November 15
+- Note that contributors may also fail to fetch if the internet is disconnected.
+
 ## v1.5.2 2018 November 15
 - Update [githubauthquerystring](https://github.com/bevry/githubauthquerystring) to v1 and make use of its redaction abilities
 
