@@ -2,9 +2,8 @@
 # https://github.com/bevry/base
 [ignore]
 .*/docs/.*
-.*/es2015/.*
+.*/edition*/.*
 .*/test/.*
-.*/edition-*/.*
 .*/node_modules/documentation/.*
 .*/node_modules/projectz/.*
 
