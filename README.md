@@ -4,7 +4,6 @@
 
 <!-- /TITLE -->
 
-
 <!-- BADGES/ -->
 
 <span class="badge-travisci"><a href="http://travis-ci.org/bevry/projectz" title="Check this project's build status on TravisCI"><img src="https://img.shields.io/travis/bevry/projectz/master.svg" alt="Travis CI Build Status" /></a></span>
@@ -26,13 +25,11 @@
 
 <!-- /BADGES -->
 
-
 <!-- DESCRIPTION/ -->
 
 Stop wasting time syncing and updating your project's README and Package Files!
 
 <!-- /DESCRIPTION -->
-
 
 Used by over [300 repositories](https://libraries.io/npm/projectz/dependent-repositories) and [200 projects](https://libraries.io/npm/projectz/dependents) thus far!
 
@@ -40,18 +37,36 @@ Used by over [300 repositories](https://libraries.io/npm/projectz/dependent-repo
 
 Here's some of the things it can do:
 
--   [Keep your projects data files synchronised appropriately](https://github.com/bevry/projectz#data-files), supports: - `package.json` - `bower.json` - `component.json` - `jquery.json`
--   [Create beautiful standardised readme files that stay in sync with your data files](https://github.com/bevry/projectz#readme-files), supports: - `README` - `CONTRIBUTING` - `LICENSE` - `BACKERS` - `HISTORY`
--   Automatic injection of the appropriate installation methods, supports: - [NPM](https://www.npmjs.com) - [Browserify](http://browserify.org/) - [Ender](http://enderjs.com) - [Component](http://github.com/component/component) - [Bower](http://bower.io/) - [Editions](https://github.com/bevry/editions) - [DocPad](https://docpad.org) Plugins
+-   [Keep your projects data files synchronised appropriately](https://github.com/bevry/projectz#data-files), supports:
+    -   `package.json`
+    -   `bower.json`
+    -   `component.json`
+    -   `jquery.json`
+-   [Create beautiful standardised readme files that stay in sync with your data files](https://github.com/bevry/projectz#readme-files), supports:
+    -   `README`
+    -   `CONTRIBUTING`
+    -   `LICENSE`
+    -   `BACKERS`
+    -   `HISTORY`
+-   Automatic injection of the appropriate installation methods, supports:
+    -   [npm](https://www.npmjs.com)
+    -   [jspm](http://jspm.io)
+    -   [Component](http://github.com/component/component)
+    -   [Bower](http://bower.io/)
+    -   [Editions](https://github.com/bevry/editions)
+    -   [DocPad](https://docpad.org) Plugins
 -   Automatic injection of your desired [badges](https://github.com/bevry/badges)
 -   Automatic injection of your [SPDX](http://spdx.org/licenses/) license information
--   Keep your data and readme files up to date with remote data, supports: - Pulling in your latest contributors from GitHub - Pulling in your latest sponsors from remote APIs ([coming soon](https://github.com/bevry/projectz/issues/80))
+-   Keep your data and readme files up to date with remote data, supports:
+    -   Pulling in your latest contributors from GitHub
+    -   Pulling in your latest sponsors from remote APIs ([coming soon](https://github.com/bevry/projectz/issues/80))
 
 <!-- INSTALL/ -->
 
 <h2>Install</h2>
 
 <a href="https://npmjs.com" title="npm is a package manager for javascript"><h3>npm</h3></a>
+
 <h4>Install Globally</h4>
 <ul>
 <li>Install: <code>npm install --global projectz</code></li>
@@ -74,7 +89,6 @@ Here's some of the things it can do:
 <p>Environments older than Node.js v6 may need <a href="https://babeljs.io/docs/usage/polyfill/" title="A polyfill that emulates missing ECMAScript environment features">Babel's Polyfill</a> or something similar.</p>
 
 <!-- /INSTALL -->
-
 
 ## Running Projectz
 
@@ -135,95 +149,95 @@ Projectz takes notes of these meta data fields:
 
 ```javascript
 {
-	// Specify your project's human readable name
-	"title": "Projectz",
+    // Specify your project's human readable name
+    "title": "Projectz",
 
-	// Specify your project name
-	"name": "projectz",
+    // Specify your project name
+    "name": "projectz",
 
-	// Specify your project's Website URL
-	"homepage": "https://github.com/bevry/projectz",
+    // Specify your project's Website URL
+    "homepage": "https://github.com/bevry/projectz",
 
-	// Specify your project's demo URL
-	// If this is missing, and `homepage` is set, we set it to the `homepage` value
-	"demo": "https://github.com/bevry/projectz",
+    // Specify your project's demo URL
+    // If this is missing, and `homepage` is set, we set it to the `homepage` value
+    "demo": "https://github.com/bevry/projectz",
 
-	// Specify your project description
-	"description": "Stop wasting time syncing and updating your project's README and Package Files!",
+    // Specify your project description
+    "description": "Stop wasting time syncing and updating your project's README and Package Files!",
 
-	// Specify your project's SPDX License
-	// Uses https://www.npmjs.com/packages/spdx for parsing
-	"license": "MIT",
+    // Specify your project's SPDX License
+    // Uses https://www.npmjs.com/packages/spdx for parsing
+    "license": "MIT",
 
-	// Specify your whether the project can run on the client-side in web browsers
-	// If this is missing, and the component or bower package files exist, then this becomes `true`
-	"browsers": true,
+    // Specify your whether the project can run on the client-side in web browsers
+    // If this is missing, and the component or bower package files exist, then this becomes `true`
+    "browsers": true,
 
-	// Specify your project's author details
-	// Can be an array or CSV string
-	"author": "2013+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
+    // Specify your project's author details
+    // Can be an array or CSV string
+    "author": "2013+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
 
-	// Specify your maintainers
-	"maintainers": [
-		"Benjamin Lupton (b@lupton.cc) (http://balupton.com)"
-	],
+    // Specify your maintainers
+    "maintainers": [
+        "Benjamin Lupton (b@lupton.cc) (http://balupton.com)"
+    ],
 
-	// Specify your sponsors
-	"sponsors": [
-		"Benjamin Lupton (b@lupton.cc) (http://balupton.com)"
-	],
+    // Specify your sponsors
+    "sponsors": [
+        "Benjamin Lupton (b@lupton.cc) (http://balupton.com)"
+    ],
 
-	// Specify your contributors
-	// This is automatically combined with the contributors from the GitHub Repository API
-	"contributors": [
-		"Benjamin Lupton (b@lupton.cc) (http://balupton.com)"
-	],
+    // Specify your contributors
+    // This is automatically combined with the contributors from the GitHub Repository API
+    "contributors": [
+        "Benjamin Lupton (b@lupton.cc) (http://balupton.com)"
+    ],
 
-	// Specify your project's repository details
-	// If this is missing, and `homepage` is a GitHub URL, this determined automatically
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/bevry/projectz.git"
-	},
+    // Specify your project's repository details
+    // If this is missing, and `homepage` is a GitHub URL, this determined automatically
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/bevry/projectz.git"
+    },
 
-	// Specify your project's issue tracker
-	// If this is missing, and `repository` is a GitHub repository, this determined automatically
-	"bugs": {
-		"url": "https://github.com/bevry/projectz/issues"
-	},
+    // Specify your project's issue tracker
+    // If this is missing, and `repository` is a GitHub repository, this determined automatically
+    "bugs": {
+        "url": "https://github.com/bevry/projectz/issues"
+    },
 
-	// Specify your project's badges for use in the readme files
-	// Projectz renders badges by sending the `badges` field to the `badges` package.
-	// Below is some sample projectz configuration for this field to render our most common badges.
-	// Even more badge types and configurations are available than just those included below.
-	// Complete details of what is available can be found over at the badges package:
-	// https://github.com/bevry/badges
-	"badges": {
-		"list": [
-			"travisci",
-			"npmversion",
-			"npmdownloads",
-			"daviddm",
-			"daviddmdev",
-			"---",
-			"slackin",
-			"patreon",
-			"gratipay",
-			"flattr",
-			"paypal",
-			"bitcoin",
-			"wishlist"
-		],
-		"config": {
-			"patreonUsername": "bevry",
-			"gratipayUsername": "bevry",
-			"flattrUsername": "balupton",
-			"paypalURL": "https://bevry.me/paypal",
-			"bitcoinURL": "https://bevry.me/bitcoin",
-			"wishlistURL": "https://bevry.me/wishlist",
-			"slackinURL": "https://slack.bevry.me"
-		}
-	},
+    // Specify your project's badges for use in the readme files
+    // Projectz renders badges by sending the `badges` field to the `badges` package.
+    // Below is some sample projectz configuration for this field to render our most common badges.
+    // Even more badge types and configurations are available than just those included below.
+    // Complete details of what is available can be found over at the badges package:
+    // https://github.com/bevry/badges
+    "badges": {
+        "list": [
+            "travisci",
+            "npmversion",
+            "npmdownloads",
+            "daviddm",
+            "daviddmdev",
+            "---",
+            "slackin",
+            "patreon",
+            "gratipay",
+            "flattr",
+            "paypal",
+            "bitcoin",
+            "wishlist"
+        ],
+        "config": {
+            "patreonUsername": "bevry",
+            "gratipayUsername": "bevry",
+            "flattrUsername": "balupton",
+            "paypalURL": "https://bevry.me/paypal",
+            "bitcoinURL": "https://bevry.me/bitcoin",
+            "wishlistURL": "https://bevry.me/wishlist",
+            "slackinURL": "https://slack.bevry.me"
+        }
+    },
 
   // If you are using the projectz meta file, you can also define this field
   // it allows you to set the configuration for other package systems
@@ -288,7 +302,6 @@ This README is also, expectedly, built with projectz. [View its source.](https:/
 
 <!-- /HISTORY -->
 
-
 <!-- CONTRIBUTE/ -->
 
 <h2>Contribute</h2>
@@ -296,7 +309,6 @@ This README is also, expectedly, built with projectz. [View its source.](https:/
 <a href="https://github.com/bevry/projectz/blob/master/CONTRIBUTING.md#files">Discover how you can contribute by heading on over to the <code>CONTRIBUTING.md</code> file.</a>
 
 <!-- /CONTRIBUTE -->
-
 
 <!-- BACKERS/ -->
 
@@ -340,7 +352,6 @@ These amazing people have contributed code to this project:
 <a href="https://github.com/bevry/projectz/blob/master/CONTRIBUTING.md#files">Discover how you can contribute by heading on over to the <code>CONTRIBUTING.md</code> file.</a>
 
 <!-- /BACKERS -->
-
 
 <!-- LICENSE/ -->
 
