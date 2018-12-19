@@ -141,7 +141,7 @@ function getJspmInstructions(data) {
 		jspmLink,
 		'',
 		'``` html',
-		'<script type=module>',
+		'<script type="module">',
 		`    import * as pkg from '${url}'`,
 		`</script>`,
 		'```'
@@ -300,7 +300,7 @@ function getInstallInstructions(data /* :Object */) /* :string */ {
 		}
 	}
 
-	if (data.devDependencies && data.devDependencies.jsdoc) {
+	if (data.main && data.devDependencies && data.devDependencies.jsdoc) {
 		parts.push(getTypeScriptInstructions(data))
 	}
 

@@ -91,7 +91,7 @@ console.log(result); // setTimeout - just like normal
 <a href="https://jspm.io" title="Native ES Modules CDN"><h3>jspm</h3></a>
 
 ``` html
-<script type=module>
+<script type="module">
     import * as pkg from '//dev.jspm.io/ambi'
 </script>
 ```

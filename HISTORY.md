@@ -1,5 +1,10 @@
 # History
 
+## v1.7.1 2018 December 19
+
+-   Fixed an eyesore with the jspm installation instructions
+-   Only output TypeScript blurb on modules
+
 ## v1.7.0 2018 December 19
 
 -   Updated installation instructions for latest ecosystem changes
