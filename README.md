@@ -70,7 +70,7 @@ Here's some of the things it can do:
 
 <h2>Install</h2>
 
-<a href="https://npmjs.com" title="npm is a package manager for javascript"><h3>NPM</h3></a>
+<a href="https://npmjs.com" title="npm is a package manager for javascript"><h3>npm</h3></a>
 <h4>Install Globally</h4>
 <ul>
 <li>Install: <code>npm install --global projectz</code></li>

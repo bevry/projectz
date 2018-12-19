@@ -82,19 +82,19 @@ console.log(result); // setTimeout - just like normal
 
 <h2>Install</h2>
 
-<a href="https://npmjs.com" title="npm is a package manager for javascript"><h3>NPM</h3></a>
-<h4>Install Globally</h4>
-<ul>
-<li>Install: <code>npm install --global ambi</code></li>
-</ul>
-<h4>Install Locally</h4>
+<a href="https://npmjs.com" title="npm is a package manager for javascript"><h3>npm</h3></a>
 <ul>
 <li>Install: <code>npm install --save ambi</code></li>
 <li>Require: <code>require('ambi')</code></li>
 </ul>
 
-<a href="https://unpkg.com" title="unpkg is a fast, global content delivery network for everything on npm"><h3>CDN</h3></a>
-<ul><li>URL: <a href="//unpkg.com/ambi"><code>//unpkg.com/ambi</li></a></ul>
+<a href="https://jspm.io" title="Native ES Modules CDN"><h3>jspm</h3></a>
+
+``` html
+<script type=module>
+    import * as pkg from '//dev.jspm.io/ambi'
+</script>
+```
 
 <a href="https://github.com/componentjs/component" title="Frontend package manager and build tool for modular web applications"><h3>Component</h3></a>
 <ul><li>Install: <code>component install ambi</code></li></ul>

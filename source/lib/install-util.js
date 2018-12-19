@@ -29,32 +29,56 @@ function getNpmInstructions(data) {
 	const commands =
 		typeof data.bin === 'string' ? [data.name] : Object.keys(data.bin || {})
 
-	const parts = [
+	return [
 		getLink({
-			text: '<h3>NPM</h3>',
+			text: '<h3>npm</h3>',
 			url: 'https://npmjs.com',
 			title: 'npm is a package manager for javascript'
 		}),
-		'<h4>Install Globally</h4>',
-		getNpmInstructionList(data, commands, false),
-		'<h4>Install Locally</h4>',
+		commands.length && '<h4>Install Globally</h4>',
+		commands.length && getNpmInstructionList(data, commands, false),
+		commands.length && '<h4>Install Locally</h4>',
 		getNpmInstructionList(data, commands, true)
 	]
-
-	return parts.join('\n')
+		.filter(i => i)
+		.join('\n')
 }
 
-function getBrowserInstructions(data) {
-	const browserLink = getLink({
-		text: '<h3>CDN</h3>',
+/*
+function getUnpkgInstructions(data) {
+	const unpkgLink = getLink({
+		text: '<h3>unpkg</h3>',
 		url: 'https://unpkg.com',
 		title:
 			'unpkg is a fast, global content delivery network for everything on npm'
 	})
 	const url = `//unpkg.com/${data.name}`
+	const link = `<a href="${url}"><code>${url}</code></a>`
 	return [
-		browserLink,
-		`<ul><li>URL: <a href="${url}"><code>//unpkg.com/${data.name}</li></a></ul>`
+		unpkgLink,
+		`<ul>`,
+		`<li>URL: <a href="${url}"><code>${url}</code></a></li>`,
+		`</ul>`
+	]
+}
+*/
+
+function getJspmInstructions(data) {
+	const jspmLink = getLink({
+		text: '<h3>jspm</h3>',
+		url: 'https://jspm.io',
+		title: 'Native ES Modules CDN'
+	})
+	const name = data.name.replace(/[^a-zA-Z]/, '')
+	const url = `//dev.jspm.io/${data.name}`
+	return [
+		jspmLink,
+		'',
+		'``` html',
+		'<script type=module>',
+		`    import * as pkg from '${url}'`,
+		`</script>`,
+		'```'
 	].join('\n')
 }
 
@@ -236,7 +260,7 @@ function getInstallInstructions(data /* :Object */) /* :string */ {
 
 			// Browser
 			if (data.browsers) {
-				parts.push(getBrowserInstructions(data))
+				parts.push(getJspmInstructions(data))
 			}
 		}
 
