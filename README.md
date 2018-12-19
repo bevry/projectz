@@ -40,31 +40,12 @@ Used by over [300 repositories](https://libraries.io/npm/projectz/dependent-repo
 
 Here's some of the things it can do:
 
-- [Keep your projects data files synchronised appropriately](https://github.com/bevry/projectz#data-files), supports:
-	- `package.json`
-	- `bower.json`
-	- `component.json`
-	- `jquery.json`
-- [Create beautiful standardised readme files that stay in sync with your data files](https://github.com/bevry/projectz#readme-files), supports:
-	- `README`
-	- `CONTRIBUTING`
-	- `LICENSE`
-	- `BACKERS`
-	- `HISTORY`
-- Automatic injection of the appropriate installation methods, supports:
-	- [NPM](https://www.npmjs.com)
-	- [Browserify](http://browserify.org/)
-	- [Ender](http://enderjs.com)
-	- [Component](http://github.com/component/component)
-	- [Bower](http://bower.io/)
-	- [Editions](https://github.com/bevry/editions)
-	- [DocPad](https://docpad.org) Plugins
-- Automatic injection of your desired [badges](https://github.com/bevry/badges)
-- Automatic injection of your [SPDX](http://spdx.org/licenses/) license information
-- Keep your data and readme files up to date with remote data, supports:
-	- Pulling in your latest contributors from GitHub
-	- Pulling in your latest sponsors from remote APIs ([coming soon](https://github.com/bevry/projectz/issues/80))
-
+-   [Keep your projects data files synchronised appropriately](https://github.com/bevry/projectz#data-files), supports: - `package.json` - `bower.json` - `component.json` - `jquery.json`
+-   [Create beautiful standardised readme files that stay in sync with your data files](https://github.com/bevry/projectz#readme-files), supports: - `README` - `CONTRIBUTING` - `LICENSE` - `BACKERS` - `HISTORY`
+-   Automatic injection of the appropriate installation methods, supports: - [NPM](https://www.npmjs.com) - [Browserify](http://browserify.org/) - [Ender](http://enderjs.com) - [Component](http://github.com/component/component) - [Bower](http://bower.io/) - [Editions](https://github.com/bevry/editions) - [DocPad](https://docpad.org) Plugins
+-   Automatic injection of your desired [badges](https://github.com/bevry/badges)
+-   Automatic injection of your [SPDX](http://spdx.org/licenses/) license information
+-   Keep your data and readme files up to date with remote data, supports: - Pulling in your latest contributors from GitHub - Pulling in your latest sponsors from remote APIs ([coming soon](https://github.com/bevry/projectz/issues/80))
 
 <!-- INSTALL/ -->
 
@@ -101,10 +82,9 @@ Here's some of the things it can do:
 
 Once installed locally, you can compile your project using projectz by running the following in your terminal:
 
-``` shell
-node ./node_modules/.bin/projectz compile
+```shell
+npx projectz compile
 ```
-
 
 ### Automatically
 
@@ -112,19 +92,18 @@ To make projectz more automatic, we recommended adding the direct command above 
 
 If you don't use a build tool, but do use npm, then you can add the following to your project's `package.json` file:
 
-``` json
+```json
 {
-  "scripts": {
-    "compile": "projectz compile",
-    "posttest": "npm run compile"
-  }
+    "scripts": {
+        "compile": "projectz compile",
+        "posttest": "npm run compile"
+    }
 }
 ```
 
 The `compile` script here is runnable via the command `npm run-script compile` and will compile your project with projectz.
 
 The `posttest` script here automatically compiles your project with projectz after your tests have successfully completed, providing you use `npm test` to run your tests. This is a great place to put projectz as projectz only updates meta documents so won't affect your test, and will always run before a publish.
-
 
 ### GitHub Rate Limiting
 
@@ -137,16 +116,16 @@ If you get a rate limit warning, you will need to add `GITHUB_ACCESS_TOKEN` (or 
 5. Open a new shell, or run `export GITHUB_ACCESS_TOKEN="the token value"` in your current shell
 6. Run projectz again
 
-
 ## Configuring Projectz
 
 ### Data Files
+
 Projectz helps you maintain the following data files:
 
-- `package.json`
-- `bower.json`
-- `component.json`
-- `jquery.json`
+-   `package.json`
+-   `bower.json`
+-   `component.json`
+-   `jquery.json`
 
 It does this by reading them, combining their data in memory, and then outputting the appropriate fields and over-rides for each file.
 
@@ -154,7 +133,7 @@ If you are making use of multiple meta data files, you may find defining a proje
 
 Projectz takes notes of these meta data fields:
 
-``` javascript
+```javascript
 {
 	// Specify your project's human readable name
 	"title": "Projectz",
@@ -256,51 +235,50 @@ Projectz takes notes of these meta data fields:
 }
 ```
 
-
 ### Readme Files
+
 Projectz helps you maintain the following readme files:
 
-- `README.md`
-- `CONTRIBUTING.md`
-- `LICENSE.md`
-- `BACKERS.md`
-- `HISTORY.md`
+-   `README.md`
+-   `CONTRIBUTING.md`
+-   `LICENSE.md`
+-   `BACKERS.md`
+-   `HISTORY.md`
 
 It does this by reading them, and replacing comment tags with the appropriate data.
 
 The following comment tags are supported:
 
-- `<!-- TITLE -->` — outputs the package's `title` field
-- `<!-- BADGES -->` — outputs the badges you have enabled from your package's `badges` field
-- `<!-- DESCRIPTION -->` — outputs the package's `description` field
-- `<!-- INSTALL -->` — outputs the package's installation instructions
-- `<!-- HISTORY -->` — outputs a link to the `HISTORY` file if it exists, otherwise if it is a Github repository, outputs a link to the releases page
-- `<!-- CONTRIBUTE -->` — outputs a link to the `CONTRIBUTE` file if it exists
-- `<!-- BACKERS -->` — outputs who the backers are for the project, including maintainers, sponsors, funding badges, and contributors
-- `<!-- LICENSE -->` — outputs a summary of the license information
+-   `<!-- TITLE -->` — outputs the package's `title` field
+-   `<!-- BADGES -->` — outputs the badges you have enabled from your package's `badges` field
+-   `<!-- DESCRIPTION -->` — outputs the package's `description` field
+-   `<!-- INSTALL -->` — outputs the package's installation instructions
+-   `<!-- HISTORY -->` — outputs a link to the `HISTORY` file if it exists, otherwise if it is a Github repository, outputs a link to the releases page
+-   `<!-- CONTRIBUTE -->` — outputs a link to the `CONTRIBUTE` file if it exists
+-   `<!-- BACKERS -->` — outputs who the backers are for the project, including maintainers, sponsors, funding badges, and contributors
+-   `<!-- LICENSE -->` — outputs a summary of the license information
 
 As well as these comment tags for updating entire files:
 
-- `<!-- LICENSEFILE -->` — outputs the complete license information
-- `<!-- BACKERSFILE -->` — same as `<!-- BACKERS -->` but made for an individual file instead
+-   `<!-- LICENSEFILE -->` — outputs the complete license information
+-   `<!-- BACKERSFILE -->` — same as `<!-- BACKERS -->` but made for an individual file instead
 
 As an example, here is a a basic `README.md` file:
 
-	<!-- TITLE -->
-	<!-- BADGES -->
-	<!-- DESCRIPTION -->
-	<!-- INSTALL -->
+    <!-- TITLE -->
+    <!-- BADGES -->
+    <!-- DESCRIPTION -->
+    <!-- INSTALL -->
 
-	## Usage
-	Usage instructions go here
+    ## Usage
+    Usage instructions go here
 
-	<!-- HISTORY -->
-	<!-- CONTRIBUTE -->
-	<!-- BACKERS -->
-	<!-- LICENSE -->
+    <!-- HISTORY -->
+    <!-- CONTRIBUTE -->
+    <!-- BACKERS -->
+    <!-- LICENSE -->
 
 This README is also, expectedly, built with projectz. [View its source.](https://raw.githubusercontent.com/bevry/projectz/master/README.md)
-
 
 <!-- HISTORY/ -->
 
