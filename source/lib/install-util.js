@@ -3,110 +3,6 @@
 
 const { getLink } = require('./projectz-util.js')
 
-function getNpmInstructionList(data, commands, local) {
-	const label = `Executable${commands.length === 1 ? '' : 's'}`
-
-	return [
-		'<ul>',
-		`<li>Install: <code>npm install ${local ? '--save' : '--global'} ${
-			data.name
-		}</code></li>`,
-		local && data.main
-			? `<li>Require: <code>require('${data.name}')</code></li>`
-			: '',
-		commands.length
-			? `<li>${label}: <code>${local ? 'npx ' : ''}${commands.join(
-					'</code>, <code>'
-			  )}</code></li>`
-			: '',
-		'</ul>'
-	]
-		.filter(i => i)
-		.join('\n')
-}
-
-function getNpmInstructions(data) {
-	const commands =
-		typeof data.bin === 'string' ? [data.name] : Object.keys(data.bin || {})
-
-	return [
-		getLink({
-			text: '<h3>npm</h3>',
-			url: 'https://npmjs.com',
-			title: 'npm is a package manager for javascript'
-		}),
-		commands.length && '<h4>Install Globally</h4>',
-		commands.length && getNpmInstructionList(data, commands, false),
-		commands.length && '<h4>Install Locally</h4>',
-		getNpmInstructionList(data, commands, true)
-	]
-		.filter(i => i)
-		.join('\n')
-}
-
-/*
-function getUnpkgInstructions(data) {
-	const unpkgLink = getLink({
-		text: '<h3>unpkg</h3>',
-		url: 'https://unpkg.com',
-		title:
-			'unpkg is a fast, global content delivery network for everything on npm'
-	})
-	const url = `//unpkg.com/${data.name}`
-	const link = `<a href="${url}"><code>${url}</code></a>`
-	return [
-		unpkgLink,
-		`<ul>`,
-		`<li>URL: <a href="${url}"><code>${url}</code></a></li>`,
-		`</ul>`
-	]
-}
-*/
-
-function getJspmInstructions(data) {
-	const jspmLink = getLink({
-		text: '<h3>jspm</h3>',
-		url: 'https://jspm.io',
-		title: 'Native ES Modules CDN'
-	})
-	const name = data.name.replace(/[^a-zA-Z]/, '')
-	const url = `//dev.jspm.io/${data.name}`
-	return [
-		jspmLink,
-		'',
-		'``` html',
-		'<script type=module>',
-		`    import * as pkg from '${url}'`,
-		`</script>`,
-		'```'
-	].join('\n')
-}
-
-function getComponentInstructions(data) {
-	const componentLink = getLink({
-		text: '<h3>Component</h3>',
-		url: 'https://github.com/componentjs/component',
-		title:
-			'Frontend package manager and build tool for modular web applications'
-	})
-	return [
-		componentLink,
-		`<ul><li>Install: <code>component install ${data.name}</code></li></ul>`
-	].join('\n')
-}
-
-function getBowerInstructions(data) {
-	const bowerLink = getLink({
-		text: '<h3>Bower</h3>',
-		url: 'https://bower.io',
-		title: 'A package manager for the web'
-	})
-	return [
-		bowerLink,
-		`<ul><li>Install: <code>bower install ${data.name}</code></li></ul>`
-	].join('\n')
-}
-
 function hydrateTextWithLinks(text) {
 	const linksArray = [
 		{
@@ -152,6 +48,12 @@ function hydrateTextWithLinks(text) {
 			title: 'ECMAScript 2015'
 		},
 		{
+			text: 'JSDoc Comments',
+			url: 'http://usejsdoc.org',
+			title:
+				'JSDoc is an API documentation generator for JavaScript, similar to Javadoc or phpDocumentor'
+		},
+		{
 			text: 'Flow Type Comments',
 			url: 'http://flowtype.org/blog/2015/02/20/Flow-Comments.html',
 			title: 'Flow is a static type checker for JavaScript'
@@ -165,6 +67,12 @@ function hydrateTextWithLinks(text) {
 			text: 'JSX',
 			url: 'https://facebook.github.io/jsx/',
 			title: 'XML/HTML inside your JavaScript'
+		},
+		{
+			text: 'TypeScript',
+			url: 'https://www.typescriptlang.org/',
+			title:
+				'TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. '
 		}
 	]
 	const linksMap = {}
@@ -178,6 +86,113 @@ function hydrateTextWithLinks(text) {
 	return text.replace(linksMatch, function(match) {
 		return linksMap[match]
 	})
+}
+
+function getNpmInstructionList(data, commands, local) {
+	const label = `Executable${commands.length === 1 ? '' : 's'}`
+
+	return [
+		'<ul>',
+		`<li>Install: <code>npm install ${local ? '--save' : '--global'} ${
+			data.name
+		}</code></li>`,
+		local && data.main
+			? `<li>Require: <code>require('${data.name}')</code></li>`
+			: '',
+		commands.length
+			? `<li>${label}: <code>${local ? 'npx ' : ''}${commands.join(
+					'</code>, <code>'
+			  )}</code></li>`
+			: '',
+		'</ul>'
+	]
+		.filter(i => i)
+		.join('\n')
+}
+
+function getNpmInstructions(data) {
+	const commands =
+		typeof data.bin === 'string' ? [data.name] : Object.keys(data.bin || {})
+
+	return [
+		getLink({
+			text: '<h3>npm</h3>',
+			url: 'https://npmjs.com',
+			title: 'npm is a package manager for javascript'
+		}),
+		commands.length && '<h4>Install Globally</h4>',
+		commands.length && getNpmInstructionList(data, commands, false),
+		commands.length && '<h4>Install Locally</h4>',
+		getNpmInstructionList(data, commands, true)
+	]
+		.filter(i => i)
+		.join('\n')
+}
+
+function getJspmInstructions(data) {
+	const jspmLink = getLink({
+		text: '<h3>jspm</h3>',
+		url: 'https://jspm.io',
+		title: 'Native ES Modules CDN'
+	})
+	const name = data.name.replace(/[^a-zA-Z]/, '')
+	const url = `//dev.jspm.io/${data.name}`
+	return [
+		jspmLink,
+		'',
+		'``` html',
+		'<script type=module>',
+		`    import * as pkg from '${url}'`,
+		`</script>`,
+		'```'
+	].join('\n')
+}
+
+function getTypeScriptInstructions(data) {
+	return [
+		hydrateTextWithLinks('<h3>TypeScript</h3>'),
+		'',
+		hydrateTextWithLinks(
+			'This project provides its type information via inline JSDoc Comments. To make use of this in TypeScript, set your <code>maxNodeModuleJsDepth</code> compiler option to `5` or thereabouts. You can accomlish this via your `tsconfig.json` file like so:'
+		),
+		'',
+		'``` json',
+		JSON.stringify(
+			{
+				compilerOptions: {
+					maxNodeModuleJsDepth: 5
+				}
+			},
+			null,
+			'  '
+		),
+		'```'
+	].join('\n')
+}
+
+function getComponentInstructions(data) {
+	const componentLink = getLink({
+		text: '<h3>Component</h3>',
+		url: 'https://github.com/componentjs/component',
+		title:
+			'Frontend package manager and build tool for modular web applications'
+	})
+	return [
+		componentLink,
+		`<ul><li>Install: <code>component install ${data.name}</code></li></ul>`
+	].join('\n')
+}
+
+function getBowerInstructions(data) {
+	const bowerLink = getLink({
+		text: '<h3>Bower</h3>',
+		url: 'https://bower.io',
+		title: 'A package manager for the web'
+	})
+	return [
+		bowerLink,
+		`<ul><li>Install: <code>bower install ${data.name}</code></li></ul>`
+	].join('\n')
 }
 
 function getEditionsInstructions(data) {
@@ -283,6 +298,10 @@ function getInstallInstructions(data /* :Object */) /* :string */ {
 		if (data.editions) {
 			parts.push(getEditionsInstructions(data))
 		}
+	}
+
+	if (data.devDependencies && data.devDependencies.jsdoc) {
+		parts.push(getTypeScriptInstructions(data))
 	}
 
 	return parts.join('\n\n')
