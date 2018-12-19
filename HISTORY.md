@@ -1,5 +1,9 @@
 # History
 
+## v1.7.3 2018 December 19
+
+-   Internal documentation updates
+
 ## v1.7.2 2018 December 19
 
 -   Moved npm require instructions after the command instructions for consistency
