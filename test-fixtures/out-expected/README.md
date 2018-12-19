@@ -82,26 +82,25 @@ console.log(result); // setTimeout - just like normal
 
 <h2>Install</h2>
 
-<a href="https://npmjs.com" title="npm is a package manager for javascript"><h3>NPM</h3></a><ul>
+<a href="https://npmjs.com" title="npm is a package manager for javascript"><h3>NPM</h3></a>
+<h4>Install Globally</h4>
+<ul>
+<li>Install: <code>npm install --global ambi</code></li>
+</ul>
+<h4>Install Locally</h4>
+<ul>
 <li>Install: <code>npm install --save ambi</code></li>
-<li>Module: <code>require('ambi')</code></li></ul>
+<li>Require: <code>require('ambi')</code></li>
+</ul>
 
-<a href="http://browserify.org" title="Browserify lets you require('modules') in the browser by bundling up all of your dependencies"><h3>Browserify</h3></a><ul>
-<li>Install: <code>npm install --save ambi</code></li>
-<li>Module: <code>require('ambi')</code></li>
-<li>CDN URL: <code>//wzrd.in/bundle/ambi@2.1.4</code></li></ul>
+<a href="https://unpkg.com" title="unpkg is a fast, global content delivery network for everything on npm"><h3>CDN</h3></a>
+<ul><li>URL: <a href="//unpkg.com/ambi"><code>//unpkg.com/ambi</li></a></ul>
 
-<a href="http://enderjs.com" title="Ender is a full featured package manager for your browser"><h3>Ender</h3></a><ul>
-<li>Install: <code>ender add ambi</code></li>
-<li>Module: <code>require('ambi')</code></li></ul>
+<a href="https://github.com/componentjs/component" title="Frontend package manager and build tool for modular web applications"><h3>Component</h3></a>
+<ul><li>Install: <code>component install ambi</code></li></ul>
 
-<a href="https://github.com/component/component" title="Frontend package manager and build tool for modular web applications"><h3>Component</h3></a><ul>
-<li>Install: <code>component install ambi</code></li>
-<li>Module: <code>require('ambi')</code></li></ul>
-
-<a href="http://bower.io" title="A package manager for the web"><h3>Bower</h3></a><ul>
-<li>Install: <code>bower install ambi</code></li>
-<li>Module: <code>require('ambi')</code></li></ul>
+<a href="https://bower.io" title="A package manager for the web"><h3>Bower</h3></a>
+<ul><li>Install: <code>bower install ambi</code></li></ul>
 
 <!-- /INSTALL -->
 
