@@ -79,8 +79,8 @@ Here's some of the things it can do:
 <h4>Install Locally</h4>
 <ul>
 <li>Install: <code>npm install --save projectz</code></li>
-<li>Require: <code>require('projectz')</code></li>
 <li>Executable: <code>npx projectz</code></li>
+<li>Require: <code>require('projectz')</code></li>
 </ul>
 
 <h3><a href="https://editions.bevry.me" title="Editions are the best way to produce and consume packages you care about.">Editions</a></h3>

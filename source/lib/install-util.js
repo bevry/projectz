@@ -96,13 +96,13 @@ function getNpmInstructionList(data, commands, local) {
 		`<li>Install: <code>npm install ${local ? '--save' : '--global'} ${
 			data.name
 		}</code></li>`,
-		local && data.main
-			? `<li>Require: <code>require('${data.name}')</code></li>`
-			: '',
 		commands.length
 			? `<li>${label}: <code>${local ? 'npx ' : ''}${commands.join(
 					'</code>, <code>'
 			  )}</code></li>`
+			: '',
+		local && data.main
+			? `<li>Require: <code>require('${data.name}')</code></li>`
 			: '',
 		'</ul>'
 	]

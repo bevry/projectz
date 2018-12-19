@@ -1,5 +1,9 @@
 # History
 
+## v1.7.2 2018 December 19
+
+-   Moved npm require instructions after the command instructions for consistency
+
 ## v1.7.1 2018 December 19
 
 -   Fixed an eyesore with the jspm installation instructions
