@@ -233,9 +233,14 @@ function getEditionsInstructions(data) {
 		editionTags.includes('symbols') ||
 		editionTags.includes('esnext') ||
 		editionTags.includes('es2015')
+	const envs = data.engines.node
+		? `Environments older than Node.js v${data.engines.node.replace(
+				/[^.0-9]+/g,
+				''
+		  )}`
+		: 'Older environments'
 	if (editionPolyfill) {
-		result +=
-			"\n\n<p>Older environments may need Babel's Polyfill or something similar.</p>"
+		result += `\n\n<p>${envs} may need Babel's Polyfill or something similar.</p>`
 	}
 
 	// Add links

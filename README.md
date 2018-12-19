@@ -90,7 +90,7 @@ Here's some of the things it can do:
 <ul><li><code>projectz</code> aliases <code>projectz/source/index.js</code></li>
 <li><code>projectz/source/index.js</code> is esnext source code with require for modules</li></ul>
 
-<p>Older environments may need <a href="https://babeljs.io/docs/usage/polyfill/" title="A polyfill that emulates missing ECMAScript environment features">Babel's Polyfill</a> or something similar.</p>
+<p>Environments older than Node.js v6 may need <a href="https://babeljs.io/docs/usage/polyfill/" title="A polyfill that emulates missing ECMAScript environment features">Babel's Polyfill</a> or something similar.</p>
 
 <!-- /INSTALL -->
 
