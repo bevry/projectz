@@ -1,5 +1,9 @@
 # History
 
+## v1.6.0 2018 December 19
+
+-   Updated [base files](https://github.com/bevry/base) and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+
 ## v1.5.3 2018 November 15
 
 -   Note that contributors may also fail to fetch if the internet is disconnected.
