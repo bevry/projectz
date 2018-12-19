@@ -4,7 +4,7 @@
 // Use the same edition of fellow as we are using here
 // This is needed rather than jsut doing require('fellow') as if fellow loads ES6 Classes
 // But projects is using ES5 Classes, then we will not be able to extend the fellow class
-const {join, dirname} = require('path')
+const { join, dirname } = require('path')
 const Fellow = require(join('fellow', dirname('..')))
 
 // Define
@@ -30,22 +30,27 @@ class Person extends Fellow {
 	@type String
 	*/
 	/* eslint no-magic-numbers: 0 */
-	set name (value /* :string */) {
-		const match = (/^((?:[0-9]+[-+]?)+)?(.+)$/).exec(value)
-		if ( match ) {
+	set name(value /* :string */) {
+		const match = /^((?:[0-9]+[-+]?)+)?(.+)$/.exec(value)
+		if (match) {
 			const years = String(match[1] || '').trim() || null
 			const name = match[2].trim() || null
-			if ( years ) {
+			if (years) {
 				this.years = years
 			}
 			this._name = name
 		}
 	}
 
-	get name () /* :any */ {
-		return this._name || this.githubUsername || this.twitterUsername || this.facebookUsername || null
+	get name() /* :any */ {
+		return (
+			this._name ||
+			this.githubUsername ||
+			this.twitterUsername ||
+			this.facebookUsername ||
+			null
+		)
 	}
-
 }
 
 // Exports

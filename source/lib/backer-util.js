@@ -1,81 +1,83 @@
 /* @flow */
 'use strict'
 
-const {getPeopleHTML, getFileUrl, getLink} = require('./projectz-util.js')
-const {getBadgesInCategory} = require('./badge-util.js')
+const { getPeopleHTML, getFileUrl, getLink } = require('./projectz-util.js')
+const { getBadgesInCategory } = require('./badge-util.js')
 
-function getSponsorsText (data /* :Object */) /* :string */ {
+function getSponsorsText(data /* :Object */) /* :string */ {
 	let result = ''
 
-	if ( data.sponsors.length === 0 ) {
+	if (data.sponsors.length === 0) {
 		// ignore
 		result +=
 			'No sponsors yet! Will you be the first?\n\n' +
 			getBadgesInCategory('funding', data)
-	}
-	else {
+	} else {
 		result +=
 			'These amazing people have contributed finances to this project:\n\n' +
-			getPeopleHTML(data.sponsors, {githubSlug: data.github.slug}) +
+			getPeopleHTML(data.sponsors, { githubSlug: data.github.slug }) +
 			`\n\nBecome a sponsor!\n\n${getBadgesInCategory('funding', data)}`
 	}
 
 	return result
 }
 
-function getMaintainersText (data /* :Object */) /* :string */ {
+function getMaintainersText(data /* :Object */) /* :string */ {
 	let result = ''
 
-	if ( data.maintainers.length === 0 ) {
+	if (data.maintainers.length === 0) {
 		// ignore
 		result += 'No maintainers yet! Will you be the first?'
-	}
-	else {
-		result += 'These amazing people are maintaining this project:\n\n' +
-			getPeopleHTML(data.maintainers, {githubSlug: data.github.slug})
+	} else {
+		result +=
+			'These amazing people are maintaining this project:\n\n' +
+			getPeopleHTML(data.maintainers, { githubSlug: data.github.slug })
 	}
 
 	return result
 }
 
-function getContributeLink (data /* :Object */, {optional = false} /* :Object */ ) /* :string */ {
+function getContributeLink(
+	data /* :Object */,
+	{ optional = false } /* :Object */
+) /* :string */ {
 	// Prepare
 	const file = data.filenamesForReadmeFiles.contributing
-	if ( !file ) {
-		if ( optional ) {
+	if (!file) {
+		if (optional) {
 			return ''
-		}
-		else {
-			throw new Error('Contributing section requires a CONTRIBUTING file to exist')
+		} else {
+			throw new Error(
+				'Contributing section requires a CONTRIBUTING file to exist'
+			)
 		}
 	}
 	const url = getFileUrl(data, file)
 	const text = `Discover how you can contribute by heading on over to the <code>${file}</code> file.`
 
 	// Return
-	return getLink({url, text})
+	return getLink({ url, text })
 }
 
-function getContributorsText (data /* :Object */) /* :string */ {
+function getContributorsText(data /* :Object */) /* :string */ {
 	let result = ''
 
-	if ( data.contributors.length === 0 ) {
+	if (data.contributors.length === 0) {
 		// ignore
 		result +=
 			'No contributors yet! Will you be the first?' +
-			`\n\n${getContributeLink(data, {optional: true})}`
-	}
-	else {
+			`\n\n${getContributeLink(data, { optional: true })}`
+	} else {
 		result +=
 			'These amazing people have contributed code to this project:\n\n' +
-			getPeopleHTML(data.contributors, {githubSlug: data.github.slug}) +
-			`\n\n${getContributeLink(data, {optional: true})}`
+			getPeopleHTML(data.contributors, { githubSlug: data.github.slug }) +
+			`\n\n${getContributeLink(data, { optional: true })}`
 	}
 
 	return result
 }
 
-function getBackerSection (data /* :Object */) /* :string */ {
+function getBackerSection(data /* :Object */) /* :string */ {
 	// Prepare
 	const result = [
 		'<h2>Backers</h2>',
@@ -97,7 +99,7 @@ function getBackerSection (data /* :Object */) /* :string */ {
 	return result
 }
 
-function getBackerFile (data /* :Object */) /* :string */ {
+function getBackerFile(data /* :Object */) /* :string */ {
 	// Prepare
 	const result = [
 		'<h1>Backers</h1>',
@@ -119,17 +121,23 @@ function getBackerFile (data /* :Object */) /* :string */ {
 	return result
 }
 
-function getContributeSection (data /* :Object */) /* :string */ {
+function getContributeSection(data /* :Object */) /* :string */ {
 	// Prepare
-	const result = [
-		'<h2>Contribute</h2>',
-		'',
-		getContributeLink(data, {})
-	].join('\n')
+	const result = ['<h2>Contribute</h2>', '', getContributeLink(data, {})].join(
+		'\n'
+	)
 
 	// Return
 	return result
 }
 
 // Exports
-module.exports = {getSponsorsText, getMaintainersText, getContributeLink, getContributorsText, getBackerSection, getBackerFile, getContributeSection}
+module.exports = {
+	getSponsorsText,
+	getMaintainersText,
+	getContributeLink,
+	getContributorsText,
+	getBackerSection,
+	getBackerFile,
+	getContributeSection
+}

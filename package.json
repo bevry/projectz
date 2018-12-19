@@ -86,20 +86,19 @@
       "description": "esnext source code with require for modules",
       "directory": "source",
       "entry": "index.js",
-      "engines": {
-        "node": "6 || 8 || 10 || 11",
-        "browsers": false
-      },
       "tags": [
         "javascript",
         "esnext",
         "require",
         "flow type comments"
-      ]
+      ],
+      "engines": {
+        "node": "6 || 8 || 10 || 11",
+        "browsers": false
+      }
     }
   ],
   "bin": "bin.js",
-  "preferGlobal": true,
   "main": "source/index.js",
   "dependencies": {
     "badges": "^1.2.8",
@@ -111,7 +110,7 @@
     "eachr": "^3.2.0",
     "extendr": "^3.3.0",
     "fellow": "^2.3.0",
-    "githubauthquerystring": "1.0.0",
+    "githubauthquerystring": "1.0.2",
     "node-fetch": "^2.3.0",
     "safefs": "^4.1.0",
     "spdx": "^0.5.2",
@@ -120,11 +119,16 @@
     "typechecker": "^4.6.0"
   },
   "devDependencies": {
-    "assert-helpers": "^4.5.1",
-    "eslint": "^5.9.0",
-    "flow-bin": "^0.86.0",
-    "joe": "^2.0.2",
+    "assert-helpers": "^4.8.0",
+    "eslint": "^5.10.0",
+    "eslint-config-bevry": "^1.0.2",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-plugin-flow-vars": "^0.5.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "flow-bin": "^0.89.0",
     "joe-reporter-console": "^2.0.2",
+    "kava": "^3.1.0",
+    "prettier": "^1.15.3",
     "safeps": "^7.0.1",
     "valid-directory": "^1.0.0"
   },
@@ -145,8 +149,17 @@
     "our:test": "npm run our:verify && npm test",
     "our:verify": "npm run our:verify:directory && npm run our:verify:eslint && npm run our:verify:flow",
     "our:verify:directory": "npx valid-directory",
-    "our:verify:eslint": "eslint --fix ./source/**",
+    "our:verify:eslint": "eslint --fix --ignore-pattern '**/*.d.ts' --ignore-pattern '**/vendor/' --ignore-pattern '**/node_modules/' --ext .mjs,.js,.jsx,.ts,.tsx './source/**/*.*'",
     "our:verify:flow": "flow check",
-    "test": "node --harmony ./source/test.js --joe-reporter=console"
+    "test": "node ./source/test.js"
+  },
+  "eslintConfig": {
+    "extends": [
+      "bevry"
+    ]
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
   }
 }

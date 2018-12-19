@@ -71,8 +71,9 @@ Here's some of the things it can do:
 <h2>Install</h2>
 
 <a href="https://npmjs.com" title="npm is a package manager for javascript"><h3>NPM</h3></a><ul>
-<li>Install: <code>npm install --global projectz</code></li>
-<li>Executable: <code>projectz</code></li></ul>
+<li>Install: <code>npm install --save projectz</code></li>
+<li>Executable: <code>projectz</code></li>
+<li>Module: <code>require('projectz')</code></li></ul>
 
 <h3><a href="https://github.com/bevry/editions" title="Editions are the best way to produce and consume packages you care about.">Editions</a></h3>
 
