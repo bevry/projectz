@@ -1,5 +1,9 @@
 # History
 
+## v1.7.0 2018 December 19
+
+-   Updated installation instructions for latest ecosystem changes
+
 ## v1.6.0 2018 December 19
 
 -   Updated [base files](https://github.com/bevry/base) and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
