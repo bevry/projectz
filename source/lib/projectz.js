@@ -10,8 +10,8 @@
 const { readdir, readFile, writeFile } = require('safefs')
 const { resolve, join } = require('path')
 
-// [CSON](https://github.com/bevry/cson) is used for loading in our configuration files
-const CSON = require('cson')
+// CSON is used for loading in our configuration files
+const CSON = require('season')
 
 // [TypeChecker](https://github.com/bevry/typechecker) is used for checking data types
 const { isString, isObject } = require('typechecker')
@@ -286,11 +286,16 @@ class Projectz {
 					const filePath = join(this.cwd, file)
 
 					packages.forEach(key => {
-						if (file.toLowerCase().indexOf(key) === 0) {
+						const basename = file
+							.toLowerCase()
+							.split('.')
+							.slice(0, -1)
+							.join('.')
+						if (basename === key) {
 							const message = `Reading package file: ${filePath}`
 							tasks.addTask(message, complete => {
 								this.log('info', message)
-								CSON.parseFile(filePath, (err, data) => {
+								CSON.readFile(filePath, (err, data) => {
 									if (err) return complete(err)
 									this.filenamesForPackageFiles[key] = file
 									this.dataForPackageFiles[key] = data
