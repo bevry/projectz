@@ -1,5 +1,10 @@
 # History
 
+## v1.7.4 2018 December 22
+
+-   Prevent `pacakge-lock.json` from being read
+-   Switched from `CSON` to `season`, as CSON doesn't handle sync errors, and no one has maintained it
+
 ## v1.7.3 2018 December 19
 
 -   Internal documentation updates
