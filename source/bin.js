@@ -82,7 +82,8 @@ cli
 
 cli
 	.on('command:*', function(cmd) {
-		logger.log('info', `Unknown command ${cmd}`)
+		cli.outputHelp()
+		logger.log('info', ` Unknown command ${cmd}`)
 	})
 
 // Start the commands
