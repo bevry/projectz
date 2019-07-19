@@ -37,6 +37,9 @@ logger
 // Extract out version out of our package and apply it to commander
 cli.version(version)
 
+// Define usage information
+cli.usage('<command> [options]')
+
 // Add our cwd customisation
 cli.option(
 	'-p, --path [value]',
