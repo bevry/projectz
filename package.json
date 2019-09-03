@@ -115,8 +115,8 @@
     "node-fetch": "^2.3.0",
     "safefs": "^4.1.0",
     "season": "^6.0.2",
-    "spdx": "^0.5.2",
-    "spdx-license-list": "^5.0.0",
+    "spdx-expression-parse": "^3.0.0",
+    "spdx-license-list": "^6.1.0",
     "taskgroup": "5",
     "typechecker": "^4.6.0"
   },

@@ -2,7 +2,7 @@
 'use strict'
 
 const { getPeopleHTML } = require('./projectz-util.js')
-const spdxParse = require('spdx').parse
+const spdxParse = require('spdx-expression-parse')
 const spdxList = require('spdx-license-list/full')
 
 function renderSpdxObject(
@@ -27,9 +27,10 @@ function renderSpdxObject(
 				? `<ul><li><a href="${url}">${name}</a></li></ul>`
 				: `<a href="${url}">${name}</a>`
 			: body
-					// Remove useless copyright headers
+					// Remove useless copyright headers - (spdx-license-list@5.x)
 					.replace('\nCopyright (c) <year> <copyright holders>\n', '')
-
+					// Remove useless copyright headers - (spdx-license-list@6.x)
+					.replace(/\s?Copyright.+holders>/gi, '')
 					// Remove license introductions
 					.replace(/^[\s\S]+<<endOptional>>\s*/m, '')
 
