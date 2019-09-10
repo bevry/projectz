@@ -209,9 +209,7 @@ function getEditionsInstructions(data) {
 		if (entryFull === data.main) {
 			hasDefaultEdition = true
 			editions.push(
-				`<code>${data.name}</code> aliases <code>${data.name}/${
-					data.main
-				}</code>`
+				`<code>${data.name}</code> aliases <code>${data.name}/${data.main}</code>`
 			)
 		}
 		editions.push(
@@ -223,15 +221,11 @@ function getEditionsInstructions(data) {
 	if (!hasDefaultEdition) {
 		if ('editions' in data.dependencies) {
 			editions.unshift(
-				`<code>${data.name}</code> aliases <code>${data.name}/${
-					data.main
-				}</code> which uses Editions to automatically select the correct edition for the consumers environment`
+				`<code>${data.name}</code> aliases <code>${data.name}/${data.main}</code> which uses Editions to automatically select the correct edition for the consumers environment`
 			)
 		} else if ('esnextguardian' in data.dependencies) {
 			editions.unshift(
-				`<code>${data.name}</code> aliases <code>${data.name}/${
-					data.main
-				}</code> which uses ESNextGuardian to automatically select the correct edition for the consumers environment`
+				`<code>${data.name}</code> aliases <code>${data.name}/${data.main}</code> which uses ESNextGuardian to automatically select the correct edition for the consumers environment`
 			)
 		}
 	}

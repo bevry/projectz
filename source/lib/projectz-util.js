@@ -39,12 +39,8 @@ function getPersonHTML(
 			: person.name
 
 		if (person.githubUsername && opts.githubSlug) {
-			const contributionsURL = `https://github.com/${
-				opts.githubSlug
-			}/commits?author=${person.githubUsername}`
-			html += ` — <a href="${contributionsURL}" title="View the GitHub contributions of ${
-				person.name
-			} on repository ${opts.githubSlug}">view contributions</a>`
+			const contributionsURL = `https://github.com/${opts.githubSlug}/commits?author=${person.githubUsername}`
+			html += ` — <a href="${contributionsURL}" title="View the GitHub contributions of ${person.name} on repository ${opts.githubSlug}">view contributions</a>`
 		}
 		return html
 	} else {
@@ -114,9 +110,7 @@ function getPeopleTextArray(
 
 function getFileUrl(data /* :Object */, filename /* :string */) /* :string */ {
 	if (data.github.slug) {
-		return `https://github.com/${
-			data.github.slug
-		}/blob/master/${filename}#files`
+		return `https://github.com/${data.github.slug}/blob/master/${filename}#files`
 	} else {
 		throw new Error(
 			'File links are currently only supported for github repositories'

@@ -249,9 +249,7 @@ class Projectz {
 				))
 				log(
 					'info',
-					`Loaded ${contributors.length} contributors (${
-						unique.length
-					} unique) for repository: ${githubSlug}`
+					`Loaded ${contributors.length} contributors (${unique.length} unique) for repository: ${githubSlug}`
 				)
 			})
 

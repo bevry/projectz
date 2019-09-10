@@ -88,7 +88,7 @@ Here's some of the things it can do:
 <ul><li><code>projectz</code> aliases <code>projectz/source/index.js</code></li>
 <li><code>projectz/source/index.js</code> is esnext source code with require for modules</li></ul>
 
-<p>Environments older than Node.js v6 may need <a href="https://babeljs.io/docs/usage/polyfill/" title="A polyfill that emulates missing ECMAScript environment features">Babel's Polyfill</a> or something similar.</p>
+<p>Environments older than Node.js v8 may need <a href="https://babeljs.io/docs/usage/polyfill/" title="A polyfill that emulates missing ECMAScript environment features">Babel's Polyfill</a> or something similar.</p>
 
 <!-- /INSTALL -->
 
@@ -352,9 +352,9 @@ These amazing people have contributed code to this project:
 <li><a href="http://ghuser.io/jamesgeorge007">James George</a> — <a href="https://github.com/bevry/projectz/commits?author=jamesgeorge007" title="View the GitHub contributions of James George on repository bevry/projectz">view contributions</a></li>
 <li><a href="https://github.com/Zearin">Zearin</a> — <a href="https://github.com/bevry/projectz/commits?author=Zearin" title="View the GitHub contributions of Zearin on repository bevry/projectz">view contributions</a></li>
 <li><a href="https://github.com/vsopvsop">vsopvsop</a> — <a href="https://github.com/bevry/projectz/commits?author=vsopvsop" title="View the GitHub contributions of vsopvsop on repository bevry/projectz">view contributions</a></li>
-<li><a href="http://mightyi.am">Shahar Or</a> — <a href="https://github.com/bevry/projectz/commits?author=mightyiam" title="View the GitHub contributions of Shahar Or on repository bevry/projectz">view contributions</a></li>
 <li><a href="http://zdroid.github.io">Zlatan Vasović</a> — <a href="https://github.com/bevry/projectz/commits?author=zdroid" title="View the GitHub contributions of Zlatan Vasović on repository bevry/projectz">view contributions</a></li>
-<li><a href="https://github.com/mightyiam">Shahar Or</a> — <a href="https://github.com/bevry/projectz/commits?author=mightyiam" title="View the GitHub contributions of Shahar Or on repository bevry/projectz">view contributions</a></li></ul>
+<li><a href="http://www.blizzard.com">Peter Chanthamynavong</a> — <a href="https://github.com/bevry/projectz/commits?author=peterkc" title="View the GitHub contributions of Peter Chanthamynavong on repository bevry/projectz">view contributions</a></li>
+<li><a href="http://mightyi.am">Shahar Dawn Or</a> — <a href="https://github.com/bevry/projectz/commits?author=mightyiam" title="View the GitHub contributions of Shahar Dawn Or on repository bevry/projectz">view contributions</a></li></ul>
 
 <a href="https://github.com/bevry/projectz/blob/master/CONTRIBUTING.md#files">Discover how you can contribute by heading on over to the <code>CONTRIBUTING.md</code> file.</a>
 

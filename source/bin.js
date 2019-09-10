@@ -80,15 +80,14 @@ cli
 		})
 	})
 
-cli
-	.on('command:*', function(cmd) {
-		cli.outputHelp()
-		logger.log('info', ` Unknown command ${cmd}`)
-	})
+cli.on('command:*', function(cmd) {
+	cli.outputHelp()
+	logger.log('info', ` Unknown command ${cmd}`)
+})
 
 // Start the commands
 cli.parse(process.argv)
 
 if (!process.argv.slice(2).length) {
-	cli.help();
+	cli.help()
 }
