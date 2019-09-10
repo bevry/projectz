@@ -1,5 +1,14 @@
 # History
 
+## v1.7.5 2019 September 11
+
+-   Show help if no arguments were supplied
+    -   Thanks to [James George](https://github.com/jamesgeorge007) for [pull request #94](https://github.com/bevry/projectz/pull/94)
+-   Updated dependencies
+    -   Update SPDX dependency
+        -   Thanks to [Peter Chanthamynavong](https://github.com/peterkc) for [pull request #95](https://github.com/bevry/projectz/pull/95)
+-   Updated [base files](https://github.com/bevry/base) and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+
 ## v1.7.4 2018 December 22
 
 -   Prevent `pacakge-lock.json` from being read
