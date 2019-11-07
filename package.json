@@ -107,7 +107,7 @@
     "caterpillar": "^3.2.0",
     "caterpillar-filter": "^3.1.0",
     "caterpillar-human": "^3.0.0",
-    "commander": "^3.0.1",
+    "commander": "^4.0.0",
     "eachr": "^3.2.0",
     "extendr": "^3.4.1",
     "fellow": "^2.4.0",
