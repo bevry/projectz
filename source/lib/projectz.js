@@ -43,6 +43,9 @@ const installUtil = require('./install-util.js')
 const licenseUtil = require('./license-util.js')
 const projectzUtil = require('./projectz-util.js')
 
+// Allow the user to make use of a proxy service for the github API if they wish
+const ghapi = process.env.GITHUB_API || 'https://api.github.com'
+
 // Definition
 // Projects is defined as a class to ensure we can run multiple instances of it
 class Projectz {
@@ -182,7 +185,7 @@ class Projectz {
 		// Prepare
 		const githubSlug = this.mergedPackageData.github.slug
 		const githubAuthQueryString = fetchGithubAuthQueryString()
-		const url = `https://api.github.com/repos/${githubSlug}/contributors?per_page=100&${githubAuthQueryString}`
+		const url = `${ghapi}/repos/${githubSlug}/contributors?per_page=100&${githubAuthQueryString}`
 
 		// Fetch the github and package contributors for it
 		log('info', `Loading contributors for repository: ${githubSlug}`)

@@ -1,5 +1,9 @@
 # History
 
+## v1.9.0 2019 November 11
+
+-   Implemented support for `GITHUB_API` environment variable to access the GitHub API via a proxy
+
 ## v1.8.0 2019 November 11
 
 -   Updated [base files](https://github.com/bevry/base) and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)

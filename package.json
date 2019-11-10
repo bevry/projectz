@@ -1,7 +1,7 @@
 {
   "title": "Projectz",
   "name": "projectz",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "Stop wasting time syncing and updating your project's README and Package Files!",
   "homepage": "https://github.com/bevry/projectz",
   "license": "MIT",
@@ -98,7 +98,7 @@
         "flow type comments"
       ],
       "engines": {
-        "node": "8 || 10 || 12 || 13",
+        "node": "8 || 10 || 12",
         "browsers": false
       }
     }
