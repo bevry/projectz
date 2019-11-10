@@ -120,7 +120,7 @@
     "season": "^6.0.2",
     "spdx-expression-parse": "^3.0.0",
     "spdx-license-list": "^6.1.0",
-    "taskgroup": "5",
+    "taskgroup": "6",
     "typechecker": "^4.8.0"
   },
   "devDependencies": {
