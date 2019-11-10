@@ -133,7 +133,7 @@
     "flow-bin": "^0.111.3",
     "kava": "^3.1.0",
     "prettier": "^1.19.1",
-    "safeps": "^7.0.1",
+    "safeps": "^8.0.0",
     "valid-directory": "^1.0.0"
   },
   "scripts": {
