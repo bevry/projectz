@@ -130,7 +130,7 @@
     "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-flow-vars": "^0.5.0",
     "eslint-plugin-prettier": "^3.1.1",
-    "flow-bin": "^0.111.3",
+    "flow-bin": "^0.112.0",
     "kava": "^3.1.0",
     "prettier": "^1.19.1",
     "safeps": "^8.0.0",
