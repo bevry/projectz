@@ -350,7 +350,8 @@ These amazing people have contributed code to this project:
 <li><a href="https://github.com/vsopvsop">vsopvsop</a> — <a href="https://github.com/bevry/projectz/commits?author=vsopvsop" title="View the GitHub contributions of vsopvsop on repository bevry/projectz">view contributions</a></li>
 <li><a href="http://zdroid.github.io">Zlatan Vasović</a> — <a href="https://github.com/bevry/projectz/commits?author=zdroid" title="View the GitHub contributions of Zlatan Vasović on repository bevry/projectz">view contributions</a></li>
 <li><a href="http://www.blizzard.com">Peter Chanthamynavong</a> — <a href="https://github.com/bevry/projectz/commits?author=peterkc" title="View the GitHub contributions of Peter Chanthamynavong on repository bevry/projectz">view contributions</a></li>
-<li><a href="http://mightyi.am">Shahar Dawn Or</a> — <a href="https://github.com/bevry/projectz/commits?author=mightyiam" title="View the GitHub contributions of Shahar Dawn Or on repository bevry/projectz">view contributions</a></li></ul>
+<li><a href="http://mightyi.am">Shahar Dawn Or</a> — <a href="https://github.com/bevry/projectz/commits?author=mightyiam" title="View the GitHub contributions of Shahar Dawn Or on repository bevry/projectz">view contributions</a></li>
+<li><a href="http://github.com/apps/dependabot-preview">dependabot-preview[bot]</a> — <a href="https://github.com/bevry/projectz/commits?author=dependabot-preview[bot]" title="View the GitHub contributions of dependabot-preview[bot] on repository bevry/projectz">view contributions</a></li></ul>
 
 <a href="https://github.com/bevry/projectz/blob/master/CONTRIBUTING.md#files">Discover how you can contribute by heading on over to the <code>CONTRIBUTING.md</code> file.</a>
 

@@ -1,7 +1,7 @@
 {
   "title": "Projectz",
   "name": "projectz",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "description": "Stop wasting time syncing and updating your project's README and Package Files!",
   "homepage": "https://github.com/bevry/projectz",
   "license": "MIT",
@@ -55,10 +55,7 @@
       "travisTLD": "com"
     }
   },
-  "funding": {
-    "type": "cooperative",
-    "url": "https://bevry.me/fund"
-  },
+  "funding": "https://bevry.me/fund",
   "author": "2013+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
   "maintainers": [
     "Benjamin Lupton <b@lupton.cc> (http://balupton.com)",
@@ -74,7 +71,8 @@
     "vsopvsop (https://github.com/vsopvsop)",
     "Zlatan Vasović <zlatanvasovic@gmail.com> (http://zdroid.github.io)",
     "Peter Chanthamynavong <peterkc@gmail.com> (http://www.blizzard.com)",
-    "Shahar Dawn Or <mightyiampresence@gmail.com> (http://mightyi.am)"
+    "Shahar Dawn Or <mightyiampresence@gmail.com> (http://mightyi.am)",
+    "dependabot-preview[bot] (http://github.com/apps/dependabot-preview)"
   ],
   "bugs": {
     "url": "https://github.com/bevry/projectz/issues"
@@ -98,7 +96,7 @@
         "flow type comments"
       ],
       "engines": {
-        "node": "8 || 10 || 12",
+        "node": "8 || 10 || 12 || 13",
         "browsers": false
       }
     }
@@ -107,33 +105,33 @@
   "main": "source/index.js",
   "dependencies": {
     "badges": "^1.4.0",
-    "caterpillar": "^3.2.0",
+    "caterpillar": "^3.3.0",
     "caterpillar-filter": "^3.1.0",
     "caterpillar-human": "^3.0.0",
-    "commander": "^4.0.0",
+    "commander": "^4.0.1",
     "eachr": "^3.2.0",
     "extendr": "^3.5.0",
     "fellow": "^2.4.0",
     "githubauthquerystring": "1.1.0",
     "node-fetch": "^2.6.0",
-    "safefs": "^5.0.0",
+    "safefs": "^5.1.0",
     "season": "^6.0.2",
     "spdx-expression-parse": "^3.0.0",
     "spdx-license-list": "^6.1.0",
     "taskgroup": "6",
-    "typechecker": "^4.8.0"
+    "typechecker": "^4.9.0"
   },
   "devDependencies": {
-    "assert-helpers": "^5.0.0",
+    "assert-helpers": "^5.2.1",
     "eslint": "^6.6.0",
     "eslint-config-bevry": "^1.2.1",
     "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-flow-vars": "^0.5.0",
     "eslint-plugin-prettier": "^3.1.1",
     "flow-bin": "^0.112.0",
-    "kava": "^3.1.0",
+    "kava": "^3.2.0",
     "prettier": "^1.19.1",
-    "safeps": "^8.0.0",
+    "safeps": "^8.1.0",
     "valid-directory": "^1.0.0"
   },
   "scripts": {
