@@ -307,7 +307,7 @@ class Projectz {
 					})
 
 					readmes.forEach(key => {
-						if (file.toLowerCase().includes(key)) {
+						if (file.toLowerCase().startsWith(key)) {
 							const message = `Reading readme file: ${filePath}`
 							tasks.addTask(message, complete => {
 								this.log('info', message)
