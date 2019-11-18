@@ -20,7 +20,8 @@
     "Benjamin Lupton <b@lupton.cc> (http://balupton.com)",
     "Sean Fridman <mail@seanfridman.com> (http://seanfridman.com)",
     "Francisco Lourenço (http://aristidesfl.github.io/)",
-    "Chris Tavares (https://github.com/christav)"
+    "Chris Tavares (https://github.com/christav)",
+    "dependabot-preview[bot] (http://github.com/apps/dependabot-preview)"
   ],
   "bugs": {
     "url": "https://github.com/bevry/ambi/issues"
