@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // Projectz CLI
 /* @flow */
 'use strict'

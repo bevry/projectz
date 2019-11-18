@@ -16,7 +16,7 @@ const { equal } = require('assert-helpers')
 const projectzPath = join(__dirname, '..')
 const srcPath = join(projectzPath, 'test-fixtures', 'src')
 const expectPath = join(projectzPath, 'test-fixtures', 'out-expected')
-const cliPath = join(projectzPath, 'bin.js')
+const cliPath = join(__dirname, 'bin.js')
 
 // -------------------------------------
 // Tests
