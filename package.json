@@ -1,7 +1,7 @@
 {
   "title": "Projectz",
   "name": "projectz",
-  "version": "1.15.0",
+  "version": "1.16.0",
   "description": "Stop wasting time syncing and updating your project's README and Package Files!",
   "homepage": "https://github.com/bevry/projectz",
   "license": "MIT",
@@ -98,7 +98,7 @@
         "flow type comments"
       ],
       "engines": {
-        "node": "8 || 10 || 12 || 13"
+        "node": "8 || 10 || 12"
       }
     }
   ],
@@ -106,32 +106,32 @@
   "type": "commonjs",
   "main": "source/index.js",
   "dependencies": {
-    "badges": "^3.0.0",
+    "badges": "^3.1.0",
     "caterpillar": "^4.0.0",
-    "caterpillar-filter": "^4.4.0",
-    "caterpillar-human": "^4.4.0",
+    "caterpillar-filter": "^4.5.0",
+    "caterpillar-human": "^4.5.0",
     "commander": "^4.0.1",
-    "eachr": "^4.4.0",
-    "extendr": "^4.2.0",
-    "fellow": "^3.2.0",
-    "githubauthquerystring": "2.2.0",
+    "eachr": "^4.5.0",
+    "extendr": "^4.3.0",
+    "fellow": "^3.3.0",
+    "githubauthquerystring": "2.3.0",
     "node-fetch": "^2.6.0",
     "safefs": "^5.4.0",
     "season": "^6.0.2",
     "spdx-expression-parse": "^3.0.0",
     "spdx-license-list": "^6.1.0",
     "taskgroup": "^6.4.0",
-    "typechecker": "^6.0.0"
+    "typechecker": "^6.2.0"
   },
   "devDependencies": {
-    "assert-helpers": "^5.7.0",
+    "assert-helpers": "^5.8.0",
     "eslint": "^6.7.2",
-    "eslint-config-bevry": "^2.2.0",
+    "eslint-config-bevry": "^2.3.0",
     "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-flow-vars": "^0.5.0",
     "eslint-plugin-prettier": "^3.1.1",
     "flow-bin": "^0.113.0",
-    "kava": "^4.3.0",
+    "kava": "^4.4.0",
     "prettier": "^1.19.1",
     "safeps": "^9.2.0",
     "valid-directory": "^1.5.0"
