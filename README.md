@@ -4,6 +4,7 @@
 
 <!-- /TITLE -->
 
+
 <!-- BADGES/ -->
 
 <span class="badge-travisci"><a href="http://travis-ci.com/bevry/projectz" title="Check this project's build status on TravisCI"><img src="https://img.shields.io/travis/com/bevry/projectz/master.svg" alt="Travis CI Build Status" /></a></span>
@@ -24,11 +25,13 @@
 
 <!-- /BADGES -->
 
+
 <!-- DESCRIPTION/ -->
 
 Stop wasting time syncing and updating your project's README and Package Files!
 
 <!-- /DESCRIPTION -->
+
 
 This far, projectz is used directly by [802 repositories](https://github.com/bevry/projectz/network/dependents) and [348 packages](https://github.com/bevry/projectz/network/dependents?dependent_type=PACKAGE), and indirectly by [2936 repositories](https://libraries.io/npm/projectz/dependent-repositories) and [349 packages](https://libraries.io/npm/projectz/dependents).
 
@@ -65,7 +68,6 @@ Here's some of the things it can do:
 <h2>Install</h2>
 
 <a href="https://npmjs.com" title="npm is a package manager for javascript"><h3>npm</h3></a>
-
 <h4>Install Globally</h4>
 <ul>
 <li>Install: <code>npm install --global projectz</code></li>
@@ -89,6 +91,7 @@ Here's some of the things it can do:
 <p>Environments older than Node.js v8 may need <a href="https://babeljs.io/docs/usage/polyfill/" title="A polyfill that emulates missing ECMAScript environment features">Babel's Polyfill</a> or something similar.</p>
 
 <!-- /INSTALL -->
+
 
 ## Running Projectz
 
@@ -302,6 +305,7 @@ This README is also, expectedly, built with projectz. [View its source.](https:/
 
 <!-- /HISTORY -->
 
+
 <!-- CONTRIBUTE/ -->
 
 <h2>Contribute</h2>
@@ -309,6 +313,7 @@ This README is also, expectedly, built with projectz. [View its source.](https:/
 <a href="https://github.com/bevry/projectz/blob/master/CONTRIBUTING.md#files">Discover how you can contribute by heading on over to the <code>CONTRIBUTING.md</code> file.</a>
 
 <!-- /CONTRIBUTE -->
+
 
 <!-- BACKERS/ -->
 
@@ -318,9 +323,9 @@ This README is also, expectedly, built with projectz. [View its source.](https:/
 
 These amazing people are maintaining this project:
 
-<ul><li><a href="http://balupton.com">Benjamin Lupton</a></li>
-<li><a href="http://robloach.net">Rob Loach</a></li>
-<li><a href="http://ghuser.io/jamesgeorge007">James George</a></li></ul>
+<ul><li><a href="http://balupton.com">Benjamin Lupton</a> — <a href="https://github.com/bevry/projectz/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/projectz">view contributions</a></li>
+<li><a href="http://robloach.net">Rob Loach</a> — <a href="https://github.com/bevry/projectz/commits?author=RobLoach" title="View the GitHub contributions of Rob Loach on repository bevry/projectz">view contributions</a></li>
+<li><a href="http://ghuser.io/jamesgeorge007">James George</a> — <a href="https://github.com/bevry/projectz/commits?author=jamesgeorge007" title="View the GitHub contributions of James George on repository bevry/projectz">view contributions</a></li></ul>
 
 <h3>Sponsors</h3>
 
@@ -340,20 +345,21 @@ No sponsors yet! Will you be the first?
 
 These amazing people have contributed code to this project:
 
-<ul><li><a href="http://balupton.com">Benjamin Lupton</a></li>
+<ul><li><a href="http://balupton.com">Benjamin Lupton</a> — <a href="https://github.com/bevry/projectz/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/projectz">view contributions</a></li>
 <li><a href="https://github.com/pflannery">Peter Flannery</a> — <a href="https://github.com/bevry/projectz/commits?author=pflannery" title="View the GitHub contributions of Peter Flannery on repository bevry/projectz">view contributions</a></li>
-<li><a href="http://robloach.net">Rob Loach</a></li>
-<li><a href="http://ghuser.io/jamesgeorge007">James George</a></li>
+<li><a href="http://robloach.net">Rob Loach</a> — <a href="https://github.com/bevry/projectz/commits?author=RobLoach" title="View the GitHub contributions of Rob Loach on repository bevry/projectz">view contributions</a></li>
+<li><a href="http://ghuser.io/jamesgeorge007">James George</a> — <a href="https://github.com/bevry/projectz/commits?author=jamesgeorge007" title="View the GitHub contributions of James George on repository bevry/projectz">view contributions</a></li>
 <li><a href="https://github.com/Zearin">Zearin</a> — <a href="https://github.com/bevry/projectz/commits?author=Zearin" title="View the GitHub contributions of Zearin on repository bevry/projectz">view contributions</a></li>
 <li><a href="https://github.com/vsopvsop">vsopvsop</a> — <a href="https://github.com/bevry/projectz/commits?author=vsopvsop" title="View the GitHub contributions of vsopvsop on repository bevry/projectz">view contributions</a></li>
-<li><a href="http://zdroid.github.io">Zlatan Vasović</a></li>
-<li><a href="http://www.blizzard.com">Peter Chanthamynavong</a></li>
-<li><a href="http://mightyi.am">Shahar Dawn Or</a></li>
-<li><a href="http://github.com/apps/dependabot-preview">dependabot-preview[bot]</a></li></ul>
+<li><a href="http://zdroid.github.io">Zlatan Vasović</a> — <a href="https://github.com/bevry/projectz/commits?author=zdroid" title="View the GitHub contributions of Zlatan Vasović on repository bevry/projectz">view contributions</a></li>
+<li><a href="http://www.blizzard.com">Peter Chanthamynavong</a> — <a href="https://github.com/bevry/projectz/commits?author=peterkc" title="View the GitHub contributions of Peter Chanthamynavong on repository bevry/projectz">view contributions</a></li>
+<li><a href="http://mightyi.am">Shahar Dawn Or</a> — <a href="https://github.com/bevry/projectz/commits?author=mightyiam" title="View the GitHub contributions of Shahar Dawn Or on repository bevry/projectz">view contributions</a></li>
+<li><a href="http://github.com/apps/dependabot-preview">dependabot-preview[bot]</a> — <a href="https://github.com/bevry/projectz/commits?author=dependabot-preview[bot]" title="View the GitHub contributions of dependabot-preview[bot] on repository bevry/projectz">view contributions</a></li></ul>
 
 <a href="https://github.com/bevry/projectz/blob/master/CONTRIBUTING.md#files">Discover how you can contribute by heading on over to the <code>CONTRIBUTING.md</code> file.</a>
 
 <!-- /BACKERS -->
+
 
 <!-- LICENSE/ -->
 

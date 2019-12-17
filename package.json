@@ -88,7 +88,7 @@
   },
   "editions": [
     {
-      "description": "esnext source code for Node.js with require for modules",
+      "description": "ESNext source code for Node.js with Require for modules",
       "directory": "source",
       "entry": "index.js",
       "tags": [
@@ -152,7 +152,7 @@
     "our:setup:install": "npm install",
     "our:test": "npm run our:verify && npm test",
     "our:verify": "npm run our:verify:directory && npm run our:verify:eslint && npm run our:verify:flow && npm run our:verify:prettier",
-    "our:verify:directory": "npx valid-directory",
+    "our:verify:directory": "valid-directory",
     "our:verify:eslint": "eslint --fix --ignore-pattern '**/*.d.ts' --ignore-pattern '**/vendor/' --ignore-pattern '**/node_modules/' --ext .mjs,.js,.jsx,.ts,.tsx ./source",
     "our:verify:flow": "flow check",
     "our:verify:prettier": "prettier --write ./source/**",

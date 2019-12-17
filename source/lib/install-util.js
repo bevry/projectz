@@ -90,7 +90,7 @@ function hydrateTextWithLinks(text) {
 	// do the replacement
 	const linksMatch = new RegExp(
 		linksArray.map(link => link.text).join('|'),
-		'gi'
+		'g'
 	)
 	return text.replace(linksMatch, function(match) {
 		return linksMap[match.toLowerCase()]
@@ -299,7 +299,7 @@ function getEditionsInstructions(data) {
 	}
 
 	// Compile result
-	let result = `<h3>Editions</h3>\n\n<p>This package is published with the following editions:</p>\n\n<ul><li>${editions.join(
+	let result = `<h3>Editions</h3>\n\n<p>This package is published with the following Editions:</p>\n\n<ul><li>${editions.join(
 		'</li>\n<li>'
 	)}</li></ul>`
 
