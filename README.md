@@ -4,7 +4,6 @@
 
 <!-- /TITLE -->
 
-
 <!-- BADGES/ -->
 
 <span class="badge-travisci"><a href="http://travis-ci.com/bevry/projectz" title="Check this project's build status on TravisCI"><img src="https://img.shields.io/travis/com/bevry/projectz/master.svg" alt="Travis CI Build Status" /></a></span>
@@ -25,15 +24,13 @@
 
 <!-- /BADGES -->
 
-
 <!-- DESCRIPTION/ -->
 
 Stop wasting time syncing and updating your project's README and Package Files!
 
 <!-- /DESCRIPTION -->
 
-
-Used by over [2936 repositories](https://libraries.io/npm/projectz/dependent-repositories) and [349 projects](https://libraries.io/npm/projectz/dependents) thus far!
+This far, projectz is used directly by [802 repositories](https://github.com/bevry/projectz/network/dependents) and [348 packages](https://github.com/bevry/projectz/network/dependents?dependent_type=PACKAGE), and indirectly by [2936 repositories](https://libraries.io/npm/projectz/dependent-repositories) and [349 packages](https://libraries.io/npm/projectz/dependents).
 
 [Watch the talk.](https://youtu.be/IAB8_UlcNWI)
 
@@ -68,6 +65,7 @@ Here's some of the things it can do:
 <h2>Install</h2>
 
 <a href="https://npmjs.com" title="npm is a package manager for javascript"><h3>npm</h3></a>
+
 <h4>Install Globally</h4>
 <ul>
 <li>Install: <code>npm install --global projectz</code></li>
@@ -91,7 +89,6 @@ Here's some of the things it can do:
 <p>Environments older than Node.js v8 may need <a href="https://babeljs.io/docs/usage/polyfill/" title="A polyfill that emulates missing ECMAScript environment features">Babel's Polyfill</a> or something similar.</p>
 
 <!-- /INSTALL -->
-
 
 ## Running Projectz
 
@@ -305,7 +302,6 @@ This README is also, expectedly, built with projectz. [View its source.](https:/
 
 <!-- /HISTORY -->
 
-
 <!-- CONTRIBUTE/ -->
 
 <h2>Contribute</h2>
@@ -313,7 +309,6 @@ This README is also, expectedly, built with projectz. [View its source.](https:/
 <a href="https://github.com/bevry/projectz/blob/master/CONTRIBUTING.md#files">Discover how you can contribute by heading on over to the <code>CONTRIBUTING.md</code> file.</a>
 
 <!-- /CONTRIBUTE -->
-
 
 <!-- BACKERS/ -->
 
@@ -359,7 +354,6 @@ These amazing people have contributed code to this project:
 <a href="https://github.com/bevry/projectz/blob/master/CONTRIBUTING.md#files">Discover how you can contribute by heading on over to the <code>CONTRIBUTING.md</code> file.</a>
 
 <!-- /BACKERS -->
-
 
 <!-- LICENSE/ -->
 
