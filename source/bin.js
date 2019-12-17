@@ -21,8 +21,7 @@ const { Projectz } = require('./index.js')
 const LOG_LEVEL_INFO = 6
 const LOG_LEVEL_DEBUG = 7
 const EXIT_ERROR_CODE = 1
-const level =
-	process.argv.includes('-d') ? LOG_LEVEL_DEBUG : LOG_LEVEL_INFO
+const level = process.argv.includes('-d') ? LOG_LEVEL_DEBUG : LOG_LEVEL_INFO
 
 // Setup our logging
 const logger = new Logger({ level })

@@ -28,6 +28,11 @@ function hydrateTextWithLinks(text) {
 			title: 'The compiler for writing next generation JavaScript'
 		},
 		{
+			text: 'CoffeeScript',
+			url: 'https://coffeescript.org',
+			title: 'CoffeeScript is a little language that compiles into JavaScript'
+		},
+		{
 			text: 'Require',
 			url: 'https://nodejs.org/dist/latest-v5.x/docs/api/modules.html',
 			title: 'Node/CJS Modules'
@@ -75,21 +80,40 @@ function hydrateTextWithLinks(text) {
 				'TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. '
 		}
 	]
+
+	// build a map
 	const linksMap = {}
+	linksArray.forEach(function(link) {
+		linksMap[link.text.toLowerCase()] = getLink(link)
+	})
+
+	// do the replacement
 	const linksMatch = new RegExp(
 		linksArray.map(link => link.text).join('|'),
-		'g'
+		'gi'
 	)
-	linksArray.forEach(function(link) {
-		linksMap[link.text] = getLink(link)
-	})
 	return text.replace(linksMatch, function(match) {
-		return linksMap[match]
+		return linksMap[match.toLowerCase()]
 	})
 }
 
 function getNpmInstructionList(data, commands, local) {
 	const label = `Executable${commands.length === 1 ? '' : 's'}`
+
+	let importStatement = ''
+	let requireStatement = ''
+	if (local && data.main) {
+		if (
+			Array.isArray(data.keywords) &&
+			data.keywords.includes('export-default')
+		) {
+			importStatement = `import pkg from ('${data.name}')`
+			requireStatement = `const pkg = require('${data.name}').default`
+		} else {
+			importStatement = `import * as pkg from ('${data.name}')`
+			requireStatement = `const pkg = require('${data.name}')`
+		}
+	}
 
 	return [
 		'<ul>',
@@ -97,12 +121,13 @@ function getNpmInstructionList(data, commands, local) {
 			data.name
 		}</code></li>`,
 		commands.length
-			? `<li>${label}: <code>${local ? 'npx ' : ''}${commands.join(
-					'</code>, <code>'
-			  )}</code></li>`
+			? `<li>${label}: <code>${commands
+					.map(command => (local ? `npx ${command}` : command))
+					.join('</code>, <code>')}</code></li>`
 			: '',
-		local && data.main
-			? `<li>Require: <code>require('${data.name}')</code></li>`
+		importStatement ? `<li>Import: <code>${importStatement}</code></li>` : '',
+		requireStatement
+			? `<li>Require: <code>${requireStatement}</code></li>`
 			: '',
 		'</ul>'
 	]
@@ -129,20 +154,65 @@ function getNpmInstructions(data) {
 		.join('\n')
 }
 
-function getJspmInstructions(data) {
-	const jspmLink = getLink({
-		text: '<h3>jspm</h3>',
-		url: 'https://jspm.io',
-		title: 'Native ES Modules CDN'
-	})
-	const name = data.name.replace(/[^a-zA-Z]/, '')
-	const url = `//dev.jspm.io/${data.name}`
+function getUnpkgInstructions(data) {
+	const url = `//unpkg.com/${data.name}@^${data.version}/${data.browser}`
+	const importer =
+		Array.isArray(data.keywords) && data.keywords.includes('export-default')
+			? `pkg`
+			: '* as pkg'
 	return [
-		jspmLink,
+		getLink({
+			text: '<h3>unpkg</h3>',
+			url: 'https://unpkg.com',
+			title:
+				'unpkg is a fast, global content delivery network for everything on npm'
+		}),
 		'',
 		'``` html',
 		'<script type="module">',
-		`    import * as pkg from '${url}'`,
+		`    import ${importer} from '${url}'`,
+		`</script>`,
+		'```'
+	].join('\n')
+}
+
+function getPikaInstructions(data) {
+	const url = `//cdn.pika.dev/${data.name}/^${data.version}`
+	const importer =
+		Array.isArray(data.keywords) && data.keywords.includes('export-default')
+			? `pkg`
+			: '* as pkg'
+	return [
+		getLink({
+			text: '<h3>pika</h3>',
+			url: 'https://www.pika.dev/cdn',
+			title: '100% Native ES Modules CDN'
+		}),
+		'',
+		'``` html',
+		'<script type="module">',
+		`    import ${importer} from '${url}'`,
+		`</script>`,
+		'```'
+	].join('\n')
+}
+
+function getJspmInstructions(data) {
+	const url = `//dev.jspm.io/${data.name}@${data.version}`
+	const importer =
+		Array.isArray(data.keywords) && data.keywords.includes('export-default')
+			? `pkg`
+			: '* as pkg'
+	return [
+		getLink({
+			text: '<h3>jspm</h3>',
+			url: 'https://jspm.io',
+			title: 'Native ES Modules CDN'
+		}),
+		'',
+		'``` html',
+		'<script type="module">',
+		`    import ${importer} from '${url}'`,
 		`</script>`,
 		'```'
 	].join('\n')
@@ -171,26 +241,24 @@ function getTypeScriptInstructions(data) {
 }
 
 function getComponentInstructions(data) {
-	const componentLink = getLink({
-		text: '<h3>Component</h3>',
-		url: 'https://github.com/componentjs/component',
-		title:
-			'Frontend package manager and build tool for modular web applications'
-	})
 	return [
-		componentLink,
+		getLink({
+			text: '<h3>Component</h3>',
+			url: 'https://github.com/componentjs/component',
+			title:
+				'Frontend package manager and build tool for modular web applications'
+		}),
 		`<ul><li>Install: <code>component install ${data.name}</code></li></ul>`
 	].join('\n')
 }
 
 function getBowerInstructions(data) {
-	const bowerLink = getLink({
-		text: '<h3>Bower</h3>',
-		url: 'https://bower.io',
-		title: 'A package manager for the web'
-	})
 	return [
-		bowerLink,
+		getLink({
+			text: '<h3>Bower</h3>',
+			url: 'https://bower.io',
+			title: 'A package manager for the web'
+		}),
 		`<ul><li>Install: <code>bower install ${data.name}</code></li></ul>`
 	].join('\n')
 }
@@ -274,6 +342,10 @@ function getInstallInstructions(data /* :Object */) /* :string */ {
 
 			// Browser
 			if (data.browsers) {
+				if (data.module) {
+					parts.push(getPikaInstructions(data))
+					parts.push(getUnpkgInstructions(data))
+				}
 				parts.push(getJspmInstructions(data))
 			}
 		}

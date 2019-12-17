@@ -85,14 +85,15 @@ console.log(result); // setTimeout - just like normal
 <a href="https://npmjs.com" title="npm is a package manager for javascript"><h3>npm</h3></a>
 <ul>
 <li>Install: <code>npm install --save ambi</code></li>
-<li>Require: <code>require('ambi')</code></li>
+<li>Import: <code>import * as pkg from ('ambi')</code></li>
+<li>Require: <code>const pkg = require('ambi')</code></li>
 </ul>
 
 <a href="https://jspm.io" title="Native ES Modules CDN"><h3>jspm</h3></a>
 
 ``` html
 <script type="module">
-    import * as pkg from '//dev.jspm.io/ambi'
+    import * as pkg from '//dev.jspm.io/ambi@2.1.4'
 </script>
 ```
 

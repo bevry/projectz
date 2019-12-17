@@ -21,6 +21,10 @@ const cliPath = join(__dirname, 'bin.js')
 // -------------------------------------
 // Tests
 
+function clean(src) {
+	return src.replace(/@[0-9^~.]/, '[cleaned]')
+}
+
 suite('projectz unit tests', function(suite, test) {
 	suite('getGithubSlug', function(suite, test) {
 		test('short repo', function() {
@@ -75,6 +79,8 @@ suite('projectz integration tests', function(suite, test) {
 		readdir(expectPath, function(err, files) {
 			if (err) return done(err)
 			files.forEach(function(file) {
+				// skip file if it is ignorable
+				if (file.startsWith('.')) return
 				// Create a test for the file
 				test(file, function(done) {
 					// Load the expected source.
@@ -84,7 +90,7 @@ suite('projectz integration tests', function(suite, test) {
 						// Load the actual source.
 						readFile(join(srcPath, file), 'utf8', function(err, actual) {
 							if (err) return done(err)
-							equal(actual.trim(), expected.trim())
+							equal(clean(actual.trim()), clean(expected.trim()))
 
 							// Complete the test for the file
 							done()
