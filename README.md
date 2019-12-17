@@ -33,7 +33,7 @@ Stop wasting time syncing and updating your project's README and Package Files!
 <!-- /DESCRIPTION -->
 
 
-Used by over [300 repositories](https://libraries.io/npm/projectz/dependent-repositories) and [200 projects](https://libraries.io/npm/projectz/dependents) thus far!
+Used by over [2936 repositories](https://libraries.io/npm/projectz/dependent-repositories) and [349 projects](https://libraries.io/npm/projectz/dependents) thus far!
 
 [Watch the talk.](https://youtu.be/IAB8_UlcNWI)
 
@@ -323,9 +323,9 @@ This README is also, expectedly, built with projectz. [View its source.](https:/
 
 These amazing people are maintaining this project:
 
-<ul><li><a href="http://balupton.com">Benjamin Lupton</a> — <a href="https://github.com/bevry/projectz/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/projectz">view contributions</a></li>
-<li><a href="http://robloach.net">Rob Loach</a> — <a href="https://github.com/bevry/projectz/commits?author=RobLoach" title="View the GitHub contributions of Rob Loach on repository bevry/projectz">view contributions</a></li>
-<li><a href="http://ghuser.io/jamesgeorge007">James George</a> — <a href="https://github.com/bevry/projectz/commits?author=jamesgeorge007" title="View the GitHub contributions of James George on repository bevry/projectz">view contributions</a></li></ul>
+<ul><li><a href="http://balupton.com">Benjamin Lupton</a></li>
+<li><a href="http://robloach.net">Rob Loach</a></li>
+<li><a href="http://ghuser.io/jamesgeorge007">James George</a></li></ul>
 
 <h3>Sponsors</h3>
 
@@ -345,16 +345,16 @@ No sponsors yet! Will you be the first?
 
 These amazing people have contributed code to this project:
 
-<ul><li><a href="http://balupton.com">Benjamin Lupton</a> — <a href="https://github.com/bevry/projectz/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/projectz">view contributions</a></li>
+<ul><li><a href="http://balupton.com">Benjamin Lupton</a></li>
 <li><a href="https://github.com/pflannery">Peter Flannery</a> — <a href="https://github.com/bevry/projectz/commits?author=pflannery" title="View the GitHub contributions of Peter Flannery on repository bevry/projectz">view contributions</a></li>
-<li><a href="http://robloach.net">Rob Loach</a> — <a href="https://github.com/bevry/projectz/commits?author=RobLoach" title="View the GitHub contributions of Rob Loach on repository bevry/projectz">view contributions</a></li>
-<li><a href="http://ghuser.io/jamesgeorge007">James George</a> — <a href="https://github.com/bevry/projectz/commits?author=jamesgeorge007" title="View the GitHub contributions of James George on repository bevry/projectz">view contributions</a></li>
+<li><a href="http://robloach.net">Rob Loach</a></li>
+<li><a href="http://ghuser.io/jamesgeorge007">James George</a></li>
 <li><a href="https://github.com/Zearin">Zearin</a> — <a href="https://github.com/bevry/projectz/commits?author=Zearin" title="View the GitHub contributions of Zearin on repository bevry/projectz">view contributions</a></li>
 <li><a href="https://github.com/vsopvsop">vsopvsop</a> — <a href="https://github.com/bevry/projectz/commits?author=vsopvsop" title="View the GitHub contributions of vsopvsop on repository bevry/projectz">view contributions</a></li>
-<li><a href="http://zdroid.github.io">Zlatan Vasović</a> — <a href="https://github.com/bevry/projectz/commits?author=zdroid" title="View the GitHub contributions of Zlatan Vasović on repository bevry/projectz">view contributions</a></li>
-<li><a href="http://www.blizzard.com">Peter Chanthamynavong</a> — <a href="https://github.com/bevry/projectz/commits?author=peterkc" title="View the GitHub contributions of Peter Chanthamynavong on repository bevry/projectz">view contributions</a></li>
-<li><a href="http://mightyi.am">Shahar Dawn Or</a> — <a href="https://github.com/bevry/projectz/commits?author=mightyiam" title="View the GitHub contributions of Shahar Dawn Or on repository bevry/projectz">view contributions</a></li>
-<li><a href="http://github.com/apps/dependabot-preview">dependabot-preview[bot]</a> — <a href="https://github.com/bevry/projectz/commits?author=dependabot-preview[bot]" title="View the GitHub contributions of dependabot-preview[bot] on repository bevry/projectz">view contributions</a></li></ul>
+<li><a href="http://zdroid.github.io">Zlatan Vasović</a></li>
+<li><a href="http://www.blizzard.com">Peter Chanthamynavong</a></li>
+<li><a href="http://mightyi.am">Shahar Dawn Or</a></li>
+<li><a href="http://github.com/apps/dependabot-preview">dependabot-preview[bot]</a></li></ul>
 
 <a href="https://github.com/bevry/projectz/blob/master/CONTRIBUTING.md#files">Discover how you can contribute by heading on over to the <code>CONTRIBUTING.md</code> file.</a>
 
