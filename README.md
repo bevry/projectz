@@ -77,15 +77,16 @@ Here's some of the things it can do:
 <ul>
 <li>Install: <code>npm install --save projectz</code></li>
 <li>Executable: <code>npx projectz</code></li>
-<li>Require: <code>require('projectz')</code></li>
+<li>Import: <code>import * as pkg from ('projectz')</code></li>
+<li>Require: <code>const pkg = require('projectz')</code></li>
 </ul>
 
 <h3><a href="https://editions.bevry.me" title="Editions are the best way to produce and consume packages you care about.">Editions</a></h3>
 
-<p>This package is published with the following editions:</p>
+<p>This package is published with the following <a href="https://editions.bevry.me" title="Editions are the best way to produce and consume packages you care about.">Editions</a>:</p>
 
 <ul><li><code>projectz</code> aliases <code>projectz/source/index.js</code></li>
-<li><code>projectz/source/index.js</code> is esnext source code with require for modules</li></ul>
+<li><code>projectz/source/index.js</code> is <a href="https://babeljs.io/docs/learn-es2015/" title="ECMAScript Next">ESNext</a> source code for Node.js with <a href="https://nodejs.org/dist/latest-v5.x/docs/api/modules.html" title="Node/CJS Modules">Require</a> for modules</li></ul>
 
 <p>Environments older than Node.js v8 may need <a href="https://babeljs.io/docs/usage/polyfill/" title="A polyfill that emulates missing ECMAScript environment features">Babel's Polyfill</a> or something similar.</p>
 

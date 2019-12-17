@@ -1,30 +1,30 @@
 {
   "title": "Projectz",
   "name": "projectz",
-  "version": "1.16.0",
+  "version": "1.17.0",
   "description": "Stop wasting time syncing and updating your project's README and Package Files!",
   "homepage": "https://github.com/bevry/projectz",
   "license": "MIT",
   "keywords": [
-    "project",
-    "readme",
-    "license",
-    "meta",
+    "badges",
+    "bower",
+    "bower.json",
+    "browserify",
     "build",
     "buildtool",
-    "metabuild",
-    "generator",
-    "markdown",
-    "documentation",
-    "package.json",
-    "jquery.json",
     "component",
-    "bower",
-    "jspm",
-    "browserify",
-    "badges",
     "component.json",
-    "bower.json"
+    "documentation",
+    "generator",
+    "jquery.json",
+    "jspm",
+    "license",
+    "markdown",
+    "meta",
+    "metabuild",
+    "package.json",
+    "project",
+    "readme"
   ],
   "badges": {
     "list": [
@@ -88,7 +88,7 @@
   },
   "editions": [
     {
-      "description": "esnext source code with require for modules",
+      "description": "esnext source code for Node.js with require for modules",
       "directory": "source",
       "entry": "index.js",
       "tags": [
@@ -116,12 +116,12 @@
     "fellow": "^3.3.0",
     "githubauthquerystring": "2.3.0",
     "node-fetch": "^2.6.0",
-    "safefs": "^5.4.0",
+    "safefs": "^5.5.0",
     "season": "^6.0.2",
     "spdx-expression-parse": "^3.0.0",
     "spdx-license-list": "^6.1.0",
-    "taskgroup": "^6.4.0",
-    "typechecker": "^6.2.0"
+    "taskgroup": "^6.5.0",
+    "typechecker": "^6.3.0"
   },
   "devDependencies": {
     "assert-helpers": "^5.8.0",
@@ -129,12 +129,12 @@
     "eslint-config-bevry": "^2.3.0",
     "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-flow-vars": "^0.5.0",
-    "eslint-plugin-prettier": "^3.1.1",
-    "flow-bin": "^0.113.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "flow-bin": "^0.114.0",
     "kava": "^4.4.0",
     "prettier": "^1.19.1",
-    "safeps": "^9.2.0",
-    "valid-directory": "^1.5.0"
+    "safeps": "^9.3.0",
+    "valid-directory": "^1.6.0"
   },
   "scripts": {
     "our:clean": "rm -Rf ./docs ./edition* ./es2015 ./es5 ./out ./.next",
@@ -168,6 +168,7 @@
     "singleQuote": true
   },
   "boundation": {
-    "adaptive": false
+    "compileNode": false,
+    "ltsNodeOnly": true
   }
 }
