@@ -1,8 +1,12 @@
 # History
 
+## v1.17.1 2019 December 18
+
+-   Fixed v1.17.0 busting edition names
+
 ## v1.17.0 2019 December 18
 
--   Install instructions adjust accordingly depending on if there is a defualt export or not (detected by presence of the `export-default` keyword)
+-   Install instructions adjust accordingly depending on if there is a default export or not (detected by presence of the `export-default` keyword)
 -   Add install instructions for pika and unpkg if the project is a module
 -   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
 
