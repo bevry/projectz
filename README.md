@@ -83,12 +83,10 @@ Here's some of the things it can do:
 
 <h3><a href="https://editions.bevry.me" title="Editions are the best way to produce and consume packages you care about.">Editions</a></h3>
 
-<p>This package is published with the following <a href="https://editions.bevry.me" title="Editions are the best way to produce and consume packages you care about.">Editions</a>:</p>
+<p>This package is published with the following editions:</p>
 
 <ul><li><code>projectz</code> aliases <code>projectz/source/index.js</code></li>
-<li><code>projectz/source/index.js</code> is <a href="https://babeljs.io/docs/learn-es2015/" title="ECMAScript Next">ESNext</a> source code for Node.js with <a href="https://nodejs.org/dist/latest-v5.x/docs/api/modules.html" title="Node/CJS Modules">Require</a> for modules</li></ul>
-
-<p>Environments older than Node.js v8 may need <a href="https://babeljs.io/docs/usage/polyfill/" title="A polyfill that emulates missing ECMAScript environment features">Babel's Polyfill</a> or something similar.</p>
+<li><code>projectz/source/index.js</code> is <a href="https://en.wikipedia.org/wiki/ECMAScript#ES.Next" title="ECMAScript Next">ESNext</a> source code for <a href="https://nodejs.org" title="Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine">Node.js</a> with <a href="https://nodejs.org/dist/latest-v5.x/docs/api/modules.html" title="Node/CJS Modules">Require</a> for modules</li></ul>
 
 <!-- /INSTALL -->
 

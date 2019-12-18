@@ -6,6 +6,12 @@ const { getLink } = require('./projectz-util.js')
 function hydrateTextWithLinks(text) {
 	const linksArray = [
 		{
+			text: 'Editions Autoloader',
+			url: 'https://github.com/bevry/editions',
+			title:
+				'You can use the Editions Autoloader to autoload the appropriate edition for your consumers environment'
+		},
+		{
 			text: 'Editions',
 			url: 'https://editions.bevry.me',
 			title:
@@ -44,12 +50,36 @@ function hydrateTextWithLinks(text) {
 		},
 		{
 			text: 'ESNext',
-			url: 'https://babeljs.io/docs/learn-es2015/',
+			url: 'https://en.wikipedia.org/wiki/ECMAScript#ES.Next',
 			title: 'ECMAScript Next'
 		},
 		{
+			text: 'ES2019',
+			url:
+				'https://en.wikipedia.org/wiki/ECMAScript#10th_Edition_-_ECMAScript_2019',
+			title: 'ECMAScript ES2019'
+		},
+		{
+			text: 'ES2018',
+			url:
+				'https://en.wikipedia.org/wiki/ECMAScript#9th_Edition_-_ECMAScript_2018',
+			title: 'ECMAScript ES2018'
+		},
+		{
+			text: 'ES2017',
+			url:
+				'https://en.wikipedia.org/wiki/ECMAScript#8th_Edition_-_ECMAScript_2017',
+			title: 'ECMAScript ES2017'
+		},
+		{
+			text: 'ES2016',
+			url:
+				'https://en.wikipedia.org/wiki/ECMAScript#7th_Edition_-_ECMAScript_2016',
+			title: 'ECMAScript 2016'
+		},
+		{
 			text: 'ES2015',
-			url: 'http://babeljs.io/docs/plugins/preset-es2015/',
+			url: 'https://babeljs.io/docs/en/learn#ecmascript-2015-features',
 			title: 'ECMAScript 2015'
 		},
 		{
@@ -72,6 +102,12 @@ function hydrateTextWithLinks(text) {
 			text: 'JSX',
 			url: 'https://facebook.github.io/jsx/',
 			title: 'XML/HTML inside your JavaScript'
+		},
+		{
+			text: 'Node.js',
+			url: 'https://nodejs.org',
+			title:
+				"Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine"
 		},
 		{
 			text: 'TypeScript',
@@ -155,7 +191,7 @@ function getNpmInstructions(data) {
 }
 
 function getUnpkgInstructions(data) {
-	const url = `//unpkg.com/${data.name}@^${data.version}/${data.browser}`
+	const url = `//unpkg.com/${data.name}@^${data.version}`
 	const importer =
 		Array.isArray(data.keywords) && data.keywords.includes('export-default')
 			? `pkg`
@@ -289,7 +325,7 @@ function getEditionsInstructions(data) {
 	if (!hasDefaultEdition) {
 		if ('editions' in data.dependencies) {
 			editions.unshift(
-				`<code>${data.name}</code> aliases <code>${data.name}/${data.main}</code> which uses Editions to automatically select the correct edition for the consumers environment`
+				`<code>${data.name}</code> aliases <code>${data.name}/${data.main}</code> which uses the Editions Autoloader to automatically select the correct edition for the consumer's environment`
 			)
 		} else if ('esnextguardian' in data.dependencies) {
 			editions.unshift(
@@ -299,26 +335,9 @@ function getEditionsInstructions(data) {
 	}
 
 	// Compile result
-	let result = `<h3>Editions</h3>\n\n<p>This package is published with the following Editions:</p>\n\n<ul><li>${editions.join(
+	const result = `<h3>Editions</h3>\n\n<p>This package is published with the following editions:</p>\n\n<ul><li>${editions.join(
 		'</li>\n<li>'
 	)}</li></ul>`
-
-	// Is the last edition node 0.10 compatible?
-	const edition = data.editions[data.editions.length - 1]
-	const editionTags = edition.tags || edition.syntaxes || []
-	const editionPolyfill =
-		editionTags.includes('symbols') ||
-		editionTags.includes('esnext') ||
-		editionTags.includes('es2015')
-	const envs = data.engines.node
-		? `Environments older than Node.js v${data.engines.node.replace(
-				/[^.0-9]+/g,
-				''
-		  )}`
-		: 'Older environments'
-	if (editionPolyfill) {
-		result += `\n\n<p>${envs} may need Babel's Polyfill or something similar.</p>`
-	}
 
 	// Add links
 	return hydrateTextWithLinks(result)

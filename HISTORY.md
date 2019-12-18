@@ -1,5 +1,11 @@
 # History
 
+## v1.18.0 2019 December 18
+
+-   Removed browser edition entry from unkpkg URL as it is not necessary
+-   Added links for Node.js, the Editions Autoloader, and ECMAScript versions
+-   Babel Polyfill section is removed as modern ecosystem doesn't need it
+
 ## v1.17.1 2019 December 18
 
 -   Fixed v1.17.0 busting edition names
