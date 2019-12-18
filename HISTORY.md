@@ -1,5 +1,9 @@
 # History
 
+## v1.19.0 2019 December 18
+
+-   Ignore contributors that are bots (identified by `[bot]` in their name)
+
 ## v1.18.0 2019 December 18
 
 -   Removed browser edition entry from unkpkg URL as it is not necessary

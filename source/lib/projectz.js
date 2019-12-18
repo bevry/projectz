@@ -576,9 +576,9 @@ class Projectz {
 				maintainers: projectzUtil.getPeopleTextArray(
 					this.mergedPackageData.maintainers
 				),
-				contributors: projectzUtil.getPeopleTextArray(
-					this.mergedPackageData.contributors
-				),
+				contributors: projectzUtil
+					.getPeopleTextArray(this.mergedPackageData.contributors)
+					.filter(entry => entry.includes('[bot]') === false),
 				bugs: this.mergedPackageData.bugs,
 				engines: this.mergedPackageData.engines,
 				dependencies: this.mergedPackageData.dependencies,
