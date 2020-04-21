@@ -1,5 +1,10 @@
 # History
 
+## v1.19.1 2020 April 21
+
+-   Fix crash when trying to generate install instructions for an edition that lacks an entry
+    -   This can happen in the case of editioned websites, which only specify `directory: '.'`
+
 ## v1.19.0 2019 December 18
 
 -   Ignore contributors that are bots (identified by `[bot]` in their name)
