@@ -303,21 +303,30 @@ function getEditionsInstructions(data) {
 	let hasDefaultEdition = false
 	const editions = []
 	data.editions.forEach(function(edition) {
-		// handle the editions standard 1.3 and below
-		const entryTrimmed = edition.directory
-			? edition.entry.replace(`${edition.directory}/`, '')
-			: edition.entry
-		const entryFull = edition.directory
-			? `${edition.directory}/${entryTrimmed}`
-			: entryTrimmed
-		if (entryFull === data.main) {
+		const entryParts = []
+		if (edition.directory) {
+			entryParts.push(edition.directory)
+		}
+		if (edition.entry) {
+			// handle the editions standard 1.3 and below
+			// can't use substring, as we don't know if we have 1.3 and below or not
+			if (edition.directory) {
+				entryParts.push(
+					edition.entry.replace(edition.directory.length + '/', '')
+				)
+			} else {
+				entryParts.push(edition.entry)
+			}
+		}
+		const entry = entryParts.join('/')
+		if (entry === data.main) {
 			hasDefaultEdition = true
 			editions.push(
 				`<code>${data.name}</code> aliases <code>${data.name}/${data.main}</code>`
 			)
 		}
 		editions.push(
-			`<code>${data.name}/${entryFull}</code> is ${edition.description}`
+			`<code>${data.name}/${entry}</code> is ${edition.description}`
 		)
 	})
 
