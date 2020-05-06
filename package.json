@@ -15,6 +15,7 @@
     "component",
     "component.json",
     "documentation",
+    "es2019",
     "generator",
     "jquery.json",
     "jspm",
@@ -22,9 +23,13 @@
     "markdown",
     "meta",
     "metabuild",
+    "node",
     "package.json",
     "project",
-    "readme"
+    "readme",
+    "typed",
+    "types",
+    "typescript"
   ],
   "badges": {
     "list": [
@@ -53,8 +58,7 @@
       "opencollectiveUsername": "bevry",
       "patreonUsername": "bevry",
       "paypalURL": "https://bevry.me/paypal",
-      "wishlistURL": "https://bevry.me/wishlist",
-      "travisTLD": "com"
+      "wishlistURL": "https://bevry.me/wishlist"
     }
   },
   "funding": "https://bevry.me/fund",
@@ -83,27 +87,37 @@
     "url": "https://github.com/bevry/projectz.git"
   },
   "engines": {
-    "node": ">=8"
+    "node": ">=14"
   },
   "editions": [
     {
-      "description": "ESNext source code for Node.js with Require for modules",
+      "description": "TypeScript source code with Import for modules",
       "directory": "source",
+      "entry": "index.ts",
+      "tags": [
+        "typescript",
+        "import"
+      ],
+      "engines": false
+    },
+    {
+      "description": "TypeScript compiled against ES2019 for Node.js with Require for modules",
+      "directory": "edition-es2019",
       "entry": "index.js",
       "tags": [
         "javascript",
-        "esnext",
-        "require",
-        "flow type comments"
+        "es2019",
+        "require"
       ],
       "engines": {
-        "node": "8 || 10 || 12"
+        "node": true
       }
     }
   ],
-  "bin": "source/bin.js",
+  "bin": "bin.js",
+  "types": "source/index.ts",
   "type": "commonjs",
-  "main": "source/index.js",
+  "main": "edition-es2019/index.js",
   "dependencies": {
     "badges": "^4.1.0",
     "caterpillar": "^4.0.0",
@@ -118,42 +132,24 @@
     "spdx-expression-parse": "^3.0.0",
     "spdx-license-list": "^6.2.0",
     "taskgroup": "^6.5.0",
-    "typechecker": "^6.4.0",
-    "typescript": "^3.8.3"
+    "typechecker": "^6.4.0"
   },
   "devDependencies": {
+    "@bevry/update-contributors": "^1.0.1",
+    "@typescript-eslint/eslint-plugin": "^2.31.0",
+    "@typescript-eslint/parser": "^2.31.0",
     "assert-helpers": "^6.2.0",
     "eslint": "^6.8.0",
     "eslint-config-bevry": "^3.4.0",
     "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-flow-vars": "^0.5.0",
     "eslint-plugin-prettier": "^3.1.3",
     "kava": "^4.4.0",
     "prettier": "^2.0.5",
     "safeps": "^9.3.0",
+    "surge": "^0.21.3",
+    "typedoc": "^0.17.6",
+    "typescript": "^3.8.3",
     "valid-directory": "^1.6.0"
-  },
-  "scripts": {
-    "our:clean": "rm -Rf ./docs ./edition* ./es2015 ./es5 ./out ./.next",
-    "our:compile": "echo no need for this project",
-    "our:deploy": "echo no need for this project",
-    "our:meta": "npm run our:meta:projectz",
-    "our:meta:projectz": "npx . compile",
-    "our:release": "npm run our:release:prepare && npm run our:release:check-changelog && npm run our:release:check-dirty && npm run our:release:tag && npm run our:release:push",
-    "our:release:check-changelog": "cat ./HISTORY.md | grep v$npm_package_version || (echo add a changelog entry for v$npm_package_version && exit -1)",
-    "our:release:check-dirty": "git diff --exit-code",
-    "our:release:prepare": "npm run our:clean && npm run our:compile && npm run our:test && npm run our:meta",
-    "our:release:push": "git push origin master && git push origin --tags",
-    "our:release:tag": "export MESSAGE=$(cat ./HISTORY.md | sed -n \"/## v$npm_package_version/,/##/p\" | sed 's/## //' | awk 'NR>1{print buf}{buf = $0}') && test \"$MESSAGE\" || (echo 'proper changelog entry not found' && exit -1) && git tag v$npm_package_version -am \"$MESSAGE\"",
-    "our:setup": "npm run our:setup:install",
-    "our:setup:install": "npm install",
-    "our:test": "npm run our:verify && npm test",
-    "our:verify": "npm run our:verify:directory && npm run our:verify:eslint && npm run our:verify:flow && npm run our:verify:prettier",
-    "our:verify:directory": "valid-directory",
-    "our:verify:eslint": "eslint --fix --ignore-pattern '**/*.d.ts' --ignore-pattern '**/vendor/' --ignore-pattern '**/node_modules/' --ext .mjs,.js,.jsx,.ts,.tsx ./source",
-    "our:verify:flow": "flow check",
-    "our:verify:prettier": "prettier --write ./source/**",
-    "test": "node ./source/test.js"
   },
   "eslintConfig": {
     "extends": [
@@ -165,7 +161,36 @@
     "singleQuote": true
   },
   "boundation": {
-    "compileNode": false,
-    "ltsNodeOnly": true
+    "targets": [
+      "ES2019"
+    ],
+    "ltsNodeOnly": true,
+    "desiredNodeOnly": true
+  },
+  "scripts": {
+    "our:clean": "rm -Rf ./docs ./edition* ./es2015 ./es5 ./out ./.next",
+    "our:compile": "npm run our:compile:edition-es2019",
+    "our:compile:edition-es2019": "tsc --module commonjs --target ES2019 --outDir ./edition-es2019 --project tsconfig.json && test -d edition-es2019/source && ( mv edition-es2019/source edition-temp && rm -Rf edition-es2019 && mv edition-temp edition-es2019 ) || true",
+    "our:deploy": "echo no need for this project",
+    "our:meta": "npm run our:meta:contributors && npm run our:meta:docs && npm run our:meta:projectz",
+    "our:meta:contributors": "npx @bevry/update-contributors",
+    "our:meta:docs": "npm run our:meta:docs:typedoc",
+    "our:meta:docs:typedoc": "rm -Rf ./docs && npx typedoc --mode file --exclude '**/+(*test*|node_modules)' --excludeExternals --name \"$npm_package_name\" --readme ./README.md --out ./docs ./source",
+    "our:meta:projectz": "npx . compile",
+    "our:release": "npm run our:release:prepare && npm run our:release:check-changelog && npm run our:release:check-dirty && npm run our:release:tag && npm run our:release:push",
+    "our:release:check-changelog": "cat ./HISTORY.md | grep v$npm_package_version || (echo add a changelog entry for v$npm_package_version && exit -1)",
+    "our:release:check-dirty": "git diff --exit-code",
+    "our:release:prepare": "npm run our:clean && npm run our:compile && npm run our:test && npm run our:meta",
+    "our:release:push": "git push origin master && git push origin --tags",
+    "our:release:tag": "export MESSAGE=$(cat ./HISTORY.md | sed -n \"/## v$npm_package_version/,/##/p\" | sed 's/## //' | awk 'NR>1{print buf}{buf = $0}') && test \"$MESSAGE\" || (echo 'proper changelog entry not found' && exit -1) && git tag v$npm_package_version -am \"$MESSAGE\"",
+    "our:setup": "npm run our:setup:install",
+    "our:setup:install": "npm install",
+    "our:test": "npm run our:verify && npm test",
+    "our:verify": "npm run our:verify:directory && npm run our:verify:eslint && npm run our:verify:prettier && npm run our:verify:typescript",
+    "our:verify:directory": "npx valid-directory",
+    "our:verify:eslint": "npx eslint --fix --ignore-pattern '**/*.d.ts' --ignore-pattern '**/vendor/' --ignore-pattern '**/node_modules/' --ext .mjs,.js,.jsx,.ts,.tsx ./source",
+    "our:verify:prettier": "prettier --write .",
+    "our:verify:typescript": "tsc --noEmit --project tsconfig.json",
+    "test": "node ./edition-es2019/test.js"
   }
 }
