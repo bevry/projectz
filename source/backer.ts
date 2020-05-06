@@ -1,8 +1,5 @@
-/* @flow */
-'use strict'
-
-const { getPeopleHTML, getFileUrl, getLink } = require('./projectz-util.js')
-const { getBadgesInCategory } = require('./badge-util.js')
+import { getPeopleHTML, getFileUrl, getLink } from './util.js'
+import { getBadgesInCategory } from './badge.js'
 
 function getSponsorsText(data /* :Object */) /* :string */ {
 	let result = ''
@@ -77,7 +74,7 @@ function getContributorsText(data /* :Object */) /* :string */ {
 	return result
 }
 
-function getBackerSection(data /* :Object */) /* :string */ {
+export function getBackerSection(data /* :Object */) /* :string */ {
 	// Prepare
 	const result = [
 		'<h2>Backers</h2>',
@@ -92,14 +89,14 @@ function getBackerSection(data /* :Object */) /* :string */ {
 		'',
 		'<h3>Contributors</h3>',
 		'',
-		getContributorsText(data)
+		getContributorsText(data),
 	].join('\n')
 
 	// Return
 	return result
 }
 
-function getBackerFile(data /* :Object */) /* :string */ {
+export function getBackerFile(data /* :Object */) /* :string */ {
 	// Prepare
 	const result = [
 		'<h1>Backers</h1>',
@@ -114,14 +111,14 @@ function getBackerFile(data /* :Object */) /* :string */ {
 		'',
 		'<h2>Contributors</h2>',
 		'',
-		getContributorsText(data)
+		getContributorsText(data),
 	].join('\n')
 
 	// Return
 	return result
 }
 
-function getContributeSection(data /* :Object */) /* :string */ {
+export function getContributeSection(data /* :Object */) /* :string */ {
 	// Prepare
 	const result = ['<h2>Contribute</h2>', '', getContributeLink(data, {})].join(
 		'\n'
@@ -129,15 +126,4 @@ function getContributeSection(data /* :Object */) /* :string */ {
 
 	// Return
 	return result
-}
-
-// Exports
-module.exports = {
-	getSponsorsText,
-	getMaintainersText,
-	getContributeLink,
-	getContributorsText,
-	getBackerSection,
-	getBackerFile,
-	getContributeSection
 }

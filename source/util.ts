@@ -1,10 +1,7 @@
-/* @flow */
-'use strict'
-
 /* :: declare type Person = Object; */
 /* :: declare type PersonOptions = {displayCopyright?:boolean; displayYears?:boolean; githubSlug?:string}; */
 
-function getGithubSlug(
+export function getGithubSlug(
 	data /* :{homepage?:string, repository?:string|{url?:string}} */
 ) {
 	let match = null
@@ -48,7 +45,7 @@ function getPersonHTML(
 	}
 }
 
-function getPeopleHTML(
+export function getPeopleHTML(
 	people /* :Array<Person> */,
 	opts /* :PersonOptions */ = {}
 ) /* :string */ {
@@ -58,7 +55,7 @@ function getPeopleHTML(
 		return (
 			'<ul>' +
 			people
-				.map(function(person) {
+				.map(function (person) {
 					return '<li>' + getPersonHTML(person, opts) + '</li>'
 				})
 				.join('\n') +
@@ -83,7 +80,7 @@ function getPersonText(
 	}
 }
 
-function getPeopleTextArray(
+export function getPeopleTextArray(
 	people /* :Array<Person> */,
 	opts /* :PersonOptions */ = {}
 ) /* :Array<string> */ {
@@ -91,7 +88,7 @@ function getPeopleTextArray(
 		return []
 	} else {
 		const textArray = []
-		people.forEach(function(person) {
+		people.forEach(function (person) {
 			if (!person.name || person.name === 'null') {
 				throw new Error(
 					`For some reason the person doesn't have a name: ${JSON.stringify(
@@ -108,7 +105,10 @@ function getPeopleTextArray(
 	}
 }
 
-function getFileUrl(data /* :Object */, filename /* :string */) /* :string */ {
+export function getFileUrl(
+	data /* :Object */,
+	filename /* :string */
+) /* :string */ {
 	if (data.github.slug) {
 		return `https://github.com/${data.github.slug}/blob/master/${filename}#files`
 	} else {
@@ -118,7 +118,7 @@ function getFileUrl(data /* :Object */, filename /* :string */) /* :string */ {
 	}
 }
 
-function getLink({ url, text, title } /* :Object */) /* :string */ {
+export function getLink({ url, text, title } /* :Object */) /* :string */ {
 	if (!url || !text) {
 		throw new Error('Links must have both a url and text')
 	}
@@ -129,7 +129,7 @@ function getLink({ url, text, title } /* :Object */) /* :string */ {
 	}
 }
 
-function replaceSection(
+export function replaceSection(
 	names /* :string|Array<string> */,
 	source /* :string */,
 	inject /* :: :string|function */
@@ -152,7 +152,7 @@ function replaceSection(
 			`<!--\\s*${regexName}/\\s*-->`,
 			'[\\s\\S]*?',
 			`<!--\\s*/${regexName}\\s*-->`,
-			')\\s+'
+			')\\s+',
 		].join(''),
 		'gim'
 	)
@@ -166,19 +166,6 @@ function replaceSection(
 	return result
 }
 
-function trim(str /* :string */) /* :string */ {
+export function trim(str /* :string */) /* :string */ {
 	return str.replace(/^\s+|\s+$/g, '')
-}
-
-// Exports
-module.exports = {
-	getGithubSlug,
-	getPersonHTML,
-	getPeopleHTML,
-	getPersonText,
-	getPeopleTextArray,
-	getFileUrl,
-	getLink,
-	replaceSection,
-	trim
 }

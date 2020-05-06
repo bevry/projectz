@@ -1,14 +1,7 @@
-/* @flow */
-'use strict'
-
-// Use the same edition of fellow as we are using here
-// This is needed rather than jsut doing require('fellow') as if fellow loads ES6 Classes
-// But projects is using ES5 Classes, then we will not be able to extend the fellow class
-const { join, dirname } = require('path')
-const Fellow = require(join('fellow', dirname('..')))
+import Fellow from 'fellow'
 
 // Define
-class Person extends Fellow {
+export class Person extends Fellow {
 	/* :: _years:?string; */
 	/* :: _name:?string; */
 	/* :: githubUsername:string; */
@@ -52,6 +45,3 @@ class Person extends Fellow {
 		)
 	}
 }
-
-// Exports
-module.exports = Person

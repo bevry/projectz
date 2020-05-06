@@ -1,9 +1,6 @@
-/* @flow */
-'use strict'
-
-const { getPeopleHTML } = require('./projectz-util.js')
-const spdxParse = require('spdx-expression-parse')
-const spdxList = require('spdx-license-list/full')
+import { getPeopleHTML } from './util.js'
+import spdxParse from 'spdx-expression-parse'
+import spdxList from 'spdx-license-list/full'
 
 function renderSpdxObject(
 	spdxObject /* :Object */,
@@ -75,14 +72,14 @@ function getLicenseIntroduction(data /* :Object */) /* :string */ {
 		'',
 		'and licensed under:',
 		'',
-		getLicensesHTML(data.license, 'description')
+		getLicensesHTML(data.license, 'description'),
 	].join('\n')
 
 	// Return
 	return result
 }
 
-function getLicenseFile(data /* :Object */) /* :string */ {
+export function getLicenseFile(data /* :Object */) /* :string */ {
 	// Check
 	if (!data.license) {
 		throw new Error('License file was requested, but no license was specified')
@@ -94,14 +91,14 @@ function getLicenseFile(data /* :Object */) /* :string */ {
 		'',
 		getLicenseIntroduction(data),
 		'',
-		getLicensesHTML(data.license, 'body')
+		getLicensesHTML(data.license, 'body'),
 	].join('\n')
 
 	// Return
 	return result
 }
 
-function getLicenseSection(data /* :Object */) /* :string */ {
+export function getLicenseSection(data /* :Object */) /* :string */ {
 	// Prepare
 	const result = ['<h2>License</h2>', '', getLicenseIntroduction(data)].join(
 		'\n'
@@ -109,12 +106,4 @@ function getLicenseSection(data /* :Object */) /* :string */ {
 
 	// Return
 	return result
-}
-
-// Exports
-module.exports = {
-	getLicensesHTML,
-	getLicenseIntroduction,
-	getLicenseFile,
-	getLicenseSection
 }
