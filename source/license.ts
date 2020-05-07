@@ -1,12 +1,13 @@
 import { getPeopleHTML } from './util.js'
 import spdxParse from 'spdx-expression-parse'
 import spdxList from 'spdx-license-list/full'
+import type Fellow from 'fellow'
 
 function renderSpdxObject(
-	spdxObject /* :Object */,
-	output /* :"description"|"body" */,
-	depth = 0
-) /* :string */ {
+	spdxObject: any,
+	output: 'description' | 'body',
+	depth: number = 0
+): string {
 	if (spdxObject.license) {
 		const code = spdxObject.license
 		const details = spdxList[code]
@@ -51,14 +52,17 @@ function renderSpdxObject(
 }
 
 function getLicensesHTML(
-	spdxString /* :string */,
-	output /* :"description"|"body" */
-) /* :string */ {
+	spdxString: string,
+	output: 'description' | 'body'
+): string {
 	const sdpxObject = spdxParse(spdxString)
 	return renderSpdxObject(sdpxObject, output)
 }
 
-function getLicenseIntroduction(data /* :Object */) /* :string */ {
+function getLicenseIntroduction(data: {
+	license: string
+	authors: Fellow[]
+}): string {
 	// Check
 	if (!data.license) {
 		throw new Error('License file was requested, but no license was specified')
@@ -79,7 +83,16 @@ function getLicenseIntroduction(data /* :Object */) /* :string */ {
 	return result
 }
 
-export function getLicenseFile(data /* :Object */) /* :string */ {
+interface LicenseOptions {
+	license?: string
+	authors: Fellow[]
+}
+
+interface LicenseConfig extends LicenseOptions {
+	license: string
+}
+
+export function getLicenseFile(data: LicenseOptions): string {
 	// Check
 	if (!data.license) {
 		throw new Error('License file was requested, but no license was specified')
@@ -89,7 +102,7 @@ export function getLicenseFile(data /* :Object */) /* :string */ {
 	const result = [
 		'<h1>License</h1>',
 		'',
-		getLicenseIntroduction(data),
+		getLicenseIntroduction(data as LicenseConfig),
 		'',
 		getLicensesHTML(data.license, 'body'),
 	].join('\n')
@@ -98,11 +111,18 @@ export function getLicenseFile(data /* :Object */) /* :string */ {
 	return result
 }
 
-export function getLicenseSection(data /* :Object */) /* :string */ {
+export function getLicenseSection(data: LicenseOptions): string {
+	// Check
+	if (!data.license) {
+		throw new Error('License file was requested, but no license was specified')
+	}
+
 	// Prepare
-	const result = ['<h2>License</h2>', '', getLicenseIntroduction(data)].join(
-		'\n'
-	)
+	const result = [
+		'<h2>License</h2>',
+		'',
+		getLicenseIntroduction(data as LicenseConfig),
+	].join('\n')
 
 	// Return
 	return result

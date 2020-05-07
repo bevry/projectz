@@ -1,7 +1,11 @@
+import type { FilenamesForReadmeFiles, Github } from './types'
 import { getLink, getFileUrl } from './util.js'
 
 // Get History Section
-export function getHistorySection(data /* :Object */) /* :string */ {
+export function getHistorySection(data: {
+	filenamesForReadmeFiles: FilenamesForReadmeFiles
+	github: Github
+}): string {
 	// Prepare
 	let link = null
 	const file = data.filenamesForReadmeFiles.history

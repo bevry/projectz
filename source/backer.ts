@@ -1,7 +1,14 @@
 import { getPeopleHTML, getFileUrl, getLink } from './util.js'
 import { getBadgesInCategory } from './badge.js'
+import type { Github, FilenamesForReadmeFiles } from './types'
+import type Fellow from 'fellow'
+import type { BadgesField } from 'badges'
 
-function getSponsorsText(data /* :Object */) /* :string */ {
+function getSponsorsText(data: {
+	badges: BadgesField
+	sponsors: Fellow[]
+	github: Github
+}): string {
 	let result = ''
 
 	if (data.sponsors.length === 0) {
@@ -12,14 +19,17 @@ function getSponsorsText(data /* :Object */) /* :string */ {
 	} else {
 		result +=
 			'These amazing people have contributed finances to this project:\n\n' +
-			getPeopleHTML(data.sponsors, { githubSlug: data.github.slug }) +
+			getPeopleHTML(data.sponsors) +
 			`\n\nBecome a sponsor!\n\n${getBadgesInCategory('funding', data)}`
 	}
 
 	return result
 }
 
-function getMaintainersText(data /* :Object */) /* :string */ {
+function getMaintainersText(data: {
+	maintainers: Fellow[]
+	github: Github
+}): string {
 	let result = ''
 
 	if (data.maintainers.length === 0) {
@@ -28,16 +38,19 @@ function getMaintainersText(data /* :Object */) /* :string */ {
 	} else {
 		result +=
 			'These amazing people are maintaining this project:\n\n' +
-			getPeopleHTML(data.maintainers, { githubSlug: data.github.slug })
+			getPeopleHTML(data.maintainers, {
+				displayContributions: true,
+				githubRepoSlug: data.github.slug,
+			})
 	}
 
 	return result
 }
 
 function getContributeLink(
-	data /* :Object */,
-	{ optional = false } /* :Object */
-) /* :string */ {
+	data: { filenamesForReadmeFiles: FilenamesForReadmeFiles; github: Github },
+	optional = false
+): string {
 	// Prepare
 	const file = data.filenamesForReadmeFiles.contributing
 	if (!file) {
@@ -56,25 +69,40 @@ function getContributeLink(
 	return getLink({ url, text })
 }
 
-function getContributorsText(data /* :Object */) /* :string */ {
+function getContributorsText(data: {
+	filenamesForReadmeFiles: FilenamesForReadmeFiles
+	contributors: Fellow[]
+	github: Github
+}): string {
 	let result = ''
 
 	if (data.contributors.length === 0) {
 		// ignore
 		result +=
 			'No contributors yet! Will you be the first?' +
-			`\n\n${getContributeLink(data, { optional: true })}`
+			`\n\n${getContributeLink(data, true)}`
 	} else {
 		result +=
 			'These amazing people have contributed code to this project:\n\n' +
-			getPeopleHTML(data.contributors, { githubSlug: data.github.slug }) +
-			`\n\n${getContributeLink(data, { optional: true })}`
+			getPeopleHTML(data.contributors, {
+				displayContributions: true,
+				githubRepoSlug: data.github.slug,
+			}) +
+			`\n\n${getContributeLink(data, true)}`
 	}
 
 	return result
 }
 
-export function getBackerSection(data /* :Object */) /* :string */ {
+interface BackerOptions {
+	filenamesForReadmeFiles: FilenamesForReadmeFiles
+	badges: BadgesField
+	maintainers: Fellow[]
+	sponsors: Fellow[]
+	contributors: Fellow[]
+	github: Github
+}
+export function getBackerSection(data: BackerOptions): string {
 	// Prepare
 	const result = [
 		'<h2>Backers</h2>',
@@ -96,7 +124,7 @@ export function getBackerSection(data /* :Object */) /* :string */ {
 	return result
 }
 
-export function getBackerFile(data /* :Object */) /* :string */ {
+export function getBackerFile(data: BackerOptions): string {
 	// Prepare
 	const result = [
 		'<h1>Backers</h1>',
@@ -118,11 +146,12 @@ export function getBackerFile(data /* :Object */) /* :string */ {
 	return result
 }
 
-export function getContributeSection(data /* :Object */) /* :string */ {
+export function getContributeSection(data: {
+	filenamesForReadmeFiles: FilenamesForReadmeFiles
+	github: Github
+}): string {
 	// Prepare
-	const result = ['<h2>Contribute</h2>', '', getContributeLink(data, {})].join(
-		'\n'
-	)
+	const result = ['<h2>Contribute</h2>', '', getContributeLink(data)].join('\n')
 
 	// Return
 	return result

@@ -1,7 +1,8 @@
 import { getLink } from './util.js'
+import { Link, FilenamesForPackageFiles, Editions } from './types.js'
 
-function hydrateTextWithLinks(text) {
-	const linksArray = [
+function hydrateTextWithLinks(text: string) {
+	const linksArray: Link[] = [
 		{
 			text: 'Editions Autoloader',
 			url: 'https://github.com/bevry/editions',
@@ -115,10 +116,10 @@ function hydrateTextWithLinks(text) {
 	]
 
 	// build a map
-	const linksMap = {}
-	linksArray.forEach(function (link) {
+	const linksMap: Record<string, string> = {}
+	for (const link of linksArray) {
 		linksMap[link.text.toLowerCase()] = getLink(link)
-	})
+	}
 
 	// do the replacement
 	const linksMatch = new RegExp(
@@ -130,7 +131,11 @@ function hydrateTextWithLinks(text) {
 	})
 }
 
-function getNpmInstructionList(data, commands, local) {
+function getNpmInstructionList(
+	data: { name: string; main?: string; keywords?: string | string[] },
+	commands: string[],
+	local: boolean
+) {
 	const label = `Executable${commands.length === 1 ? '' : 's'}`
 
 	let importStatement = ''
@@ -168,7 +173,11 @@ function getNpmInstructionList(data, commands, local) {
 		.join('\n')
 }
 
-function getNpmInstructions(data) {
+function getNpmInstructions(data: {
+	name: string
+	main?: string
+	bin?: string | Record<string, string>
+}) {
 	const commands =
 		typeof data.bin === 'string' ? [data.name] : Object.keys(data.bin || {})
 
@@ -187,7 +196,11 @@ function getNpmInstructions(data) {
 		.join('\n')
 }
 
-function getUnpkgInstructions(data) {
+function getUnpkgInstructions(data: {
+	name: string
+	version: string
+	keywords?: string | string[]
+}) {
 	const url = `//unpkg.com/${data.name}@^${data.version}`
 	const importer =
 		Array.isArray(data.keywords) && data.keywords.includes('export-default')
@@ -209,7 +222,11 @@ function getUnpkgInstructions(data) {
 	].join('\n')
 }
 
-function getPikaInstructions(data) {
+function getPikaInstructions(data: {
+	name: string
+	version: string
+	keywords?: string | string[]
+}) {
 	const url = `//cdn.pika.dev/${data.name}/^${data.version}`
 	const importer =
 		Array.isArray(data.keywords) && data.keywords.includes('export-default')
@@ -230,7 +247,11 @@ function getPikaInstructions(data) {
 	].join('\n')
 }
 
-function getJspmInstructions(data) {
+function getJspmInstructions(data: {
+	name: string
+	version: string
+	keywords?: string | string[]
+}) {
 	const url = `//dev.jspm.io/${data.name}@${data.version}`
 	const importer =
 		Array.isArray(data.keywords) && data.keywords.includes('export-default')
@@ -251,7 +272,7 @@ function getJspmInstructions(data) {
 	].join('\n')
 }
 
-function getTypeScriptInstructions(data) {
+function getTypeScriptInstructions() {
 	return [
 		hydrateTextWithLinks('<h3>TypeScript</h3>'),
 		'',
@@ -273,7 +294,7 @@ function getTypeScriptInstructions(data) {
 	].join('\n')
 }
 
-function getComponentInstructions(data) {
+function getComponentInstructions(data: { name: string }) {
 	return [
 		getLink({
 			text: '<h3>Component</h3>',
@@ -285,7 +306,7 @@ function getComponentInstructions(data) {
 	].join('\n')
 }
 
-function getBowerInstructions(data) {
+function getBowerInstructions(data: { name: string }) {
 	return [
 		getLink({
 			text: '<h3>Bower</h3>',
@@ -296,10 +317,15 @@ function getBowerInstructions(data) {
 	].join('\n')
 }
 
-function getEditionsInstructions(data) {
+function getEditionsInstructions(data: {
+	name: string
+	main?: string
+	dependencies: Record<string, string>
+	editions: Editions
+}) {
 	let hasDefaultEdition = false
 	const editions = []
-	data.editions.forEach(function (edition) {
+	for (const edition of data.editions) {
 		const entryParts = []
 		if (edition.directory) {
 			entryParts.push(edition.directory)
@@ -325,7 +351,7 @@ function getEditionsInstructions(data) {
 		editions.push(
 			`<code>${data.name}/${entry}</code> is ${edition.description}`
 		)
-	})
+	}
 
 	// Autoloaders
 	if (!hasDefaultEdition) {
@@ -350,7 +376,18 @@ function getEditionsInstructions(data) {
 }
 
 // Define
-export function getInstallInstructions(data /* :Object */) /* :string */ {
+export function getInstallInstructions(data: {
+	filenamesForPackageFiles: FilenamesForPackageFiles
+	name: string
+	version: string
+	main?: string
+	browsers?: boolean
+	module?: any
+	dependencies: Record<string, string>
+	devDependencies: Record<string, string>
+	editions: Editions
+	keywords: string[]
+}): string {
 	const parts = ['<h2>Install</h2>']
 
 	// DocPad
@@ -392,7 +429,7 @@ export function getInstallInstructions(data /* :Object */) /* :string */ {
 	}
 
 	if (data.main && data.devDependencies && data.devDependencies.jsdoc) {
-		parts.push(getTypeScriptInstructions(data))
+		parts.push(getTypeScriptInstructions())
 	}
 
 	return parts.join('\n\n')

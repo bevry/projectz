@@ -9,7 +9,5 @@
     "target": "ESNext",
     "lib": []
   },
-  "include": [
-    "source"
-  ]
+  "include": ["source"]
 }

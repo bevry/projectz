@@ -1,9 +1,13 @@
 /* :: declare type Person = Object; */
 /* :: declare type PersonOptions = {displayCopyright?:boolean; displayYears?:boolean; githubSlug?:string}; */
 
-export function getGithubSlug(
-	data /* :{homepage?:string, repository?:string|{url?:string}} */
-) {
+import { Github, Link } from './types'
+import type { default as Fellow, FormatOptions } from 'fellow'
+
+export function getGithubSlug(data: {
+	homepage?: string
+	repository?: string | { url?: string }
+}) {
 	let match = null
 	if (typeof data.repository === 'string') {
 		match = data.repository.match(/^(?:github:)?([^/:]+\/[^/:]+)$/)
@@ -21,34 +25,7 @@ export function getGithubSlug(
 	return (match && match[1]) || null
 }
 
-function getPersonHTML(
-	person /* :Person */,
-	opts /* :PersonOptions */ = {}
-) /* :string */ {
-	if (person.name) {
-		let html = ''
-
-		if (opts.displayCopyright) html += 'Copyright &copy; '
-		if (opts.displayYears && person.years) html += person.years + ' '
-
-		html += person.url
-			? `<a href="${person.url}">${person.name}</a>`
-			: person.name
-
-		if (person.githubUsername && opts.githubSlug) {
-			const contributionsURL = `https://github.com/${opts.githubSlug}/commits?author=${person.githubUsername}`
-			html += ` — <a href="${contributionsURL}" title="View the GitHub contributions of ${person.name} on repository ${opts.githubSlug}">view contributions</a>`
-		}
-		return html
-	} else {
-		return ''
-	}
-}
-
-export function getPeopleHTML(
-	people /* :Array<Person> */,
-	opts /* :PersonOptions */ = {}
-) /* :string */ {
+export function getPeopleHTML(people: Fellow[], opts?: FormatOptions): string {
 	if (people.length === 0) {
 		return ''
 	} else {
@@ -56,7 +33,7 @@ export function getPeopleHTML(
 			'<ul>' +
 			people
 				.map(function (person) {
-					return '<li>' + getPersonHTML(person, opts) + '</li>'
+					return '<li>' + person.toHTML(opts) + '</li>'
 				})
 				.join('\n') +
 			'</ul>'
@@ -64,30 +41,14 @@ export function getPeopleHTML(
 	}
 }
 
-function getPersonText(
-	person /* :Person */,
-	opts /* :PersonOptions */ = {}
-) /* :string */ {
-	if (person.name) {
-		let text = ''
-		if (opts.displayYears && person.years) text += person.years + ' '
-		text += person.name
-		if (person.email) text += ' <' + person.email + '>'
-		if (person.url) text += ' (' + person.url + ')'
-		return text
-	} else {
-		return ''
-	}
-}
-
 export function getPeopleTextArray(
-	people /* :Array<Person> */,
-	opts /* :PersonOptions */ = {}
-) /* :Array<string> */ {
+	people: Fellow[],
+	opts?: FormatOptions
+): string[] {
 	if (people.length === 0) {
 		return []
 	} else {
-		const textArray = []
+		const textArray: string[] = []
 		people.forEach(function (person) {
 			if (!person.name || person.name === 'null') {
 				throw new Error(
@@ -98,17 +59,14 @@ export function getPeopleTextArray(
 					)}`
 				)
 			}
-			const text = getPersonText(person, opts)
+			const text = person.toString(opts)
 			if (text) textArray.push(text)
 		})
 		return textArray
 	}
 }
 
-export function getFileUrl(
-	data /* :Object */,
-	filename /* :string */
-) /* :string */ {
+export function getFileUrl(data: { github: Github }, filename: string): string {
 	if (data.github.slug) {
 		return `https://github.com/${data.github.slug}/blob/master/${filename}#files`
 	} else {
@@ -118,7 +76,7 @@ export function getFileUrl(
 	}
 }
 
-export function getLink({ url, text, title } /* :Object */) /* :string */ {
+export function getLink({ url, text, title }: Link): string {
 	if (!url || !text) {
 		throw new Error('Links must have both a url and text')
 	}
@@ -130,11 +88,11 @@ export function getLink({ url, text, title } /* :Object */) /* :string */ {
 }
 
 export function replaceSection(
-	names /* :string|Array<string> */,
-	source /* :string */,
-	inject /* :: :string|function */
-) /* :string */ {
-	let regexName, sectionName
+	names: string | string[],
+	source: string,
+	inject: string | Function
+): string {
+	let regexName: string, sectionName: string
 	if (Array.isArray(names)) {
 		regexName = '(' + names.join('|') + ')'
 		sectionName = names[0]
@@ -166,6 +124,6 @@ export function replaceSection(
 	return result
 }
 
-export function trim(str /* :string */) /* :string */ {
+export function trim(str: string): string {
 	return str.replace(/^\s+|\s+$/g, '')
 }

@@ -3,7 +3,7 @@ import { getGithubSlug } from './util.js'
 import { spawn } from 'safeps'
 import { suite } from 'kava'
 import { join } from 'path'
-import { readdir, readFile } from 'safefs'
+import { readdir, readFile } from 'fs'
 import { equal } from 'assert-helpers'
 
 // -------------------------------------
@@ -17,7 +17,7 @@ const cliPath = join(__dirname, 'bin.js')
 // -------------------------------------
 // Tests
 
-function clean(src) {
+function clean(src: string) {
 	return src.replace(/@[0-9^~.]/, '[cleaned]')
 }
 

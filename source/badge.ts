@@ -1,9 +1,9 @@
-import { renderBadges } from 'badges'
+import { renderBadges, BadgesField } from 'badges'
 
 export function getBadgesInCategory(
-	category /* :string */,
-	data /* :Object */
-) /* :string */ {
+	category: string,
+	data: { badges?: BadgesField }
+): string {
 	if (data.badges && data.badges.list) {
 		return renderBadges(data.badges.list, data.badges.config, {
 			filterCategory: category,
@@ -14,7 +14,7 @@ export function getBadgesInCategory(
 	}
 }
 
-export function getBadgesSection(data /* :Object */) /* :string */ {
+export function getBadgesSection(data: { badges?: BadgesField }): string {
 	if (data.badges && data.badges.list) {
 		return renderBadges(data.badges.list, data.badges.config, {
 			filterScripts: true,
