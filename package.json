@@ -124,10 +124,8 @@
     "caterpillar-filter": "^5.1.0",
     "caterpillar-human": "^5.1.0",
     "cson-safe": "^1.0.5",
-    "extendr": "^5.1.0",
     "fellow": "^6.5.0",
     "get-cli-arg": "^5.0.0",
-    "safefs": "^5.5.0",
     "spdx-expression-parse": "^3.0.0",
     "spdx-license-list": "^6.2.0",
     "typechecker": "^6.4.0"
