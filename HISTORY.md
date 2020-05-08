@@ -5,7 +5,7 @@
 -   Converted from JavaScript to TypeScript
 -   `-p <value>` cli arg is now `--path=<value>`
 -   `-d` cli arg is now `--verbose`
--   Contributors are no longer fetched from github, if you want that functionality, use [@bevry/get-contributors](https://github.com/bevry/get-contributors)
+-   Contributors are no longer fetched from github, if you want that functionality, use [@bevry/update-contributors](https://github.com/bevry/update-contributors)
     -   If this is an issue, file an issue with a small bounty and it can be re-added
     -   This was done, as
         -   now projectz is purely reading, merging, and rendering of local files
