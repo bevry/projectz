@@ -20,7 +20,7 @@ export function getGithubSlug(data: {
 		} else {
 			return null
 		}
-		match = url.match(/github\.com\/([^/:]+\/[^/:]+?)(?:\.git|\/)?$/)
+		match = url.match(/github\.com[/:]([^/:]+\/[^/:]+?)(?:\.git|\/)?$/)
 	}
 	return (match && match[1]) || null
 }
@@ -87,6 +87,7 @@ export function getLink({ url, text, title }: Link): string {
 	}
 }
 
+// @todo replace this with bevry/ropo
 export function replaceSection(
 	names: string | string[],
 	source: string,

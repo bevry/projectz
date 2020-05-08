@@ -16,6 +16,20 @@ async function main(): Promise<void> {
 		const p = getarg('path')
 		const d = getarg('verbose')
 
+		// bc upgrade
+		if (process.argv.includes('-p')) {
+			console.log(
+				'projecz now requires -p argument to be specifie via --path=value'
+			)
+			return process.exit(1)
+		}
+		if (process.argv.includes('-d')) {
+			console.log(
+				'projecz now requires -d argument to be specifie via --verbose'
+			)
+			return process.exit(1)
+		}
+
 		// Prepare our logging configuration
 		const level = d ? 7 : 6
 
@@ -47,9 +61,9 @@ async function main(): Promise<void> {
 		console.log(
 			'projectz compile: merge our data files and compile our meta files'
 		)
-		console.log('--verbose: Outputs verbose logging')
+		console.log('\t--verbose\tOutputs verbose logging')
 		console.log(
-			'--path: Path to the project that you wish to work with, defaults to the current working directory'
+			'\t--path=value\tPath to the project that you wish to work with, defaults to the current working directory'
 		)
 		return process.exit(1)
 	}

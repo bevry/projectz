@@ -14,18 +14,20 @@
   ],
   "author": "2015+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me), 2011-2014 Benjamin Lupton <b@lupton.cc> (http://balupton.com)",
   "maintainers": [
-    "Benjamin Lupton <b@lupton.cc> (http://balupton.com)"
+    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
   ],
   "contributors": [
-    "Benjamin Lupton <b@lupton.cc> (http://balupton.com)",
-    "Sean Fridman <mail@seanfridman.com> (http://seanfridman.com)",
+    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)",
+    "Sean Fridman <mail@seanfridman.com> (https://github.com/sfrdmn)",
     "Francisco Lourenço (http://aristidesfl.github.io/)",
     "Chris Tavares (https://github.com/christav)"
   ],
   "bugs": {
     "url": "https://github.com/bevry/ambi/issues"
   },
-  "repository": "bevry/ambi",
+  "repository": {
+    "url": "https://github.com/bevry/ambi.git"
+  },
   "engines": {
     "node": ">=0.8"
   },

@@ -8,14 +8,22 @@ import { promises as fsPromises } from 'fs'
 const { readdir, readFile, writeFile } = fsPromises
 import { resolve, join, dirname } from 'path'
 
+// Errlop used for wrapping errors
+import Errlop from 'errlop'
+
 // CSON is used for loading in our configuration files
-import { parse as parseCSON } from 'cson-safe'
+import { parse as parseCSON } from 'cson-parser'
 
 // [TypeChecker](https://github.com/bevry/typechecker) is used for checking data types
-import { isString, isPlainObject } from 'typechecker'
+import { isString, isPlainObject, isEmptyPlainObject } from 'typechecker'
+
+// Fellow handling, and contributor fetching
+import Fellow from 'fellow'
+
+// Badges
+import type { BadgesField } from 'badges'
 
 // Load in our other project files
-import Person from 'fellow'
 import {
 	getContributeSection,
 	getBackerFile,
@@ -45,12 +53,15 @@ import type {
 	EnhancedPackagesDataWithGitHub,
 	EnhancedReadmesData,
 } from './types.js'
-import type { BadgesField, BadgesConfig } from 'badges'
 
 async function parseFile<T extends any>(path: string): Promise<T> {
-	const str = await readFile(path, 'utf-8')
-	const data = parseCSON(str)
-	return data
+	try {
+		const str = await readFile(path, 'utf-8')
+		const data = parseCSON(str)
+		return data
+	} catch (err) {
+		return Promise.reject(new Errlop(`failed parsing the file: ${path}`, err))
+	}
 }
 
 interface Options {
@@ -165,6 +176,7 @@ export class Projectz {
 				list: [],
 				config: {},
 			},
+			bugs: {},
 			readmes: {},
 			packages: {},
 			repository: {},
@@ -229,7 +241,7 @@ export class Projectz {
 		}
 
 		// Validate enhanced fields
-		const objs = ['badges', 'readmes', 'packages', 'repository', 'github']
+		const objs = ['badges', 'readmes', 'packages', 'github', 'bugs']
 		for (const key of objs) {
 			if (!isPlainObject(mergedPackagesData[key])) {
 				return Promise.reject(
@@ -264,6 +276,17 @@ export class Projectz {
 
 		// ----------------------------------
 		// Ensure
+
+		// Ensure repository is an object
+		if (typeof mergedPackagesData.repository === 'string') {
+			const githubSlug = getGithubSlug(mergedPackagesData)
+			if (githubSlug) {
+				mergedPackagesData.repository = {
+					type: 'git',
+					url: `https://github.com/${githubSlug}.git`,
+				}
+			}
+		}
 
 		// Fallback name
 		if (!mergedPackagesData.name) {
@@ -301,15 +324,9 @@ export class Projectz {
 		}
 
 		// ----------------------------------
-		// Enhance
+		// Enhance Respository
 
-		// Prepare badges
-		const badgesConfig: BadgesConfig = {
-			npmPackageName:
-				this.filenamesForPackageFiles.package && mergedPackagesData.name,
-		}
-
-		// Extract repository information
+		// Converge and extract repository information
 		let github: Github | undefined
 		if (mergedPackagesData.repository) {
 			const githubSlug = getGithubSlug(mergedPackagesData)
@@ -329,25 +346,41 @@ export class Projectz {
 				}
 
 				// Badges
-				Object.assign(badgesConfig, {
+				Object.assign(mergedPackagesData.badges.config, {
 					githubUsername,
 					githubRepository,
 					githubSlug,
 				})
+
+				// Fallback bugs field by use of repo
+				if (!mergedPackagesData.bugs) {
+					mergedPackagesData.bugs = github && {
+						url: `https://github.com/${github.slug}/issues`,
+					}
+				}
+
+				// Fetch contributors
+				// await getContributorsFromRepo(githubSlug)
 			}
 		}
 
+		// ----------------------------------
+		// Enhance People
+
 		// Fellows
-		const authors = Person.add(
+		const authors = Fellow.add(
 			mergedPackagesData.authors || mergedPackagesData.author
 		)
-		const contributors = Person.add(mergedPackagesData.contributors).filter(
+		const contributors = Fellow.add(mergedPackagesData.contributors).filter(
 			(fellow) => fellow.name.includes('[bot]') === false
 		)
-		const maintainers = Person.add(mergedPackagesData.maintainers).filter(
+		const maintainers = Fellow.add(mergedPackagesData.maintainers).filter(
 			(fellow) => fellow.name.includes('[bot]') === false
 		)
-		const sponsors = Person.add(mergedPackagesData.sponsors)
+		const sponsors = Fellow.add(mergedPackagesData.sponsors)
+
+		// ----------------------------------
+		// Enhance Packages
 
 		// Create the data for the `package.json` format
 		const pkg: PackageEnhanced = Object.assign(
@@ -370,10 +403,13 @@ export class Projectz {
 				}).join(', '),
 				maintainers: getPeopleTextArray(maintainers, {
 					displayEmail: true,
+					urlFields: ['githubUrl', 'url'],
 				}),
 				contributors: getPeopleTextArray(contributors, {
 					displayEmail: true,
+					urlFields: ['githubUrl', 'url'],
 				}),
+				repository: mergedPackagesData.repository,
 				bugs: mergedPackagesData.bugs,
 				engines: mergedPackagesData.engines,
 				dependencies: mergedPackagesData.dependencies,
@@ -384,6 +420,17 @@ export class Projectz {
 			// Explicit data
 			mergedPackagesData.packages.package || {}
 		)
+
+		// Trim
+		// @ts-ignore
+		if (isEmptyPlainObject(pkg.dependencies)) delete pkg.dependencies
+		// @ts-ignore
+		if (isEmptyPlainObject(pkg.devDependencies)) delete pkg.devDependencies
+
+		// Badges
+		if (!mergedPackagesData.badges.config.npmPackageName && pkg.name) {
+			mergedPackagesData.badges.config.npmPackageName = pkg.name
+		}
 
 		// Create the data for the `jquery.json` format, which is essentially the same as the `package.json` format so just extend that
 		const jquery = Object.assign(
@@ -439,8 +486,9 @@ export class Projectz {
 				license: mergedPackagesData.license,
 				description: mergedPackagesData.description,
 				keywords: mergedPackagesData.keywords,
-				authors: getPeopleTextArray(mergedPackagesData.authors, {
+				authors: getPeopleTextArray(authors, {
 					displayYears: true,
+					displayEmail: true,
 				}),
 				main: mergedPackagesData.main,
 			},
@@ -449,19 +497,12 @@ export class Projectz {
 			mergedPackagesData.packages.bower || {}
 		)
 
+		// ----------------------------------
+		// Enhance Combination
+
 		// Merge together
 		const enhancedPackagesData: EnhancedPackagesData = Object.assign(
-			{
-				// Fallback repository field by use of repo
-				repository: github && {
-					url: github.slug,
-				},
-
-				// Fallback bugs field by use of repo
-				bugs: github && {
-					url: `https://github.com/${github.slug}/issues`,
-				},
-			},
+			{},
 			mergedPackagesData as {
 				name: string
 				title: string
@@ -470,12 +511,12 @@ export class Projectz {
 				browsers: boolean
 				keywords: string[]
 				editions: Editions
+				badges: BadgesField
 				readmes: Record<string, any>
 				projectz: Record<string, any>
 				packages: Record<string, any>
 				dependencies: Record<string, string>
 				devDependencies: Record<string, string>
-				badges: BadgesField
 			},
 			{
 				// Add paths so that our helpers have access to them
@@ -595,12 +636,12 @@ export class Projectz {
 				}
 			),
 			// save readme files
-			...Object.entries(this.filenamesForPackageFiles).map(
-				async ([name, filename]) => {
+			...Object.entries(this.filenamesForReadmeFiles).map(
+				async ([key, filename]) => {
 					if (!filename) return
 					const filepath = join(this.cwd, filename)
 					this.log('info', `Saving readme file: ${filepath}`)
-					const data = enhancedReadmesData[name]
+					const data = enhancedReadmesData[key]
 					return writeFile(filepath, data)
 				}
 			),

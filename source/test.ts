@@ -12,7 +12,6 @@ import { equal } from 'assert-helpers'
 const projectzPath = join(__dirname, '..')
 const srcPath = join(projectzPath, 'test-fixtures', 'src')
 const expectPath = join(projectzPath, 'test-fixtures', 'out-expected')
-const cliPath = join(__dirname, 'bin.js')
 
 // -------------------------------------
 // Tests
@@ -25,6 +24,12 @@ suite('projectz unit tests', function (suite, test) {
 	suite('getGithubSlug', function (suite, test) {
 		test('short repo', function () {
 			equal(getGithubSlug({ repository: 'bevry/projectz' }), 'bevry/projectz')
+		})
+		test('short explicit', function () {
+			equal(
+				getGithubSlug({ repository: 'github:bevry/projectz' }),
+				'bevry/projectz'
+			)
 		})
 		test('gist failure', function () {
 			equal(getGithubSlug({ repository: 'gist:11081aaa281' }), null)
@@ -51,13 +56,21 @@ suite('projectz unit tests', function (suite, test) {
 				'bevry/projectz'
 			)
 		})
+		test('full repo with ssh', function () {
+			equal(
+				getGithubSlug({
+					repository: { url: 'git@github.com:bevry/projectz.git' },
+				}),
+				'bevry/projectz'
+			)
+		})
 	})
 })
 
 suite('projectz integration tests', function (suite, test) {
 	// Compile with Projectz using -p to switch to the source path.
 	test('compile project with projectz', function (done) {
-		const command = ['node', cliPath, 'compile', '-p', srcPath]
+		const command = ['npx', projectzPath, 'compile', `--path=${srcPath}`]
 		spawn(command, { stdio: 'inherit' }, done)
 	})
 

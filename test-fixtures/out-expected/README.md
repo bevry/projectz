@@ -141,10 +141,9 @@ No sponsors yet! Will you be the first?
 These amazing people have contributed code to this project:
 
 <ul><li><a href="http://balupton.com">Benjamin Lupton</a> — <a href="https://github.com/bevry/ambi/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/ambi">view contributions</a></li>
-<li><a href="http://seanfridman.com">Sean Fridman</a> — <a href="https://github.com/bevry/ambi/commits?author=sfrdmn" title="View the GitHub contributions of Sean Fridman on repository bevry/ambi">view contributions</a></li>
+<li><a href="https://github.com/sfrdmn">Sean Fridman</a> — <a href="https://github.com/bevry/ambi/commits?author=sfrdmn" title="View the GitHub contributions of Sean Fridman on repository bevry/ambi">view contributions</a></li>
 <li><a href="http://aristidesfl.github.io/">Francisco Lourenço</a></li>
-<li><a href="https://github.com/christav">Chris Tavares</a> — <a href="https://github.com/bevry/ambi/commits?author=christav" title="View the GitHub contributions of Chris Tavares on repository bevry/ambi">view contributions</a></li>
-<li><a href="http://github.com/apps/dependabot-preview">dependabot-preview[bot]</a> — <a href="https://github.com/bevry/ambi/commits?author=dependabot-preview[bot]" title="View the GitHub contributions of dependabot-preview[bot] on repository bevry/ambi">view contributions</a></li></ul>
+<li><a href="https://github.com/christav">Chris Tavares</a> — <a href="https://github.com/bevry/ambi/commits?author=christav" title="View the GitHub contributions of Chris Tavares on repository bevry/ambi">view contributions</a></li></ul>
 
 
 

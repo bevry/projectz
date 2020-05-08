@@ -63,34 +63,6 @@ Here's some of the things it can do:
     -   Pulling in your latest contributors from GitHub
     -   Pulling in your latest sponsors from remote APIs ([coming soon](https://github.com/bevry/projectz/issues/80))
 
-<!-- INSTALL/ -->
-
-<h2>Install</h2>
-
-<a href="https://npmjs.com" title="npm is a package manager for javascript"><h3>npm</h3></a>
-<h4>Install Globally</h4>
-<ul>
-<li>Install: <code>npm install --global projectz</code></li>
-<li>Executable: <code>projectz</code></li>
-</ul>
-<h4>Install Locally</h4>
-<ul>
-<li>Install: <code>npm install --save projectz</code></li>
-<li>Executable: <code>npx projectz</code></li>
-<li>Import: <code>import * as pkg from ('projectz')</code></li>
-<li>Require: <code>const pkg = require('projectz')</code></li>
-</ul>
-
-<h3><a href="https://editions.bevry.me" title="Editions are the best way to produce and consume packages you care about.">Editions</a></h3>
-
-<p>This package is published with the following editions:</p>
-
-<ul><li><code>projectz</code> aliases <code>projectz/source/index.js</code></li>
-<li><code>projectz/source/index.js</code> is <a href="https://en.wikipedia.org/wiki/ECMAScript#ES.Next" title="ECMAScript Next">ESNext</a> source code for <a href="https://nodejs.org" title="Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine">Node.js</a> with <a href="https://nodejs.org/dist/latest-v5.x/docs/api/modules.html" title="Node/CJS Modules">Require</a> for modules</li></ul>
-
-<!-- /INSTALL -->
-
-
 ## Running Projectz
 
 ### Directly
@@ -286,6 +258,9 @@ As an example, here is a a basic `README.md` file:
     <!-- INSTALL -->
 
     ## Usage
+
+[Complete API Documentation.](http://master.projectz.bevry.surge.sh/docs/globals.html)
+
     Usage instructions go here
 
     <!-- HISTORY -->
@@ -294,6 +269,35 @@ As an example, here is a a basic `README.md` file:
     <!-- LICENSE -->
 
 This README is also, expectedly, built with projectz. [View its source.](https://raw.githubusercontent.com/bevry/projectz/master/README.md)
+
+<!-- INSTALL/ -->
+
+<h2>Install</h2>
+
+<a href="https://npmjs.com" title="npm is a package manager for javascript"><h3>npm</h3></a>
+<h4>Install Globally</h4>
+<ul>
+<li>Install: <code>npm install --global projectz</code></li>
+<li>Executable: <code>projectz</code></li>
+</ul>
+<h4>Install Locally</h4>
+<ul>
+<li>Install: <code>npm install --save projectz</code></li>
+<li>Executable: <code>npx projectz</code></li>
+<li>Import: <code>import * as pkg from ('projectz')</code></li>
+<li>Require: <code>const pkg = require('projectz')</code></li>
+</ul>
+
+<h3><a href="https://editions.bevry.me" title="Editions are the best way to produce and consume packages you care about.">Editions</a></h3>
+
+<p>This package is published with the following editions:</p>
+
+<ul><li><code>projectz/source/index.ts</code> is <a href="https://www.typescriptlang.org/" title="TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. ">TypeScript</a> source code with <a href="https://babeljs.io/docs/learn-es2015/#modules" title="ECMAScript Modules">Import</a> for modules</li>
+<li><code>projectz</code> aliases <code>projectz/edition-es2019/index.js</code></li>
+<li><code>projectz/edition-es2019/index.js</code> is <a href="https://www.typescriptlang.org/" title="TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. ">TypeScript</a> compiled against <a href="https://en.wikipedia.org/wiki/ECMAScript#10th_Edition_-_ECMAScript_2019" title="ECMAScript ES2019">ES2019</a> for <a href="https://nodejs.org" title="Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine">Node.js</a> with <a href="https://nodejs.org/dist/latest-v5.x/docs/api/modules.html" title="Node/CJS Modules">Require</a> for modules</li></ul>
+
+<!-- /INSTALL -->
+
 
 <!-- HISTORY/ -->
 
@@ -321,9 +325,9 @@ This README is also, expectedly, built with projectz. [View its source.](https:/
 
 These amazing people are maintaining this project:
 
-<ul><li><a href="http://balupton.com">Benjamin Lupton</a> — <a href="https://github.com/bevry/projectz/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/projectz">view contributions</a></li>
-<li><a href="http://robloach.net">Rob Loach</a> — <a href="https://github.com/bevry/projectz/commits?author=RobLoach" title="View the GitHub contributions of Rob Loach on repository bevry/projectz">view contributions</a></li>
-<li><a href="http://ghuser.io/jamesgeorge007">James George</a> — <a href="https://github.com/bevry/projectz/commits?author=jamesgeorge007" title="View the GitHub contributions of James George on repository bevry/projectz">view contributions</a></li></ul>
+<ul><li><a href="https://github.com/balupton">Benjamin Lupton</a> — <a href="https://github.com/bevry/projectz/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/projectz">view contributions</a></li>
+<li><a href="https://github.com/RobLoach">Rob Loach</a> — <a href="https://github.com/bevry/projectz/commits?author=RobLoach" title="View the GitHub contributions of Rob Loach on repository bevry/projectz">view contributions</a></li>
+<li><a href="https://github.com/jamesgeorge007">James George</a> — <a href="https://github.com/bevry/projectz/commits?author=jamesgeorge007" title="View the GitHub contributions of James George on repository bevry/projectz">view contributions</a></li></ul>
 
 <h3>Sponsors</h3>
 
@@ -343,16 +347,15 @@ No sponsors yet! Will you be the first?
 
 These amazing people have contributed code to this project:
 
-<ul><li><a href="http://balupton.com">Benjamin Lupton</a> — <a href="https://github.com/bevry/projectz/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/projectz">view contributions</a></li>
+<ul><li><a href="https://github.com/balupton">Benjamin Lupton</a> — <a href="https://github.com/bevry/projectz/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/projectz">view contributions</a></li>
 <li><a href="https://github.com/pflannery">Peter Flannery</a> — <a href="https://github.com/bevry/projectz/commits?author=pflannery" title="View the GitHub contributions of Peter Flannery on repository bevry/projectz">view contributions</a></li>
-<li><a href="http://robloach.net">Rob Loach</a> — <a href="https://github.com/bevry/projectz/commits?author=RobLoach" title="View the GitHub contributions of Rob Loach on repository bevry/projectz">view contributions</a></li>
-<li><a href="http://ghuser.io/jamesgeorge007">James George</a> — <a href="https://github.com/bevry/projectz/commits?author=jamesgeorge007" title="View the GitHub contributions of James George on repository bevry/projectz">view contributions</a></li>
+<li><a href="https://github.com/RobLoach">Rob Loach</a> — <a href="https://github.com/bevry/projectz/commits?author=RobLoach" title="View the GitHub contributions of Rob Loach on repository bevry/projectz">view contributions</a></li>
+<li><a href="https://github.com/jamesgeorge007">James George</a> — <a href="https://github.com/bevry/projectz/commits?author=jamesgeorge007" title="View the GitHub contributions of James George on repository bevry/projectz">view contributions</a></li>
 <li><a href="https://github.com/Zearin">Zearin</a> — <a href="https://github.com/bevry/projectz/commits?author=Zearin" title="View the GitHub contributions of Zearin on repository bevry/projectz">view contributions</a></li>
 <li><a href="https://github.com/vsopvsop">vsopvsop</a> — <a href="https://github.com/bevry/projectz/commits?author=vsopvsop" title="View the GitHub contributions of vsopvsop on repository bevry/projectz">view contributions</a></li>
-<li><a href="http://zdroid.github.io">Zlatan Vasović</a> — <a href="https://github.com/bevry/projectz/commits?author=zdroid" title="View the GitHub contributions of Zlatan Vasović on repository bevry/projectz">view contributions</a></li>
-<li><a href="http://www.blizzard.com">Peter Chanthamynavong</a> — <a href="https://github.com/bevry/projectz/commits?author=peterkc" title="View the GitHub contributions of Peter Chanthamynavong on repository bevry/projectz">view contributions</a></li>
-<li><a href="http://mightyi.am">Shahar Dawn Or</a> — <a href="https://github.com/bevry/projectz/commits?author=mightyiam" title="View the GitHub contributions of Shahar Dawn Or on repository bevry/projectz">view contributions</a></li>
-<li><a href="http://github.com/apps/dependabot-preview">dependabot-preview[bot]</a> — <a href="https://github.com/bevry/projectz/commits?author=dependabot-preview[bot]" title="View the GitHub contributions of dependabot-preview[bot] on repository bevry/projectz">view contributions</a></li></ul>
+<li><a href="https://github.com/zdroid">Zlatan Vasović</a> — <a href="https://github.com/bevry/projectz/commits?author=zdroid" title="View the GitHub contributions of Zlatan Vasović on repository bevry/projectz">view contributions</a></li>
+<li><a href="https://github.com/peterkc">Peter Chanthamynavong</a> — <a href="https://github.com/bevry/projectz/commits?author=peterkc" title="View the GitHub contributions of Peter Chanthamynavong on repository bevry/projectz">view contributions</a></li>
+<li><a href="https://github.com/mightyiam">Shahar Dawn Or</a> — <a href="https://github.com/bevry/projectz/commits?author=mightyiam" title="View the GitHub contributions of Shahar Dawn Or on repository bevry/projectz">view contributions</a></li></ul>
 
 <a href="https://github.com/bevry/projectz/blob/master/CONTRIBUTING.md#files">Discover how you can contribute by heading on over to the <code>CONTRIBUTING.md</code> file.</a>
 

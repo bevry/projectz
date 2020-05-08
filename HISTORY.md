@@ -1,5 +1,21 @@
 # History
 
+## v2.0.0 2020 May 8
+
+-   Converted from JavaScript to TypeScript
+-   `-p <value>` cli arg is now `--path=<value>`
+-   `-d` cli arg is now `--verbose`
+-   Contributors are no longer fetched from github, if you want that functionality, use [@bevry/get-contributors](https://github.com/bevry/get-contributors)
+    -   If this is an issue, file an issue with a small bounty and it can be re-added
+    -   This was done, as
+        -   now projectz is purely reading, merging, and rendering of local files
+        -   fetching contributors requires [github authorisation env variables](https://github.com/bevry/githubauthreq) to be provided
+-   Contributors and Maintainers will now have their github URL used instead of their homepage in the json listings
+-   No more duplicate contributors and maintainers
+-   No more bots listed as contributors and maintainers
+-   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+-   Minimum required node version changed from `node: >=8` to `node: >=14` as projectz's tests have issues with supporting all but the latest LTS
+
 ## v1.19.1 2020 April 21
 
 -   Fix crash when trying to generate install instructions for an edition that lacks an entry

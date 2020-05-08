@@ -1,5 +1,6 @@
 import { getLink } from './util.js'
 import { Link, FilenamesForPackageFiles, Editions } from './types.js'
+import { isEmptyPlainObject } from 'typechecker'
 
 function hydrateTextWithLinks(text: string) {
 	const linksArray: Link[] = [
@@ -322,7 +323,8 @@ function getEditionsInstructions(data: {
 	main?: string
 	dependencies: Record<string, string>
 	editions: Editions
-}) {
+}): string {
+	if (!data.editions.length) return ''
 	let hasDefaultEdition = false
 	const editions = []
 	for (const edition of data.editions) {
@@ -432,5 +434,5 @@ export function getInstallInstructions(data: {
 		parts.push(getTypeScriptInstructions())
 	}
 
-	return parts.join('\n\n')
+	return parts.filter((i) => i).join('\n\n')
 }
