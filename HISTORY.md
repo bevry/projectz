@@ -1,5 +1,9 @@
 # History
 
+## v2.1.0 2020 May 11
+
+-   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+
 ## v2.0.0 2020 May 8
 
 -   Converted from JavaScript to TypeScript

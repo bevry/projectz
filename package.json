@@ -1,7 +1,7 @@
 {
   "title": "Projectz",
   "name": "projectz",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Stop wasting time syncing and updating your project's README and Package Files!",
   "homepage": "https://github.com/bevry/projectz",
   "license": "MIT",
@@ -70,19 +70,19 @@
   "author": "2013+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
   "maintainers": [
     "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)",
-    "Rob Loach <robloach@gmail.com> (https://github.com/RobLoach)",
-    "James George <jamesgeorge998001@gmail.com> (https://github.com/jamesgeorge007)"
+    "James George <jamesgeorge998001@gmail.com> (https://github.com/jamesgeorge007)",
+    "Rob Loach <robloach@gmail.com> (https://github.com/RobLoach)"
   ],
   "contributors": [
     "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)",
+    "James George <jamesgeorge998001@gmail.com> (https://github.com/jamesgeorge007)",
+    "Peter Chanthamynavong <peterkc@gmail.com> (https://github.com/peterkc)",
     "Peter Flannery (https://github.com/pflannery)",
     "Rob Loach <robloach@gmail.com> (https://github.com/RobLoach)",
-    "James George <jamesgeorge998001@gmail.com> (https://github.com/jamesgeorge007)",
+    "Shahar Dawn Or <mightyiampresence@gmail.com> (https://github.com/mightyiam)",
     "Zearin (https://github.com/Zearin)",
-    "vsopvsop (https://github.com/vsopvsop)",
     "Zlatan Vasović <zlatanvasovic@gmail.com> (https://github.com/zdroid)",
-    "Peter Chanthamynavong <peterkc@gmail.com> (https://github.com/peterkc)",
-    "Shahar Dawn Or <mightyiampresence@gmail.com> (https://github.com/mightyiam)"
+    "vsopvsop (https://github.com/vsopvsop)"
   ],
   "bugs": {
     "url": "https://github.com/bevry/projectz/issues"
@@ -136,15 +136,15 @@
     "typechecker": "^6.4.0"
   },
   "devDependencies": {
-    "@bevry/update-contributors": "^1.1.0",
+    "@bevry/update-contributors": "^1.4.0",
     "@typescript-eslint/eslint-plugin": "^2.31.0",
     "@typescript-eslint/parser": "^2.31.0",
     "assert-helpers": "^6.2.0",
-    "eslint": "^6.8.0",
+    "eslint": "^7.0.0",
     "eslint-config-bevry": "^3.4.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.3",
-    "kava": "^4.4.0",
+    "kava": "^5.0.0",
     "prettier": "^2.0.5",
     "safeps": "^9.3.0",
     "surge": "^0.21.3",
@@ -174,8 +174,8 @@
     "our:verify": "npm run our:verify:directory && npm run our:verify:eslint && npm run our:verify:prettier && npm run our:verify:typescript",
     "our:verify:directory": "npx valid-directory",
     "our:verify:eslint": "npx eslint --fix --ignore-pattern '**/*.d.ts' --ignore-pattern '**/vendor/' --ignore-pattern '**/node_modules/' --ext .mjs,.js,.jsx,.ts,.tsx ./source",
-    "our:verify:prettier": "prettier --write .",
-    "our:verify:typescript": "tsc --noEmit --project tsconfig.json",
+    "our:verify:prettier": "npx prettier --write .",
+    "our:verify:typescript": "npx tsc --noEmit --project tsconfig.json",
     "test": "node ./edition-es2019/test.js"
   },
   "eslintConfig": {
