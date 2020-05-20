@@ -54,7 +54,7 @@ import type {
 	EnhancedReadmesData,
 } from './types.js'
 
-async function parseFile<T extends any>(path: string): Promise<T> {
+async function parseFile<T>(path: string): Promise<T> {
 	try {
 		const str = await readFile(path, 'utf-8')
 		const data = parseCSON(str)
@@ -146,7 +146,7 @@ export class Projectz {
 				const basename = file.toLowerCase().split('.').slice(0, -1).join('.')
 				if (basename === key) {
 					this.log('info', `Reading package file: ${filePath}`)
-					const data = await parseFile(filePath)
+					const data = await parseFile<Record<string, any>>(filePath)
 					this.filenamesForPackageFiles[key] = file
 					this.dataForPackageFiles[key] = data
 				}
