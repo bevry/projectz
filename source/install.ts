@@ -5,6 +5,12 @@ import { isEmptyPlainObject } from 'typechecker'
 function hydrateTextWithLinks(text: string) {
 	const linksArray: Link[] = [
 		{
+			text: 'Deno',
+			url: 'https://deno.land',
+			title:
+				'Deno is a secure runtime for JavaScript and TypeScript, it is an alternative to Node.js',
+		},
+		{
 			text: 'Editions Autoloader',
 			url: 'https://github.com/bevry/editions',
 			title:
@@ -176,7 +182,6 @@ function getNpmInstructionList(
 
 function getNpmInstructions(data: {
 	name: string
-	main?: string
 	bin?: string | Record<string, string>
 }) {
 	const commands =
@@ -195,6 +200,33 @@ function getNpmInstructions(data: {
 	]
 		.filter((i) => i)
 		.join('\n')
+}
+
+function getDenoInstructions(data: {
+	name: string
+	version: string
+	deno?: string
+	keywords?: string | string[]
+}) {
+	const url =
+		`https://unpkg.com/${data.name}@^${data.version}` +
+		(data.deno ? `/${data.deno}` : '')
+	const importer =
+		Array.isArray(data.keywords) && data.keywords.includes('export-default')
+			? `pkg`
+			: '* as pkg'
+	return [
+		getLink({
+			text: '<h3>Deno</h3>',
+			url: 'https://deno.land',
+			title:
+				'Deno is a secure runtime for JavaScript and TypeScript, it is an alternative for Node.js',
+		}),
+		'',
+		'``` typescript',
+		`import ${importer} from '${url}'`,
+		'```',
+	].join('\n')
 }
 
 function getUnpkgInstructions(data: {
@@ -382,6 +414,7 @@ export function getInstallInstructions(data: {
 	filenamesForPackageFiles: FilenamesForPackageFiles
 	name: string
 	version: string
+	deno?: string
 	main?: string
 	browsers?: boolean
 	module?: any
@@ -403,6 +436,11 @@ export function getInstallInstructions(data: {
 		// Node
 		if (data.filenamesForPackageFiles.package) {
 			parts.push(getNpmInstructions(data))
+
+			// Deno
+			if (data.deno) {
+				parts.push(getDenoInstructions(data))
+			}
 
 			// Browser
 			if (data.browsers) {
