@@ -133,7 +133,7 @@
     "get-cli-arg": "^5.5.0",
     "spdx-expression-parse": "^3.0.1",
     "spdx-license-list": "^6.2.0",
-    "typechecker": "7.5.0"
+    "typechecker": "7.9.0"
   },
   "devDependencies": {
     "@bevry/update-contributors": "^1.9.0",

@@ -2167,6 +2167,11 @@ typechecker@7.5.0:
   resolved "https://registry.yarnpkg.com/typechecker/-/typechecker-7.5.0.tgz#7e70c7e8d5ea6fc7b2ba626ab91d87578c2e306e"
   integrity sha512-3rN7f/Tx7Ydg72sFl8Lrbl6sx4YGljmU/CVNr9Df6lRikYxd3H1HK03j+ZqE7ZS2WWOOn0YOACziAT8r+9O0fw==
 
+typechecker@7.9.0, typechecker@^7.4.0:
+  version "7.9.0"
+  resolved "https://registry.yarnpkg.com/typechecker/-/typechecker-7.9.0.tgz#2b091765bc4f7bd0b59cd6e28e70618fbc4f89a3"
+  integrity sha512-x6VYUQbPNOlrjX9eiBNLT49SC5TZRZma6KGOZufhGw7cnZXsfxFeWHD5lxuv24zdZxLVpXDWkvXsGQ9Iv87K7Q==
+
 typechecker@^4.3.0:
   version "4.11.0"
   resolved "https://registry.yarnpkg.com/typechecker/-/typechecker-4.11.0.tgz#8219cd90d2f7b585a3f5af9c146c8a23891f1eac"
@@ -2178,11 +2183,6 @@ typechecker@^6.2.0:
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/typechecker/-/typechecker-6.4.0.tgz#c087dc744c5a0f17524d58a17eb31a9660ab7324"
   integrity sha512-EbOu+9szY13mhl0EsvLXnR+pTCa3gTHQQPLdce72ujcC9fRHXlVFBNXtHeRhgzLxLlKUh4zA9C0tezLDgshf+A==
-
-typechecker@^7.4.0:
-  version "7.8.0"
-  resolved "https://registry.yarnpkg.com/typechecker/-/typechecker-7.8.0.tgz#f4d0555a09b73d966d8706568ae8d2b52fd788a1"
-  integrity sha512-AgM1axUw/u5i8dgMN09kX/2lnJ57qmq4vW1nrn43brFZmAxs8eeWvt21XeKudzC7u/m4i7il8FRKMSs11XmUkw==
 
 typedoc-default-themes@^0.10.1:
   version "0.10.1"
