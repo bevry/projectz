@@ -1384,10 +1384,10 @@ lunr@^2.3.8:
   resolved "https://registry.yarnpkg.com/lunr/-/lunr-2.3.8.tgz#a8b89c31f30b5a044b97d2d28e2da191b6ba2072"
   integrity sha512-oxMeX/Y35PNFuZoHp+jUj5OSEmLCaIH4KTFJh7a93cHBoFmpw2IoPs22VIz7vyO2YUnx2Tn9dzIwO2P/4quIRg==
 
-make-deno-edition@^0.9.1:
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/make-deno-edition/-/make-deno-edition-0.9.1.tgz#b299739ae852c0337764729bc28ec9d437a8cc63"
-  integrity sha512-9GOh3xya6+Y2nTBRiMmIvJa+0yBVAK6W2Zqjna0BRSAbb4ztbWEbGTwmyYMlSCh2IKalXXvqEXj3Lfltqem0rQ==
+make-deno-edition@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/make-deno-edition/-/make-deno-edition-0.10.0.tgz#cc52dbd0941a6ad1eacb46daf9321f937d89949d"
+  integrity sha512-lsDjA+SoDH5eeus7I/Z7vcF9OW+IgcbRmmhHCejkXbm5/kLFM61ua8XvIBkLsOxiQw6cW9t5a37jRZH8TMsJhw==
   dependencies:
     "@types/rimraf" "^3.0.0"
     await-spawn "^3.0.0"
