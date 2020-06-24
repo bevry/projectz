@@ -349,6 +349,7 @@ These amazing people have contributed code to this project:
 
 <ul><li><a href="https://github.com/balupton">Benjamin Lupton</a> — <a href="https://github.com/bevry/projectz/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/projectz">view contributions</a></li>
 <li><a href="https://github.com/jamesgeorge007">James George</a> — <a href="https://github.com/bevry/projectz/commits?author=jamesgeorge007" title="View the GitHub contributions of James George on repository bevry/projectz">view contributions</a></li>
+<li><a href="https://github.com/oliverlorenz">Oliver Lorenz</a> — <a href="https://github.com/bevry/projectz/commits?author=oliverlorenz" title="View the GitHub contributions of Oliver Lorenz on repository bevry/projectz">view contributions</a></li>
 <li><a href="https://github.com/peterkc">Peter Chanthamynavong</a> — <a href="https://github.com/bevry/projectz/commits?author=peterkc" title="View the GitHub contributions of Peter Chanthamynavong on repository bevry/projectz">view contributions</a></li>
 <li><a href="https://github.com/pflannery">Peter Flannery</a> — <a href="https://github.com/bevry/projectz/commits?author=pflannery" title="View the GitHub contributions of Peter Flannery on repository bevry/projectz">view contributions</a></li>
 <li><a href="https://github.com/RobLoach">Rob Loach</a> — <a href="https://github.com/bevry/projectz/commits?author=RobLoach" title="View the GitHub contributions of Rob Loach on repository bevry/projectz">view contributions</a></li>

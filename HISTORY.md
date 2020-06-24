@@ -1,5 +1,10 @@
 # History
 
+## v2.10.1 2020 June 22
+
+-   Fix failure from missing `Errlop` dependency - Thakns to [Oliver Lorenz](https://github.com/oliverlorenz) for [pull request #154](https://github.com/bevry/projectz/pull/154)
+-   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+
 ## v2.10.0 2020 June 22
 
 -   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
