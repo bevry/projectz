@@ -129,6 +129,7 @@
     "caterpillar-filter": "^6.6.0",
     "caterpillar-human": "^6.6.0",
     "cson-parser": "^4.0.4",
+    "errlop": "^3.9.0",
     "fellow": "^6.11.0",
     "get-cli-arg": "^5.5.0",
     "spdx-expression-parse": "^3.0.1",
