@@ -1,3 +1,6 @@
+// Import process for deno compat
+import process from 'process'
+
 // Import caterpillar [Caterpillar](https://github.com/bevry/caterpillar) for logging
 import { Logger } from 'caterpillar'
 import Filter from 'caterpillar-filter'
