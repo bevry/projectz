@@ -2147,6 +2147,11 @@ typechecker@7.10.0:
   resolved "https://registry.yarnpkg.com/typechecker/-/typechecker-7.10.0.tgz#774e3dca5b4d328bcf843e382f794ad9a5b6fce4"
   integrity sha512-e7yzPyPe1FGiyt8YwvxsZcR5/BI/RjRkfSQ9S0ilCBYFPED7qQ09dN0mpq6MlM67Vo+zRbfXc6ghYNYwBpQoaw==
 
+typechecker@7.11.0:
+  version "7.11.0"
+  resolved "https://registry.yarnpkg.com/typechecker/-/typechecker-7.11.0.tgz#50bdf6e54f881c18d57f618151c172f1cbc61650"
+  integrity sha512-xGAKaBilIT5fPJZenLoJfzwpTAeAABZvjPIAhn72cBtTFwFuIA6drwp+PdDDq6fmNSwx0IYjF5lQZUYC6EkMSw==
+
 typechecker@7.5.0:
   version "7.5.0"
   resolved "https://registry.yarnpkg.com/typechecker/-/typechecker-7.5.0.tgz#7e70c7e8d5ea6fc7b2ba626ab91d87578c2e306e"
