@@ -2,9 +2,7 @@
 import process from 'process'
 
 // Import caterpillar [Caterpillar](https://github.com/bevry/caterpillar) for logging
-import { Logger } from 'caterpillar'
-import Filter from 'caterpillar-filter'
-import Human from 'caterpillar-human'
+import { Logger, Filter, Human } from 'caterpillar'
 
 // Import the package used to get the value of CLI arguments
 import getarg from 'get-cli-arg'
@@ -37,8 +35,8 @@ async function main(): Promise<void> {
 		const level = d ? 7 : 6
 
 		// Setup our logging
-		const logger = new Logger({ level })
-		const filter = new Filter()
+		const logger = new Logger({ lineLevel: level })
+		const filter = new Filter({ filterLevel: level })
 		const human = new Human()
 
 		// Pipe logger output to filter, then filter output to stdout
