@@ -255,21 +255,21 @@ function getUnpkgInstructions(data: {
 	].join('\n')
 }
 
-function getPikaInstructions(data: {
+function getSkypackInstructions(data: {
 	name: string
 	version: string
 	keywords?: string | string[]
 }) {
-	const url = `//cdn.pika.dev/${data.name}/^${data.version}`
+	const url = `//cdn.skypack.dev/${data.name}@^${data.version}`
 	const importer =
 		Array.isArray(data.keywords) && data.keywords.includes('export-default')
 			? `pkg`
 			: '* as pkg'
 	return [
 		getLink({
-			text: '<h3>pika</h3>',
-			url: 'https://www.pika.dev/cdn',
-			title: '100% Native ES Modules CDN',
+			text: '<h3>Skypack</h3>',
+			url: 'https://www.skypack.dev',
+			title: 'Skypack is a JavaScript Delivery Network for modern web apps',
 		}),
 		'',
 		'``` html',
@@ -445,7 +445,7 @@ export function getInstallInstructions(data: {
 			// Browser
 			if (data.browsers) {
 				if (data.module) {
-					parts.push(getPikaInstructions(data))
+					parts.push(getSkypackInstructions(data))
 					parts.push(getUnpkgInstructions(data))
 				}
 				parts.push(getJspmInstructions(data))
