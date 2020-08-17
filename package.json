@@ -164,7 +164,7 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "kava": "^5.10.0",
-    "make-deno-edition": "^0.15.0",
+    "make-deno-edition": "^1.0.0",
     "prettier": "^2.0.5",
     "safeps": "^10.12.0",
     "surge": "^0.21.6",
