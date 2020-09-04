@@ -5,11 +5,13 @@ import { suite } from 'kava'
 import { join } from 'path'
 import { readdir, readFile } from 'fs'
 import { equal } from 'assert-helpers'
+import filedirname from 'filedirname'
 
 // -------------------------------------
 // Paths
 
-const projectzPath = join(__dirname, '..')
+const [file, dir] = filedirname()
+const projectzPath = join(dir, '..')
 const srcPath = join(projectzPath, 'test-fixtures', 'src')
 const expectPath = join(projectzPath, 'test-fixtures', 'out-expected')
 
