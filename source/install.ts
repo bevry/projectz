@@ -59,6 +59,12 @@ function hydrateTextWithLinks(text: string) {
 			title: 'ECMAScript Next',
 		},
 		{
+			text: 'ES2020',
+			url:
+				'https://en.wikipedia.org/wiki/ECMAScript#11th_Edition_–_ECMAScript_2020',
+			title: 'ECMAScript ES2020',
+		},
+		{
 			text: 'ES2019',
 			url:
 				'https://en.wikipedia.org/wiki/ECMAScript#10th_Edition_-_ECMAScript_2019',
