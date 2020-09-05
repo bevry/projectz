@@ -1,6 +1,7 @@
 // Import
 import { getGithubSlug } from './util.js'
-import { spawn } from 'safeps'
+import safeps from 'safeps'
+const { spawn } = safeps
 import kava from 'kava'
 import { join } from 'path'
 import { readdir, readFile } from 'fs'
@@ -22,7 +23,7 @@ function clean(src: string) {
 	return src.replace(/@[0-9^~.]/, '[cleaned]')
 }
 
-kava.kava.suite('projectz unit tests', function (suite, test) {
+kava.suite('projectz unit tests', function (suite, test) {
 	suite('getGithubSlug', function (suite, test) {
 		test('short repo', function () {
 			equal(getGithubSlug({ repository: 'bevry/projectz' }), 'bevry/projectz')

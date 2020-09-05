@@ -1,7 +1,7 @@
 {
   "title": "Projectz",
   "name": "projectz",
-  "version": "2.15.0",
+  "version": "2.16.0",
   "description": "Stop wasting time syncing and updating your project's README and Package Files!",
   "homepage": "https://github.com/bevry/projectz",
   "license": "MIT",
@@ -77,7 +77,7 @@
     "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)",
     "James George <jamesgeorge998001@gmail.com> (https://github.com/jamesgeorge007)",
     "Oliver Lorenz (https://github.com/oliverlorenz)",
-    "Peter Chanthamynavong <peterkc@gmail.com> (https://github.com/peterkc)",
+    "Peter C <peterkc@gmail.com> (https://github.com/peterkc)",
     "Peter Flannery (https://github.com/pflannery)",
     "Rob Loach <robloach@gmail.com> (https://github.com/RobLoach)",
     "Shahar Dawn Or <mightyiampresence@gmail.com> (https://github.com/mightyiam)",
@@ -101,6 +101,7 @@
       "directory": "source",
       "entry": "index.ts",
       "tags": [
+        "source",
         "typescript",
         "import"
       ],
@@ -111,24 +112,28 @@
       "directory": "edition-es2019",
       "entry": "index.js",
       "tags": [
+        "compiled",
         "javascript",
         "es2019",
         "require"
       ],
       "engines": {
-        "node": "14"
+        "node": "14",
+        "browsers": false
       }
     },
     {
       "description": "TypeScript compiled against ES2019 for Node.js with Import for modules",
-      "directory": "edition-node-esm",
+      "directory": "edition-es2019-esm",
       "entry": "index.js",
       "tags": [
+        "compiled",
         "javascript",
+        "es2019",
         "import"
       ],
       "engines": {
-        "node": true,
+        "node": "14",
         "browsers": false
       }
     }
@@ -139,46 +144,46 @@
   "main": "edition-es2019/index.js",
   "exports": {
     "node": {
-      "import": "./edition-node-esm/index.js",
+      "import": "./edition-es2019-esm/index.js",
       "require": "./edition-es2019/index.js"
     }
   },
   "dependencies": {
-    "badges": "^4.21.0",
-    "caterpillar": "^6.2.0",
+    "badges": "^4.22.0",
+    "caterpillar": "^6.5.0",
     "cson-parser": "^4.0.5",
-    "errlop": "^3.16.0",
-    "fellow": "^6.18.0",
-    "get-cli-arg": "^6.6.0",
+    "errlop": "^3.17.0",
+    "fellow": "^6.20.0",
+    "get-cli-arg": "^6.7.0",
     "spdx-expression-parse": "^3.0.1",
     "spdx-license-list": "^6.2.0",
-    "typechecker": "^7.13.0"
+    "typechecker": "^7.15.0"
   },
   "devDependencies": {
-    "@bevry/update-contributors": "^1.15.0",
-    "@typescript-eslint/eslint-plugin": "^3.9.1",
-    "@typescript-eslint/parser": "^3.9.1",
-    "assert-helpers": "^7.0.1",
-    "eslint": "^7.7.0",
-    "eslint-config-bevry": "^3.19.0",
+    "@bevry/update-contributors": "^1.16.0",
+    "@typescript-eslint/eslint-plugin": "^4.0.1",
+    "@typescript-eslint/parser": "^4.0.1",
+    "assert-helpers": "^7.2.0",
+    "eslint": "^7.8.1",
+    "eslint-config-bevry": "^3.22.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "filedirname": "^2.2.0",
-    "kava": "^5.11.0",
-    "make-deno-edition": "^1.0.0",
-    "prettier": "^2.0.5",
-    "safeps": "^10.12.0",
+    "filedirname": "^2.3.0",
+    "kava": "^5.12.0",
+    "make-deno-edition": "^1.1.1",
+    "prettier": "^2.1.1",
+    "safeps": "^10.13.0",
     "surge": "^0.21.6",
-    "typedoc": "^0.18.0",
-    "typescript": "^3.9.7",
-    "valid-directory": "^3.0.0"
+    "typedoc": "^0.19.1",
+    "typescript": "^4.0.2",
+    "valid-directory": "^3.3.0"
   },
   "scripts": {
     "our:clean": "rm -Rf ./docs ./edition* ./es2015 ./es5 ./out ./.next",
-    "our:compile": "npm run our:compile:deno && npm run our:compile:edition-es2019 && npm run our:compile:edition-node-esm && npm run our:compile:types",
+    "our:compile": "npm run our:compile:deno && npm run our:compile:edition-es2019 && npm run our:compile:edition-es2019-esm && npm run our:compile:types",
     "our:compile:deno": "make-deno-edition --attempt",
     "our:compile:edition-es2019": "tsc --module commonjs --target ES2019 --outDir ./edition-es2019 --project tsconfig.json && ( test ! -d edition-es2019/source || ( mv edition-es2019/source edition-temp && rm -Rf edition-es2019 && mv edition-temp edition-es2019 ) ) && echo '{\"type\": \"commonjs\"}' > edition-es2019/package.json",
-    "our:compile:edition-node-esm": "tsc --module ESNext --target ES2019 --outDir ./edition-node-esm --project tsconfig.json && ( test ! -d edition-node-esm/source || ( mv edition-node-esm/source edition-temp && rm -Rf edition-node-esm && mv edition-temp edition-node-esm ) ) && echo '{\"type\": \"module\"}' > edition-node-esm/package.json",
+    "our:compile:edition-es2019-esm": "tsc --module ESNext --target ES2019 --outDir ./edition-es2019-esm --project tsconfig.json && ( test ! -d edition-es2019-esm/source || ( mv edition-es2019-esm/source edition-temp && rm -Rf edition-es2019-esm && mv edition-temp edition-es2019-esm ) ) && echo '{\"type\": \"module\"}' > edition-es2019-esm/package.json",
     "our:compile:types": "tsc --project tsconfig.json --emitDeclarationOnly --declaration --declarationMap --declarationDir ./compiled-types && ( test ! -d compiled-types/source || ( mv compiled-types/source edition-temp && rm -Rf compiled-types && mv edition-temp compiled-types ) )",
     "our:deploy": "echo no need for this project",
     "our:meta": "npm run our:meta:contributors && npm run our:meta:docs && npm run our:meta:projectz",
