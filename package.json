@@ -216,10 +216,6 @@
     "singleQuote": true
   },
   "boundation": {
-    "targets": [
-      "ES2019"
-    ],
-    "ltsNodeOnly": true,
     "desiredNodeOnly": true
   }
 }
