@@ -1,7 +1,7 @@
 {
   "title": "Projectz",
   "name": "projectz",
-  "version": "2.17.0",
+  "version": "2.18.0",
   "description": "Stop wasting time syncing and updating your project's README and Package Files!",
   "homepage": "https://github.com/bevry/projectz",
   "license": "MIT",
@@ -15,6 +15,7 @@
     "component",
     "component.json",
     "documentation",
+    "es2019",
     "generator",
     "jquery.json",
     "jspm",
@@ -32,7 +33,6 @@
   ],
   "badges": {
     "list": [
-      "travisci",
       "npmversion",
       "npmdownloads",
       "daviddm",
@@ -58,7 +58,6 @@
       "patreonUsername": "bevry",
       "paypalURL": "https://bevry.me/paypal",
       "wishlistURL": "https://bevry.me/wishlist",
-      "travisTLD": "com",
       "githubUsername": "bevry",
       "githubRepository": "projectz",
       "githubSlug": "bevry/projectz",
@@ -107,13 +106,13 @@
       "engines": false
     },
     {
-      "description": "TypeScript compiled against ES2020 for Node.js 14 with Require for modules",
-      "directory": "edition-es2020",
+      "description": "TypeScript compiled against ES2019 for Node.js with Require for modules",
+      "directory": "edition-es2019",
       "entry": "index.js",
       "tags": [
         "compiled",
         "javascript",
-        "es2020",
+        "es2019",
         "require"
       ],
       "engines": {
@@ -122,13 +121,13 @@
       }
     },
     {
-      "description": "TypeScript compiled against ES2020 for Node.js 14 with Import for modules",
-      "directory": "edition-es2020-esm",
+      "description": "TypeScript compiled against ES2019 for Node.js with Import for modules",
+      "directory": "edition-es2019-esm",
       "entry": "index.js",
       "tags": [
         "compiled",
         "javascript",
-        "es2020",
+        "es2019",
         "import"
       ],
       "engines": {
@@ -140,49 +139,49 @@
   "bin": "bin.cjs",
   "types": "./compiled-types/",
   "type": "module",
-  "main": "edition-es2020/index.js",
+  "main": "edition-es2019/index.js",
   "exports": {
     "node": {
-      "import": "./edition-es2020-esm/index.js",
-      "require": "./edition-es2020/index.js"
+      "import": "./edition-es2019-esm/index.js",
+      "require": "./edition-es2019/index.js"
     }
   },
   "dependencies": {
-    "badges": "^4.23.0",
+    "badges": "^4.24.0",
     "caterpillar": "^6.6.0",
-    "cson-parser": "^4.0.5",
+    "cson-parser": "^4.0.6",
     "errlop": "^4.1.0",
     "fellow": "^6.21.0",
     "get-cli-arg": "^6.8.0",
     "spdx-expression-parse": "^3.0.1",
     "spdx-license-list": "^6.3.0",
-    "typechecker": "^7.16.0"
+    "typechecker": "^7.17.0"
   },
   "devDependencies": {
-    "@bevry/update-contributors": "^1.17.0",
-    "@typescript-eslint/eslint-plugin": "^4.6.0",
-    "@typescript-eslint/parser": "^4.6.0",
+    "@bevry/update-contributors": "^1.18.0",
+    "@typescript-eslint/eslint-plugin": "^4.8.1",
+    "@typescript-eslint/parser": "^4.8.1",
     "assert-helpers": "^8.1.0",
-    "eslint": "^7.12.1",
+    "eslint": "^7.14.0",
     "eslint-config-bevry": "^3.23.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-prettier": "^3.1.4",
     "filedirname": "^2.4.0",
     "kava": "^5.13.0",
     "make-deno-edition": "^1.2.0",
-    "prettier": "^2.1.2",
-    "safeps": "^10.14.0",
-    "surge": "^0.21.6",
+    "prettier": "^2.2.0",
+    "safeps": "^10.15.0",
+    "surge": "^0.21.7",
     "typedoc": "^0.19.2",
-    "typescript": "^4.0.5",
-    "valid-directory": "^3.4.0"
+    "typescript": "^4.1.2",
+    "valid-directory": "^3.5.0"
   },
   "scripts": {
     "our:clean": "rm -Rf ./docs ./edition* ./es2015 ./es5 ./out ./.next",
-    "our:compile": "npm run our:compile:deno && npm run our:compile:edition-es2020 && npm run our:compile:edition-es2020-esm && npm run our:compile:types",
+    "our:compile": "npm run our:compile:deno && npm run our:compile:edition-es2019 && npm run our:compile:edition-es2019-esm && npm run our:compile:types",
     "our:compile:deno": "make-deno-edition --attempt",
-    "our:compile:edition-es2020": "tsc --module commonjs --target ES2020 --outDir ./edition-es2020 --project tsconfig.json && ( test ! -d edition-es2020/source || ( mv edition-es2020/source edition-temp && rm -Rf edition-es2020 && mv edition-temp edition-es2020 ) ) && echo '{\"type\": \"commonjs\"}' > edition-es2020/package.json",
-    "our:compile:edition-es2020-esm": "tsc --module ESNext --target ES2020 --outDir ./edition-es2020-esm --project tsconfig.json && ( test ! -d edition-es2020-esm/source || ( mv edition-es2020-esm/source edition-temp && rm -Rf edition-es2020-esm && mv edition-temp edition-es2020-esm ) ) && echo '{\"type\": \"module\"}' > edition-es2020-esm/package.json",
+    "our:compile:edition-es2019": "tsc --module commonjs --target ES2019 --outDir ./edition-es2019 --project tsconfig.json && ( test ! -d edition-es2019/source || ( mv edition-es2019/source edition-temp && rm -Rf edition-es2019 && mv edition-temp edition-es2019 ) ) && echo '{\"type\": \"commonjs\"}' > edition-es2019/package.json",
+    "our:compile:edition-es2019-esm": "tsc --module ESNext --target ES2019 --outDir ./edition-es2019-esm --project tsconfig.json && ( test ! -d edition-es2019-esm/source || ( mv edition-es2019-esm/source edition-temp && rm -Rf edition-es2019-esm && mv edition-temp edition-es2019-esm ) ) && echo '{\"type\": \"module\"}' > edition-es2019-esm/package.json",
     "our:compile:types": "tsc --project tsconfig.json --emitDeclarationOnly --declaration --declarationMap --declarationDir ./compiled-types && ( test ! -d compiled-types/source || ( mv compiled-types/source edition-temp && rm -Rf compiled-types && mv edition-temp compiled-types ) )",
     "our:deploy": "echo no need for this project",
     "our:meta": "npm run our:meta:contributors && npm run our:meta:docs && npm run our:meta:projectz",
@@ -203,7 +202,7 @@
     "our:verify:directory": "valid-directory",
     "our:verify:eslint": "eslint --fix --ignore-pattern '**/*.d.ts' --ignore-pattern '**/vendor/' --ignore-pattern '**/node_modules/' --ext .mjs,.js,.jsx,.ts,.tsx ./source",
     "our:verify:prettier": "prettier --write .",
-    "test": "node ./edition-es2020/test.js"
+    "test": "node ./edition-es2019/test.js"
   },
   "eslintConfig": {
     "extends": [
