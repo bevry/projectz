@@ -17,8 +17,7 @@ export function getHistorySection(data: {
 	} else if (data.github.slug) {
 		link = getLink({
 			url: `https://github.com/${data.github.slug}/releases`,
-			text:
-				'Discover the release history by heading on over to the releases page.',
+			text: 'Discover the release history by heading on over to the releases page.',
 		})
 	} else {
 		throw new Error(

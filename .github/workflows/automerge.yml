@@ -8,4 +8,4 @@ jobs:
       - uses: actions/checkout@v2
       - uses: ahmadnassri/action-dependabot-auto-merge@v2
         with:
-          github-token: '${{ secrets.DEPENDABOT_AUTOMERGE_GITHUB_TOKEN }}'
+          github-token: ${{ secrets.DEPENDABOT_AUTOMERGE_GITHUB_TOKEN }}

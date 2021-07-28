@@ -7,6 +7,7 @@
 
 <!-- BADGES/ -->
 
+<span class="badge-githubworkflow"><a href="https://github.com/bevry/projectz/actions?query=workflow%3Abevry" title="View the status of this project's GitHub Workflow: bevry"><img src="https://github.com/bevry/projectz/workflows/bevry/badge.svg" alt="Status of the GitHub Workflow: bevry" /></a></span>
 <span class="badge-npmversion"><a href="https://npmjs.org/package/projectz" title="View this project on NPM"><img src="https://img.shields.io/npm/v/projectz.svg" alt="NPM version" /></a></span>
 <span class="badge-npmdownloads"><a href="https://npmjs.org/package/projectz" title="View this project on NPM"><img src="https://img.shields.io/npm/dm/projectz.svg" alt="NPM downloads" /></a></span>
 <span class="badge-daviddm"><a href="https://david-dm.org/bevry/projectz" title="View the status of this project's dependencies on DavidDM"><img src="https://img.shields.io/david/bevry/projectz.svg" alt="Dependency Status" /></a></span>
