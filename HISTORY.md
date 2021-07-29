@@ -1,5 +1,15 @@
 # History
 
+## v2.20.0 2021 July 30
+
+-   Fixed fatal errors going unreported
+-   No longer support CSON for package files, JSON only.
+-   No longer outputs logging line info if `--verbose` is not present
+-   Better debugging for file and json reading, writing, and directory reading.
+-   Fixed missing `package.json:badges.config` from crashing the compile.
+-   `--debug` now tells you to use `--verbose` instead, rather than doing nothing.
+-   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+
 ## v2.19.0 2021 July 29
 
 -   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)

@@ -116,7 +116,7 @@ Projectz helps you maintain the following data files:
 
 It does this by reading them, combining their data in memory, and then outputting the appropriate fields and over-rides for each file.
 
-If you are making use of multiple meta data files, you may find defining a projectz meta file (`projectz.json` for JSON, or `projectz.cson` for [CSON](https://github.com/bevry/cson)) to be useful. The projectz meta file can serve as a central location for the configuration of all the other files. However, if you only require one meta data file, then you can ignore this ability.
+If you are making use of multiple meta data files, you may find defining a projectz meta file (`projectz.json` for JSON to be useful. The projectz meta file can serve as a central location for the configuration of all the other files. However, if you only require one meta data file, then you can ignore this ability.
 
 Projectz takes notes of these meta data fields:
 

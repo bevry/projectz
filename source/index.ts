@@ -4,15 +4,11 @@
 // First we need to import the libraries we require.
 
 // Load in the file system libraries
-import { promises as fsPromises } from 'fs'
-const { readdir, readFile, writeFile } = fsPromises
+import { readFile, readDirectory, writeFile } from '@bevry/file'
 import { resolve, join, dirname } from 'path'
 
-// Errlop used for wrapping errors
-import Errlop from 'errlop'
-
-// CSON is used for loading in our configuration files
-import { parse as parseCSON } from 'cson-parser'
+// Handle configuration files
+import { readJSON, writeJSON } from '@bevry/json'
 
 // [TypeChecker](https://github.com/bevry/typechecker) is used for checking data types
 import { isString, isPlainObject, isEmptyPlainObject } from 'typechecker'
@@ -53,16 +49,6 @@ import type {
 	EnhancedPackagesDataWithGitHub,
 	EnhancedReadmesData,
 } from './types.js'
-
-async function parseFile<T>(path: string): Promise<T> {
-	try {
-		const str = await readFile(path, 'utf-8')
-		const data = parseCSON(str)
-		return data
-	} catch (err) {
-		return Promise.reject(new Errlop(`failed parsing the file: ${path}`, err))
-	}
-}
 
 interface Options {
 	/** the directory that we wish to do our work on, defaults to `process.cwd()` */
@@ -112,6 +98,7 @@ export class Projectz {
 	constructor(opts: Options) {
 		this.cwd = opts.cwd ? resolve(opts.cwd) : process.cwd()
 		if (opts.log) this.log = opts.log
+		// this.log = console.log.bind(console)
 	}
 
 	/** Compile the project */
@@ -138,7 +125,7 @@ export class Projectz {
 		const ReadmeFiles = Object.keys(this.filenamesForReadmeFiles)
 
 		// Load
-		const files = await readdir(this.cwd)
+		const files = await readDirectory(this.cwd)
 		for (const file of files) {
 			const filePath = join(this.cwd, file)
 
@@ -146,7 +133,7 @@ export class Projectz {
 				const basename = file.toLowerCase().split('.').slice(0, -1).join('.')
 				if (basename === key) {
 					this.log('info', `Reading package file: ${filePath}`)
-					const data = await parseFile<Record<string, any>>(filePath)
+					const data = await readJSON<Record<string, any>>(filePath)
 					this.filenamesForPackageFiles[key] = file
 					this.dataForPackageFiles[key] = data
 				}
@@ -155,7 +142,7 @@ export class Projectz {
 			for (const key of ReadmeFiles) {
 				if (file.toLowerCase().startsWith(key)) {
 					this.log('info', `Reading meta file: ${filePath}`)
-					const data = await readFile(filePath, 'utf-8')
+					const data = await readFile(filePath)
 					this.filenamesForReadmeFiles[key] = file
 					this.dataForReadmeFiles[key] = data.toString()
 				}
@@ -167,6 +154,8 @@ export class Projectz {
 	protected async enhancePackagesData() {
 		// ----------------------------------
 		// Combine
+
+		this.log('debug', 'Enhancing packages data')
 
 		// Combine the package data
 		const mergedPackagesData: any = {
@@ -193,50 +182,40 @@ export class Projectz {
 
 		// Validate keywords field
 		if (isString(mergedPackagesData.keywords)) {
-			return Promise.reject(
-				new Error('projectz: keywords field must be array instead of CSV')
-			)
+			throw new Error('projectz: keywords field must be array instead of CSV')
 		}
 
 		// Validate sponsors array
 		if (mergedPackagesData.sponsor) {
-			return Promise.reject(
-				new Error('projectz: sponsor field is deprecated, use sponsors field')
+			throw new Error(
+				'projectz: sponsor field is deprecated, use sponsors field'
 			)
 		}
 		if (isString(mergedPackagesData.sponsors)) {
-			return Promise.reject(
-				new Error('projectz: sponsors field must be array instead of CSV')
-			)
+			throw new Error('projectz: sponsors field must be array instead of CSV')
 		}
 
 		// Validate maintainers array
 		if (mergedPackagesData.maintainer) {
-			return Promise.reject(
-				new Error(
-					'projectz: maintainer field is deprecated, use maintainers field'
-				)
+			throw new Error(
+				'projectz: maintainer field is deprecated, use maintainers field'
 			)
 		}
 		if (isString(mergedPackagesData.maintainers)) {
-			return Promise.reject(
-				new Error('projectz: maintainers field must be array instead of CSV')
+			throw new Error(
+				'projectz: maintainers field must be array instead of CSV'
 			)
 		}
 
 		// Validate license SPDX string
 		if (isPlainObject(mergedPackagesData.license)) {
-			return Promise.reject(
-				new Error(
-					'projectz: license field must now be a valid SPDX string: https://docs.npmjs.com/files/package.json#license'
-				)
+			throw new Error(
+				'projectz: license field must now be a valid SPDX string: https://docs.npmjs.com/files/package.json#license'
 			)
 		}
 		if (isPlainObject(mergedPackagesData.licenses)) {
-			return Promise.reject(
-				new Error(
-					'projectz: licenses field is deprecated, you must now use the license field as a valid SPDX string: https://docs.npmjs.com/files/package.json#license'
-				)
+			throw new Error(
+				'projectz: licenses field is deprecated, you must now use the license field as a valid SPDX string: https://docs.npmjs.com/files/package.json#license'
 			)
 		}
 
@@ -244,19 +223,15 @@ export class Projectz {
 		const objs = ['badges', 'readmes', 'packages', 'github', 'bugs']
 		for (const key of objs) {
 			if (!isPlainObject(mergedPackagesData[key])) {
-				return Promise.reject(
-					new Error(`projectz: ${key} property must be an object`)
-				)
+				throw new Error(`projectz: ${key} property must be an object`)
 			}
 		}
 
 		// Validate package values
 		for (const [key, value] of Object.entries(mergedPackagesData.packages)) {
 			if (!isPlainObject(value)) {
-				return Promise.reject(
-					new Error(
-						`projectz: custom package data for package ${key} must be an object`
-					)
+				throw new Error(
+					`projectz: custom package data for package ${key} must be an object`
 				)
 			}
 		}
@@ -267,12 +242,11 @@ export class Projectz {
 			(mergedPackagesData.badges.config &&
 				!isPlainObject(mergedPackagesData.badges.config))
 		) {
-			return Promise.reject(
-				new Error(
-					'projectz: badges field must be in the format of: {list: [], config: {}}\nSee https://github.com/bevry/badges for details.'
-				)
+			throw new Error(
+				'projectz: badges field must be in the format of: {list: [], config: {}}\nSee https://github.com/bevry/badges for details.'
 			)
 		}
+		mergedPackagesData.badges.config ??= {}
 
 		// ----------------------------------
 		// Ensure
@@ -630,9 +604,8 @@ export class Projectz {
 					if (!filename || key === 'projectz') return
 					const filepath = join(this.cwd, filename)
 					this.log('info', `Saving package file: ${filepath}`)
-					const data =
-						JSON.stringify(enhancedPackagesData[key], null, '  ') + '\n'
-					return writeFile(filepath, data)
+					const data = enhancedPackagesData[key]
+					return writeJSON(filepath, data)
 				}
 			),
 			// save readme files
@@ -641,8 +614,8 @@ export class Projectz {
 					if (!filename) return
 					const filepath = join(this.cwd, filename)
 					this.log('info', `Saving readme file: ${filepath}`)
-					const data = enhancedReadmesData[key]
-					return writeFile(filepath, data)
+					const content = enhancedReadmesData[key]
+					return writeFile(filepath, content)
 				}
 			),
 		])

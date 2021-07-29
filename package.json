@@ -1,7 +1,7 @@
 {
   "title": "Projectz",
   "name": "projectz",
-  "version": "2.19.0",
+  "version": "2.20.0",
   "description": "Stop wasting time syncing and updating your project's README and Package Files!",
   "homepage": "https://github.com/bevry/projectz",
   "license": "MIT",
@@ -149,10 +149,10 @@
     }
   },
   "dependencies": {
+    "@bevry/file": "^1.1.0",
+    "@bevry/json": "^1.4.0",
     "badges": "^4.26.0",
-    "caterpillar": "^6.6.0",
-    "cson-parser": "^4.0.9",
-    "errlop": "^4.2.0",
+    "caterpillar": "^6.7.0",
     "fellow": "^6.23.0",
     "get-cli-arg": "^7.1.0",
     "spdx-expression-parse": "^3.0.1",
@@ -165,7 +165,7 @@
     "@typescript-eslint/parser": "^4.28.5",
     "assert-helpers": "^8.2.0",
     "eslint": "^7.31.0",
-    "eslint-config-bevry": "^3.25.0",
+    "eslint-config-bevry": "^3.26.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
     "filedirname": "^2.6.0",

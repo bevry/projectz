@@ -1,6 +1,5 @@
 import { getLink } from './util.js'
 import { Link, FilenamesForPackageFiles, Editions } from './types.js'
-import { isEmptyPlainObject } from 'typechecker'
 
 function hydrateTextWithLinks(text: string) {
 	const linksArray: Link[] = [

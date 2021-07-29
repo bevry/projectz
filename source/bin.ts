@@ -24,9 +24,9 @@ async function main(): Promise<void> {
 			)
 			return process.exit(1)
 		}
-		if (process.argv.includes('-d')) {
+		if (process.argv.includes('-d') || process.argv.includes('--debug')) {
 			console.log(
-				'projecz now requires -d argument to be specifie via --verbose'
+				'projecz now requires -d argument to be specified via --verbose'
 			)
 			return process.exit(1)
 		}
@@ -35,7 +35,7 @@ async function main(): Promise<void> {
 		const level = d ? 7 : 6
 
 		// Setup our logging
-		const logger = new Logger({ lineLevel: level })
+		const logger = new Logger({ lineLevel: d ? level : -Infinity })
 		const filter = new Filter({ filterLevel: level })
 		const human = new Human()
 
@@ -50,12 +50,13 @@ async function main(): Promise<void> {
 			})
 			await project.compile()
 		} catch (err) {
-			// error
-			logger.log('err', err.stack)
+			// fatal
+			// do not use logger.log, as if a fatal error happened, it won't output it
+			console.error(err.stack || err)
 			return process.exit(1)
 		}
 
-		// Done
+		// done
 		logger.log('info', 'Completed successfully')
 	} else {
 		// output help
