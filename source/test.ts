@@ -7,6 +7,7 @@ import { join } from 'path'
 import { readdir, readFile } from 'fs'
 import { equal } from 'assert-helpers'
 import filedirname from 'filedirname'
+import { readJSON } from '@bevry/json'
 
 // -------------------------------------
 // Paths
@@ -22,6 +23,18 @@ const expectPath = join(projectzPath, 'test-fixtures', 'out-expected')
 function clean(src: string) {
 	return src.replace(/@[0-9^~.]/, '[cleaned]')
 }
+
+let binPath: string
+kava.test('projectz test prep', function (done) {
+	Promise.resolve()
+		.then(async function () {
+			binPath = join(
+				projectzPath,
+				(await readJSON<any>(join(projectzPath, 'package.json'))).bin
+			)
+		})
+		.finally(done)
+})
 
 kava.suite('projectz unit tests', function (suite, test) {
 	suite('getGithubSlug', function (suite, test) {
@@ -73,7 +86,7 @@ kava.suite('projectz unit tests', function (suite, test) {
 kava.suite('projectz integration tests', function (suite, test) {
 	// Compile with Projectz using -p to switch to the source path.
 	test('compile project with projectz', function (done) {
-		const command = ['npx', projectzPath, 'compile', `--path=${srcPath}`]
+		const command = ['node', binPath, 'compile', `--path=${srcPath}`]
 		spawn(command, { stdio: 'inherit' }, done)
 	})
 

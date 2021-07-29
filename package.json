@@ -1,7 +1,7 @@
 {
   "title": "Projectz",
   "name": "projectz",
-  "version": "2.20.0",
+  "version": "2.21.0",
   "description": "Stop wasting time syncing and updating your project's README and Package Files!",
   "homepage": "https://github.com/bevry/projectz",
   "license": "MIT",
@@ -179,6 +179,7 @@
     "valid-directory": "^3.7.0"
   },
   "scripts": {
+    "our:bin": "node ./bin.cjs",
     "our:clean": "rm -Rf ./docs ./edition* ./es2015 ./es5 ./out ./.next",
     "our:compile": "npm run our:compile:deno && npm run our:compile:edition-es2019 && npm run our:compile:edition-es2019-esm && npm run our:compile:types",
     "our:compile:deno": "make-deno-edition --attempt",
@@ -190,7 +191,7 @@
     "our:meta:contributors": "update-contributors",
     "our:meta:docs": "npm run our:meta:docs:typedoc",
     "our:meta:docs:typedoc": "rm -Rf ./docs && typedoc --exclude '**/+(*test*|node_modules)' --excludeExternals --out ./docs ./source",
-    "our:meta:projectz": "npx . compile",
+    "our:meta:projectz": "npm run our:bin -- compile",
     "our:release": "npm run our:release:prepare && npm run our:release:check-changelog && npm run our:release:check-dirty && npm run our:release:tag && npm run our:release:push",
     "our:release:check-changelog": "cat ./HISTORY.md | grep v$npm_package_version || (echo add a changelog entry for v$npm_package_version && exit -1)",
     "our:release:check-dirty": "git diff --exit-code",

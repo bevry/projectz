@@ -1,5 +1,10 @@
 # History
 
+## v2.21.0 2021 July 30
+
+-   Don't use `npx` anymore during our tests, it doesn't do what we actually want, and it keeps prompting to install things.
+-   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+
 ## v2.20.0 2021 July 30
 
 -   Fixed fatal errors going unreported

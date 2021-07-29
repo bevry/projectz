@@ -259,7 +259,7 @@ As an example, here is a a basic `README.md` file:
 
     ## Usage
 
-[Complete API Documentation.](http://master.projectz.bevry.surge.sh/docs/globals.html)
+[Complete API Documentation.](http://master.projectz.bevry.surge.sh/docs/)
 
     Usage instructions go here
 
