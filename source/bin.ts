@@ -49,7 +49,7 @@ async function main(): Promise<void> {
 				cwd: p || null,
 			})
 			await project.compile()
-		} catch (err) {
+		} catch (err: any) {
 			// fatal
 			// do not use logger.log, as if a fatal error happened, it won't output it
 			console.error(err.stack || err)

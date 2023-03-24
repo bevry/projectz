@@ -49,6 +49,7 @@ import type {
 	EnhancedPackagesDataWithGitHub,
 	EnhancedReadmesData,
 } from './types.js'
+export * from './types.js'
 
 interface Options {
 	/** the directory that we wish to do our work on, defaults to `process.cwd()` */
