@@ -173,7 +173,7 @@
     "prettier": "^2.8.6",
     "safeps": "^10.17.0",
     "surge": "^0.23.1",
-    "typedoc": "^0.23.28",
+    "typedoc": "^0.25.3",
     "typescript": "5.0.2",
     "valid-directory": "^3.9.0"
   },
