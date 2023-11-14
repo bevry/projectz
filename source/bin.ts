@@ -20,13 +20,13 @@ async function main(): Promise<void> {
 		// bc upgrade
 		if (process.argv.includes('-p')) {
 			console.log(
-				'projecz now requires -p argument to be specifie via --path=value'
+				'projecz now requires -p argument to be specifie via --path=value',
 			)
 			return process.exit(1)
 		}
 		if (process.argv.includes('-d') || process.argv.includes('--debug')) {
 			console.log(
-				'projecz now requires -d argument to be specified via --verbose'
+				'projecz now requires -d argument to be specified via --verbose',
 			)
 			return process.exit(1)
 		}
@@ -61,11 +61,11 @@ async function main(): Promise<void> {
 	} else {
 		// output help
 		console.log(
-			'projectz compile: merge our data files and compile our meta files'
+			'projectz compile: merge our data files and compile our meta files',
 		)
 		console.log('\t--verbose\tOutputs verbose logging')
 		console.log(
-			'\t--path=value\tPath to the project that you wish to work with, defaults to the current working directory'
+			'\t--path=value\tPath to the project that you wish to work with, defaults to the current working directory',
 		)
 		return process.exit(1)
 	}

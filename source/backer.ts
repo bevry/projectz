@@ -49,7 +49,7 @@ function getMaintainersText(data: {
 
 function getContributeLink(
 	data: { filenamesForReadmeFiles: FilenamesForReadmeFiles; github: Github },
-	optional = false
+	optional = false,
 ): string {
 	// Prepare
 	const file = data.filenamesForReadmeFiles.contributing
@@ -58,7 +58,7 @@ function getContributeLink(
 			return ''
 		} else {
 			throw new Error(
-				'Contributing section requires a CONTRIBUTING file to exist'
+				'Contributing section requires a CONTRIBUTING file to exist',
 			)
 		}
 	}

@@ -43,7 +43,7 @@ export function getPeopleHTML(people: Fellow[], opts?: FormatOptions): string {
 
 export function getPeopleTextArray(
 	people: Fellow[],
-	opts?: FormatOptions
+	opts?: FormatOptions,
 ): string[] {
 	if (people.length === 0) {
 		return []
@@ -55,8 +55,8 @@ export function getPeopleTextArray(
 					`For some reason the person doesn't have a name: ${JSON.stringify(
 						person,
 						null,
-						'  '
-					)}`
+						'  ',
+					)}`,
 				)
 			}
 			const text = person.toString(opts)
@@ -71,7 +71,7 @@ export function getFileUrl(data: { github: Github }, filename: string): string {
 		return `https://github.com/${data.github.slug}/blob/master/${filename}#files`
 	} else {
 		throw new Error(
-			'File links are currently only supported for github repositories'
+			'File links are currently only supported for github repositories',
 		)
 	}
 }
@@ -91,7 +91,7 @@ export function getLink({ url, text, title }: Link): string {
 export function replaceSection(
 	names: string | string[],
 	source: string,
-	inject: string | Function
+	inject: string | Function,
 ): string {
 	let regexName: string, sectionName: string
 	if (Array.isArray(names)) {
@@ -113,7 +113,7 @@ export function replaceSection(
 			`<!--\\s*/${regexName}\\s*-->`,
 			')\\s+',
 		].join(''),
-		'gim'
+		'gim',
 	)
 
 	function replace() {

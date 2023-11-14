@@ -2,7 +2,7 @@ import { renderBadges, BadgesField } from 'badges'
 
 export function getBadgesInCategory(
 	category: string,
-	data: { badges?: BadgesField }
+	data: { badges?: BadgesField },
 ): string {
 	if (data.badges && data.badges.list) {
 		return renderBadges(data.badges.list, data.badges.config, {

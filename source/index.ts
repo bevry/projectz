@@ -111,9 +111,8 @@ export class Projectz {
 		const enhancedPackagesData = await this.enhancePackagesData()
 
 		// Enhance our readme data
-		const enhancedReadmesData = await this.enhanceReadmesData(
-			enhancedPackagesData
-		)
+		const enhancedReadmesData =
+			await this.enhanceReadmesData(enhancedPackagesData)
 
 		// Save
 		await this.save(enhancedPackagesData, enhancedReadmesData)
@@ -189,7 +188,7 @@ export class Projectz {
 		// Validate sponsors array
 		if (mergedPackagesData.sponsor) {
 			throw new Error(
-				'projectz: sponsor field is deprecated, use sponsors field'
+				'projectz: sponsor field is deprecated, use sponsors field',
 			)
 		}
 		if (isString(mergedPackagesData.sponsors)) {
@@ -199,24 +198,24 @@ export class Projectz {
 		// Validate maintainers array
 		if (mergedPackagesData.maintainer) {
 			throw new Error(
-				'projectz: maintainer field is deprecated, use maintainers field'
+				'projectz: maintainer field is deprecated, use maintainers field',
 			)
 		}
 		if (isString(mergedPackagesData.maintainers)) {
 			throw new Error(
-				'projectz: maintainers field must be array instead of CSV'
+				'projectz: maintainers field must be array instead of CSV',
 			)
 		}
 
 		// Validate license SPDX string
 		if (isPlainObject(mergedPackagesData.license)) {
 			throw new Error(
-				'projectz: license field must now be a valid SPDX string: https://docs.npmjs.com/files/package.json#license'
+				'projectz: license field must now be a valid SPDX string: https://docs.npmjs.com/files/package.json#license',
 			)
 		}
 		if (isPlainObject(mergedPackagesData.licenses)) {
 			throw new Error(
-				'projectz: licenses field is deprecated, you must now use the license field as a valid SPDX string: https://docs.npmjs.com/files/package.json#license'
+				'projectz: licenses field is deprecated, you must now use the license field as a valid SPDX string: https://docs.npmjs.com/files/package.json#license',
 			)
 		}
 
@@ -232,7 +231,7 @@ export class Projectz {
 		for (const [key, value] of Object.entries(mergedPackagesData.packages)) {
 			if (!isPlainObject(value)) {
 				throw new Error(
-					`projectz: custom package data for package ${key} must be an object`
+					`projectz: custom package data for package ${key} must be an object`,
 				)
 			}
 		}
@@ -244,7 +243,7 @@ export class Projectz {
 				!isPlainObject(mergedPackagesData.badges.config))
 		) {
 			throw new Error(
-				'projectz: badges field must be in the format of: {list: [], config: {}}\nSee https://github.com/bevry/badges for details.'
+				'projectz: badges field must be in the format of: {list: [], config: {}}\nSee https://github.com/bevry/badges for details.',
 			)
 		}
 		mergedPackagesData.badges.config ??= {}
@@ -294,7 +293,7 @@ export class Projectz {
 				this.filenamesForPackageFiles.bower ||
 					this.filenamesForPackageFiles.component ||
 					mergedPackagesData.browser ||
-					mergedPackagesData.jspm
+					mergedPackagesData.jspm,
 			)
 		}
 
@@ -344,13 +343,13 @@ export class Projectz {
 
 		// Fellows
 		const authors = Fellow.add(
-			mergedPackagesData.authors || mergedPackagesData.author
+			mergedPackagesData.authors || mergedPackagesData.author,
 		)
 		const contributors = Fellow.add(mergedPackagesData.contributors).filter(
-			(fellow) => fellow.name.includes('[bot]') === false
+			(fellow) => fellow.name.includes('[bot]') === false,
 		)
 		const maintainers = Fellow.add(mergedPackagesData.maintainers).filter(
-			(fellow) => fellow.name.includes('[bot]') === false
+			(fellow) => fellow.name.includes('[bot]') === false,
 		)
 		const sponsors = Fellow.add(mergedPackagesData.sponsors)
 
@@ -393,7 +392,7 @@ export class Projectz {
 			},
 
 			// Explicit data
-			mergedPackagesData.packages.package || {}
+			mergedPackagesData.packages.package || {},
 		)
 
 		// Trim
@@ -419,7 +418,7 @@ export class Projectz {
 			pkg,
 
 			// Explicit data
-			mergedPackagesData.packages.jquery || {}
+			mergedPackagesData.packages.jquery || {},
 		)
 
 		// Create the data for the `component.json` format
@@ -443,7 +442,7 @@ export class Projectz {
 			},
 
 			// Explicit data
-			mergedPackagesData.packages.component || {}
+			mergedPackagesData.packages.component || {},
 		)
 
 		// Create the data for the `bower.json` format
@@ -469,7 +468,7 @@ export class Projectz {
 			},
 
 			// Explicit data
-			mergedPackagesData.packages.bower || {}
+			mergedPackagesData.packages.bower || {},
 		)
 
 		// ----------------------------------
@@ -512,7 +511,7 @@ export class Projectz {
 				jquery,
 				component,
 				bower,
-			}
+			},
 		)
 
 		// Return
@@ -533,13 +532,13 @@ export class Projectz {
 			value = replaceSection(
 				['BADGES', 'BADGE'],
 				value,
-				getBadgesSection.bind(null, data)
+				getBadgesSection.bind(null, data),
 			)
 			value = replaceSection(['DESCRIPTION'], value, data.description)
 			value = replaceSection(
 				['INSTALL'],
 				value,
-				getInstallInstructions.bind(null, data)
+				getInstallInstructions.bind(null, data),
 			)
 			value = replaceSection(
 				['CONTRIBUTE', 'CONTRIBUTING'],
@@ -547,42 +546,42 @@ export class Projectz {
 				data.github
 					? getContributeSection.bind(
 							null,
-							data as EnhancedPackagesDataWithGitHub
+							data as EnhancedPackagesDataWithGitHub,
 					  )
-					: '<!-- github projects only -->'
+					: '<!-- github projects only -->',
 			)
 			value = replaceSection(
 				['BACKERS', 'BACKER'],
 				value,
 				data.github
 					? getBackerSection.bind(null, data as EnhancedPackagesDataWithGitHub)
-					: '<!-- github projects only -->'
+					: '<!-- github projects only -->',
 			)
 			value = replaceSection(
 				['BACKERSFILE', 'BACKERFILE'],
 				value,
 				data.github
 					? getBackerFile.bind(null, data as EnhancedPackagesDataWithGitHub)
-					: '<!-- github projects only -->'
+					: '<!-- github projects only -->',
 			)
 			value = replaceSection(
 				['HISTORY', 'CHANGES', 'CHANGELOG'],
 				value,
 				data.github
 					? getHistorySection.bind(null, data as EnhancedPackagesDataWithGitHub)
-					: '<!-- github projects only -->'
+					: '<!-- github projects only -->',
 			)
 			value = replaceSection(
 				['LICENSE', 'LICENSES'],
 				value,
 				data.github
 					? getLicenseSection.bind(null, data as EnhancedPackagesDataWithGitHub)
-					: '<!-- github projects only -->'
+					: '<!-- github projects only -->',
 			)
 			value = replaceSection(
 				['LICENSEFILE'],
 				value,
-				getLicenseFile.bind(null, data)
+				getLicenseFile.bind(null, data),
 			)
 			enhancedReadmesData[key] = trim(value) + '\n'
 			this.log('info', `Enhanced readme value: ${key}`)
@@ -593,7 +592,7 @@ export class Projectz {
 	/** Save the data we've loaded into the files */
 	protected async save(
 		enhancedPackagesData: EnhancedPackagesData,
-		enhancedReadmesData: EnhancedReadmesData
+		enhancedReadmesData: EnhancedReadmesData,
 	) {
 		// Prepare
 		this.log('info', 'Writing changes...')
@@ -607,7 +606,7 @@ export class Projectz {
 					this.log('info', `Saving package file: ${filepath}`)
 					const data = enhancedPackagesData[key]
 					return writeJSON(filepath, data)
-				}
+				},
 			),
 			// save readme files
 			...Object.entries(this.filenamesForReadmeFiles).map(
@@ -617,7 +616,7 @@ export class Projectz {
 					this.log('info', `Saving readme file: ${filepath}`)
 					const content = enhancedReadmesData[key]
 					return writeFile(filepath, content)
-				}
+				},
 			),
 		])
 

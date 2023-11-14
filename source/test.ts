@@ -30,7 +30,7 @@ kava.test('projectz test prep', function (done) {
 		.then(async function () {
 			binPath = join(
 				projectzPath,
-				(await readJSON<any>(join(projectzPath, 'package.json'))).bin
+				(await readJSON<any>(join(projectzPath, 'package.json'))).bin,
 			)
 		})
 		.finally(done)
@@ -44,7 +44,7 @@ kava.suite('projectz unit tests', function (suite, test) {
 		test('short explicit', function () {
 			equal(
 				getGithubSlug({ repository: 'github:bevry/projectz' }),
-				'bevry/projectz'
+				'bevry/projectz',
 			)
 		})
 		test('gist failure', function () {
@@ -61,7 +61,7 @@ kava.suite('projectz unit tests', function (suite, test) {
 				getGithubSlug({
 					repository: { url: 'https://github.com/bevry/projectz' },
 				}),
-				'bevry/projectz'
+				'bevry/projectz',
 			)
 		})
 		test('full repo with .git', function () {
@@ -69,7 +69,7 @@ kava.suite('projectz unit tests', function (suite, test) {
 				getGithubSlug({
 					repository: { url: 'https://github.com/bevry/projectz.git' },
 				}),
-				'bevry/projectz'
+				'bevry/projectz',
 			)
 		})
 		test('full repo with ssh', function () {
@@ -77,7 +77,7 @@ kava.suite('projectz unit tests', function (suite, test) {
 				getGithubSlug({
 					repository: { url: 'git@github.com:bevry/projectz.git' },
 				}),
-				'bevry/projectz'
+				'bevry/projectz',
 			)
 		})
 	})

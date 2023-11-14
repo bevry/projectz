@@ -1,5 +1,10 @@
 # History
 
+## v3.0.0 2023 November 14
+
+-   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+-   Minimum required Node.js version changed from `node: >=18` to `node: >=20` adapting to ecosystem changes
+
 ## v2.23.0 2023 March 24
 
 -   Updated license from [`MIT`](http://spdx.org/licenses/MIT.html) to [`Artistic-2.0`](http://spdx.org/licenses/Artistic-2.0.html)

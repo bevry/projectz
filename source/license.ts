@@ -6,7 +6,7 @@ import type Fellow from 'fellow'
 function renderSpdxObject(
 	spdxObject: any,
 	output: 'description' | 'body',
-	depth: number = 0
+	depth: number = 0,
 ): string {
 	if (spdxObject.license) {
 		const code = spdxObject.license
@@ -35,7 +35,7 @@ function renderSpdxObject(
 					// Convert the license into HTML
 					.replace(
 						/^(.+?)\n\s*([\s\S]+)\s*$/,
-						'<h2>$1</h2>\n\n<pre>\n$2\n</pre>'
+						'<h2>$1</h2>\n\n<pre>\n$2\n</pre>',
 					)
 	} else if (spdxObject.conjunction) {
 		const left = renderSpdxObject(spdxObject.left, output, depth + 1)
@@ -46,14 +46,14 @@ function renderSpdxObject(
 			: `${left}\n\n${right}\n\n`.trim()
 	} else {
 		throw new Error(
-			`Unknown spdx object value: ${JSON.stringify(spdxObject, null, '  ')}`
+			`Unknown spdx object value: ${JSON.stringify(spdxObject, null, '  ')}`,
 		)
 	}
 }
 
 function getLicensesHTML(
 	spdxString: string,
-	output: 'description' | 'body'
+	output: 'description' | 'body',
 ): string {
 	const sdpxObject = spdxParse(spdxString)
 	return renderSpdxObject(sdpxObject, output)

@@ -131,7 +131,7 @@ function hydrateTextWithLinks(text: string) {
 	// do the replacement
 	const linksMatch = new RegExp(
 		linksArray.map((link) => link.text).join('|'),
-		'g'
+		'g',
 	)
 	return text.replace(linksMatch, function (match) {
 		return linksMap[match.toLowerCase()]
@@ -141,7 +141,7 @@ function hydrateTextWithLinks(text: string) {
 function getNpmInstructionList(
 	data: { name: string; main?: string; keywords?: string | string[] },
 	commands: string[],
-	local: boolean
+	local: boolean,
 ) {
 	const label = `Executable${commands.length === 1 ? '' : 's'}`
 
@@ -310,7 +310,7 @@ function getTypeScriptInstructions() {
 		hydrateTextWithLinks('<h3>TypeScript</h3>'),
 		'',
 		hydrateTextWithLinks(
-			'This project provides its type information via inline JSDoc Comments. To make use of this in TypeScript, set your <code>maxNodeModuleJsDepth</code> compiler option to `5` or thereabouts. You can accomlish this via your `tsconfig.json` file like so:'
+			'This project provides its type information via inline JSDoc Comments. To make use of this in TypeScript, set your <code>maxNodeModuleJsDepth</code> compiler option to `5` or thereabouts. You can accomlish this via your `tsconfig.json` file like so:',
 		),
 		'',
 		'``` json',
@@ -321,7 +321,7 @@ function getTypeScriptInstructions() {
 				},
 			},
 			null,
-			'  '
+			'  ',
 		),
 		'```',
 	].join('\n')
@@ -369,7 +369,7 @@ function getEditionsInstructions(data: {
 			// can't use substring, as we don't know if we have 1.3 and below or not
 			if (edition.directory) {
 				entryParts.push(
-					edition.entry.replace(edition.directory.length + '/', '')
+					edition.entry.replace(edition.directory.length + '/', ''),
 				)
 			} else {
 				entryParts.push(edition.entry)
@@ -379,11 +379,11 @@ function getEditionsInstructions(data: {
 		if (entry === data.main) {
 			hasDefaultEdition = true
 			editions.push(
-				`<code>${data.name}</code> aliases <code>${data.name}/${data.main}</code>`
+				`<code>${data.name}</code> aliases <code>${data.name}/${data.main}</code>`,
 			)
 		}
 		editions.push(
-			`<code>${data.name}/${entry}</code> is ${edition.description}`
+			`<code>${data.name}/${entry}</code> is ${edition.description}`,
 		)
 	}
 
@@ -391,18 +391,18 @@ function getEditionsInstructions(data: {
 	if (!hasDefaultEdition) {
 		if ('editions' in data.dependencies) {
 			editions.unshift(
-				`<code>${data.name}</code> aliases <code>${data.name}/${data.main}</code> which uses the Editions Autoloader to automatically select the correct edition for the consumer's environment`
+				`<code>${data.name}</code> aliases <code>${data.name}/${data.main}</code> which uses the Editions Autoloader to automatically select the correct edition for the consumer's environment`,
 			)
 		} else if ('esnextguardian' in data.dependencies) {
 			editions.unshift(
-				`<code>${data.name}</code> aliases <code>${data.name}/${data.main}</code> which uses ESNextGuardian to automatically select the correct edition for the consumers environment`
+				`<code>${data.name}</code> aliases <code>${data.name}/${data.main}</code> which uses ESNextGuardian to automatically select the correct edition for the consumers environment`,
 			)
 		}
 	}
 
 	// Compile result
 	const result = `<h3>Editions</h3>\n\n<p>This package is published with the following editions:</p>\n\n<ul><li>${editions.join(
-		'</li>\n<li>'
+		'</li>\n<li>',
 	)}</li></ul>`
 
 	// Add links
@@ -430,7 +430,7 @@ export function getInstallInstructions(data: {
 	if (data.name.startsWith(prefix)) {
 		const pluginName = data.name.substring(prefix.length)
 		parts.push(
-			`Install this DocPad plugin by entering <code>docpad install ${pluginName}</code> into your terminal.`
+			`Install this DocPad plugin by entering <code>docpad install ${pluginName}</code> into your terminal.`,
 		)
 	} else {
 		// Node

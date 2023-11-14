@@ -21,7 +21,7 @@ export function getHistorySection(data: {
 		})
 	} else {
 		throw new Error(
-			'History section either requires a HISTORY file or a Github repository'
+			'History section either requires a HISTORY file or a Github repository',
 		)
 	}
 
