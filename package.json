@@ -1,7 +1,7 @@
 {
   "title": "Projectz",
   "name": "projectz",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "Stop wasting time syncing and updating your project's README and Package Files!",
   "homepage": "https://github.com/bevry/projectz",
   "license": "Artistic-2.0",
@@ -149,34 +149,34 @@
     }
   },
   "dependencies": {
-    "@bevry/file": "^2.1.0",
-    "@bevry/json": "^1.7.0",
-    "badges": "^4.32.0",
-    "caterpillar": "^6.9.0",
+    "@bevry/file": "^2.2.0",
+    "@bevry/json": "^1.8.0",
+    "badges": "^4.34.0",
+    "caterpillar": "^6.11.0",
     "fellow": "^6.25.0",
-    "get-cli-arg": "^8.0.0",
+    "get-cli-arg": "^8.1.0",
     "spdx-expression-parse": "^3.0.1",
     "spdx-license-list": "^6.8.0",
-    "typechecker": "^8.1.0"
+    "typechecker": "^8.2.0"
   },
   "devDependencies": {
     "@bevry/update-contributors": "^1.23.0",
     "@types/node": "^20.9.0",
     "@typescript-eslint/eslint-plugin": "^6.11.0",
     "@typescript-eslint/parser": "^6.11.0",
-    "assert-helpers": "^11.2.0",
+    "assert-helpers": "^11.4.0",
     "eslint": "^8.53.0",
     "eslint-config-bevry": "^4.0.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
-    "filedirname": "^2.9.0",
-    "kava": "^7.1.0",
+    "filedirname": "^2.10.0",
+    "kava": "^7.2.0",
     "prettier": "^3.1.0",
-    "safeps": "^11.1.0",
+    "safeps": "^11.2.0",
     "surge": "^0.23.1",
     "typedoc": "^0.25.3",
     "typescript": "5.2.2",
-    "valid-directory": "^4.1.0"
+    "valid-directory": "^4.2.0"
   },
   "scripts": {
     "our:bin": "node ./bin.cjs",
