@@ -1,7 +1,7 @@
 {
   "title": "Projectz",
   "name": "projectz",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "Stop wasting time syncing and updating your project's README and Package Files!",
   "homepage": "https://github.com/bevry/projectz",
   "license": "Artistic-2.0",
@@ -149,9 +149,11 @@
     }
   },
   "dependencies": {
-    "@bevry/file": "^2.2.0",
-    "@bevry/json": "^1.8.0",
-    "badges": "^4.34.0",
+    "@bevry/fs-list": "^2.0.0",
+    "@bevry/fs-read": "^1.0.0",
+    "@bevry/fs-write": "^1.0.0",
+    "@bevry/json": "^1.9.0",
+    "badges": "^4.35.0",
     "caterpillar": "^6.11.0",
     "fellow": "^6.25.0",
     "get-cli-arg": "^8.1.0",
@@ -161,11 +163,11 @@
   },
   "devDependencies": {
     "@bevry/update-contributors": "^1.23.0",
-    "@types/node": "^20.9.0",
+    "@types/node": "^20.9.1",
     "@typescript-eslint/eslint-plugin": "^6.11.0",
     "@typescript-eslint/parser": "^6.11.0",
     "assert-helpers": "^11.4.0",
-    "eslint": "^8.53.0",
+    "eslint": "^8.54.0",
     "eslint-config-bevry": "^4.0.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
@@ -176,7 +178,7 @@
     "surge": "^0.23.1",
     "typedoc": "^0.25.3",
     "typescript": "5.2.2",
-    "valid-directory": "^4.2.0"
+    "valid-directory": "^4.4.0"
   },
   "scripts": {
     "our:bin": "node ./bin.cjs",
@@ -218,5 +220,8 @@
   },
   "boundation": {
     "desiredNodeOnly": true
+  },
+  "testen": {
+    "serial": true
   }
 }

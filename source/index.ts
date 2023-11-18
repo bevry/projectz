@@ -4,7 +4,9 @@
 // First we need to import the libraries we require.
 
 // Load in the file system libraries
-import { readFile, readDirectory, writeFile } from '@bevry/file'
+import list from '@bevry/fs-list'
+import read from '@bevry/fs-read'
+import write from '@bevry/fs-write'
 import { resolve, join, dirname } from 'path'
 
 // Handle configuration files
@@ -125,7 +127,7 @@ export class Projectz {
 		const ReadmeFiles = Object.keys(this.filenamesForReadmeFiles)
 
 		// Load
-		const files = await readDirectory(this.cwd)
+		const files = await list(this.cwd)
 		for (const file of files) {
 			const filePath = join(this.cwd, file)
 
@@ -142,7 +144,7 @@ export class Projectz {
 			for (const key of ReadmeFiles) {
 				if (file.toLowerCase().startsWith(key)) {
 					this.log('info', `Reading meta file: ${filePath}`)
-					const data = await readFile(filePath)
+					const data = await read(filePath)
 					this.filenamesForReadmeFiles[key] = file
 					this.dataForReadmeFiles[key] = data.toString()
 				}
@@ -615,7 +617,7 @@ export class Projectz {
 					const filepath = join(this.cwd, filename)
 					this.log('info', `Saving readme file: ${filepath}`)
 					const content = enhancedReadmesData[key]
-					return writeFile(filepath, content)
+					return write(filepath, content)
 				},
 			),
 		])
