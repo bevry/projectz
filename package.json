@@ -1,7 +1,7 @@
 {
   "title": "Projectz",
   "name": "projectz",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "description": "Stop wasting time syncing and updating your project's README and Package Files!",
   "homepage": "https://github.com/bevry/projectz",
   "license": "Artistic-2.0",
@@ -40,18 +40,19 @@
       "githubsponsors",
       "thanksdev",
       "patreon",
-      "flattr",
       "liberapay",
       "buymeacoffee",
       "opencollective",
       "crypto",
       "paypal",
-      "wishlist"
+      "---",
+      "discord",
+      "twitch"
     ],
     "config": {
       "githubWorkflow": "bevry",
       "githubSponsorsUsername": "balupton",
-      "thanksdevGithubUsername": "balupton",
+      "thanksdevGithubUsername": "bevry",
       "buymeacoffeeUsername": "balupton",
       "cryptoURL": "https://bevry.me/crypto",
       "flattrUsername": "balupton",
@@ -60,6 +61,9 @@
       "patreonUsername": "bevry",
       "paypalURL": "https://bevry.me/paypal",
       "wishlistURL": "https://bevry.me/wishlist",
+      "discordServerID": "1147436445783560193",
+      "discordServerInvite": "nQuXddV7VP",
+      "twitchUsername": "balupton",
       "githubUsername": "bevry",
       "githubRepository": "projectz",
       "githubSlug": "bevry/projectz",
@@ -136,45 +140,57 @@
         "node": "20",
         "browsers": false
       }
+    },
+    {
+      "description": "TypeScript compiled Types with Import for modules",
+      "directory": "edition-types",
+      "entry": "index.d.ts",
+      "tags": [
+        "compiled",
+        "types",
+        "import"
+      ],
+      "engines": false
     }
   ],
   "bin": "bin.cjs",
-  "types": "./compiled-types/",
+  "types": "edition-types/index.d.ts",
   "type": "module",
   "main": "edition-es2022/index.js",
   "exports": {
     "node": {
+      "types": "./edition-types/index.d.ts",
       "import": "./edition-es2022-esm/index.js",
       "require": "./edition-es2022/index.js"
     }
   },
   "dependencies": {
-    "@bevry/fs-list": "^2.0.0",
-    "@bevry/fs-read": "^1.0.0",
-    "@bevry/fs-write": "^1.0.0",
-    "@bevry/json": "^1.9.0",
-    "badges": "^4.35.0",
-    "caterpillar": "^6.11.0",
+    "@bevry/fs-list": "^2.1.0",
+    "@bevry/fs-read": "^1.1.0",
+    "@bevry/fs-write": "^1.1.0",
+    "@bevry/json": "^1.10.0",
+    "badges": "^4.36.0",
+    "caterpillar": "^6.12.0",
     "fellow": "^6.25.0",
     "get-cli-arg": "^8.1.0",
     "spdx-expression-parse": "^3.0.1",
     "spdx-license-list": "^6.8.0",
-    "typechecker": "^8.2.0"
+    "typechecker": "^8.5.0"
   },
   "devDependencies": {
     "@bevry/update-contributors": "^1.23.0",
-    "@types/node": "^20.9.1",
-    "@typescript-eslint/eslint-plugin": "^6.11.0",
-    "@typescript-eslint/parser": "^6.11.0",
-    "assert-helpers": "^11.4.0",
+    "@types/node": "^20.9.3",
+    "@typescript-eslint/eslint-plugin": "^6.12.0",
+    "@typescript-eslint/parser": "^6.12.0",
+    "assert-helpers": "^11.5.0",
     "eslint": "^8.54.0",
-    "eslint-config-bevry": "^4.0.0",
+    "eslint-config-bevry": "^5.1.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
-    "filedirname": "^2.10.0",
-    "kava": "^7.2.0",
+    "filedirname": "^2.11.0",
+    "kava": "^7.3.0",
     "prettier": "^3.1.0",
-    "safeps": "^11.2.0",
+    "safeps": "^11.3.0",
     "surge": "^0.23.1",
     "typedoc": "^0.25.3",
     "typescript": "5.2.2",
@@ -183,10 +199,10 @@
   "scripts": {
     "our:bin": "node ./bin.cjs",
     "our:clean": "rm -rf ./docs ./edition* ./es2015 ./es5 ./out ./.next",
-    "our:compile": "npm run our:compile:edition-es2022 && npm run our:compile:edition-es2022-esm && npm run our:compile:types",
+    "our:compile": "npm run our:compile:edition-es2022 && npm run our:compile:edition-es2022-esm && npm run our:compile:edition-types",
     "our:compile:edition-es2022": "tsc --module commonjs --target ES2022 --outDir ./edition-es2022 --project tsconfig.json && ( test ! -d edition-es2022/source || ( mv edition-es2022/source edition-temp && rm -rf edition-es2022 && mv edition-temp edition-es2022 ) ) && printf '%s' '{\"type\": \"commonjs\"}' > edition-es2022/package.json",
     "our:compile:edition-es2022-esm": "tsc --module ESNext --target ES2022 --outDir ./edition-es2022-esm --project tsconfig.json && ( test ! -d edition-es2022-esm/source || ( mv edition-es2022-esm/source edition-temp && rm -rf edition-es2022-esm && mv edition-temp edition-es2022-esm ) ) && printf '%s' '{\"type\": \"module\"}' > edition-es2022-esm/package.json",
-    "our:compile:types": "tsc --project tsconfig.json --emitDeclarationOnly --declaration --declarationMap --declarationDir ./compiled-types && ( test ! -d compiled-types/source || ( mv compiled-types/source edition-temp && rm -rf compiled-types && mv edition-temp compiled-types ) )",
+    "our:compile:edition-types": "tsc --emitDeclarationOnly --declaration --declarationMap --declarationDir ./edition-types --project tsconfig.json && ( test ! -d edition-types/source || ( mv edition-types/source edition-temp && rm -rf edition-types && mv edition-temp edition-types ) )",
     "our:deploy": "printf '%s\n' 'no need for this project'",
     "our:meta": "npm run our:meta:contributors && npm run our:meta:docs && npm run our:meta:projectz",
     "our:meta:contributors": "update-contributors",
