@@ -1,19 +1,20 @@
-// Import
-import { getGithubSlug } from './util.js'
-import safeps from 'safeps'
-const { spawn } = safeps
+// builtin
+import { join } from 'node:path'
+import { readdir, readFile } from 'node:fs'
+
+// local
 import kava from 'kava'
-import { join } from 'path'
-import { readdir, readFile } from 'fs'
 import { equal } from 'assert-helpers'
 import filedirname from 'filedirname'
-import { readJSON } from '@bevry/json'
+import safeps from 'safeps'
+const { spawn } = safeps
 
 // -------------------------------------
 // Paths
 
 const [file, dir] = filedirname()
 const projectzPath = join(dir, '..')
+const binPath = join(dir, 'bin.js')
 const srcPath = join(projectzPath, 'test-fixtures', 'src')
 const expectPath = join(projectzPath, 'test-fixtures', 'out-expected')
 
@@ -24,69 +25,10 @@ function clean(src: string) {
 	return src.replace(/@[0-9^~.]/, '[cleaned]')
 }
 
-let binPath: string
-kava.test('projectz test prep', function (done) {
-	Promise.resolve()
-		.then(async function () {
-			binPath = join(
-				projectzPath,
-				(await readJSON<any>(join(projectzPath, 'package.json'))).bin,
-			)
-		})
-		.finally(done)
-})
-
-kava.suite('projectz unit tests', function (suite, test) {
-	suite('getGithubSlug', function (suite, test) {
-		test('short repo', function () {
-			equal(getGithubSlug({ repository: 'bevry/projectz' }), 'bevry/projectz')
-		})
-		test('short explicit', function () {
-			equal(
-				getGithubSlug({ repository: 'github:bevry/projectz' }),
-				'bevry/projectz',
-			)
-		})
-		test('gist failure', function () {
-			equal(getGithubSlug({ repository: 'gist:11081aaa281' }), null)
-		})
-		test('bitbucket failure', function () {
-			equal(getGithubSlug({ repository: 'bitbucket:bb/repo' }), null)
-		})
-		test('gitlab failure', function () {
-			equal(getGithubSlug({ repository: 'gitlab:gl/repo' }), null)
-		})
-		test('full repo', function () {
-			equal(
-				getGithubSlug({
-					repository: { url: 'https://github.com/bevry/projectz' },
-				}),
-				'bevry/projectz',
-			)
-		})
-		test('full repo with .git', function () {
-			equal(
-				getGithubSlug({
-					repository: { url: 'https://github.com/bevry/projectz.git' },
-				}),
-				'bevry/projectz',
-			)
-		})
-		test('full repo with ssh', function () {
-			equal(
-				getGithubSlug({
-					repository: { url: 'git@github.com:bevry/projectz.git' },
-				}),
-				'bevry/projectz',
-			)
-		})
-	})
-})
-
 kava.suite('projectz integration tests', function (suite, test) {
 	// Compile with Projectz using -p to switch to the source path.
 	test('compile project with projectz', function (done) {
-		const command = ['node', binPath, 'compile', `--path=${srcPath}`]
+		const command = ['node', binPath, '--offline', `--path=${srcPath}`]
 		spawn(command, { stdio: 'inherit' }, done)
 	})
 

@@ -1,74 +1,96 @@
-// Import process for deno compat
-import process from 'process'
+// builtin
+import { argv, cwd, stdout } from 'node:process'
 
-// Import caterpillar [Caterpillar](https://github.com/bevry/caterpillar) for logging
+// external
 import { Logger, Filter, Human } from 'caterpillar'
 
-// Import the package used to get the value of CLI arguments
-import getarg from 'get-cli-arg'
-
-// Import out projectz utility
+// local
 import { Projectz } from './index.js'
 
-async function main(): Promise<void> {
-	// Compile
-	if (process.argv.includes('compile')) {
-		// fetch
-		const p = getarg('path')
-		const d = getarg('verbose')
+// cli
+import Argument from '@bevry/argument'
+const help = `
+	USAGE:
+	projectz [...options]
 
-		// bc upgrade
-		if (process.argv.includes('-p')) {
-			console.log(
-				'projecz now requires -p argument to be specifie via --path=value',
-			)
-			return process.exit(1)
+	OPTIONS:
+	--path=<string>
+	  The directory to process, defaults to the current working directory.
+
+	--[no-]verbose[=<boolean>]
+	  Set the logging level to verbose (log level 7 instead of the default 6).
+
+	--[no-]offline[=<boolean>]
+	  If enabled, then remote updates will be not performed (such as fetching latest backers).
+
+	compile
+	  Prior to version 3.5, this was necessary for projectz to do its thing. Now it is the default behaviour.`
+
+async function main(args: Array<string>): Promise<void> {
+	// parse arguments
+	let path: string = cwd(),
+		verbose: boolean = false,
+		offline: boolean = false
+	for (const arg of args) {
+		const a = new Argument(arg)
+		switch (a.key) {
+			case 'help': {
+				return Argument.help(help)
+			}
+			case 'path': {
+				path = a.string({ enabled: path })
+				break
+			}
+			case 'verbose': {
+				verbose = a.boolean()
+				break
+			}
+			case 'offline': {
+				offline = a.boolean()
+				break
+			}
+			case 'compile': {
+				console.warn(
+					a.arg,
+					'is no longer necessary, and is now the default behaviour.',
+				)
+				break
+			}
+			default: {
+				switch (a.value) {
+					case 'compile': {
+						console.warn(
+							a.arg,
+							'is no longer necessary, and is now the default behaviour.',
+						)
+						break
+					}
+					default: {
+						return a.unknown()
+					}
+				}
+			}
 		}
-		if (process.argv.includes('-d') || process.argv.includes('--debug')) {
-			console.log(
-				'projecz now requires -d argument to be specified via --verbose',
-			)
-			return process.exit(1)
-		}
-
-		// Prepare our logging configuration
-		const level = d ? 7 : 6
-
-		// Setup our logging
-		const logger = new Logger({ lineLevel: d ? level : -Infinity })
-		const filter = new Filter({ filterLevel: level })
-		const human = new Human()
-
-		// Pipe logger output to filter, then filter output to stdout
-		logger.pipe(filter).pipe(human).pipe(process.stdout)
-
-		// Compile
-		try {
-			const project = new Projectz({
-				log: logger.log.bind(logger),
-				cwd: p || null,
-			})
-			await project.compile()
-		} catch (err: any) {
-			// fatal
-			// do not use logger.log, as if a fatal error happened, it won't output it
-			console.error(err.stack || err)
-			return process.exit(1)
-		}
-
-		// done
-		logger.log('info', 'Completed successfully')
-	} else {
-		// output help
-		console.log(
-			'projectz compile: merge our data files and compile our meta files',
-		)
-		console.log('\t--verbose\tOutputs verbose logging')
-		console.log(
-			'\t--path=value\tPath to the project that you wish to work with, defaults to the current working directory',
-		)
-		return process.exit(1)
 	}
-}
 
-main()
+	// setup our logging
+	const level = verbose ? 7 : 6
+	const logger = new Logger({ lineLevel: verbose ? level : -Infinity })
+	const filter = new Filter({ filterLevel: level })
+	const human = new Human()
+	logger.pipe(filter).pipe(human).pipe(stdout)
+
+	// configure projectz
+	const project = new Projectz({
+		offline,
+		cwd: path,
+		log: logger.log.bind(logger),
+	})
+
+	// execute
+	await project.compile()
+
+	// done
+	logger.log('info', 'Completed successfully')
+}
+main(argv.slice(2)).catch(Argument.catch(help))

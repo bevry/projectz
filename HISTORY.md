@@ -1,5 +1,13 @@
 # History
 
+## v4.0.0 2023 December 27
+
+-   CLI has been rewritten, supporting new `offline` mode, and no longer requires the `compile` argument; made possible via [bevry/argument](https://github.com/bevry/argument)
+-   Backers are now fetched if possible; made possible via [bevry/github-api](https://github.com/bevry/github-api)
+-   Markdown files are now rendered with markdown segments instead of html; made possible via [bevry/render](https://github.com/bevry/render)
+-   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+-   Thank you to the sponsors: [Andrew Nesbitt](https://nesbitt.io), [Balsa](https://balsa.com), [Codecov](https://codecov.io/), [Poonacha Medappa](https://poonachamedappa.com), [Rob Morris](https://github.com/Rob-Morris), [Sentry](https://sentry.io), [Syntax](https://syntax.fm)
+
 ## v3.4.0 2023 November 25
 
 -   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)

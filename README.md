@@ -1,9 +1,8 @@
 <!-- TITLE/ -->
 
-<h1>Projectz</h1>
+# Projectz
 
 <!-- /TITLE -->
-
 
 <!-- BADGES/ -->
 
@@ -25,7 +24,6 @@
 
 <!-- /BADGES -->
 
-
 <!-- DESCRIPTION/ -->
 
 Stop wasting time syncing and updating your project's README and Package Files!
@@ -39,12 +37,12 @@ This far, projectz is used directly by [802 repositories](https://github.com/bev
 
 Here's some of the things it can do:
 
--   [Keep your projects data files synchronised appropriately](https://github.com/bevry/projectz#data-files), supports:
+-   [Keep your project's package files synchronised appropriately](https://github.com/bevry/projectz#data-files), supports:
     -   `package.json`
     -   `bower.json`
     -   `component.json`
     -   `jquery.json`
--   [Create beautiful standardised readme files that stay in sync with your data files](https://github.com/bevry/projectz#readme-files), supports:
+-   [Create beautiful standardised readme files that stay in sync with your package files](https://github.com/bevry/projectz#readme-files), supports:
     -   `README`
     -   `CONTRIBUTING`
     -   `LICENSE`
@@ -52,6 +50,7 @@ Here's some of the things it can do:
     -   `HISTORY`
 -   Automatic injection of the appropriate installation methods, supports:
     -   [npm](https://www.npmjs.com)
+    -   [deno](https://deno.land)
     -   [jspm](http://jspm.io)
     -   [Component](http://github.com/component/component)
     -   [Bower](http://bower.io/)
@@ -70,7 +69,7 @@ Here's some of the things it can do:
 Once installed locally, you can compile your project using projectz by running the following in your terminal:
 
 ```shell
-npx projectz compile
+npx projectz
 ```
 
 ### Automatically
@@ -82,8 +81,8 @@ If you don't use a build tool, but do use npm, then you can add the following to
 ```json
 {
     "scripts": {
-        "compile": "projectz compile",
-        "posttest": "npm run compile"
+        "compile": "projectz",
+        "posttest": "projectz"
     }
 }
 ```
@@ -105,9 +104,9 @@ If you get a rate limit warning, you will need to add `GITHUB_ACCESS_TOKEN` (or 
 
 ## Configuring Projectz
 
-### Data Files
+### Package Files
 
-Projectz helps you maintain the following data files:
+Projectz helps you maintain the following package files:
 
 -   `package.json`
 -   `bower.json`
@@ -116,7 +115,7 @@ Projectz helps you maintain the following data files:
 
 It does this by reading them, combining their data in memory, and then outputting the appropriate fields and over-rides for each file.
 
-If you are making use of multiple meta data files, you may find defining a projectz meta file (`projectz.json` for JSON to be useful. The projectz meta file can serve as a central location for the configuration of all the other files. However, if you only require one meta data file, then you can ignore this ability.
+If you are making use of multiple package files, you may find defining a `projectz.json` package file will help, as it can serve as a central location for the configuration of all the other files. However, if you only require one package file, then you can ignore this ability.
 
 Projectz takes notes of these meta data fields:
 
@@ -272,68 +271,71 @@ This README is also, expectedly, built with projectz. [View its source.](https:/
 
 <!-- INSTALL/ -->
 
-<h2>Install</h2>
+## Install
 
-<a href="https://npmjs.com" title="npm is a package manager for javascript"><h3>npm</h3></a>
-<h4>Install Globally</h4>
-<ul>
-<li>Install: <code>npm install --global projectz</code></li>
-<li>Executable: <code>projectz</code></li>
-</ul>
-<h4>Install Locally</h4>
-<ul>
-<li>Install: <code>npm install --save projectz</code></li>
-<li>Executable: <code>npx projectz</code></li>
-<li>Import: <code>import * as pkg from ('projectz')</code></li>
-<li>Require: <code>const pkg = require('projectz')</code></li>
-</ul>
+### [npm](https://npmjs.com "npm is a package manager for javascript")
 
-<h3><a href="https://editions.bevry.me" title="Editions are the best way to produce and consume packages you care about.">Editions</a></h3>
+#### Install Globally
 
-<p>This package is published with the following editions:</p>
+-   Install: `npm install --global projectz`
+-   Executable: `projectz`
 
-<ul><li><code>projectz/source/index.ts</code> is <a href="https://www.typescriptlang.org/" title="TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. ">TypeScript</a> source code with <a href="https://babeljs.io/docs/learn-es2015/#modules" title="ECMAScript Modules">Import</a> for modules</li>
-<li><code>projectz</code> aliases <code>projectz/edition-es2022/index.js</code></li>
-<li><code>projectz/edition-es2022/index.js</code> is <a href="https://www.typescriptlang.org/" title="TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. ">TypeScript</a> compiled against ES2022 for <a href="https://nodejs.org" title="Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine">Node.js</a> with <a href="https://nodejs.org/dist/latest-v5.x/docs/api/modules.html" title="Node/CJS Modules">Require</a> for modules</li>
-<li><code>projectz/edition-es2022-esm/index.js</code> is <a href="https://www.typescriptlang.org/" title="TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. ">TypeScript</a> compiled against ES2022 for <a href="https://nodejs.org" title="Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine">Node.js</a> with <a href="https://babeljs.io/docs/learn-es2015/#modules" title="ECMAScript Modules">Import</a> for modules</li>
-<li><code>projectz/edition-types/index.d.ts</code> is <a href="https://www.typescriptlang.org/" title="TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. ">TypeScript</a> compiled Types with <a href="https://babeljs.io/docs/learn-es2015/#modules" title="ECMAScript Modules">Import</a> for modules</li></ul>
+#### Install Locally
+
+-   Install: `npm install --save projectz`
+-   Executable: `npx projectz`
+-   Import: `import * as pkg from ('projectz')`
+-   Require: `const pkg = require('projectz')`
+
+### [Editions](https://editions.bevry.me "Editions are the best way to produce and consume packages you care about.")
+
+This package is published with the following editions:
+-   `projectz/source/index.ts` is [TypeScript](https://www.typescriptlang.org/ "TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.") source code with [Import](https://babeljs.io/docs/learn-es2015/#modules "ECMAScript Modules") for modules
+-   `projectz` aliases `projectz/edition-es2022/index.js`
+-   `projectz/edition-es2022/index.js` is [TypeScript](https://www.typescriptlang.org/ "TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.") compiled against [ES2022](https://en.wikipedia.org/wiki/ES2022 "ECMAScript 2022") for [Node.js](https://nodejs.org "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine") 20 with [Require](https://nodejs.org/dist/latest-v5.x/docs/api/modules.html "Node/CJS Modules") for modules
+-   `projectz/edition-es2022-esm/index.js` is [TypeScript](https://www.typescriptlang.org/ "TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.") compiled against [ES2022](https://en.wikipedia.org/wiki/ES2022 "ECMAScript 2022") for [Node.js](https://nodejs.org "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine") 20 with [Import](https://babeljs.io/docs/learn-es2015/#modules "ECMAScript Modules") for modules
+-   `projectz/edition-types/index.d.ts` is [TypeScript](https://www.typescriptlang.org/ "TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.") compiled Types with [Import](https://babeljs.io/docs/learn-es2015/#modules "ECMAScript Modules") for modules
 
 <!-- /INSTALL -->
 
-
 <!-- HISTORY/ -->
 
-<h2>History</h2>
+## History
 
-<a href="https://github.com/bevry/projectz/blob/master/HISTORY.md#files">Discover the release history by heading on over to the <code>HISTORY.md</code> file.</a>
+[Discover the release history by heading on over to the `HISTORY.md` file.](https://github.com/bevry/projectz/blob/HEAD/HISTORY.md#files)
 
 <!-- /HISTORY -->
 
-
-<!-- CONTRIBUTE/ -->
-
-<h2>Contribute</h2>
-
-<a href="https://github.com/bevry/projectz/blob/master/CONTRIBUTING.md#files">Discover how you can contribute by heading on over to the <code>CONTRIBUTING.md</code> file.</a>
-
-<!-- /CONTRIBUTE -->
-
-
 <!-- BACKERS/ -->
 
-<h2>Backers</h2>
+## Backers
 
-<h3>Maintainers</h3>
+### Code
 
-These amazing people are maintaining this project:
+[Discover how to contribute via the `CONTRIBUTING.md` file.](https://github.com/bevry/projectz/blob/HEAD/CONTRIBUTING.md#files)
 
-<ul><li><a href="https://github.com/balupton">Benjamin Lupton</a> — <a href="https://github.com/bevry/projectz/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/projectz">view contributions</a></li>
-<li><a href="https://github.com/jamesgeorge007">James George</a> — <a href="https://github.com/bevry/projectz/commits?author=jamesgeorge007" title="View the GitHub contributions of James George on repository bevry/projectz">view contributions</a></li>
-<li><a href="https://github.com/RobLoach">Rob Loach</a> — <a href="https://github.com/bevry/projectz/commits?author=RobLoach" title="View the GitHub contributions of Rob Loach on repository bevry/projectz">view contributions</a></li></ul>
+#### Authors
 
-<h3>Sponsors</h3>
+-   [Benjamin Lupton](https://balupton.com) — Benjamin furthers the humanities and the commons using the monikers balupton and @bevry
 
-No sponsors yet! Will you be the first?
+#### Maintainers
+
+-   [Benjamin Lupton](https://github.com/balupton) — Benjamin furthers the humanities and the commons using the monikers balupton and @bevry
+
+#### Contributors
+
+-   [Benjamin Lupton](https://github.com/balupton) — [view contributions](https://github.com/bevry/projectz/commits?author=balupton "View the GitHub contributions of Benjamin Lupton on repository bevry/projectz")
+-   [James George](https://github.com/jamesgeorge007) — [view contributions](https://github.com/bevry/projectz/commits?author=jamesgeorge007 "View the GitHub contributions of James George on repository bevry/projectz")
+-   [Oliver Lorenz](https://github.com/oliverlorenz) — [view contributions](https://github.com/bevry/projectz/commits?author=oliverlorenz "View the GitHub contributions of Oliver Lorenz on repository bevry/projectz")
+-   [Peter C](https://github.com/peterkc) — [view contributions](https://github.com/bevry/projectz/commits?author=peterkc "View the GitHub contributions of Peter C on repository bevry/projectz")
+-   [Peter Flannery](https://github.com/pflannery) — [view contributions](https://github.com/bevry/projectz/commits?author=pflannery "View the GitHub contributions of Peter Flannery on repository bevry/projectz")
+-   [Rob Loach](https://github.com/RobLoach) — [view contributions](https://github.com/bevry/projectz/commits?author=RobLoach "View the GitHub contributions of Rob Loach on repository bevry/projectz")
+-   [Shahar "Dawn" Or](https://github.com/mightyiam) — [view contributions](https://github.com/bevry/projectz/commits?author=mightyiam "View the GitHub contributions of Shahar &quot;Dawn&quot; Or on repository bevry/projectz")
+-   [vsopvsop](https://github.com/vsopvsop) — [view contributions](https://github.com/bevry/projectz/commits?author=vsopvsop "View the GitHub contributions of vsopvsop on repository bevry/projectz")
+-   [Zearin](https://github.com/Zearin) — [view contributions](https://github.com/bevry/projectz/commits?author=Zearin "View the GitHub contributions of Zearin on repository bevry/projectz")
+-   [Zlatan Vasović](https://github.com/zlatanvasovic) — [view contributions](https://github.com/bevry/projectz/commits?author=zlatanvasovic "View the GitHub contributions of Zlatan Vasović on repository bevry/projectz")
+
+### Finances
 
 <span class="badge-githubsponsors"><a href="https://github.com/sponsors/balupton" title="Donate to this project using GitHub Sponsors"><img src="https://img.shields.io/badge/github-donate-yellow.svg" alt="GitHub Sponsors donate button" /></a></span>
 <span class="badge-thanksdev"><a href="https://thanks.dev/u/gh/bevry" title="Donate to this project using ThanksDev"><img src="https://img.shields.io/badge/thanksdev-donate-yellow.svg" alt="ThanksDev donate button" /></a></span>
@@ -344,36 +346,45 @@ No sponsors yet! Will you be the first?
 <span class="badge-crypto"><a href="https://bevry.me/crypto" title="Donate to this project using Cryptocurrency"><img src="https://img.shields.io/badge/crypto-donate-yellow.svg" alt="crypto donate button" /></a></span>
 <span class="badge-paypal"><a href="https://bevry.me/paypal" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a></span>
 
-<h3>Contributors</h3>
+#### Sponsors
 
-These amazing people have contributed code to this project:
+-   [Andrew Nesbitt](https://nesbitt.io) — Software engineer and researcher
+-   [Balsa](https://balsa.com) — We're Balsa, and we're building tools for builders.
+-   [Codecov](https://codecov.io/) — Empower developers with tools to improve code quality and testing.
+-   [Poonacha Medappa](https://poonachamedappa.com)
+-   [Rob Morris](https://github.com/Rob-Morris)
+-   [Sentry](https://sentry.io) — Real-time crash reporting for your web apps, mobile apps, and games.
+-   [Syntax](https://syntax.fm) — Syntax Podcast
 
-<ul><li><a href="https://github.com/balupton">Benjamin Lupton</a> — <a href="https://github.com/bevry/projectz/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/projectz">view contributions</a></li>
-<li><a href="https://github.com/jamesgeorge007">James George</a> — <a href="https://github.com/bevry/projectz/commits?author=jamesgeorge007" title="View the GitHub contributions of James George on repository bevry/projectz">view contributions</a></li>
-<li><a href="https://github.com/oliverlorenz">Oliver Lorenz</a> — <a href="https://github.com/bevry/projectz/commits?author=oliverlorenz" title="View the GitHub contributions of Oliver Lorenz on repository bevry/projectz">view contributions</a></li>
-<li><a href="https://github.com/peterkc">Peter C</a> — <a href="https://github.com/bevry/projectz/commits?author=peterkc" title="View the GitHub contributions of Peter C on repository bevry/projectz">view contributions</a></li>
-<li><a href="https://github.com/pflannery">Peter Flannery</a> — <a href="https://github.com/bevry/projectz/commits?author=pflannery" title="View the GitHub contributions of Peter Flannery on repository bevry/projectz">view contributions</a></li>
-<li><a href="https://github.com/RobLoach">Rob Loach</a> — <a href="https://github.com/bevry/projectz/commits?author=RobLoach" title="View the GitHub contributions of Rob Loach on repository bevry/projectz">view contributions</a></li>
-<li><a href="https://github.com/mightyiam">Shahar "Dawn" Or</a> — <a href="https://github.com/bevry/projectz/commits?author=mightyiam" title="View the GitHub contributions of Shahar "Dawn" Or on repository bevry/projectz">view contributions</a></li>
-<li><a href="https://github.com/Zearin">Zearin</a> — <a href="https://github.com/bevry/projectz/commits?author=Zearin" title="View the GitHub contributions of Zearin on repository bevry/projectz">view contributions</a></li>
-<li><a href="https://github.com/zlatanvasovic">Zlatan Vasović</a> — <a href="https://github.com/bevry/projectz/commits?author=zlatanvasovic" title="View the GitHub contributions of Zlatan Vasović on repository bevry/projectz">view contributions</a></li>
-<li><a href="https://github.com/vsopvsop">vsopvsop</a> — <a href="https://github.com/bevry/projectz/commits?author=vsopvsop" title="View the GitHub contributions of vsopvsop on repository bevry/projectz">view contributions</a></li></ul>
+#### Donors
 
-<a href="https://github.com/bevry/projectz/blob/master/CONTRIBUTING.md#files">Discover how you can contribute by heading on over to the <code>CONTRIBUTING.md</code> file.</a>
+-   [Andrew Nesbitt](https://nesbitt.io)
+-   [Balsa](https://balsa.com)
+-   [Chad](https://opencollective.com/chad8)
+-   [Codecov](https://codecov.io/)
+-   [entroniq](https://gitlab.com/entroniq)
+-   [Jean-Luc Geering](https://github.com/jlgeering)
+-   [Michael Duane Mooring](https://mdm.cc)
+-   [Mohammed Shah](https://github.com/smashah)
+-   [Poonacha Medappa](https://poonachamedappa.com)
+-   [Rob Morris](https://github.com/Rob-Morris)
+-   [Sentry](https://sentry.io)
+-   [ServieJS](https://github.com/serviejs)
+-   [Skunk Team](https://skunk.team)
+-   [Syntax](https://syntax.fm)
 
 <!-- /BACKERS -->
 
-
 <!-- LICENSE/ -->
 
-<h2>License</h2>
+## License
 
 Unless stated otherwise all works are:
 
-<ul><li>Copyright &copy; 2013+ <a href="http://bevry.me">Bevry Pty Ltd</a></li></ul>
+-   Copyright &copy; [Benjamin Lupton](https://balupton.com)
 
 and licensed under:
 
-<ul><li><a href="http://spdx.org/licenses/Artistic-2.0.html">Artistic License 2.0</a></li></ul>
+-   [Artistic License 2.0](http://spdx.org/licenses/Artistic-2.0.html)
 
 <!-- /LICENSE -->

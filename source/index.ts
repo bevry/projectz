@@ -1,76 +1,63 @@
 /* eslint key-spacing:0 */
 
-// Imports
-// First we need to import the libraries we require.
+// builtin
+import { resolve, join, dirname } from 'node:path'
 
-// Load in the file system libraries
+// external
+import type { BadgesField } from 'badges'
+import trimEmptyKeys from 'trim-empty-keys'
+import arrangePackageData from 'arrange-package-json'
 import list from '@bevry/fs-list'
 import read from '@bevry/fs-read'
 import write from '@bevry/fs-write'
-import { resolve, join, dirname } from 'path'
-
-// Handle configuration files
 import { readJSON, writeJSON } from '@bevry/json'
-
-// [TypeChecker](https://github.com/bevry/typechecker) is used for checking data types
 import { isString, isPlainObject, isEmptyPlainObject } from 'typechecker'
-
-// Fellow handling, and contributor fetching
-import Fellow from 'fellow'
-
-// Badges
-import type { BadgesField } from 'badges'
-
-// Load in our other project files
 import {
-	getContributeSection,
-	getBackerFile,
-	getBackerSection,
-} from './backer.js'
-import { getBadgesSection } from './badge.js'
-import { getHistorySection } from './history.js'
-import { getInstallInstructions } from './install.js'
-import { getLicenseFile, getLicenseSection } from './license.js'
-import {
-	getGithubSlug,
-	getPeopleTextArray,
-	replaceSection,
-	trim,
-} from './util.js'
+	getGitHubSlugFromPackageData,
+	getBackers,
+	renderBackers,
+	BackersRenderFormat,
+} from '@bevry/github-api'
+import { mh1, trim } from '@bevry/render'
 
-// Types
+// local
 import type {
 	FilenamesForPackageFiles,
 	FilenamesForReadmeFiles,
 	DataForReadmeFiles,
 	DataForPackageFiles,
-	EnhancedPackagesData,
 	Github,
 	PackageEnhanced,
 	Editions,
-	EnhancedPackagesDataWithGitHub,
-	EnhancedReadmesData,
+	EnhancedPackageDataWithGitHub,
+	EnhancedReadmeData,
+	EnhancedPackageData,
 } from './types.js'
 export * from './types.js'
+import {
+	getContributeSection,
+	getBackersFile,
+	getBackersSection,
+} from './backer.js'
+import { getBadgesSection } from './badge.js'
+import { getHistorySection } from './history.js'
+import { getInstallInstructions } from './install.js'
+import { getLicenseFile, getLicenseSection } from './license.js'
+import { replaceSection } from './util.js'
 
-interface Options {
-	/** the directory that we wish to do our work on, defaults to `process.cwd()` */
-	cwd?: string
-	/** the log function to use, first argument being the log level */
-	log?: Function
-}
-
-// Definition
-// Projects is defined as a class to ensure we can run multiple instances of it
+/** Projectz, use to merge data files and render meta files. */
 export class Projectz {
-	/** our log function to use (logLevel, ...messages) */
-	protected readonly log: Function = function () {}
+	/** The log function to use, first argument being the log level */
+	readonly log: Function = function () {}
 
-	/** the current working directory (the path) that projectz is working on */
-	protected readonly cwd: string
+	/** The directory to process, defaults to the current working directory*/
+	readonly cwd: string
+
+	/** If enabled, then remote updates will be not performed (such as fetching latest backers). */
+	readonly offline: boolean = false
 
 	/**
-	 * The absolute paths for all the package files.
+	 * Resolved absolute paths for the package files.
 	 * Should be arranged in the order of merging preference.
 	 */
 	protected readonly filenamesForPackageFiles: FilenamesForPackageFiles = {
@@ -81,10 +68,10 @@ export class Projectz {
 		projectz: null,
 	}
 
-	/** the data for each of our package files */
+	/** Resolved data for the package files */
 	protected readonly dataForPackageFiles: DataForPackageFiles = {}
 
-	/** the absolute paths for all the meta files */
+	/** Resolved absolute paths for the readme files */
 	protected readonly filenamesForReadmeFiles: FilenamesForReadmeFiles = {
 		// gets filled in with relative paths
 		readme: null,
@@ -94,44 +81,40 @@ export class Projectz {
 		license: null,
 	}
 
-	/** the data for each of our readme files */
+	/** Resolved data for the readme files */
 	protected readonly dataForReadmeFiles: DataForReadmeFiles = {}
 
-	// Apply options
-	constructor(opts: Options) {
-		this.cwd = opts.cwd ? resolve(opts.cwd) : process.cwd()
+	/** Configure our instance. */
+	constructor(opts: Partial<Pick<Projectz, 'cwd' | 'offline' | 'log'>> = {}) {
+		this.cwd = resolve(opts.cwd || '.')
+		this.offline = opts.offline || false
 		if (opts.log) this.log = opts.log
-		// this.log = console.log.bind(console)
 	}
 
-	/** Compile the project */
+	/** Use the configuration to compile the project. */
 	public async compile() {
-		// Load readme and package data
 		await this.loadPaths()
 
-		// Enhance our package data
-		const enhancedPackagesData = await this.enhancePackagesData()
+		const enhancedPackageData = await this.enhanceDataForPackageFiles()
 
-		// Enhance our readme data
-		const enhancedReadmesData =
-			await this.enhanceReadmesData(enhancedPackagesData)
+		const enhancedReadmeData =
+			await this.enhanceDataForReadmeFiles(enhancedPackageData)
 
-		// Save
-		await this.save(enhancedPackagesData, enhancedReadmesData)
+		await this.save(enhancedPackageData, enhancedReadmeData)
 	}
 
-	/** Load in the paths we have specified */
+	/** Resolve the paths and metdata for the data and meta files. */
 	protected async loadPaths() {
 		// Apply our determined paths for packages
-		const packages = Object.keys(this.filenamesForPackageFiles)
-		const ReadmeFiles = Object.keys(this.filenamesForReadmeFiles)
+		const packageFiles = Object.keys(this.filenamesForPackageFiles)
+		const readmeFiles = Object.keys(this.filenamesForReadmeFiles)
 
 		// Load
 		const files = await list(this.cwd)
 		for (const file of files) {
 			const filePath = join(this.cwd, file)
 
-			for (const key of packages) {
+			for (const key of packageFiles) {
 				const basename = file.toLowerCase().split('.').slice(0, -1).join('.')
 				if (basename === key) {
 					this.log('info', `Reading package file: ${filePath}`)
@@ -141,7 +124,7 @@ export class Projectz {
 				}
 			}
 
-			for (const key of ReadmeFiles) {
+			for (const key of readmeFiles) {
 				if (file.toLowerCase().startsWith(key)) {
 					this.log('info', `Reading meta file: ${filePath}`)
 					const data = await read(filePath)
@@ -152,15 +135,15 @@ export class Projectz {
 		}
 	}
 
-	/** Merge and enhance the packages data */
-	protected async enhancePackagesData() {
+	/** Merge and enhance the data for the package files. */
+	protected async enhanceDataForPackageFiles(): Promise<EnhancedPackageData> {
 		// ----------------------------------
 		// Combine
 
 		this.log('debug', 'Enhancing packages data')
 
 		// Combine the package data
-		const mergedPackagesData: any = {
+		const mergedPackageData: any = {
 			keywords: [],
 			editions: [],
 			badges: {
@@ -176,61 +159,59 @@ export class Projectz {
 			devDependencies: {},
 		}
 		for (const key of Object.keys(this.filenamesForPackageFiles)) {
-			Object.assign(mergedPackagesData, this.dataForPackageFiles[key])
+			Object.assign(mergedPackageData, this.dataForPackageFiles[key])
 		}
 
 		// ----------------------------------
 		// Validation
 
 		// Validate keywords field
-		if (isString(mergedPackagesData.keywords)) {
+		if (isString(mergedPackageData.keywords)) {
 			throw new Error('projectz: keywords field must be array instead of CSV')
 		}
 
-		// Validate sponsors array
-		if (mergedPackagesData.sponsor) {
-			throw new Error(
-				'projectz: sponsor field is deprecated, use sponsors field',
-			)
-		}
-		if (isString(mergedPackagesData.sponsors)) {
-			throw new Error('projectz: sponsors field must be array instead of CSV')
-		}
-
-		// Validate maintainers array
-		if (mergedPackagesData.maintainer) {
-			throw new Error(
-				'projectz: maintainer field is deprecated, use maintainers field',
-			)
-		}
-		if (isString(mergedPackagesData.maintainers)) {
-			throw new Error(
-				'projectz: maintainers field must be array instead of CSV',
-			)
+		// Validate people fields
+		for (const soloField of [
+			'maintainer',
+			'contributor',
+			'sponsor',
+			'funder',
+			'backer',
+		]) {
+			const pluralField = `${soloField}s`
+			if (mergedPackageData[soloField]) {
+				throw new Error(
+					`projectz: ${soloField} field is deprecated, use ${pluralField} field`,
+				)
+			}
+			if (isString(mergedPackageData[pluralField])) {
+				throw new Error(
+					`projectz: ${pluralField} field must be array instead of CSV`,
+				)
+			}
 		}
 
 		// Validate license SPDX string
-		if (isPlainObject(mergedPackagesData.license)) {
+		if (isPlainObject(mergedPackageData.license)) {
 			throw new Error(
 				'projectz: license field must now be a valid SPDX string: https://docs.npmjs.com/files/package.json#license',
 			)
 		}
-		if (isPlainObject(mergedPackagesData.licenses)) {
+		if (isPlainObject(mergedPackageData.licenses)) {
 			throw new Error(
 				'projectz: licenses field is deprecated, you must now use the license field as a valid SPDX string: https://docs.npmjs.com/files/package.json#license',
 			)
 		}
 
 		// Validate enhanced fields
-		const objs = ['badges', 'readmes', 'packages', 'github', 'bugs']
-		for (const key of objs) {
-			if (!isPlainObject(mergedPackagesData[key])) {
-				throw new Error(`projectz: ${key} property must be an object`)
+		for (const field of ['badges', 'readmes', 'packages', 'github', 'bugs']) {
+			if (!isPlainObject(mergedPackageData[field])) {
+				throw new Error(`projectz: ${field} field must be an object`)
 			}
 		}
 
 		// Validate package values
-		for (const [key, value] of Object.entries(mergedPackagesData.packages)) {
+		for (const [key, value] of Object.entries(mergedPackageData.packages)) {
 			if (!isPlainObject(value)) {
 				throw new Error(
 					`projectz: custom package data for package ${key} must be an object`,
@@ -240,24 +221,24 @@ export class Projectz {
 
 		// Validate badges field
 		if (
-			!Array.isArray(mergedPackagesData.badges.list) ||
-			(mergedPackagesData.badges.config &&
-				!isPlainObject(mergedPackagesData.badges.config))
+			!Array.isArray(mergedPackageData.badges.list) ||
+			(mergedPackageData.badges.config &&
+				!isPlainObject(mergedPackageData.badges.config))
 		) {
 			throw new Error(
 				'projectz: badges field must be in the format of: {list: [], config: {}}\nSee https://github.com/bevry/badges for details.',
 			)
 		}
-		mergedPackagesData.badges.config ??= {}
+		mergedPackageData.badges.config ??= {}
 
 		// ----------------------------------
 		// Ensure
 
 		// Ensure repository is an object
-		if (typeof mergedPackagesData.repository === 'string') {
-			const githubSlug = getGithubSlug(mergedPackagesData)
+		if (typeof mergedPackageData.repository === 'string') {
+			const githubSlug = getGitHubSlugFromPackageData(mergedPackageData)
 			if (githubSlug) {
-				mergedPackagesData.repository = {
+				mergedPackageData.repository = {
 					type: 'git',
 					url: `https://github.com/${githubSlug}.git`,
 				}
@@ -265,47 +246,47 @@ export class Projectz {
 		}
 
 		// Fallback name
-		if (!mergedPackagesData.name) {
-			mergedPackagesData.name = dirname(this.cwd)
+		if (!mergedPackageData.name) {
+			mergedPackageData.name = dirname(this.cwd)
 		}
 
 		// Fallback version
-		if (!mergedPackagesData.version) {
-			mergedPackagesData.version = '0.1.0'
+		if (!mergedPackageData.version) {
+			mergedPackageData.version = '0.1.0'
 		}
 
 		// Fallback demo field, by scanning homepage
-		if (!mergedPackagesData.demo && mergedPackagesData.homepage) {
-			mergedPackagesData.demo = mergedPackagesData.homepage
+		if (!mergedPackageData.demo && mergedPackageData.homepage) {
+			mergedPackageData.demo = mergedPackageData.homepage
 		}
 
 		// Fallback title from name
-		if (!mergedPackagesData.title) {
-			mergedPackagesData.title = mergedPackagesData.name
+		if (!mergedPackageData.title) {
+			mergedPackageData.title = mergedPackageData.name
 		}
 
 		// Fallback description
-		if (!mergedPackagesData.description) {
-			mergedPackagesData.description = 'no description was provided'
+		if (!mergedPackageData.description) {
+			mergedPackageData.description = 'no description was provided'
 		}
 
 		// Fallback browsers field, by checking if `component` or `bower` package files exists, or if the `browser` or `jspm` fields are defined
-		if (mergedPackagesData.browsers == null) {
-			mergedPackagesData.browsers = Boolean(
+		if (mergedPackageData.browsers == null) {
+			mergedPackageData.browsers = Boolean(
 				this.filenamesForPackageFiles.bower ||
 					this.filenamesForPackageFiles.component ||
-					mergedPackagesData.browser ||
-					mergedPackagesData.jspm,
+					mergedPackageData.browser ||
+					mergedPackageData.jspm,
 			)
 		}
 
 		// ----------------------------------
-		// Enhance Respository
+		// Enhance Repository
 
 		// Converge and extract repository information
 		let github: Github | undefined
-		if (mergedPackagesData.repository) {
-			const githubSlug = getGithubSlug(mergedPackagesData)
+		if (mergedPackageData.repository) {
+			const githubSlug = getGitHubSlugFromPackageData(mergedPackageData)
 			if (githubSlug) {
 				// Extract parts
 				const [githubUsername, githubRepository] = githubSlug.split('/')
@@ -322,15 +303,15 @@ export class Projectz {
 				}
 
 				// Badges
-				Object.assign(mergedPackagesData.badges.config, {
+				Object.assign(mergedPackageData.badges.config, {
 					githubUsername,
 					githubRepository,
 					githubSlug,
 				})
 
 				// Fallback bugs field by use of repo
-				if (!mergedPackagesData.bugs) {
-					mergedPackagesData.bugs = github && {
+				if (!mergedPackageData.bugs) {
+					mergedPackageData.bugs = github && {
 						url: `https://github.com/${github.slug}/issues`,
 					}
 				}
@@ -341,19 +322,18 @@ export class Projectz {
 		}
 
 		// ----------------------------------
-		// Enhance People
+		// Enhance Backers
 
-		// Fellows
-		const authors = Fellow.add(
-			mergedPackagesData.authors || mergedPackagesData.author,
-		)
-		const contributors = Fellow.add(mergedPackagesData.contributors).filter(
-			(fellow) => fellow.name.includes('[bot]') === false,
-		)
-		const maintainers = Fellow.add(mergedPackagesData.maintainers).filter(
-			(fellow) => fellow.name.includes('[bot]') === false,
-		)
-		const sponsors = Fellow.add(mergedPackagesData.sponsors)
+		const backers = await getBackers({
+			githubSlug: github?.slug,
+			packageData: mergedPackageData,
+			offline: this.offline,
+			sponsorCentsThreshold: 100,
+			donorCentsThreshold: 100,
+		})
+		const renderedBackersForPackage = await renderBackers(backers, {
+			format: BackersRenderFormat.string,
+		})
 
 		// ----------------------------------
 		// Enhance Packages
@@ -368,33 +348,26 @@ export class Projectz {
 
 			// Enhanced Data
 			{
-				name: mergedPackagesData.name,
-				version: mergedPackagesData.version,
-				license: mergedPackagesData.license,
-				description: mergedPackagesData.description,
-				keywords: mergedPackagesData.keywords,
-				author: getPeopleTextArray(authors, {
-					displayEmail: true,
-					displayYears: true,
-				}).join(', '),
-				maintainers: getPeopleTextArray(maintainers, {
-					displayEmail: true,
-					urlFields: ['githubUrl', 'url'],
-				}),
-				contributors: getPeopleTextArray(contributors, {
-					displayEmail: true,
-					urlFields: ['githubUrl', 'url'],
-				}),
-				repository: mergedPackagesData.repository,
-				bugs: mergedPackagesData.bugs,
-				engines: mergedPackagesData.engines,
-				dependencies: mergedPackagesData.dependencies,
-				devDependencies: mergedPackagesData.devDependencies,
-				main: mergedPackagesData.main,
+				// meta
+				name: mergedPackageData.name,
+				version: mergedPackageData.version,
+				license: mergedPackageData.license,
+				description: mergedPackageData.description,
+				repository: mergedPackageData.repository,
+				bugs: mergedPackageData.bugs,
+				keywords: mergedPackageData.keywords,
+				// code
+				engines: mergedPackageData.engines,
+				dependencies: mergedPackageData.dependencies,
+				devDependencies: mergedPackageData.devDependencies,
+				main: mergedPackageData.main,
 			},
 
+			// Enhanced Backers
+			renderedBackersForPackage,
+
 			// Explicit data
-			mergedPackagesData.packages.package || {},
+			mergedPackageData.packages.package || {},
 		)
 
 		// Trim
@@ -404,8 +377,8 @@ export class Projectz {
 		if (isEmptyPlainObject(pkg.devDependencies)) delete pkg.devDependencies
 
 		// Badges
-		if (!mergedPackagesData.badges.config.npmPackageName && pkg.name) {
-			mergedPackagesData.badges.config.npmPackageName = pkg.name
+		if (!mergedPackageData.badges.config.npmPackageName && pkg.name) {
+			mergedPackageData.badges.config.npmPackageName = pkg.name
 		}
 
 		// Create the data for the `jquery.json` format, which is essentially the same as the `package.json` format so just extend that
@@ -420,7 +393,7 @@ export class Projectz {
 			pkg,
 
 			// Explicit data
-			mergedPackagesData.packages.jquery || {},
+			mergedPackageData.packages.jquery || {},
 		)
 
 		// Create the data for the `component.json` format
@@ -433,18 +406,18 @@ export class Projectz {
 
 			// Enhanced Data
 			{
-				name: mergedPackagesData.name,
-				version: mergedPackagesData.version,
-				license: mergedPackagesData.license,
-				description: mergedPackagesData.description,
-				keywords: mergedPackagesData.keywords,
-				demo: mergedPackagesData.demo,
-				main: mergedPackagesData.main,
-				scripts: [mergedPackagesData.main],
+				name: mergedPackageData.name,
+				version: mergedPackageData.version,
+				license: mergedPackageData.license,
+				description: mergedPackageData.description,
+				keywords: mergedPackageData.keywords,
+				demo: mergedPackageData.demo,
+				main: mergedPackageData.main,
+				scripts: [mergedPackageData.main],
 			},
 
 			// Explicit data
-			mergedPackagesData.packages.component || {},
+			mergedPackageData.packages.component || {},
 		)
 
 		// Create the data for the `bower.json` format
@@ -457,29 +430,26 @@ export class Projectz {
 
 			// Enhanced Data
 			{
-				name: mergedPackagesData.name,
-				version: mergedPackagesData.version,
-				license: mergedPackagesData.license,
-				description: mergedPackagesData.description,
-				keywords: mergedPackagesData.keywords,
-				authors: getPeopleTextArray(authors, {
-					displayYears: true,
-					displayEmail: true,
-				}),
-				main: mergedPackagesData.main,
+				name: mergedPackageData.name,
+				version: mergedPackageData.version,
+				license: mergedPackageData.license,
+				description: mergedPackageData.description,
+				keywords: mergedPackageData.keywords,
+				authors: mergedPackageData.authors,
+				main: mergedPackageData.main,
 			},
 
 			// Explicit data
-			mergedPackagesData.packages.bower || {},
+			mergedPackageData.packages.bower || {},
 		)
 
 		// ----------------------------------
 		// Enhance Combination
 
-		// Merge together
-		const enhancedPackagesData: EnhancedPackagesData = Object.assign(
+		// only stored in memory
+		const enhancedPackageData: EnhancedPackageData = Object.assign(
 			{},
-			mergedPackagesData as {
+			mergedPackageData as {
 				name: string
 				title: string
 				version: string
@@ -494,6 +464,7 @@ export class Projectz {
 				dependencies: Record<string, string>
 				devDependencies: Record<string, string>
 			},
+			backers,
 			{
 				// Add paths so that our helpers have access to them
 				filenamesForPackageFiles: this.filenamesForPackageFiles,
@@ -501,12 +472,6 @@ export class Projectz {
 
 				// Other
 				github,
-
-				// Fellows
-				authors,
-				contributors,
-				maintainers,
-				sponsors,
 
 				// Create the data for the `package.json` format
 				package: pkg,
@@ -517,12 +482,12 @@ export class Projectz {
 		)
 
 		// Return
-		return enhancedPackagesData
+		return enhancedPackageData
 	}
 
-	/** Merge and enhance the readmes data */
-	protected async enhanceReadmesData(data: EnhancedPackagesData) {
-		const enhancedReadmesData: EnhancedReadmesData = {}
+	/** Merge and enhance the metadata from the meta files. */
+	protected async enhanceDataForReadmeFiles(data: EnhancedPackageData) {
+		const enhancedReadmeData: EnhancedReadmeData = {}
 
 		/* eslint prefer-const: 0 */
 		for (let [key, value] of Object.entries(this.dataForReadmeFiles)) {
@@ -530,7 +495,7 @@ export class Projectz {
 				this.log('debug', `Enhancing readme value: ${key} — skipped`)
 				continue
 			}
-			value = replaceSection(['TITLE', 'NAME'], value, `<h1>${data.title}</h1>`)
+			value = replaceSection(['TITLE', 'NAME'], value, mh1(data.title))
 			value = replaceSection(
 				['BADGES', 'BADGE'],
 				value,
@@ -548,36 +513,37 @@ export class Projectz {
 				data.github
 					? getContributeSection.bind(
 							null,
-							data as EnhancedPackagesDataWithGitHub,
-					  )
+							data as EnhancedPackageDataWithGitHub,
+						)
+					: '<!-- github projects only -->',
+				Boolean(value.includes('BACKERS --')),
+			)
+			value = replaceSection(
+				['BACKERS', 'BACKER', 'PEOPLE'],
+				value,
+				data.github
+					? getBackersSection.bind(null, data as EnhancedPackageDataWithGitHub)
 					: '<!-- github projects only -->',
 			)
 			value = replaceSection(
-				['BACKERS', 'BACKER'],
+				['BACKERSFILE', 'BACKERFILE', 'PEOPLEFILE'],
 				value,
 				data.github
-					? getBackerSection.bind(null, data as EnhancedPackagesDataWithGitHub)
-					: '<!-- github projects only -->',
-			)
-			value = replaceSection(
-				['BACKERSFILE', 'BACKERFILE'],
-				value,
-				data.github
-					? getBackerFile.bind(null, data as EnhancedPackagesDataWithGitHub)
+					? getBackersFile.bind(null, data as EnhancedPackageDataWithGitHub)
 					: '<!-- github projects only -->',
 			)
 			value = replaceSection(
 				['HISTORY', 'CHANGES', 'CHANGELOG'],
 				value,
 				data.github
-					? getHistorySection.bind(null, data as EnhancedPackagesDataWithGitHub)
+					? getHistorySection.bind(null, data as EnhancedPackageDataWithGitHub)
 					: '<!-- github projects only -->',
 			)
 			value = replaceSection(
 				['LICENSE', 'LICENSES'],
 				value,
 				data.github
-					? getLicenseSection.bind(null, data as EnhancedPackagesDataWithGitHub)
+					? getLicenseSection.bind(null, data as EnhancedPackageDataWithGitHub)
 					: '<!-- github projects only -->',
 			)
 			value = replaceSection(
@@ -585,16 +551,16 @@ export class Projectz {
 				value,
 				getLicenseFile.bind(null, data),
 			)
-			enhancedReadmesData[key] = trim(value) + '\n'
+			enhancedReadmeData[key] = value.replaceAll('-->\n\n\n<!--', '-->\n\n<!--')
 			this.log('info', `Enhanced readme value: ${key}`)
 		}
-		return enhancedReadmesData
+		return enhancedReadmeData
 	}
 
-	/** Save the data we've loaded into the files */
+	/** Save the data and meta files with our enhancements. */
 	protected async save(
-		enhancedPackagesData: EnhancedPackagesData,
-		enhancedReadmesData: EnhancedReadmesData,
+		enhancedPackageData: EnhancedPackageData,
+		enhancedReadmeData: EnhancedReadmeData,
 	) {
 		// Prepare
 		this.log('info', 'Writing changes...')
@@ -606,7 +572,9 @@ export class Projectz {
 					if (!filename || key === 'projectz') return
 					const filepath = join(this.cwd, filename)
 					this.log('info', `Saving package file: ${filepath}`)
-					const data = enhancedPackagesData[key]
+					const data = trimEmptyKeys(
+						arrangePackageData(enhancedPackageData[key]),
+					)
 					return writeJSON(filepath, data)
 				},
 			),
@@ -616,7 +584,7 @@ export class Projectz {
 					if (!filename) return
 					const filepath = join(this.cwd, filename)
 					this.log('info', `Saving readme file: ${filepath}`)
-					const content = enhancedReadmesData[key]
+					const content = trim(enhancedReadmeData[key]) + '\n'
 					return write(filepath, content)
 				},
 			),

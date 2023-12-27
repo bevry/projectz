@@ -9,9 +9,8 @@ export function getBadgesInCategory(
 			filterCategory: category,
 			filterScripts: true,
 		})
-	} else {
-		return ''
 	}
+	return ''
 }
 
 export function getBadgesSection(data: { badges?: BadgesField }): string {
@@ -19,7 +18,6 @@ export function getBadgesSection(data: { badges?: BadgesField }): string {
 		return renderBadges(data.badges.list, data.badges.config, {
 			filterScripts: true,
 		})
-	} else {
-		return ''
 	}
+	return ''
 }

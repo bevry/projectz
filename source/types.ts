@@ -1,11 +1,31 @@
+// external
 import type { BadgesField } from 'badges'
-import type Fellow from 'fellow'
+import type { Fellow } from '@bevry/github-api'
 import type { Edition } from 'editions'
 
-export interface Link {
-	url: string
-	text: string
-	title?: string
+export interface LicenseOptions {
+	license?: string
+	authors: Fellow[]
+}
+
+export interface LicenseConfig extends LicenseOptions {
+	license: string
+}
+
+export interface BackerOptions {
+	filenamesForReadmeFiles: FilenamesForReadmeFiles
+	badges: BadgesField
+
+	author: Fellow[]
+	authors: Fellow[]
+	maintainers: Fellow[]
+	contributors: Fellow[]
+
+	funders: Fellow[]
+	sponsors: Fellow[]
+	donors: Fellow[]
+
+	github: Github
 }
 
 export interface Github {
@@ -87,9 +107,9 @@ export interface BowerEnhanced {
 
 export type Editions = Edition[]
 
-export type EnhancedReadmesData = DataForReadmeFiles
+export type EnhancedReadmeData = DataForReadmeFiles
 
-export interface EnhancedPackagesData {
+export interface EnhancedPackageData {
 	[key: string]: any
 	filenamesForPackageFiles: FilenamesForPackageFiles
 	filenamesForReadmeFiles: FilenamesForReadmeFiles
@@ -113,13 +133,21 @@ export interface EnhancedPackagesData {
 	browsers: boolean
 	editions: Edition[]
 	github?: Github
-	sponsor?: never
-	sponsors: Fellow[]
+
+	author: Fellow[]
+	authors: Fellow[]
 	maintainer?: never
 	maintainers: Fellow[]
+	contributor?: never
 	contributors: Fellow[]
-	author?: string
-	authors: Fellow[]
+
+	funder?: never
+	funders: Fellow[]
+	sponsor?: never
+	sponsors: Fellow[]
+	donor?: never
+	donors: Fellow[]
+
 	license?: string
 	licenses?: never
 	browser?: any
@@ -130,6 +158,6 @@ export interface EnhancedPackagesData {
 	}
 }
 
-export interface EnhancedPackagesDataWithGitHub extends EnhancedPackagesData {
+export interface EnhancedPackageDataWithGitHub extends EnhancedPackageData {
 	github: Github
 }

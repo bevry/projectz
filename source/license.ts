@@ -1,7 +1,11 @@
-import { getPeopleHTML } from './util.js'
+// external
+import { BackersRenderFormat, renderBackers } from '@bevry/github-api'
 import spdxParse from 'spdx-expression-parse'
-import spdxList from 'spdx-license-list/full'
-import type Fellow from 'fellow'
+import spdxList from 'spdx-license-list/full.js'
+import { lines, ma, mul, mh1, mh2, pre, mp } from '@bevry/render'
+
+// local
+import { LicenseConfig, LicenseOptions } from './types.js'
 
 function renderSpdxObject(
 	spdxObject: any,
@@ -16,15 +20,12 @@ function renderSpdxObject(
 			throw new Error(`Could not find the details for the license ${code}`)
 		}
 
-		const name = details.name
-		const body = details.licenseText
 		const url = `http://spdx.org/licenses/${code}.html`
-
 		return output === 'description'
 			? depth === 0
-				? `<ul><li><a href="${url}">${name}</a></li></ul>`
-				: `<a href="${url}">${name}</a>`
-			: body
+				? mul([ma({ url, inner: details.name })])
+				: ma({ url, inner: details.name })
+			: details.licenseText
 					// Remove useless copyright headers - (spdx-license-list@5.x)
 					.replace('\nCopyright (c) <year> <copyright holders>\n', '')
 					// Remove useless copyright headers - (spdx-license-list@6.x)
@@ -32,18 +33,19 @@ function renderSpdxObject(
 					// Remove license introductions
 					.replace(/^[\s\S]+<<endOptional>>\s*/m, '')
 
-					// Convert the license into HTML
+					// Render the license
 					.replace(
 						/^(.+?)\n\s*([\s\S]+)\s*$/,
-						'<h2>$1</h2>\n\n<pre>\n$2\n</pre>',
+						(match: string, license: string, body: string) =>
+							lines([mh2(license), pre(body)]),
 					)
 	} else if (spdxObject.conjunction) {
 		const left = renderSpdxObject(spdxObject.left, output, depth + 1)
 		const middle = spdxObject.conjunction
 		const right = renderSpdxObject(spdxObject.right, output, depth + 1)
 		return output === 'description'
-			? `<ul><li>${left}</li>\n<li>${middle}</li>\n<li>${right}</li></ul>`
-			: `${left}\n\n${right}\n\n`.trim()
+			? mul([left, middle, right])
+			: lines([left, right])
 	} else {
 		throw new Error(
 			`Unknown spdx object value: ${JSON.stringify(spdxObject, null, '  ')}`,
@@ -51,7 +53,7 @@ function renderSpdxObject(
 	}
 }
 
-function getLicensesHTML(
+function getRenderedLicenses(
 	spdxString: string,
 	output: 'description' | 'body',
 ): string {
@@ -59,37 +61,26 @@ function getLicensesHTML(
 	return renderSpdxObject(sdpxObject, output)
 }
 
-function getLicenseIntroduction(data: {
-	license: string
-	authors: Fellow[]
-}): string {
+function getLicenseIntroduction(data: LicenseOptions): string {
 	// Check
 	if (!data.license) {
 		throw new Error('License file was requested, but no license was specified')
 	}
 
 	// Prepare
-	const result = [
-		'Unless stated otherwise all works are:',
-		'',
-		getPeopleHTML(data.authors, { displayCopyright: true, displayYears: true }),
-		'',
-		'and licensed under:',
-		'',
-		getLicensesHTML(data.license, 'description'),
-	].join('\n')
+	const renderedBackers = renderBackers(
+		{ authors: data.authors },
+		{ format: BackersRenderFormat.copyright },
+	)
+	const result = lines([
+		mp('Unless stated otherwise all works are:'),
+		mul(renderedBackers.authors || []),
+		mp('and licensed under:'),
+		getRenderedLicenses(data.license, 'description'),
+	])
 
 	// Return
 	return result
-}
-
-interface LicenseOptions {
-	license?: string
-	authors: Fellow[]
-}
-
-interface LicenseConfig extends LicenseOptions {
-	license: string
 }
 
 export function getLicenseFile(data: LicenseOptions): string {
@@ -99,13 +90,11 @@ export function getLicenseFile(data: LicenseOptions): string {
 	}
 
 	// Prepare
-	const result = [
-		'<h1>License</h1>',
-		'',
+	const result = lines([
+		mh1('License'),
 		getLicenseIntroduction(data as LicenseConfig),
-		'',
-		getLicensesHTML(data.license, 'body'),
-	].join('\n')
+		getRenderedLicenses(data.license, 'body'),
+	])
 
 	// Return
 	return result
@@ -118,11 +107,10 @@ export function getLicenseSection(data: LicenseOptions): string {
 	}
 
 	// Prepare
-	const result = [
-		'<h2>License</h2>',
-		'',
+	const result = lines([
+		mh2('License'),
 		getLicenseIntroduction(data as LicenseConfig),
-	].join('\n')
+	])
 
 	// Return
 	return result

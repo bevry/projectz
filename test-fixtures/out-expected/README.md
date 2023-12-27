@@ -1,9 +1,8 @@
 <!-- TITLE/ -->
 
-<h1>ambi</h1>
+# ambi
 
 <!-- /TITLE -->
-
 
 <!-- BADGES/ -->
 
@@ -22,7 +21,6 @@
 <span class="badge-wishlist"><a href="https://bevry.me/wishlist" title="Buy an item on our wishlist for us"><img src="https://img.shields.io/badge/wishlist-donate-yellow.svg" alt="Wishlist browse button" /></a></span>
 
 <!-- /BADGES -->
-
 
 <!-- DESCRIPTION/ -->
 
@@ -80,54 +78,64 @@ console.log(result); // setTimeout - just like normal
 
 <!-- INSTALL/ -->
 
-<h2>Install</h2>
+## Install
 
-<a href="https://npmjs.com" title="npm is a package manager for javascript"><h3>npm</h3></a>
-<ul>
-<li>Install: <code>npm install --save ambi</code></li>
-<li>Import: <code>import * as pkg from ('ambi')</code></li>
-<li>Require: <code>const pkg = require('ambi')</code></li>
-</ul>
+### [npm](https://npmjs.com "npm is a package manager for javascript")
 
-<a href="https://jspm.io" title="Native ES Modules CDN"><h3>jspm</h3></a>
+-   Install: `npm install --save ambi`
+-   Import: `import * as pkg from ('ambi')`
+-   Require: `const pkg = require('ambi')`
+
+### [jspm](https://jspm.io "Native ES Modules CDN")
 
 ``` html
 <script type="module">
     import * as pkg from '//dev.jspm.io/ambi@2.1.4'
 </script>
 ```
+### [Component](https://github.com/componentjs/component "Frontend package manager and build tool for modular web applications")
 
-<a href="https://github.com/componentjs/component" title="Frontend package manager and build tool for modular web applications"><h3>Component</h3></a>
-<ul><li>Install: <code>component install ambi</code></li></ul>
+-   Install: `component install ambi`
 
-<a href="https://bower.io" title="A package manager for the web"><h3>Bower</h3></a>
-<ul><li>Install: <code>bower install ambi</code></li></ul>
+### [Bower](https://bower.io "A package manager for the web")
+
+-   Install: `bower install ambi`
 
 <!-- /INSTALL -->
 
-
 <!-- HISTORY/ -->
 
-<h2>History</h2>
+## History
 
-<a href="https://github.com/bevry/ambi/releases">Discover the release history by heading on over to the releases page.</a>
+[Discover the release history by heading on over to the releases page.](https://github.com/bevry/ambi/releases)
 
 <!-- /HISTORY -->
 
-
 <!-- BACKERS/ -->
 
-<h2>Backers</h2>
+## Backers
 
-<h3>Maintainers</h3>
+### Code
 
-These amazing people are maintaining this project:
 
-<ul><li><a href="http://balupton.com">Benjamin Lupton</a> — <a href="https://github.com/bevry/ambi/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/ambi">view contributions</a></li></ul>
 
-<h3>Sponsors</h3>
+#### Authors
 
-No sponsors yet! Will you be the first?
+-   2011-2012,2015+ [Benjamin Lupton](https://balupton.com)
+-   2013-2015 [Bevry Pty Ltd](https://bevry.me)
+
+#### Maintainers
+
+-   [Benjamin Lupton](https://github.com/balupton)
+
+#### Contributors
+
+-   [Benjamin Lupton](https://github.com/balupton) — [view contributions](https://github.com/bevry/ambi/commits?author=balupton "View the GitHub contributions of Benjamin Lupton on repository bevry/ambi")
+-   [Chris Tavares](https://github.com/christav) — [view contributions](https://github.com/bevry/ambi/commits?author=christav "View the GitHub contributions of Chris Tavares on repository bevry/ambi")
+-   [Francisco Lourenço](https://github.com/aristidesfl) — [view contributions](https://github.com/bevry/ambi/commits?author=aristidesfl "View the GitHub contributions of Francisco Lourenço on repository bevry/ambi")
+-   [Sean Fridman](https://github.com/sfrdmn) — [view contributions](https://github.com/bevry/ambi/commits?author=sfrdmn "View the GitHub contributions of Sean Fridman on repository bevry/ambi")
+
+### Finances
 
 <span class="badge-patreon"><a href="https://patreon.com/bevry" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/patreon-donate-yellow.svg" alt="Patreon donate button" /></a></span>
 <span class="badge-gratipay"><a href="https://gratipay.com/bevry" title="Donate weekly to this project using Gratipay"><img src="https://img.shields.io/badge/gratipay-donate-yellow.svg" alt="Gratipay donate button" /></a></span>
@@ -136,33 +144,30 @@ No sponsors yet! Will you be the first?
 <span class="badge-bitcoin"><a href="https://bevry.me/bitcoin" title="Donate to this project using Cryptocurrency"><img src="https://img.shields.io/badge/crypto-donate-yellow.svg" alt="crypto donate button" /></a></span>
 <span class="badge-wishlist"><a href="https://bevry.me/wishlist" title="Buy an item on our wishlist for us"><img src="https://img.shields.io/badge/wishlist-donate-yellow.svg" alt="Wishlist browse button" /></a></span>
 
-<h3>Contributors</h3>
+#### Donors
 
-These amazing people have contributed code to this project:
-
-<ul><li><a href="http://balupton.com">Benjamin Lupton</a> — <a href="https://github.com/bevry/ambi/commits?author=balupton" title="View the GitHub contributions of Benjamin Lupton on repository bevry/ambi">view contributions</a></li>
-<li><a href="https://github.com/sfrdmn">Sean Fridman</a> — <a href="https://github.com/bevry/ambi/commits?author=sfrdmn" title="View the GitHub contributions of Sean Fridman on repository bevry/ambi">view contributions</a></li>
-<li><a href="http://aristidesfl.github.io/">Francisco Lourenço</a></li>
-<li><a href="https://github.com/christav">Chris Tavares</a> — <a href="https://github.com/bevry/ambi/commits?author=christav" title="View the GitHub contributions of Chris Tavares on repository bevry/ambi">view contributions</a></li></ul>
-
-
+-   [Chad](https://opencollective.com/chad8)
+-   [entroniq](https://gitlab.com/entroniq)
+-   [Jean-Luc Geering](https://github.com/jlgeering)
+-   [mikeumus](https://bevry.me)
+-   [serviejs](https://github.com/serviejs)
+-   [smashah](https://github.com/smashah)
 
 <!-- /BACKERS -->
 
-
 <!-- LICENSE/ -->
 
-<h2>License</h2>
+## License
 
 Unless stated otherwise all works are:
 
-<ul><li>Copyright &copy; 2015+ <a href="http://bevry.me">Bevry Pty Ltd</a></li>
-<li>Copyright &copy; 2011-2014 <a href="http://balupton.com">Benjamin Lupton</a></li></ul>
+-   Copyright &copy; 2011-2012,2015+ [Benjamin Lupton](https://balupton.com)
+-   Copyright &copy; 2013-2015 [Bevry Pty Ltd](https://bevry.me)
 
 and licensed under:
 
-<ul><li><a href="http://spdx.org/licenses/MIT.html">MIT License</a></li>
-<li>and</li>
-<li><a href="http://spdx.org/licenses/CC-BY-4.0.html">Creative Commons Attribution 4.0 International</a></li></ul>
+-   [MIT License](http://spdx.org/licenses/MIT.html)
+-   and
+-   [Creative Commons Attribution 4.0 International](http://spdx.org/licenses/CC-BY-4.0.html)
 
 <!-- /LICENSE -->

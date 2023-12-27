@@ -1,8 +1,15 @@
 {
   "name": "ambi",
   "version": "2.1.4",
+  "license": "(MIT AND CC-BY-4.0)",
   "description": "Execute a function ambidextrously (normalizes the differences between synchronous and asynchronous functions). Useful for treating synchronous functions as asynchronous functions (like supporting both synchronous and asynchronous event definitions automatically).",
   "homepage": "https://github.com/bevry/ambi",
+  "repository": {
+    "url": "https://github.com/bevry/ambi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bevry/ambi/issues"
+  },
   "keywords": [
     "sync",
     "async",
@@ -12,35 +19,40 @@
     "ambidextrous",
     "flow"
   ],
-  "author": "2015+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me), 2011-2014 Benjamin Lupton <b@lupton.cc> (http://balupton.com)",
+  "author": "2011-2012,2015+ Benjamin Lupton <b@lupton.cc> (https://balupton.com) (https://github.com/balupton), 2013-2015 Bevry Pty Ltd <us@bevry.me> (https://bevry.me)",
+  "authors": [
+    "2011-2012,2015+ Benjamin Lupton <b@lupton.cc> (https://balupton.com) (https://github.com/balupton)",
+    "2013-2015 Bevry Pty Ltd <us@bevry.me> (https://bevry.me)"
+  ],
   "maintainers": [
-    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
+    "Benjamin Lupton <b@lupton.cc> (https://balupton.com) (https://github.com/balupton)"
   ],
   "contributors": [
-    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)",
-    "Sean Fridman <mail@seanfridman.com> (https://github.com/sfrdmn)",
-    "Francisco Lourenço (http://aristidesfl.github.io/)",
-    "Chris Tavares (https://github.com/christav)"
+    "Benjamin Lupton <b@lupton.cc> (https://balupton.com) (https://github.com/balupton)",
+    "Chris Tavares (https://github.com/christav)",
+    "Francisco Lourenço (https://github.com/aristidesfl)",
+    "Sean Fridman <mail@seanfridman.com> (https://github.com/sfrdmn)"
   ],
-  "bugs": {
-    "url": "https://github.com/bevry/ambi/issues"
-  },
-  "repository": {
-    "url": "https://github.com/bevry/ambi.git"
-  },
+  "donors": [
+    "Chad (https://opencollective.com/chad8)",
+    "entroniq (https://gitlab.com/entroniq) (https://thanks.dev/d/gl/entroniq)",
+    "Jean-Luc Geering (https://github.com/jlgeering) (https://opencollective.com/jlgeering) (https://twitter.com/jlgeering)",
+    "mikeumus (https://bevry.me) (https://github.com/mikeumus) (https://opencollective.com/mikeumus) (https://twitter.com/mikeumus)",
+    "serviejs (https://github.com/serviejs) (https://thanks.dev/d/gh/serviejs)",
+    "smashah (https://github.com/smashah) (https://thanks.dev/d/gh/smashah)"
+  ],
   "engines": {
     "node": ">=0.8"
   },
+  "main": "./out/lib/ambi.js",
   "dependencies": {
     "typechecker": "~2.0.6"
-  },
-  "directories": {
-    "lib": "./out/lib"
   },
   "scripts": {
     "preinstall": "node ./cyclic.js",
     "test": "node ./out/test/everything-test.js"
   },
-  "main": "./out/lib/ambi.js",
-  "license": "(MIT AND CC-BY-4.0)"
+  "directories": {
+    "lib": "./out/lib"
+  }
 }

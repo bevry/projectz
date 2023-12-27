@@ -13,7 +13,7 @@
     "ambidextrous",
     "flow"
   ],
-  "author": "2015+ Bevry Pty Ltd <us@bevry.me> (http://bevry.me), 2011-2014 Benjamin Lupton <b@lupton.cc> (http://balupton.com)",
+  "author": "2011-2012,2015+ Benjamin Lupton <b@lupton.cc> (https://balupton.com), 2013-2015 Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
   "maintainers": [
     "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
   ],
@@ -43,14 +43,22 @@
       "slackinURL": "https://slack.bevry.me"
     }
   },
-  "dependencies": { "typechecker": "~2.0.6" },
-  "engines": { "node": ">=0.8" },
+  "dependencies": {
+    "typechecker": "~2.0.6"
+  },
+  "engines": {
+    "node": ">=0.8"
+  },
   "scripts": {
     "preinstall": "node ./cyclic.js",
     "test": "node ./out/text/everything-test.js"
   },
   "main": "./out/lib/ambi.js",
   "packages": {
-    "component": { "dependencies": { "bevry/typechecker": "master" } }
+    "component": {
+      "dependencies": {
+        "bevry/typechecker": "master"
+      }
+    }
   }
 }
