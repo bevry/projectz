@@ -316,11 +316,11 @@ This package is published with the following editions:
 
 #### Authors
 
--   [Benjamin Lupton](https://balupton.com) — Benjamin furthers the humanities and the commons using the monikers balupton and @bevry
+-   [Benjamin Lupton](https://balupton.com) — Accelerating collaborative wisdom.
 
 #### Maintainers
 
--   [Benjamin Lupton](https://github.com/balupton) — Benjamin furthers the humanities and the commons using the monikers balupton and @bevry
+-   [Benjamin Lupton](https://github.com/balupton) — Accelerating collaborative wisdom.
 
 #### Contributors
 
