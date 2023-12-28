@@ -1,5 +1,12 @@
 # History
 
+## v4.1.1 2023 December 28
+
+-   Update github-api and fellow deps, so trailing slashes no longer cause duplicates (they are now trimmed) and maintainer urls are now the homepage
+-   Support `.repository` that isn't github, if it is github however, update to the preferred format
+-   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)
+-   Thank you to the sponsors: [Andrew Nesbitt](https://nesbitt.io), [Balsa](https://balsa.com), [Codecov](https://codecov.io/), [Poonacha Medappa](https://poonachamedappa.com), [Rob Morris](https://github.com/Rob-Morris), [Sentry](https://sentry.io), [Syntax](https://syntax.fm)
+
 ## v4.1.0 2023 December 28
 
 -   Updated dependencies, [base files](https://github.com/bevry/base), and [editions](https://editions.bevry.me) using [boundation](https://github.com/bevry/boundation)

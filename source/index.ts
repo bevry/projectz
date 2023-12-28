@@ -17,6 +17,9 @@ import {
 	getBackers,
 	renderBackers,
 	BackersRenderFormat,
+	getRepositoryWebsiteUrlFromGitHubSlugOrUrl,
+	getRepositoryIssuesUrlFromGitHubSlugOrUrl,
+	getRepositoryUrlFromGitHubSlugOrUrl,
 } from '@bevry/github-api'
 import { mh1, trim } from '@bevry/render'
 
@@ -236,12 +239,9 @@ export class Projectz {
 
 		// Ensure repository is an object
 		if (typeof mergedPackageData.repository === 'string') {
-			const githubSlug = getGitHubSlugFromPackageData(mergedPackageData)
-			if (githubSlug) {
-				mergedPackageData.repository = {
-					type: 'git',
-					url: `https://github.com/${githubSlug}.git`,
-				}
+			mergedPackageData.repository = {
+				type: 'git',
+				url: mergedPackageData.repository,
 			}
 		}
 
@@ -290,15 +290,19 @@ export class Projectz {
 			if (githubSlug) {
 				// Extract parts
 				const [githubUsername, githubRepository] = githubSlug.split('/')
-				const githubUrl = 'https://github.com/' + githubSlug
-				const githubRepositoryUrl = githubUrl + '.git'
+				const githubRepositoryWebsiteUrl =
+					getRepositoryWebsiteUrlFromGitHubSlugOrUrl(githubSlug) || ''
+				const githubRepositoryUrl =
+					getRepositoryUrlFromGitHubSlugOrUrl(githubSlug) || ''
+				const githubIssuesUrl =
+					getRepositoryIssuesUrlFromGitHubSlugOrUrl(githubSlug) || ''
 
 				// Github data
 				github = {
 					username: githubUsername,
 					repository: githubRepository,
 					slug: githubSlug,
-					url: githubUrl,
+					url: githubRepositoryWebsiteUrl,
 					repositoryUrl: githubRepositoryUrl,
 				}
 
@@ -309,15 +313,18 @@ export class Projectz {
 					githubSlug,
 				})
 
-				// Fallback bugs field by use of repo
+				// Fallback bugs field by use of slug
 				if (!mergedPackageData.bugs) {
-					mergedPackageData.bugs = github && {
-						url: `https://github.com/${github.slug}/issues`,
-					}
+					mergedPackageData.bugs = githubIssuesUrl
 				}
 
-				// Fetch contributors
-				// await getContributorsFromRepo(githubSlug)
+				// Fallback repository field by use of slug
+				if (!mergedPackageData.repository?.url) {
+					mergedPackageData.repository = {
+						type: 'git',
+						url: githubRepositoryUrl,
+					}
+				}
 			}
 		}
 
@@ -328,8 +335,6 @@ export class Projectz {
 			githubSlug: github?.slug,
 			packageData: mergedPackageData,
 			offline: this.offline,
-			sponsorCentsThreshold: 100,
-			donorCentsThreshold: 100,
 		})
 		const renderedBackersForPackage = await renderBackers(backers, {
 			format: BackersRenderFormat.string,

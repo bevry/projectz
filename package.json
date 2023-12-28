@@ -1,14 +1,14 @@
 {
   "title": "Projectz",
   "name": "projectz",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "license": "Artistic-2.0",
   "description": "Stop wasting time syncing and updating your project's README and Package Files!",
   "homepage": "https://github.com/bevry/projectz",
   "funding": "https://bevry.me/fund",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bevry/projectz.git"
+    "url": "git+https://github.com/bevry/projectz.git"
   },
   "bugs": {
     "url": "https://github.com/bevry/projectz/issues"
@@ -89,7 +89,7 @@
     "Benjamin Lupton <b@lupton.cc> (https://balupton.com) (https://github.com/balupton)",
     "James George <jamesgeorge998001@gmail.com> (https://github.com/jamesgeorge007)",
     "Oliver Lorenz (https://www.oliverlorenz.com) (https://github.com/oliverlorenz)",
-    "Peter C <peterkc@gmail.com> (https://www.linkedin.com/in/peterkc1/) (https://github.com/peterkc)",
+    "Peter C <peterkc@gmail.com> (https://www.linkedin.com/in/peterkc1) (https://github.com/peterkc)",
     "Peter Flannery (https://github.com/pflannery)",
     "Rob Loach <robloach@gmail.com> (https://robloach.net) (https://github.com/RobLoach)",
     "Shahar \"Dawn\" Or <mightyiampresence@gmail.com> (https://github.com/mightyiam)",
@@ -100,7 +100,7 @@
   "sponsors": [
     "Andrew Nesbitt (https://nesbitt.io) (https://github.com/andrew): Software engineer and researcher",
     "Balsa <hello@balsa.com> (https://balsa.com) (https://github.com/balsa): We're Balsa, and we're building tools for builders.",
-    "Codecov <hello-codecov@sentry.io> (https://codecov.io/) (https://github.com/codecov): Empower developers with tools to improve code quality and testing.",
+    "Codecov <hello-codecov@sentry.io> (https://codecov.io) (https://github.com/codecov): Empower developers with tools to improve code quality and testing.",
     "Poonacha Medappa (https://poonachamedappa.com) (https://github.com/km-Poonacha)",
     "Rob Morris <rob@prismatik.com.au> (https://github.com/Rob-Morris)",
     "Sentry (https://sentry.io) (https://github.com/getsentry): Real-time crash reporting for your web apps, mobile apps, and games.",
@@ -108,19 +108,30 @@
   ],
   "donors": [
     "Andrew Nesbitt (https://nesbitt.io) (https://github.com/andrew)",
+    "Armen Mkrtchian (https://mogoni.dev) (https://github.com/Armenm)",
     "Balsa <hello@balsa.com> (https://balsa.com) (https://github.com/balsa)",
     "Chad (https://opencollective.com/chad8)",
-    "Codecov <hello-codecov@sentry.io> (https://codecov.io/) (https://github.com/codecov)",
+    "Codecov <hello-codecov@sentry.io> (https://codecov.io) (https://github.com/codecov)",
+    "dr.dimitru (https://veliovgroup.com) (https://github.com/dr-dimitru)",
+    "Elliott Ditman (https://elliottditman.com) (https://github.com/elliottditman)",
     "entroniq (https://gitlab.com/entroniq) (https://thanks.dev/d/gl/entroniq)",
+    "GitHub (https://github.com/about) (https://github.com/github)",
+    "Hunter Beast (https://cryptoquick.com) (https://github.com/cryptoquick)",
     "Jean-Luc Geering (https://github.com/jlgeering) (https://opencollective.com/jlgeering) (https://twitter.com/jlgeering)",
     "Michael Duane Mooring (https://mdm.cc) (https://github.com/mikeumus) (https://opencollective.com/mikeumus) (https://twitter.com/mikeumus)",
+    "Michael Harry Scepaniak <mhs1.sys@gmail.com> (https://michaelscepaniak.com) (https://github.com/hispanic)",
     "Mohammed Shah <shah@idk.uno> (https://github.com/smashah) (https://thanks.dev/d/gh/smashah) (https://twitter.com/smashah)",
+    "Mr. Henry <hello@mrhenry.be> (https://mrhenry.be) (https://github.com/mrhenry)",
+    "Nermal <nermalcat69@skiff.com> (https://arjunaditya.vercel.app) (https://github.com/nermalcat69)",
+    "Pleo (https://www.pleo.io) (https://github.com/pleo-io)",
     "Poonacha Medappa (https://poonachamedappa.com) (https://github.com/km-Poonacha)",
     "Rob Morris <rob@prismatik.com.au> (https://github.com/Rob-Morris)",
+    "Robert de Forest <guitar.robot@gmail.com> (https://github.com/rdeforest)",
     "Sentry (https://sentry.io) (https://github.com/getsentry)",
     "ServieJS (https://github.com/serviejs) (https://thanks.dev/d/gh/serviejs)",
     "Skunk Team (https://skunk.team) (https://github.com/skunkteam)",
-    "Syntax <scott@syntax.fm> (https://syntax.fm) (https://github.com/syntaxfm)"
+    "Syntax <scott@syntax.fm> (https://syntax.fm) (https://github.com/syntaxfm)",
+    "WriterJohnBuck (https://github.com/WriterJohnBuck)"
   ],
   "engines": {
     "node": ">=20"
@@ -195,7 +206,7 @@
     "@bevry/fs-list": "^2.5.0",
     "@bevry/fs-read": "^1.5.0",
     "@bevry/fs-write": "^1.5.0",
-    "@bevry/github-api": "^11.1.0",
+    "@bevry/github-api": "^11.3.1",
     "@bevry/json": "^2.3.0",
     "@bevry/render": "^1.1.0",
     "arrange-package-json": "^5.1.0",
@@ -203,7 +214,7 @@
     "caterpillar": "^8.1.0",
     "spdx-expression-parse": "^4.0.0",
     "spdx-license-list": "^6.8.0",
-    "trim-empty-keys": "^1.0.1",
+    "trim-empty-keys": "^1.1.0",
     "typechecker": "^9.3.0"
   },
   "devDependencies": {
@@ -221,7 +232,7 @@
     "safeps": "^11.5.0",
     "typedoc": "^0.25.4",
     "typescript": "5.3.3",
-    "valid-directory": "^4.7.0"
+    "valid-directory": "^4.8.0"
   },
   "scripts": {
     "our:bin": "node ./bin.cjs",
@@ -234,7 +245,7 @@
     "our:meta": "npm run our:meta:docs && npm run our:meta:projectz",
     "our:meta:docs": "npm run our:meta:docs:typedoc",
     "our:meta:docs:typedoc": "rm -rf ./docs && typedoc --exclude '**/+(*test*|node_modules)' --excludeExternals --out ./docs ./source",
-    "our:meta:projectz": "npm run our:bin",
+    "our:meta:projectz": "npm run our:bin -- --offline",
     "our:release": "npm run our:release:prepare && npm run our:release:check-changelog && npm run our:release:check-dirty && npm run our:release:tag && npm run our:release:push",
     "our:release:check-changelog": "cat ./HISTORY.md | grep \"v$npm_package_version\" || (printf '%s\n' \"add a changelog entry for v$npm_package_version\" && exit -1)",
     "our:release:check-dirty": "git diff --exit-code",

@@ -126,7 +126,7 @@ console.log(result); // setTimeout - just like normal
 
 #### Maintainers
 
--   [Benjamin Lupton](https://github.com/balupton)
+-   [Benjamin Lupton](https://balupton.com)
 
 #### Contributors
 
