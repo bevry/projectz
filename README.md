@@ -374,7 +374,7 @@ This package is published with the following editions:
 -   [Mohammed Shah](https://github.com/smashah)
 -   [Mr. Henry](https://mrhenry.be)
 -   [Nermal](https://arjunaditya.vercel.app)
--   [Pleo](https://www.pleo.io)
+-   [Pleo](https://pleo.io)
 -   [Poonacha Medappa](https://poonachamedappa.com)
 -   [Rob Morris](https://github.com/Rob-Morris)
 -   [Robert de Forest](https://github.com/rdeforest)
