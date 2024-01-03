@@ -31,7 +31,7 @@ Stop wasting time syncing and updating your project's README and Package Files!
 <!-- /DESCRIPTION -->
 
 
-This far, projectz is used directly by [802 repositories](https://github.com/bevry/projectz/network/dependents) and [348 packages](https://github.com/bevry/projectz/network/dependents?dependent_type=PACKAGE), and indirectly by [2936 repositories](https://libraries.io/npm/projectz/dependent-repositories) and [349 packages](https://libraries.io/npm/projectz/dependents).
+This far, projectz is used directly by [1062 repositories](https://github.com/bevry/projectz/network/dependents) and [421 packages](https://github.com/bevry/projectz/network/dependents?dependent_type=PACKAGE), and indirectly by [2989 repositories](https://libraries.io/npm/projectz/dependent-repositories) and [349 packages](https://libraries.io/npm/projectz/dependents).
 
 [Watch the talk.](https://youtu.be/IAB8_UlcNWI)
 
