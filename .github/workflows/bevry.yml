@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Install desired Node.js version
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: '20'
       - name: Verify Node.js Versions
@@ -29,7 +29,7 @@ jobs:
       - run: npm run our:verify
       - name: Install targeted Node.js
         if: ${{ matrix.node != 20 }}
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node }}
       - name: Verify Node.js Versions
@@ -46,7 +46,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Install desired Node.js version
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: '20'
       - name: Verify Node.js Versions
